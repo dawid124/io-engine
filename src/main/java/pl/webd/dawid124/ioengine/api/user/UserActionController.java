@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.api;
+package pl.webd.dawid124.ioengine.api.user;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.PostMapping;
