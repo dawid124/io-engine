@@ -1,0 +1,94 @@
+package pl.webd.dawid124.ioengine.config;
+
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.annotation.MessagingGateway;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.core.MessageProducer;
+import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
+import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
+import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
+import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
+import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessagingException;
+import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
+
+@Configuration
+public class MqttConfig {
+
+    private final MqttSettings settings;
+
+    public MqttConfig(MqttSettings settings) {
+        this.settings = settings;
+    }
+
+    @Bean
+    public MessageChannel mqttTriggerChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageChannel mqttOutboundChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageProducer triggers() {
+        MqttPahoMessageDrivenChannelAdapter adapter =
+                new MqttPahoMessageDrivenChannelAdapter(settings.getHost(), settings.getClientId(), settings.getTriggerTopic());
+        adapter.setCompletionTimeout(5000);
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setQos(1);
+        adapter.setOutputChannel(mqttTriggerChannel());
+        return adapter;
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "mqttTriggerChannel")
+    public MessageHandler handler() {
+        return new MessageHandler() {
+
+            @Override
+            public void handleMessage(Message<?> message) throws MessagingException {
+                System.out.println(message.getPayload());
+            }
+
+        };
+    }
+
+    @Bean
+    public MqttPahoClientFactory mqttClientFactory() {
+        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setServerURIs(new String[] {settings.getHost() });
+        options.setUserName(settings.getUsername());
+        options.setPassword(settings.getPassword().toCharArray());
+        factory.setConnectionOptions(options);
+        return factory;
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "mqttOutboundChannel")
+    public MessageHandler mqttOutbound() {
+        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(settings.getClientId(), mqttClientFactory());
+        messageHandler.setAsync(true);
+        messageHandler.setDefaultTopic(settings.getTopic());
+        return messageHandler;
+    }
+
+
+    @MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
+    public interface MqttGateway {
+
+        void sendToMqtt(String data);
+
+    }
+
+
+}

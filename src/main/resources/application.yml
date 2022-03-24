@@ -1,0 +1,7 @@
+mqtt:
+  host: tcp://localhost:1883
+  username:
+  password:
+  client-id: io-engine
+  topic: home
+  trigger-topic: home/trigger
