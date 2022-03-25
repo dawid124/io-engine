@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.api.blind;
+package pl.webd.dawid124.ioengine.rest.blind;
 
 import org.springframework.web.bind.annotation.RestController;
 

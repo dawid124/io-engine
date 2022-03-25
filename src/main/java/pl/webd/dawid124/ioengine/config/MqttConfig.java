@@ -18,6 +18,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
+import pl.webd.dawid124.ioengine.model.ActionRequest;
 
 @Configuration
 public class MqttConfig {

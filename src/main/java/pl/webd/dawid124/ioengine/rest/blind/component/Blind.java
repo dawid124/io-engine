@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.api.blind.component;
+package pl.webd.dawid124.ioengine.rest.blind.component;
 
 import com.pi4j.io.gpio.*;
 import org.apache.logging.log4j.LogManager;
