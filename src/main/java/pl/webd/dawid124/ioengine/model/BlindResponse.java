@@ -1,5 +1,7 @@
 package pl.webd.dawid124.ioengine.model;
 
+import pl.webd.dawid124.ioengine.home.state.device.EBlindDirection;
+
 import java.io.Serializable;
 
 public class BlindResponse implements Serializable {

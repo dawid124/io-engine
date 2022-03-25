@@ -21,6 +21,8 @@ public class Action implements Serializable {
     private int stepTime;
     private int time;
 
+    private int percent;
+
     public String getIoId() {
         return ioId;
     }
@@ -99,5 +101,13 @@ public class Action implements Serializable {
 
     public void setTime(int time) {
         this.time = time;
+    }
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 }
