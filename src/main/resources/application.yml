@@ -3,5 +3,5 @@ mqtt:
   username:
   password:
   client-id: io-engine
-  topic: home
-  trigger-topic: home/trigger
+  topic: io-actions
+  trigger-topic: home/triggers

@@ -7,6 +7,12 @@ public class ActionRequest implements Serializable {
 
     private List<Action> actions;
 
+    public ActionRequest() {}
+
+    public ActionRequest(List<Action> actions) {
+        this.actions = actions;
+    }
+
     public List<Action> getActions() {
         return actions;
     }

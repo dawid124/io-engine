@@ -1,7 +1,6 @@
 package pl.webd.dawid124.ioengine.config;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.MessagingGateway;
@@ -13,20 +12,20 @@ import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
-import pl.webd.dawid124.ioengine.model.ActionRequest;
+import pl.webd.dawid124.ioengine.service.TriggerService;
 
 @Configuration
 public class MqttConfig {
 
     private final MqttSettings settings;
+    private final TriggerService triggerService;
 
-    public MqttConfig(MqttSettings settings) {
+    public MqttConfig(MqttSettings settings, TriggerService triggerService) {
         this.settings = settings;
+        this.triggerService = triggerService;
     }
 
     @Bean
@@ -43,24 +42,17 @@ public class MqttConfig {
     public MessageProducer triggers() {
         MqttPahoMessageDrivenChannelAdapter adapter =
                 new MqttPahoMessageDrivenChannelAdapter(settings.getHost(), settings.getClientId(), settings.getTriggerTopic());
-        adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.setQos(1);
         adapter.setOutputChannel(mqttTriggerChannel());
+
+
         return adapter;
     }
 
     @Bean
     @ServiceActivator(inputChannel = "mqttTriggerChannel")
     public MessageHandler handler() {
-        return new MessageHandler() {
-
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-                System.out.println(message.getPayload());
-            }
-
-        };
+        return triggerService;
     }
 
     @Bean

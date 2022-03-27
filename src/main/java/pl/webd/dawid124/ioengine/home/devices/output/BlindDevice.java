@@ -33,16 +33,17 @@ public class BlindDevice extends Device {
     public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, Pin up, Pin down) {
         super(id, name, driverConfiguration);
         try {
-//            GpioController GPIO = GpioFactory.getInstance();
-//            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
-//            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
-//            move(EBlindDirection.UP);
+            GpioController GPIO = GpioFactory.getInstance();
+            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
+            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
+            this.state = new BlindDeviceState(id, name);
+            move(EBlindDirection.UP);
         } catch (Exception ex) {
 
         }
 
 
-        this.state = new BlindDeviceState(id, name);
+
 
     }
 
@@ -67,7 +68,7 @@ public class BlindDevice extends Device {
     }
 
     public BlindResponse dim(EBlindDirection direction, int percent) {
-        if (lock || EBlindDirection.UP.equals(state)) {
+        if (lock) {
             return new BlindResponse(state.getPosition(), state.getDimmerPercent());
         }
 

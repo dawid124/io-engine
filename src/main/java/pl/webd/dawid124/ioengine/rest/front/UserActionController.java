@@ -42,12 +42,12 @@ public class UserActionController {
 
         List<Action> actions = action.getActions();
 
-        List<Action> blindActions = actions.stream().filter(a -> EDeviceType.BLIND.equals(a.getType())).collect(Collectors.toList());
+        List<Action> blindActions = actions.stream().filter(a -> EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
         blindService.processBlinds(blindActions);
 
-        List<Action> lightsActions = actions.stream().filter(a -> !EDeviceType.BLIND.equals(a.getType())).collect(Collectors.toList());
+        List<Action> lightsActions = actions.stream().filter(a -> !EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
 
-        mqttGateway.sendToMqtt(gson.toJson(lightsActions));
+        mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(lightsActions)));
 
         return action;
     }

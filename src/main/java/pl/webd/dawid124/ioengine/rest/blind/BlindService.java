@@ -36,8 +36,10 @@ public class BlindService {
                     device.move(EBlindDirection.DOWN);
                     break;
                 case DIM_UP:
+                    device.dim(EBlindDirection.UP, action.getPercent());
+                    break;
                 case DIM_DOWN:
-                    device.dim(EBlindDirection.DIMMER, action.getPercent());
+                    device.dim(EBlindDirection.DOWN, action.getPercent());
                     break;
             }
         }

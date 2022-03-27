@@ -52,10 +52,9 @@ public class DeviceService {
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
         addDevice(new RgbwDevice("rgbw-tv", "TV", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-kitchen", "Kuchnia", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-dinning1", "Jadalnia 1", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-dinning2", "Jadalnia 2", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-dinner", "Kuchnia", floor1Driver0ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
+        addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 
         addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia góra", floor1Driver0Local, 25));
         addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 24));
@@ -65,6 +64,9 @@ public class DeviceService {
         addDevice(new BlindDevice("f1-hs-corner", "HS Salon róg", localPi, RaspiPin.GPIO_04, RaspiPin.GPIO_05));
         addDevice(new BlindDevice("f1-fix-360", "FIX Salon 360", localPi, RaspiPin.GPIO_00, RaspiPin.GPIO_02));
         addDevice(new BlindDevice("f1-fix-360-corner", "FIX Salon 360 róg", localPi, RaspiPin.GPIO_03, RaspiPin.GPIO_12));
+
+        addDevice(new BlindDevice("office-left", "Biuro lewa", localPi, RaspiPin.GPIO_13, RaspiPin.GPIO_14));
+        addDevice(new BlindDevice("office-right", "Biuro prawa", localPi, RaspiPin.GPIO_21, RaspiPin.GPIO_22));
     }
 
     private void addDevice(IDevice device) {

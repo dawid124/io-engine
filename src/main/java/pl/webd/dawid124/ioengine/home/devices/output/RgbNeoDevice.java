@@ -14,7 +14,7 @@ public class RgbNeoDevice extends Device {
     }
 
     @Override public EDeviceType getType() {
-        return EDeviceType.NEO_RGB;
+        return EDeviceType.NEO;
     }
 
     @Override public DeviceState getInitialState() {

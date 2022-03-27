@@ -9,7 +9,7 @@ public class Action implements Serializable {
 
     private String ioId;
     private String name;
-    private EDeviceType type;
+    private EDeviceType ioType;
     private EActionType action;
 
     private Color color;
@@ -39,12 +39,12 @@ public class Action implements Serializable {
         this.name = name;
     }
 
-    public EDeviceType getType() {
-        return type;
+    public EDeviceType getIoType() {
+        return ioType;
     }
 
-    public void setType(EDeviceType type) {
-        this.type = type;
+    public void setIoType(EDeviceType ioType) {
+        this.ioType = ioType;
     }
 
     public EActionType getAction() {
