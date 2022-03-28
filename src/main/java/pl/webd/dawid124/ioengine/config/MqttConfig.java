@@ -40,11 +40,14 @@ public class MqttConfig {
 
     @Bean
     public MessageProducer triggers() {
+//        MqttPahoMessageDrivenChannelAdapter adapter =
+//                new MqttPahoMessageDrivenChannelAdapter(settings.getHost(), settings.getClientId(), settings.getTriggerTopic());
+
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(settings.getHost(), settings.getClientId(), settings.getTriggerTopic());
+                new MqttPahoMessageDrivenChannelAdapter(settings.getClientId(), mqttClientFactory(), settings.getTriggerTopic());
+
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setOutputChannel(mqttTriggerChannel());
-
 
         return adapter;
     }
@@ -56,17 +59,6 @@ public class MqttConfig {
     }
 
     @Bean
-    public MqttPahoClientFactory mqttClientFactory() {
-        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
-        MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] {settings.getHost() });
-        options.setUserName(settings.getUsername());
-        options.setPassword(settings.getPassword().toCharArray());
-        factory.setConnectionOptions(options);
-        return factory;
-    }
-
-    @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(settings.getClientId(), mqttClientFactory());
@@ -75,13 +67,26 @@ public class MqttConfig {
         return messageHandler;
     }
 
-
     @MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
     public interface MqttGateway {
-
         void sendToMqtt(String data);
-
     }
 
+    @Bean
+    public MqttPahoClientFactory mqttClientFactory() {
+        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
+        factory.setConnectionOptions(getReceiverMqttConnectOptions());
+        return factory;
+    }
 
+    @Bean
+    public MqttConnectOptions getReceiverMqttConnectOptions() {
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setCleanSession(true);
+        mqttConnectOptions.setConnectionTimeout(30);
+        mqttConnectOptions.setKeepAliveInterval(60);
+        mqttConnectOptions.setAutomaticReconnect(true);
+        mqttConnectOptions.setServerURIs(new String[] { settings.getHost() });
+        return mqttConnectOptions;
+    }
 }
