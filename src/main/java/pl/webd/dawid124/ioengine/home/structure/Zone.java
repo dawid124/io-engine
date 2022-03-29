@@ -1,8 +1,6 @@
 package pl.webd.dawid124.ioengine.home.structure;
 
 import pl.webd.dawid124.ioengine.home.devices.output.IDevice;
-import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
-import pl.webd.dawid124.ioengine.home.state.variable.IVariable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,22 +12,20 @@ public class Zone {
     private final String id;
     private final String name;
 
+    private final int order;
+
     private final ArrayList<String> deviceIds;
     private Map<String, IDevice> devices;
 
-    private Map<String, IVariable> variables;
-    private Map<String, DeviceState> deviceStates;
-
     private final Map<String, Scene> scenes;
 
-    public Zone(String id, String name) {
+    public Zone(String id, String name, int order) {
         this.id = id;
         this.name = name;
+        this.order = order;
 
         this.deviceIds = new ArrayList<>();
         this.devices = new HashMap<>();
-        this.variables = new HashMap<>();
-        this.deviceStates = new HashMap<>();
         this.scenes = new HashMap<>();
     }
 
@@ -49,16 +45,12 @@ public class Zone {
         return devices;
     }
 
-    public Map<String, IVariable> getVariables() {
-        return variables;
-    }
-
-    public Map<String, DeviceState> getDeviceStates() {
-        return deviceStates;
-    }
-
     public Map<String, Scene> getScenes() {
         return scenes;
+    }
+
+    public int getOrder() {
+        return order;
     }
 
     public void addScene(Scene scene) {
@@ -67,13 +59,5 @@ public class Zone {
 
     public void setDevices(Map<String, IDevice> devices) {
         this.devices = devices;
-    }
-
-    public void setVariables(Map<String, IVariable> variables) {
-        this.variables = variables;
-    }
-
-    public void setDeviceStates(Map<String, DeviceState> deviceStates) {
-        this.deviceStates = deviceStates;
     }
 }

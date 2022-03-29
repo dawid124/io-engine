@@ -1,6 +1,5 @@
 package pl.webd.dawid124.ioengine.service;
 
-import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.home.devices.driver.config.ELocalDriverLocation;

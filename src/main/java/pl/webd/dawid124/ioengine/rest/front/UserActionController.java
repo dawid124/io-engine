@@ -38,7 +38,7 @@ public class UserActionController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
     public ActionRequest actions(@RequestBody ActionRequest action) {
-        stateService.updateSate(action);
+        stateService.updateDeviceSate(action);
 
         List<Action> actions = action.getActions();
 

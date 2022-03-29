@@ -11,15 +11,9 @@ import javax.annotation.PostConstruct;
 @Service
 public class StructureService {
 
-    private final DeviceService deviceService;
-    private final StateService stateService;
+    private final Home home;
 
-    private Home home;
-
-    public StructureService(DeviceService deviceService, StateService stateService) {
-        this.deviceService = deviceService;
-        this.stateService = stateService;
-
+    public StructureService() {
         this.home = new Home();
     }
 
@@ -39,22 +33,22 @@ public class StructureService {
     }
 
     public Zone buildFloor1Zone() {
-        Zone floor1 = new Zone("floor1", "Salon");
+        Zone floor1 = new Zone("floor1", "Salon", 0);
 
         floor1.getDeviceIds().add("rgbw-tv");
         floor1.getDeviceIds().add("rgbw-kitchen");
         floor1.getDeviceIds().add("rgbw-dinning1");
         floor1.getDeviceIds().add("rgbw-dinning2");
 
-        floor1.addScene(new Scene("auto", "Auto"));
-        floor1.addScene(new Scene("standard", "Standard"));
-        floor1.addScene(new Scene("music", "Muzyka"));
+        floor1.addScene(new Scene("auto", "Auto", 0));
+        floor1.addScene(new Scene("standard", "Standard", 1));
+        floor1.addScene(new Scene("music", "Muzyka", 2));
 
         return floor1;
     }
 
     public Zone buildFloor2Zone() {
-        Zone floor2 = new Zone("floor2", "Góra");
+        Zone floor2 = new Zone("floor2", "Góra", 1);
 
         floor2.getDeviceIds().add("led-bathroom");
 
@@ -62,21 +56,17 @@ public class StructureService {
     }
 
     public Zone buildOfficeZone() {
-        Zone office = new Zone("office", "Biuro");
+        Zone office = new Zone("office", "Biuro", 2);
 
         office.getDeviceIds().add("rgbw-office");
 
-        office.addScene(new Scene("auto", "Auto"));
-        office.addScene(new Scene("standard", "Standard"));
+        office.addScene(new Scene("auto", "Auto", 0));
+        office.addScene(new Scene("standard", "Standard", 1));
 
         return office;
     }
 
     public Home fetchStructure() {
-
-        home.getZones().forEach((zoneId, zone) -> zone.setDevices(deviceService.fetchSelected(zone.getDeviceIds())));
-        home.getZones().forEach((zoneId, zone) -> zone.setDeviceStates(stateService.fetchSelected(zone.getDeviceIds())));
-
         return home;
     }
 }

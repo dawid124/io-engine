@@ -4,10 +4,12 @@ public class Scene {
 
     private final String id;
     private final String name;
+    private final int order;
 
-    public Scene(String id, String name) {
+    public Scene(String id, String name, int order) {
         this.id = id;
         this.name = name;
+        this.order = order;
     }
 
     public String getId() {
@@ -16,5 +18,9 @@ public class Scene {
 
     public String getName() {
         return name;
+    }
+
+    public int getOrder() {
+        return order;
     }
 }
