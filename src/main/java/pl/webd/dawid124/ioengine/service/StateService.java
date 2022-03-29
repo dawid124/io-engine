@@ -42,7 +42,7 @@ public class StateService {
     public void init() {
         deviceService.fetchAll().values().forEach(device -> addDeviceState(device.getInitialState()));
         structureService.fetchStructure().getZones().values().forEach(z -> {
-            String firstScene = z.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst().map(Scene::getId).orElse(null);
+            String firstScene = z.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst().map(Scene::getId).orElse("none");
             addZoneState(new ZoneState(z.getId(), z.getName(), firstScene));
         });
     }

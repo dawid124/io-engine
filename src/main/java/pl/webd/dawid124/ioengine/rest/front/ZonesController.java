@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.webd.dawid124.ioengine.home.structure.Home;
+import pl.webd.dawid124.ioengine.model.ZoneChangeResponse;
 import pl.webd.dawid124.ioengine.model.ZonesResponse;
 import pl.webd.dawid124.ioengine.service.StateService;
 import pl.webd.dawid124.ioengine.service.StructureService;
@@ -27,11 +28,11 @@ public class ZonesController {
     @PostMapping(value = "/api/zone/{zoneId}/{sceneId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
-    public ResponseEntity<Object> changeScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
+    public ResponseEntity<ZoneChangeResponse> changeScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
 
         stateService.updateScene(zoneId, sceneId);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new ZoneChangeResponse(zoneId, sceneId));
     }
 
     @GetMapping(value = "/api/zones", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

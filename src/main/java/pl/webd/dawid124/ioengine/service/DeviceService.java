@@ -47,6 +47,7 @@ public class DeviceService {
         drivers.add(piLocal);
 
         PicoDriverConfiguration floor1Driver0ExpanderA = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
+        PicoDriverConfiguration floor1Driver0ExpanderB = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration floor1Driver0Local = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
@@ -55,7 +56,9 @@ public class DeviceService {
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 
-        addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia góra", floor1Driver0Local, 25));
+        addDevice(new RgbwDevice("rgbw-kitchen", "Korytarz", floor1Driver0ExpanderB, 12, 13, 14, 15));
+
+        addDevice(new RgbwDevice("rgbw-lobby", "Kuchnia góra", floor1Driver0Local, 8, 9, 10, 11));
         addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 24));
 
 

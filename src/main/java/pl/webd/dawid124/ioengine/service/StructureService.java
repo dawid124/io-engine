@@ -32,7 +32,7 @@ public class StructureService {
         home.getZones().put(office.getId(), office);
     }
 
-    public Zone buildFloor1Zone() {
+    private Zone buildFloor1Zone() {
         Zone floor1 = new Zone("floor1", "Salon", 0);
 
         floor1.getDeviceIds().add("rgbw-tv");
@@ -42,20 +42,23 @@ public class StructureService {
 
         floor1.addScene(new Scene("auto", "Auto", 0));
         floor1.addScene(new Scene("standard", "Standard", 1));
-        floor1.addScene(new Scene("music", "Muzyka", 2));
+        floor1.addScene(new Scene("night", "Noc", 2));
 
         return floor1;
     }
 
-    public Zone buildFloor2Zone() {
+    private Zone buildFloor2Zone() {
         Zone floor2 = new Zone("floor2", "Góra", 1);
+
+        floor2.addScene(new Scene("auto", "Auto", 0));
+        floor2.addScene(new Scene("standard", "Standard", 1));
 
         floor2.getDeviceIds().add("led-bathroom");
 
         return floor2;
     }
 
-    public Zone buildOfficeZone() {
+    private Zone buildOfficeZone() {
         Zone office = new Zone("office", "Biuro", 2);
 
         office.getDeviceIds().add("rgbw-office");

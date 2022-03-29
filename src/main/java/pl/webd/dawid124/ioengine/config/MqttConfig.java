@@ -40,11 +40,8 @@ public class MqttConfig {
 
     @Bean
     public MessageProducer triggers() {
-//        MqttPahoMessageDrivenChannelAdapter adapter =
-//                new MqttPahoMessageDrivenChannelAdapter(settings.getHost(), settings.getClientId(), settings.getTriggerTopic());
-
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(settings.getClientId(), mqttClientFactory(), settings.getTriggerTopic());
+                new MqttPahoMessageDrivenChannelAdapter(settings.getClientId() + "Trigger", mqttClientFactory(), settings.getTriggerTopic());
 
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setOutputChannel(mqttTriggerChannel());
@@ -61,7 +58,7 @@ public class MqttConfig {
     @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(settings.getClientId(), mqttClientFactory());
+        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(settings.getClientId() + "Actions", mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultTopic(settings.getTopic());
         return messageHandler;
