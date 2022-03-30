@@ -1,0 +1,18 @@
+package pl.webd.dawid124.ioengine.home.state.device;
+
+public enum EDeviceStateType {
+    BLIND(BlindDeviceState.class),
+    NEO(NeoDeviceState.class),
+    LED(LedDeviceState.class),
+    COLOR_LED(ColorLedDeviceState.class);
+
+    Class clazz;
+
+    EDeviceStateType(Class clazz) {
+        this.clazz = clazz;
+    }
+
+    public Class getClazz() {
+        return clazz;
+    }
+}

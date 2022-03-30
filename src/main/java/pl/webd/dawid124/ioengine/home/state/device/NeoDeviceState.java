@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.home.state.device;
 
+import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.Color;
 
 public class NeoDeviceState extends DeviceState {
@@ -10,13 +11,13 @@ public class NeoDeviceState extends DeviceState {
     private int speed;
 
     public NeoDeviceState(String id, String name) {
-        super(id, name);
+        super(id, name, EDeviceStateType.NEO);
         this.color = new Color();
         this.brightness = 0;
     }
 
     public NeoDeviceState(String id, String name, Color color, int brightness, int animationId, int speed) {
-        super(id, name);
+        super(id, name, EDeviceStateType.NEO);
         this.color = color;
         this.brightness = brightness;
         this.animationId = animationId;

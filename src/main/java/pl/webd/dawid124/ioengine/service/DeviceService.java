@@ -11,7 +11,7 @@ import pl.webd.dawid124.ioengine.home.devices.driver.configuration.PicoDriverCon
 import pl.webd.dawid124.ioengine.home.devices.driver.instance.IDriver;
 import pl.webd.dawid124.ioengine.home.devices.driver.instance.LocalDriver;
 import pl.webd.dawid124.ioengine.home.devices.driver.instance.PicoDriver;
-import pl.webd.dawid124.ioengine.home.devices.output.BlindDevice;
+import pl.webd.dawid124.ioengine.home.devices.input.BlindDevice;
 import pl.webd.dawid124.ioengine.home.devices.output.IDevice;
 import pl.webd.dawid124.ioengine.home.devices.output.RgbwDevice;
 import pl.webd.dawid124.ioengine.home.devices.output.RgbwNeoDevice;
@@ -56,7 +56,10 @@ public class DeviceService {
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 
-        addDevice(new RgbwDevice("rgbw-kitchen", "Korytarz", floor1Driver0ExpanderB, 12, 13, 14, 15));
+        addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 15));
+        addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 14));
+
+        addDevice(new RgbwDevice("rgbw-lobby", "Korytarz", floor1Driver0ExpanderB, 12, 13, 14, 15));
 
         addDevice(new RgbwDevice("rgbw-lobby", "Kuchnia góra", floor1Driver0Local, 8, 9, 10, 11));
         addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 24));

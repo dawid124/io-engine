@@ -8,13 +8,13 @@ public class ColorLedDeviceState extends DeviceState {
     private int brightness;
 
     public ColorLedDeviceState(String id, String name) {
-        super(id, name);
+        super(id, name, EDeviceStateType.COLOR_LED);
         this.color = new Color();
         this.brightness = 0;
     }
 
     public ColorLedDeviceState(String id, String name, Color color, int brightness) {
-        super(id, name);
+        super(id, name, EDeviceStateType.COLOR_LED);
         this.color = color;
         this.brightness = brightness;
     }

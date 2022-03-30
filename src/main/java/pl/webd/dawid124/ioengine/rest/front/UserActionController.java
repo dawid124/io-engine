@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
-import pl.webd.dawid124.ioengine.model.Action;
+import pl.webd.dawid124.ioengine.model.IoAction;
 import pl.webd.dawid124.ioengine.model.ActionRequest;
 import pl.webd.dawid124.ioengine.rest.blind.BlindService;
 import pl.webd.dawid124.ioengine.service.StateService;
@@ -40,14 +40,14 @@ public class UserActionController {
     public ActionRequest actions(@RequestBody ActionRequest action) {
         stateService.updateDeviceSate(action);
 
-        List<Action> actions = action.getActions();
+        List<IoAction> ioActions = action.getActions();
 
-        List<Action> blindActions = actions.stream().filter(a -> EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
-        blindService.processBlinds(blindActions);
+        List<IoAction> blindIoActions = ioActions.stream().filter(a -> EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
+        blindService.processBlinds(blindIoActions);
 
-        List<Action> lightsActions = actions.stream().filter(a -> !EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
+        List<IoAction> lightsIoActions = ioActions.stream().filter(a -> !EDeviceType.BLIND.equals(a.getIoType())).collect(Collectors.toList());
 
-        mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(lightsActions)));
+        mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(lightsIoActions)));
 
         return action;
     }

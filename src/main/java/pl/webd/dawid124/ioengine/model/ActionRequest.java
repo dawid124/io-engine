@@ -5,19 +5,29 @@ import java.util.List;
 
 public class ActionRequest implements Serializable {
 
-    private List<Action> actions;
+    private String zoneId;
+
+    private List<IoAction> ioActions;
 
     public ActionRequest() {}
 
-    public ActionRequest(List<Action> actions) {
-        this.actions = actions;
+    public ActionRequest(List<IoAction> ioActions) {
+        this.ioActions = ioActions;
     }
 
-    public List<Action> getActions() {
-        return actions;
+    public List<IoAction> getActions() {
+        return ioActions;
     }
 
-    public void setActions(List<Action> actions) {
-        this.actions = actions;
+    public void setActions(List<IoAction> ioActions) {
+        this.ioActions = ioActions;
+    }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
     }
 }

@@ -5,7 +5,7 @@ import pl.webd.dawid124.ioengine.home.state.Color;
 
 import java.io.Serializable;
 
-public class Action implements Serializable {
+public class IoAction implements Serializable {
 
     private String ioId;
     private String name;

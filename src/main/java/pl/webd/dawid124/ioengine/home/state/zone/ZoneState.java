@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.home.state.zone;
 
+import pl.webd.dawid124.ioengine.home.state.scene.SceneState;
 import pl.webd.dawid124.ioengine.home.state.variable.IVariable;
 
 import java.util.HashMap;
@@ -11,6 +12,8 @@ public class ZoneState {
     private final String name;
 
     private String activeScene;
+
+    private Map<String, SceneState> sceneStates;
     private Map<String, IVariable> variables;
 
     public ZoneState(String id, String name, String activeScene) {
@@ -18,6 +21,11 @@ public class ZoneState {
         this.name = name;
         this.activeScene = activeScene;
         this.variables = new HashMap<>();
+        this.sceneStates = new HashMap<>();
+    }
+
+    public void addSceneState(SceneState state) {
+        sceneStates.put(state.getId(), state);
     }
 
     public String getId() {
@@ -40,7 +48,19 @@ public class ZoneState {
         return activeScene;
     }
 
+    public SceneState findActiveScene() {
+        return sceneStates.get(activeScene);
+    }
+
     public void setActiveScene(String activeScene) {
         this.activeScene = activeScene;
+    }
+
+    public Map<String, SceneState> getSceneStates() {
+        return sceneStates;
+    }
+
+    public void setSceneStates(Map<String, SceneState> sceneStates) {
+        this.sceneStates = sceneStates;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.Color;
-import pl.webd.dawid124.ioengine.model.Action;
+import pl.webd.dawid124.ioengine.model.IoAction;
 import pl.webd.dawid124.ioengine.model.ActionRequest;
 import pl.webd.dawid124.ioengine.model.SensorTrigger;
 
@@ -32,33 +32,33 @@ public class TriggerService implements MessageHandler {
         System.out.println(message.getPayload());
 
         SensorTrigger trigger = gson.fromJson((String) message.getPayload(), SensorTrigger.class);
-        Action action = new Action();
+        IoAction ioAction = new IoAction();
 
         switch (trigger.getId()) {
             case "pir-office":
-                action.setIoId("rgbw-office");
-                action.setIoType(EDeviceType.RGBW);
-                action.setColor(new Color(0, 0, 0, 255));
-                action.setTime(1500);
+                ioAction.setIoId("rgbw-office");
+                ioAction.setIoType(EDeviceType.RGBW);
+                ioAction.setColor(new Color(0, 0, 0, 255));
+                ioAction.setTime(1500);
                 if (trigger.isState()) {
-                    action.setBrightness(255);
+                    ioAction.setBrightness(255);
                 } else {
-                    action.setBrightness(0);
+                    ioAction.setBrightness(0);
                 }
-                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(action))));
+                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(ioAction))));
 
                 break;
             case "pir-lobby":
-                action.setIoId("rgbw-lobby");
-                action.setIoType(EDeviceType.RGBW);
-                action.setColor(new Color(0, 0, 0, 255));
-                action.setTime(1500);
+                ioAction.setIoId("rgbw-lobby");
+                ioAction.setIoType(EDeviceType.RGBW);
+                ioAction.setColor(new Color(0, 0, 0, 255));
+                ioAction.setTime(1500);
                 if (trigger.isState()) {
-                    action.setBrightness(255);
+                    ioAction.setBrightness(255);
                 } else {
-                    action.setBrightness(0);
+                    ioAction.setBrightness(0);
                 }
-                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(action))));
+                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(ioAction))));
                 break;
             case "pir-wc":
 

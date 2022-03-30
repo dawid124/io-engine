@@ -1,26 +1,42 @@
 package pl.webd.dawid124.ioengine.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.home.state.variable.StringVariable;
+import pl.webd.dawid124.ioengine.home.json.DeviceStateJsonAdapter;
+import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
 import pl.webd.dawid124.ioengine.home.structure.Home;
 import pl.webd.dawid124.ioengine.home.structure.Scene;
 import pl.webd.dawid124.ioengine.home.structure.Zone;
+import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 
-@Service
-public class StructureService {
+@Service public class StructureService {
 
-    private final Home home;
+    private Home home;
+
+    private Gson gson;
 
     public StructureService() {
         this.home = new Home();
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(DeviceState.class, new DeviceStateJsonAdapter())
+                .create();
     }
 
-    @PostConstruct
-    public void init() {
+    @PostConstruct public void init() {
 
-        home.getVariables().put("test-global-variable", new StringVariable("default"));
+
+        try {
+
+            String structure = ResourceUtils.getResourceFileAsString("classpath:structure.json");
+            home = gson.fromJson(structure, Home.class);
+            System.out.println(structure);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Zone floor1 = buildFloor1Zone();
         home.getZones().put(floor1.getId(), floor1);

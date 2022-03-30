@@ -1,9 +1,11 @@
-package pl.webd.dawid124.ioengine.home.devices.output;
+package pl.webd.dawid124.ioengine.home.devices.input;
 
 import com.pi4j.io.gpio.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.webd.dawid124.ioengine.home.devices.driver.configuration.IDriverConfiguration;
+import pl.webd.dawid124.ioengine.home.devices.output.Device;
+import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.device.BlindDeviceState;
 import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
 import pl.webd.dawid124.ioengine.model.BlindResponse;
@@ -33,16 +35,16 @@ public class BlindDevice extends Device {
     public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, Pin up, Pin down) {
         super(id, name, driverConfiguration);
         try {
-            GpioController GPIO = GpioFactory.getInstance();
-            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
-            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
-            this.state = new BlindDeviceState(id, name);
-            move(EBlindDirection.UP);
+//            GpioController GPIO = GpioFactory.getInstance();
+//            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
+//            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
+//            this.state = new BlindDeviceState(id, name);
+//            move(EBlindDirection.UP);
         } catch (Exception ex) {
 
         }
 
-
+        this.state = new BlindDeviceState(id, name);
 
 
     }

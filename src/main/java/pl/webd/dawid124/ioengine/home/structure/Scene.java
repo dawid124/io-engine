@@ -1,10 +1,18 @@
 package pl.webd.dawid124.ioengine.home.structure;
 
+import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
+import pl.webd.dawid124.ioengine.home.structure.group.LightGroup;
+
+import java.util.List;
+
 public class Scene {
 
     private final String id;
     private final String name;
     private final int order;
+
+    private List<LightGroup> groups;
+    private List<DeviceState> lightsState;
 
     public Scene(String id, String name, int order) {
         this.id = id;
@@ -22,5 +30,21 @@ public class Scene {
 
     public int getOrder() {
         return order;
+    }
+
+    public List<LightGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<LightGroup> groups) {
+        this.groups = groups;
+    }
+
+    public List<DeviceState> getLightsState() {
+        return lightsState;
+    }
+
+    public void setLightsState(List<DeviceState> lightsState) {
+        this.lightsState = lightsState;
     }
 }

@@ -15,9 +15,11 @@ public class Zone {
     private final int order;
 
     private final ArrayList<String> deviceIds;
+    private final Map<String, Scene> scenes;
+
+
     private Map<String, IDevice> devices;
 
-    private final Map<String, Scene> scenes;
 
     public Zone(String id, String name, int order) {
         this.id = id;
