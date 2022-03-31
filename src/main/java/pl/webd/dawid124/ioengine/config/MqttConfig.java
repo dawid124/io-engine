@@ -12,6 +12,7 @@ import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
@@ -66,7 +67,7 @@ public class MqttConfig {
 
     @MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
     public interface MqttGateway {
-        void sendToMqtt(String data);
+        void sendToMqtt(Message<String> message);
     }
 
     @Bean

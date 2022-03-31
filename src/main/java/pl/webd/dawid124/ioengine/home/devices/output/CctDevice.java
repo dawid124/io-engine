@@ -21,7 +21,7 @@ public class CctDevice extends Device {
     }
 
     @Override public DeviceState getInitialState() {
-        return new ColorLedDeviceState(id, name);
+        return new ColorLedDeviceState(id);
     }
 
     public int getPinWW() {

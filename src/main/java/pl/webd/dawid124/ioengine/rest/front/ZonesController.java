@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.webd.dawid124.ioengine.home.structure.Home;
+import pl.webd.dawid124.ioengine.home.state.scene.SceneState;
 import pl.webd.dawid124.ioengine.model.ZoneChangeResponse;
 import pl.webd.dawid124.ioengine.model.ZonesResponse;
 import pl.webd.dawid124.ioengine.service.StateService;
-import pl.webd.dawid124.ioengine.service.StructureService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -20,19 +19,21 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class ZonesController {
 
     private final StateService stateService;
+    private final UserActionService userActionService;
 
-    public ZonesController(StateService stateService) {
+    public ZonesController(StateService stateService, UserActionService userActionService) {
         this.stateService = stateService;
+        this.userActionService = userActionService;
     }
 
     @PostMapping(value = "/api/zone/{zoneId}/{sceneId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
-    public ResponseEntity<ZoneChangeResponse> changeScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
+    public ResponseEntity<SceneState> changeScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
 
-        stateService.updateScene(zoneId, sceneId);
+        SceneState sceneState = userActionService.processSceneChange(zoneId, sceneId);
 
-        return ResponseEntity.ok(new ZoneChangeResponse(zoneId, sceneId));
+        return ResponseEntity.ok(sceneState);
     }
 
     @GetMapping(value = "/api/zones", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

@@ -3,15 +3,16 @@ package pl.webd.dawid124.ioengine.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class ActionRequest implements Serializable {
+public class UiActionRequest implements Serializable {
 
     private String zoneId;
+    private String sceneId;
 
     private List<IoAction> ioActions;
 
-    public ActionRequest() {}
+    public UiActionRequest() {}
 
-    public ActionRequest(List<IoAction> ioActions) {
+    public UiActionRequest(List<IoAction> ioActions) {
         this.ioActions = ioActions;
     }
 
@@ -29,5 +30,13 @@ public class ActionRequest implements Serializable {
 
     public void setZoneId(String zoneId) {
         this.zoneId = zoneId;
+    }
+
+    public String getSceneId() {
+        return sceneId;
+    }
+
+    public void setSceneId(String sceneId) {
+        this.sceneId = sceneId;
     }
 }

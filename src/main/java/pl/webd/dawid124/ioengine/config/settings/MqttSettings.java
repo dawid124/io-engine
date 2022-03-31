@@ -14,6 +14,7 @@ public class MqttSettings {
     private String password;
     private String topic;
     private String triggerTopic;
+    private String actionTopic;
     private String clientId;
 
     public String getHost() {
@@ -62,5 +63,13 @@ public class MqttSettings {
 
     public void setTriggerTopic(String triggerTopic) {
         this.triggerTopic = triggerTopic;
+    }
+
+    public String getActionTopic() {
+        return actionTopic;
+    }
+
+    public void setActionTopic(String actionTopic) {
+        this.actionTopic = actionTopic;
     }
 }

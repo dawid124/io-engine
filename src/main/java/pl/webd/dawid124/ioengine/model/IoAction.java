@@ -23,6 +23,8 @@ public class IoAction implements Serializable {
 
     private int percent;
 
+    private boolean group;
+
     public String getIoId() {
         return ioId;
     }
@@ -109,5 +111,17 @@ public class IoAction implements Serializable {
 
     public void setPercent(int percent) {
         this.percent = percent;
+    }
+
+    public boolean isGroup() {
+        return group;
+    }
+
+    public void setGroup(boolean group) {
+        this.group = group;
+    }
+
+    public boolean isBlind() {
+        return EDeviceType.BLIND.equals(ioType);
     }
 }

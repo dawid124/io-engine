@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.service;
 
 import com.google.gson.Gson;
+import org.springframework.integration.support.MutableMessage;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
@@ -9,7 +10,8 @@ import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.Color;
 import pl.webd.dawid124.ioengine.model.IoAction;
-import pl.webd.dawid124.ioengine.model.ActionRequest;
+import pl.webd.dawid124.ioengine.model.IoActionRequest;
+import pl.webd.dawid124.ioengine.model.UiActionRequest;
 import pl.webd.dawid124.ioengine.model.SensorTrigger;
 
 import java.util.Collections;
@@ -45,7 +47,7 @@ public class TriggerService implements MessageHandler {
                 } else {
                     ioAction.setBrightness(0);
                 }
-                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(ioAction))));
+                mqttGateway.sendToMqtt(new MutableMessage(gson.toJson(new IoActionRequest(Collections.singletonList(ioAction)))));
 
                 break;
             case "pir-lobby":
@@ -58,7 +60,7 @@ public class TriggerService implements MessageHandler {
                 } else {
                     ioAction.setBrightness(0);
                 }
-                mqttGateway.sendToMqtt(gson.toJson(new ActionRequest(Collections.singletonList(ioAction))));
+                mqttGateway.sendToMqtt(new MutableMessage(gson.toJson(new IoActionRequest(Collections.singletonList(ioAction)))));
                 break;
             case "pir-wc":
 

@@ -44,7 +44,7 @@ public class BlindDevice extends Device {
 
         }
 
-        this.state = new BlindDeviceState(id, name);
+        this.state = new BlindDeviceState(id);
 
 
     }

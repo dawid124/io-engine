@@ -18,7 +18,7 @@ public class RgbwNeoDevice extends Device {
     }
 
     @Override public DeviceState getInitialState() {
-        return new NeoDeviceState(id, name);
+        return new NeoDeviceState(id);
     }
 
     public int getPin() {

@@ -19,7 +19,7 @@ public class LedDevice extends Device {
     }
 
     @Override public DeviceState getInitialState() {
-        return new LedDeviceState(id, name);
+        return new LedDeviceState(id);
     }
 
     public int getPin() {

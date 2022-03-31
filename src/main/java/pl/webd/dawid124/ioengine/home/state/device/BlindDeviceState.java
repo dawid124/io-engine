@@ -1,20 +1,21 @@
 package pl.webd.dawid124.ioengine.home.state.device;
 
 import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
+import pl.webd.dawid124.ioengine.model.IoAction;
 
 public class BlindDeviceState extends DeviceState {
 
     private EBlindDirection position;
     private int dimmerPercent;
 
-    public BlindDeviceState(String id, String name) {
-        super(id, name, EDeviceStateType.BLIND);
+    public BlindDeviceState(String id) {
+        super(id, EDeviceStateType.BLIND);
         this.position = EBlindDirection.UP;
         this.dimmerPercent = 0;
     }
 
-    public BlindDeviceState(String id, String name, EBlindDirection position, int dimmerPercent) {
-        super(id, name, EDeviceStateType.BLIND);
+    public BlindDeviceState(String id, EBlindDirection position, int dimmerPercent) {
+        super(id, EDeviceStateType.BLIND);
         this.position = position;
         this.dimmerPercent = dimmerPercent;
     }
@@ -33,5 +34,10 @@ public class BlindDeviceState extends DeviceState {
 
     public void setDimmerPercent(int dimmerPercent) {
         this.dimmerPercent = dimmerPercent;
+    }
+
+    @Override
+    public IoAction toAction() {
+        return null;
     }
 }

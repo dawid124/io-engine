@@ -87,4 +87,8 @@ public class DeviceService {
                 .filter(map -> ids.contains(map.getKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
+
+    public IDevice fetchDevice(String ioId) {
+        return devices.get(ioId);
+    }
 }
