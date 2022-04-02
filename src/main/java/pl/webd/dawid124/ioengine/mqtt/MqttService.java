@@ -6,10 +6,8 @@ import org.springframework.integration.support.MutableMessage;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
-import pl.webd.dawid124.ioengine.model.ActionDevice;
-import pl.webd.dawid124.ioengine.model.IoAction;
-import pl.webd.dawid124.ioengine.model.IoActionRequest;
-import pl.webd.dawid124.ioengine.service.DeviceService;
+import pl.webd.dawid124.ioengine.module.action.model.ActionDevice;
+import pl.webd.dawid124.ioengine.module.action.model.IoAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
