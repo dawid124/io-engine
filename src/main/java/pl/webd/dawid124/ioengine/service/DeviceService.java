@@ -36,9 +36,9 @@ public class DeviceService {
 
     @PostConstruct
     public void init() {
-        PicoDriver floor1Driver0 = new PicoDriver("io-driver-f1-0");
-        PicoDriver floor1Driver1 = new PicoDriver("io-driver-f1-1");
-        PicoDriver floor2Driver0 = new PicoDriver("io-driver-f2-0");
+        PicoDriver floor1Driver0 = new PicoDriver("IO-DRIVER-F1-0");
+        PicoDriver floor1Driver1 = new PicoDriver("IO-DRIVER-F1-1");
+        PicoDriver floor2Driver0 = new PicoDriver("IO-DRIVER-F2-0");
         LocalDriver piLocal = new LocalDriver("pi-master");
 
         drivers.add(floor1Driver0);
@@ -52,7 +52,7 @@ public class DeviceService {
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
         addDevice(new RgbwDevice("rgbw-tv", "TV", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-dinner", "Kuchnia", floor1Driver0ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-dinner", "Jadalnia 2", floor1Driver0ExpanderA, 4, 5, 6, 7));
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 

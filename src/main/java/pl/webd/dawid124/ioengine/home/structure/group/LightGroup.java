@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.home.structure.group;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
 
@@ -12,6 +13,7 @@ public class LightGroup {
     private List<String> deviceIds;
     private EDeviceType type;
 
+    @JsonIgnore
     private DeviceState initialState;
 
     public String getIoId() {

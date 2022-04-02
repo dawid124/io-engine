@@ -12,8 +12,8 @@ import pl.webd.dawid124.ioengine.home.structure.Scene;
 import pl.webd.dawid124.ioengine.home.structure.Zone;
 import pl.webd.dawid124.ioengine.home.structure.group.LightGroup;
 import pl.webd.dawid124.ioengine.model.IoAction;
-import pl.webd.dawid124.ioengine.model.ZoneResponse;
-import pl.webd.dawid124.ioengine.model.ZonesResponse;
+import pl.webd.dawid124.ioengine.model.ZoneInitResponse;
+import pl.webd.dawid124.ioengine.model.ZonesInitResponse;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -71,10 +71,14 @@ public class StateService {
         return zoneState.get(zoneId).getSceneStates().get(sceneId);
     }
 
-    public ZonesResponse fetchZones() {
-        ZonesResponse zones = new ZonesResponse();
+    public ZonesInitResponse fetchZoneStates() {
+        ZonesInitResponse zones = new ZonesInitResponse();
 
-        zoneState.values().forEach(z -> zones.getZones().put(z.getId(), new ZoneResponse(z.getActiveScene())));
+        zoneState.values().forEach(z -> {
+            SceneState scene = z.getSceneStates().get(z.getActiveScene());
+            ZoneInitResponse zone = new ZoneInitResponse(z.getId(), z.getActiveScene(), scene.getDeviceState(), scene.getGroupState());
+            zones.getZones().put(z.getId(), zone);
+        });
 
         return zones;
     }

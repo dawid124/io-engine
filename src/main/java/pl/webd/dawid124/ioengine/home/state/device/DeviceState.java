@@ -5,13 +5,15 @@ import pl.webd.dawid124.ioengine.model.IoAction;
 public abstract class DeviceState implements Cloneable {
 
     private String ioId;
-    private EDeviceStateType type;
+    private String name;
+    private EDeviceStateType ioType;
 
     protected DeviceState() {}
 
-    protected DeviceState(String ioId, EDeviceStateType type) {
+    protected DeviceState(String ioId, String name, EDeviceStateType ioType) {
         this.ioId = ioId;
-        this.type = type;
+        this.name = name;
+        this.ioType = ioType;
     }
 
     public abstract IoAction toAction();
@@ -20,8 +22,12 @@ public abstract class DeviceState implements Cloneable {
         return ioId;
     }
 
-    public EDeviceStateType getType() {
-        return type;
+    public EDeviceStateType getIoType() {
+        return ioType;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

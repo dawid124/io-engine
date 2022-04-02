@@ -11,8 +11,8 @@ import pl.webd.dawid124.ioengine.home.devices.output.EDeviceType;
 import pl.webd.dawid124.ioengine.home.state.Color;
 import pl.webd.dawid124.ioengine.model.IoAction;
 import pl.webd.dawid124.ioengine.model.IoActionRequest;
-import pl.webd.dawid124.ioengine.model.UiActionRequest;
 import pl.webd.dawid124.ioengine.model.SensorTrigger;
+import pl.webd.dawid124.ioengine.mqtt.MqttService;
 
 import java.util.Collections;
 
@@ -22,16 +22,16 @@ public class TriggerService implements MessageHandler {
     private final Gson gson = new Gson();
 
     private final MqttConfig.MqttGateway mqttGateway;
-    private final StateService stateService;
+    private final MqttService mqttService;
 
-    public TriggerService(MqttConfig.MqttGateway mqttGateway, StateService stateService) {
+    public TriggerService(MqttConfig.MqttGateway mqttGateway, MqttService mqttService) {
         this.mqttGateway = mqttGateway;
-        this.stateService = stateService;
+        this.mqttService = mqttService;
     }
 
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {
-        System.out.println(message.getPayload());
+//        System.out.println(message.getPayload());
 
         SensorTrigger trigger = gson.fromJson((String) message.getPayload(), SensorTrigger.class);
         IoAction ioAction = new IoAction();

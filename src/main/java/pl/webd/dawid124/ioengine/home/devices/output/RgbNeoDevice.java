@@ -13,12 +13,12 @@ public class RgbNeoDevice extends Device {
         this.pin = pin;
     }
 
-    @Override public EDeviceType getType() {
+    @Override public EDeviceType getIoType() {
         return EDeviceType.NEO;
     }
 
     @Override public DeviceState getInitialState() {
-        return new NeoDeviceState(id);
+        return new NeoDeviceState(id, name);
     }
 
     public int getPin() {

@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 
 public class DeviceStateJsonAdapter implements JsonDeserializer<DeviceState> {
 
-    private static final String TYPE_ATTR = "Type";
+    private static final String TYPE_ATTR = "ioType";
 
     private static final String ERROR_MSG = "Error on parsing Device State Type, type: [%s]";
 

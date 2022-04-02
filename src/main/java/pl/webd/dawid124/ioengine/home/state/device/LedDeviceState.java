@@ -6,13 +6,13 @@ public class LedDeviceState extends DeviceState {
 
     protected int brightness;
 
-    public LedDeviceState(String id) {
-        super(id, EDeviceStateType.LED);
+    public LedDeviceState(String id, String name) {
+        super(id, name, EDeviceStateType.LED);
         this.brightness = 0;
     }
 
-    public LedDeviceState(String id, EDeviceStateType stateType) {
-        super(id, stateType);
+    public LedDeviceState(String id, String name, EDeviceStateType stateType) {
+        super(id, name, stateType);
         this.brightness = 0;
     }
 
@@ -20,11 +20,6 @@ public class LedDeviceState extends DeviceState {
     public IoAction toAction() {
         IoAction action = new IoAction();
         return action;
-    }
-
-    public LedDeviceState(String id, int brightness) {
-        super(id, EDeviceStateType.LED);
-        this.brightness = brightness;
     }
 
     public int getBrightness() {

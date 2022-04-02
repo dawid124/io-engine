@@ -20,12 +20,12 @@ public class RgbwDevice extends Device {
         this.pinW = pinW;
     }
 
-    @Override public EDeviceType getType() {
+    @Override public EDeviceType getIoType() {
         return EDeviceType.RGBW;
     }
 
     @Override public DeviceState getInitialState() {
-        return new ColorLedDeviceState(id);
+        return new ColorLedDeviceState(id, name);
     }
 
     public int getPinR() {

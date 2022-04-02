@@ -14,12 +14,12 @@ public class LedDevice extends Device {
         this.pin = pin;
     }
 
-    @Override public EDeviceType getType() {
+    @Override public EDeviceType getIoType() {
         return EDeviceType.LED;
     }
 
     @Override public DeviceState getInitialState() {
-        return new LedDeviceState(id);
+        return new LedDeviceState(id, name);
     }
 
     public int getPin() {

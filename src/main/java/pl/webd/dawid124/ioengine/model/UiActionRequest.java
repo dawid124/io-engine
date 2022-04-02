@@ -12,7 +12,9 @@ public class UiActionRequest implements Serializable {
 
     public UiActionRequest() {}
 
-    public UiActionRequest(List<IoAction> ioActions) {
+    public UiActionRequest(String zoneId, String sceneId, List<IoAction> ioActions) {
+        this.zoneId = zoneId;
+        this.sceneId = sceneId;
         this.ioActions = ioActions;
     }
 

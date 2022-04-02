@@ -5,6 +5,7 @@ import pl.webd.dawid124.ioengine.home.state.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.home.state.device.DeviceState;
 import pl.webd.dawid124.ioengine.home.state.device.LedDeviceState;
 import pl.webd.dawid124.ioengine.home.state.device.NeoDeviceState;
+import pl.webd.dawid124.ioengine.model.EActionType;
 import pl.webd.dawid124.ioengine.model.IoAction;
 
 public final class IoActionFactory {
@@ -14,7 +15,8 @@ public final class IoActionFactory {
     public static IoAction fromDeviceState(IDevice device, DeviceState state) {
         IoAction a = new IoAction();
         a.setIoId(device.getId());
-        a.setIoType(device.getType());
+        a.setIoType(device.getIoType());
+        a.setAction(EActionType.CHANGE);
 
         if (state instanceof NeoDeviceState) {
             NeoDeviceState neoState = (NeoDeviceState) state;

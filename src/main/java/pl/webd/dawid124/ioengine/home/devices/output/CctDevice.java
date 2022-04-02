@@ -16,12 +16,12 @@ public class CctDevice extends Device {
         this.pinCW = pinCW;
     }
 
-    @Override public EDeviceType getType() {
+    @Override public EDeviceType getIoType() {
         return EDeviceType.CCT;
     }
 
     @Override public DeviceState getInitialState() {
-        return new ColorLedDeviceState(id);
+        return new ColorLedDeviceState(id, name);
     }
 
     public int getPinWW() {

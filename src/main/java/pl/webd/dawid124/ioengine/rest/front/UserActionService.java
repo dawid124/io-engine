@@ -53,6 +53,17 @@ public class UserActionService {
 
         SceneState sceneState = stateService.fetchScene(zoneId, sceneId);
 
+        List<IoAction> actionList = new ArrayList<>();
+
+        for (DeviceState deviceState: sceneState.getDeviceState().values()) {
+            IDevice device = deviceService.fetchDevice(deviceState.getIoId());
+            if (device != null) {
+                actionList.add(IoActionFactory.fromDeviceState(device, deviceState));
+            }
+        }
+
+        processLights(actionList, zoneId, sceneId);
+
         return sceneState;
     }
 
@@ -95,7 +106,9 @@ public class UserActionService {
         for (String ioId : group.getDeviceIds()) {
             DeviceState deviceState = sceneState.getDeviceState().get(ioId);
             IDevice device = deviceService.fetchDevice(ioId);
-            actionList.add(IoActionFactory.fromDeviceState(device, deviceState));
+            if (device != null) {
+                actionList.add(IoActionFactory.fromDeviceState(device, deviceState));
+            }
         }
 
         processLights(actionList, zoneId, sceneId);

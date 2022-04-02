@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.home.structure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.webd.dawid124.ioengine.home.devices.output.IDevice;
 
 import java.util.ArrayList;
@@ -14,11 +15,13 @@ public class Zone {
 
     private final int order;
 
+    @JsonIgnore
     private final ArrayList<String> deviceIds;
+    @JsonIgnore
+    private Map<String, IDevice> devices;
+
     private final Map<String, Scene> scenes;
 
-
-    private Map<String, IDevice> devices;
 
 
     public Zone(String id, String name, int order) {

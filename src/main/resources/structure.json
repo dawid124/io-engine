@@ -4,7 +4,7 @@
       "id": "floor1",
       "name": "Salon",
       "order": 0,
-      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinning1", "rgbw-dinning2", "neo-kitchen", "neo-celling"],
+      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "neo-kitchen", "neo-celling"],
       "scenes": {
         "auto": {
           "id": "auto",
@@ -14,7 +14,8 @@
           "lightsState": [
             {
               "ioId": "rgbw-tv",
-              "type": "COLOR_LED",
+              "name": "TV",
+              "ioType": "RGBW",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -25,7 +26,8 @@
             },
             {
               "ioId": "rgbw-kitchen",
-              "type": "COLOR_LED",
+              "name": "Jadalnia 1",
+              "ioType": "RGBW",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -35,19 +37,9 @@
               }
             },
             {
-              "ioId": "rgbw-dinning1",
-              "type": "COLOR_LED",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinning2",
-              "type": "COLOR_LED",
+              "ioId": "rgbw-dinner",
+              "name": "Jadalnia 2",
+              "ioType": "RGBW",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -58,8 +50,8 @@
             },
             {
               "ioId": "neo-kitchen",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Kuchnia",
+              "ioType": "NEO",
               "brightness": 0,
               "animationId": 0,
               "speed": 1000,
@@ -72,8 +64,8 @@
             },
             {
               "ioId": "neo-celling",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Sufit",
+              "ioType": "NEO",
               "brightness": 0,
               "animationId": 0,
               "speed": 1000,
@@ -94,12 +86,12 @@
             {
               "ioId": "f1-std-led-group",
               "name": "Led",
-              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinning1", "rgbw-dinning2"],
-              "type": "RGBW",
+              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner"],
+              "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-led-group",
                 "name": "Led",
-                "type": "COLOR_LED",
+                "ioType": "RGBW",
                 "brightness": 255,
                 "color": {
                   "r": 0,
@@ -113,11 +105,11 @@
               "ioId": "f1-std-neo-group",
               "name": "Neo",
               "deviceIds": ["neo-kitchen", "neo-celling"],
-              "type": "NEO",
+              "ioType": "NEO",
               "initialState": {
                 "ioId": "f1-std-neo-group",
                 "name": "Neo",
-                "type": "NEO",
+                "ioType": "NEO",
                 "animationId": 0,
                 "speed": 1000,
                 "brightness": 255,
@@ -133,7 +125,8 @@
           "lightsState": [
             {
               "ioId": "rgbw-tv",
-              "type": "COLOR_LED",
+              "name": "TV",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -144,7 +137,8 @@
             },
             {
               "ioId": "rgbw-kitchen",
-              "type": "COLOR_LED",
+              "name": "Jadalnia 1",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -154,19 +148,9 @@
               }
             },
             {
-              "ioId": "rgbw-dinning1",
-              "type": "COLOR_LED",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinning2",
-              "type": "COLOR_LED",
+              "ioId": "rgbw-dinner",
+              "name": "Jadalnia 2",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -177,8 +161,8 @@
             },
             {
               "ioId": "neo-kitchen",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Kuchnia",
+              "ioType": "NEO",
               "brightness": 100,
               "animationId": 0,
               "speed": 1000,
@@ -191,8 +175,8 @@
             },
             {
               "ioId": "neo-celling",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Sufit",
+              "ioType": "NEO",
               "brightness": 100,
               "animationId": 0,
               "speed": 1000,
@@ -213,12 +197,12 @@
             {
               "ioId": "f1-std-led-group",
               "name": "Led",
-              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinning1", "rgbw-dinning2"],
-              "type": "RGBW",
+              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner"],
+              "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-led-group",
                 "name": "Led",
-                "type": "COLOR_LED",
+                "ioType": "RGBW",
                 "brightness": 50,
                 "color": {
                   "r": 0,
@@ -232,11 +216,11 @@
               "ioId": "f1-std-neo-group",
               "name": "Neo",
               "deviceIds": ["neo-kitchen", "neo-celling"],
-              "type": "NEO",
+              "ioType": "NEO",
               "initialState": {
                 "ioId": "f1-std-neo-group",
                 "name": "Neo",
-                "type": "NEO",
+                "ioType": "NEO",
                 "animationId": 0,
                 "speed": 1000,
                 "brightness": 50,
@@ -252,7 +236,8 @@
           "lightsState": [
             {
               "ioId": "rgbw-tv",
-              "type": "COLOR_LED",
+              "name": "TV",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -263,7 +248,8 @@
             },
             {
               "ioId": "rgbw-kitchen",
-              "type": "COLOR_LED",
+              "name": "Jadalnia 1",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -273,19 +259,9 @@
               }
             },
             {
-              "ioId": "rgbw-dinning1",
-              "type": "COLOR_LED",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinning2",
-              "type": "COLOR_LED",
+              "ioId": "rgbw-dinner",
+              "name": "Jadalnia 2",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -296,8 +272,8 @@
             },
             {
               "ioId": "neo-kitchen",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Kuchnia",
+              "ioType": "NEO",
               "brightness": 100,
               "animationId": 0,
               "speed": 1000,
@@ -310,8 +286,8 @@
             },
             {
               "ioId": "neo-celling",
-              "name": "Led",
-              "type": "NEO",
+              "name": "Neo Sufit",
+              "ioType": "NEO",
               "brightness": 100,
               "animationId": 0,
               "speed": 1000,
@@ -362,7 +338,8 @@
           "lightsState": [
             {
               "ioId": "rgbw-office",
-              "type": "COLOR_LED",
+              "name": "Biuro",
+              "ioType": "RGBW",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -373,7 +350,8 @@
             },
             {
               "ioId": "rgbw-lobby",
-              "type": "COLOR_LED",
+              "name": "Korytarz",
+              "ioType": "RGBW",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -391,13 +369,13 @@
           "groups": [
             {
               "ioId": "f1-std-rgbw-office",
-              "name": "Led",
+              "name": "Biuro",
               "deviceIds": ["rgbw-office"],
-              "type": "RGBW",
+              "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-rgbw-office",
-                "name": "Led",
-                "type": "COLOR_LED",
+                "name": "Biuro",
+                "ioType": "RGBW",
                 "brightness": 255,
                 "color": {
                   "r": 0,
@@ -409,13 +387,13 @@
             },
             {
               "ioId": "f1-std-rgbw-lobby",
-              "name": "Led",
+              "name": "Korytarz",
               "deviceIds": ["rgbw-lobby"],
-              "type": "RGBW",
+              "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-rgbw-lobby",
-                "name": "Led",
-                "type": "COLOR_LED",
+                "name": "Korytarz",
+                "ioType": "RGBW",
                 "brightness": 255,
                 "color": {
                   "r": 0,
@@ -429,7 +407,8 @@
           "lightsState": [
             {
               "ioId": "rgbw-office",
-              "type": "COLOR_LED",
+              "name": "Biuro",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,
@@ -440,7 +419,8 @@
             },
             {
               "ioId": "rgbw-lobby",
-              "type": "COLOR_LED",
+              "name": "Korytarz",
+              "ioType": "RGBW",
               "brightness": 255,
               "color": {
                 "r": 0,

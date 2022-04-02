@@ -25,7 +25,7 @@ public final class MqttService {
     private final MqttSettings settings;
     private final MqttConfig.MqttGateway mqttGateway;
 
-    public MqttService(MqttSettings settings, MqttConfig.MqttGateway mqttGateway, DeviceService deviceService) {
+    public MqttService(MqttSettings settings, MqttConfig.MqttGateway mqttGateway) {
         this.settings = settings;
         this.mqttGateway = mqttGateway;
     }

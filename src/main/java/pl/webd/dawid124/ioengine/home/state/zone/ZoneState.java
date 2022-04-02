@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.home.state.zone;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.webd.dawid124.ioengine.home.state.scene.SceneState;
 import pl.webd.dawid124.ioengine.home.state.variable.IVariable;
 

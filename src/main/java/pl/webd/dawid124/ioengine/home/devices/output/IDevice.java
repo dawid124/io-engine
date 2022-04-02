@@ -7,7 +7,7 @@ public interface IDevice {
 
     IDriverConfiguration getDriverConfiguration();
 
-    EDeviceType getType();
+    EDeviceType getIoType();
 
     String getId();
 

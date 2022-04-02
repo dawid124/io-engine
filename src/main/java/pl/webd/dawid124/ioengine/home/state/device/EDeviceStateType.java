@@ -4,7 +4,7 @@ public enum EDeviceStateType {
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),
     LED(LedDeviceState.class),
-    COLOR_LED(ColorLedDeviceState.class);
+    RGBW(ColorLedDeviceState.class);
 
     Class clazz;
 

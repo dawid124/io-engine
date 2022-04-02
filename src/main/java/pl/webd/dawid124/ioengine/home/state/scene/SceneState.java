@@ -20,6 +20,13 @@ public class SceneState {
         this.deviceState = new HashMap<>();
     }
 
+    public SceneState(String id, String name, Map<String, DeviceState> deviceState, Map<String, DeviceState> groupState) {
+        this.id = id;
+        this.name = name;
+        this.deviceState = deviceState;
+        this.groupState = groupState;
+    }
+
     public void addGroupState(DeviceState state) {
         groupState.put(state.getIoId(), state);
     }
