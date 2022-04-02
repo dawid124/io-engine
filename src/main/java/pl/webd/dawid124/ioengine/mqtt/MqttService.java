@@ -6,8 +6,8 @@ import org.springframework.integration.support.MutableMessage;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
-import pl.webd.dawid124.ioengine.module.action.model.ActionDevice;
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.server.ActionDevice;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,14 +28,13 @@ public final class MqttService {
         this.mqttGateway = mqttGateway;
     }
 
-    public void sendActionsToDevices(List<ActionDevice> actions) {
+    public void sendActionsToDevices(List<IoAction> actions) {
 
         Map<String, List<IoAction>> actionsPerAddress = new HashMap<>();
 
-        for (ActionDevice actionDevice: actions) {
-            String driverId = actionDevice.getDevice().getDriverConfiguration().getDriver().getId();
-            List<IoAction> group = actionsPerAddress.computeIfAbsent(driverId, k -> new ArrayList<>());
-            group.add(actionDevice.getIoAction());
+        for (IoAction action: actions) {
+            List<IoAction> group = actionsPerAddress.computeIfAbsent(action.getDeviceId(), k -> new ArrayList<>());
+            group.add(action);
         }
 
         actionsPerAddress.forEach((id, values) ->

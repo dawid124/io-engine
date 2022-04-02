@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.module.action.model;
+package pl.webd.dawid124.ioengine.module.action.model.rest;
 
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 

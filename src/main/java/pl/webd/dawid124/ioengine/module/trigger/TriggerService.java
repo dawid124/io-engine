@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.share.Color;
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.mqtt.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.IoActionRequest;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 

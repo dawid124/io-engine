@@ -8,7 +8,7 @@ import pl.webd.dawid124.ioengine.module.device.model.output.Device;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.state.model.device.BlindDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
-import pl.webd.dawid124.ioengine.module.action.model.BlindResponse;
+import pl.webd.dawid124.ioengine.module.action.model.rest.BlindResponse;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 
 import java.util.concurrent.Executors;

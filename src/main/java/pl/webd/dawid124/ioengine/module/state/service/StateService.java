@@ -1,6 +1,8 @@
 package pl.webd.dawid124.ioengine.module.state.service;
 
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
+import pl.webd.dawid124.ioengine.module.action.model.server.ServerDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
@@ -11,7 +13,7 @@ import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.structure.model.Scene;
 import pl.webd.dawid124.ioengine.module.structure.model.Zone;
 import pl.webd.dawid124.ioengine.module.structure.model.LightGroup;
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
@@ -85,28 +87,21 @@ public class StateService {
         return zones;
     }
 
-    public void updateGroupSate(List<IoAction> actions, LightGroup group, String zoneId, String sceneId) {
-        SceneState scene = this.zoneState.get(zoneId).getSceneStates().get(sceneId);
+    public void updateGroupSate(ServerUiAction action) {
+        updateStateByType(action.getIoAction(), action.getDevice().getState());
 
-        for (IoAction action: actions) {
-            updateStateByType(action, scene.getGroupState().get(action.getIoId()));
-
-            for (String ioId: group.getDeviceIds()) {
-                updateStateByGroup(action, scene.getDeviceState().get(ioId));
-            }
+        for (ServerDevice serverDevice : action.getDevice().getChildren()) {
+            updateStateByGroup(action.getIoAction(), serverDevice.getState());
         }
     }
 
-    public void updateDeviceSate(List<IoAction> actions, String zoneId, String sceneId) {
-        SceneState scene = this.zoneState.get(zoneId).getSceneStates().get(sceneId);
-        for (IoAction a : actions) {
-            DeviceState state = scene.getDeviceState().get(a.getIoId());
-
-            updateStateByType(a, state);
+    public void updateDeviceSate(List<ServerUiAction> actions) {
+        for (ServerUiAction action : actions) {
+            updateStateByType(action.getIoAction(), action.getDevice().getState());
         }
     }
 
-    private void updateStateByGroup(IoAction ioAction, DeviceState state) {
+    private void updateStateByGroup(UiAction ioAction, DeviceState state) {
         if (state instanceof ColorLedDeviceState) {
             ((ColorLedDeviceState) state).setColor(ioAction.getColor());
         } else if (state instanceof NeoDeviceState) {
@@ -117,7 +112,7 @@ public class StateService {
         }
     }
 
-    private void updateStateByType(IoAction a, DeviceState state) {
+    private void updateStateByType(UiAction a, DeviceState state) {
         if (state instanceof ColorLedDeviceState) {
             updateColorLedState((ColorLedDeviceState) state, a);
         } else if (state instanceof NeoDeviceState) {
@@ -127,16 +122,16 @@ public class StateService {
         }
     }
 
-    private void updateLedState(LedDeviceState state, IoAction ioAction) {
+    private void updateLedState(LedDeviceState state, UiAction ioAction) {
         state.setBrightness(ioAction.getBrightness());
     }
 
-    private void updateColorLedState(ColorLedDeviceState state, IoAction ioAction) {
+    private void updateColorLedState(ColorLedDeviceState state, UiAction ioAction) {
         state.setBrightness(ioAction.getBrightness());
         state.setColor(ioAction.getColor());
     }
 
-    private void updateNeoState(NeoDeviceState state, IoAction ioAction) {
+    private void updateNeoState(NeoDeviceState state, UiAction ioAction) {
         state.setBrightness(ioAction.getBrightness());
         state.setColor(ioAction.getColor());
         state.setAnimationId(ioAction.getAnimationId());

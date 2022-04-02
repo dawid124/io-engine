@@ -1,14 +1,14 @@
-package pl.webd.dawid124.ioengine.module.action.model;
+package pl.webd.dawid124.ioengine.mqtt;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.share.Color;
 
-import java.io.Serializable;
-
-public class IoAction implements Serializable {
+public class IoAction {
 
     private String ioId;
-    private String name;
     private EDeviceType ioType;
     private EActionType action;
 
@@ -21,9 +21,10 @@ public class IoAction implements Serializable {
     private int stepTime;
     private int time;
 
-    private int percent;
-
-    private boolean group;
+    @JsonIgnore
+    private String deviceId;
+    @JsonIgnore
+    private EIoDriverType deviceType;
 
     public String getIoId() {
         return ioId;
@@ -31,14 +32,6 @@ public class IoAction implements Serializable {
 
     public void setIoId(String ioId) {
         this.ioId = ioId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public EDeviceType getIoType() {
@@ -105,23 +98,19 @@ public class IoAction implements Serializable {
         this.time = time;
     }
 
-    public int getPercent() {
-        return percent;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setPercent(int percent) {
-        this.percent = percent;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public boolean isGroup() {
-        return group;
+    public EIoDriverType getDeviceType() {
+        return deviceType;
     }
 
-    public void setGroup(boolean group) {
-        this.group = group;
-    }
-
-    public boolean isBlind() {
-        return EDeviceType.BLIND.equals(ioType);
+    public void setDeviceType(EIoDriverType deviceType) {
+        this.deviceType = deviceType;
     }
 }

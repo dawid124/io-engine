@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
-import pl.webd.dawid124.ioengine.module.action.model.UiActionRequest;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 

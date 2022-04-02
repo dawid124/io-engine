@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.module.action.model;
+package pl.webd.dawid124.ioengine.module.action.model.rest;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,21 +8,21 @@ public class UiActionRequest implements Serializable {
     private String zoneId;
     private String sceneId;
 
-    private List<IoAction> ioActions;
+    private List<UiAction> ioActions;
 
     public UiActionRequest() {}
 
-    public UiActionRequest(String zoneId, String sceneId, List<IoAction> ioActions) {
+    public UiActionRequest(String zoneId, String sceneId, List<UiAction> ioActions) {
         this.zoneId = zoneId;
         this.sceneId = sceneId;
         this.ioActions = ioActions;
     }
 
-    public List<IoAction> getActions() {
+    public List<UiAction> getActions() {
         return ioActions;
     }
 
-    public void setActions(List<IoAction> ioActions) {
+    public void setActions(List<UiAction> ioActions) {
         this.ioActions = ioActions;
     }
 

@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 
 public class BlindDeviceState extends DeviceState {
 
@@ -36,7 +36,7 @@ public class BlindDeviceState extends DeviceState {
     }
 
     @Override
-    public IoAction toAction() {
+    public UiAction toAction() {
         return null;
     }
 }

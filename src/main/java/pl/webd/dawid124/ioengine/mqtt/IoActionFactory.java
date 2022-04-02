@@ -1,12 +1,12 @@
-package pl.webd.dawid124.ioengine.utils;
+package pl.webd.dawid124.ioengine.mqtt;
 
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.NeoDeviceState;
-import pl.webd.dawid124.ioengine.module.action.model.EActionType;
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 
 public final class IoActionFactory {
 
@@ -17,6 +17,8 @@ public final class IoActionFactory {
         a.setIoId(device.getId());
         a.setIoType(device.getIoType());
         a.setAction(EActionType.CHANGE);
+        a.setDeviceId(device.getDriverConfiguration().getDriver().getId());
+        a.setDeviceType(device.getDriverConfiguration().getDriver().getType());
 
         if (state instanceof NeoDeviceState) {
             NeoDeviceState neoState = (NeoDeviceState) state;

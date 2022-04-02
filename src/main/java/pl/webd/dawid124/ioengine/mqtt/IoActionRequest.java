@@ -1,7 +1,5 @@
 package pl.webd.dawid124.ioengine.mqtt;
 
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
-
 import java.util.List;
 
 public class IoActionRequest {

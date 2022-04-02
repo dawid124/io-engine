@@ -1,33 +1,25 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
 import pl.webd.dawid124.ioengine.module.device.model.input.BlindDevice;
-import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
-import pl.webd.dawid124.ioengine.module.action.model.IoAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BlindService {
 
-    private DeviceService deviceService;
-
-    public BlindService(DeviceService deviceService) {
-        this.deviceService = deviceService;
-    }
-
-    public void processBlinds(List<IoAction> ioActions) {
-        Map<String, IDevice> devices = deviceService.fetchAll();
-
-        for (IoAction ioAction : ioActions) {
-            BlindDevice device = (BlindDevice) devices.get(ioAction.getIoId());
+    public void processBlinds(List<ServerUiAction> actions) {
+        for (ServerUiAction action : actions) {
+            BlindDevice device = (BlindDevice) action.getDevice().getDevice();
             if (device == null) {
                 return;
             }
 
+            UiAction ioAction = action.getIoAction();
             switch (ioAction.getAction()) {
                 case UP:
                     device.move(EBlindDirection.UP);
