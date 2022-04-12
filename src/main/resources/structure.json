@@ -4,7 +4,21 @@
       "id": "floor1",
       "name": "Salon",
       "order": 0,
-      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "neo-kitchen", "neo-celling"],
+      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "neo-kitchen", "neo-celling", "rgbww-kitchen"],
+      "blinds": [
+        {
+          "ioId": "f1-hs"
+        },
+        {
+          "ioId": "f1-hs-corner"
+        },
+        {
+          "ioId": "f1-fix-360"
+        },
+        {
+          "ioId": "f1-fix-360-corner"
+        }
+      ],
       "scenes": {
         "auto": {
           "id": "auto",
@@ -49,6 +63,19 @@
               }
             },
             {
+              "ioId": "rgbww-kitchen",
+              "name": "Kuchnia Szafki",
+              "ioType": "RGBW",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            },
+            {
               "ioId": "neo-kitchen",
               "name": "Neo Kuchnia",
               "ioType": "NEO",
@@ -74,6 +101,76 @@
                 "g": 0,
                 "b": 0,
                 "w": 255
+              }
+            },
+            {
+              "ioId": "neo-wall-1",
+              "name": "Wall 1",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-2",
+              "name": "Wall 2",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-3",
+              "name": "Wall 3 & 7",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-4",
+              "name": "Wall 4 & 6",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-5",
+              "name": "Wall 5",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
               }
             }
           ]
@@ -86,7 +183,7 @@
             {
               "ioId": "f1-std-led-group",
               "name": "Led",
-              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner"],
+              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "rgbww-kitchen"],
               "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-led-group",
@@ -118,6 +215,32 @@
                   "g": 0,
                   "b": 0,
                   "w": 255
+                }
+              }
+            },
+            {
+              "ioId": "f1-std-neo-wall",
+              "name": "Wall",
+              "deviceIds": [
+                "neo-wall-1",
+                "neo-wall-2",
+                "neo-wall-3",
+                "neo-wall-4",
+                "neo-wall-5"
+              ],
+              "ioType": "NEO",
+              "initialState": {
+                "ioId": "f1-std-neo-wall",
+                "name": "Wall",
+                "ioType": "NEO",
+                "animationId": 0,
+                "speed": 1000,
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 0
                 }
               }
             }
@@ -157,6 +280,19 @@
                 "g": 0,
                 "b": 0,
                 "w": 255
+              }
+            },
+            {
+              "ioId": "rgbww-kitchen",
+              "name": "Kuchnia Szafki",
+              "ioType": "RGBW",
+              "brightness": 255,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
               }
             },
             {
@@ -186,6 +322,76 @@
                 "b": 0,
                 "w": 255
               }
+            },
+            {
+              "ioId": "neo-wall-1",
+              "name": "Wall 1",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-2",
+              "name": "Wall 2",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-3",
+              "name": "Wall 3 & 7",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-4",
+              "name": "Wall 4 & 6",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
+            },
+            {
+              "ioId": "neo-wall-5",
+              "name": "Wall 5",
+              "ioType": "NEO",
+              "brightness": 255,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 0
+              }
             }
           ]
         },
@@ -197,7 +403,7 @@
             {
               "ioId": "f1-std-led-group",
               "name": "Led",
-              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner"],
+              "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "rgbww-kitchen"],
               "ioType": "RGBW",
               "initialState": {
                 "ioId": "f1-std-led-group",
@@ -268,6 +474,19 @@
                 "g": 0,
                 "b": 0,
                 "w": 255
+              }
+            },
+            {
+              "ioId": "rgbww-kitchen",
+              "name": "Kuchnia Szafki",
+              "ioType": "RGBW",
+              "brightness": 100,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
               }
             },
             {
@@ -329,6 +548,14 @@
       "name": "Parter",
       "order": 2,
       "deviceIds": ["rgbw-office", "rgbw-lobby"],
+      "blinds": [
+        {
+          "ioId": "office-left"
+        },
+        {
+          "ioId": "office-right"
+        }
+      ],
       "scenes": {
         "auto": {
           "id": "auto",

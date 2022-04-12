@@ -26,6 +26,16 @@ public class UserActionController {
         this.stateService = stateService;
     }
 
+    @PostMapping(value = "/api/blinds", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<SceneStateResponse> blinds(@RequestBody UiActionRequest action) {
+
+        userActionService.processActionChange(action);
+
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping(value = "/api/actions", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody

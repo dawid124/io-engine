@@ -1,12 +1,11 @@
 package pl.webd.dawid124.ioengine.module.structure.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javafx.collections.transformation.SortedList;
+import pl.webd.dawid124.ioengine.module.device.model.input.BlindDevice;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Zone {
 
@@ -15,13 +14,11 @@ public class Zone {
 
     private final int order;
 
-    @JsonIgnore
-    private final ArrayList<String> deviceIds;
-    @JsonIgnore
-    private Map<String, IDevice> devices;
-
+    private final Set<BlindStructure> blinds;
     private final Map<String, Scene> scenes;
 
+    @JsonIgnore
+    private final List<String> deviceIds;
 
 
     public Zone(String id, String name, int order) {
@@ -30,7 +27,7 @@ public class Zone {
         this.order = order;
 
         this.deviceIds = new ArrayList<>();
-        this.devices = new HashMap<>();
+        this.blinds = new TreeSet<>();
         this.scenes = new HashMap<>();
     }
 
@@ -46,12 +43,12 @@ public class Zone {
         return deviceIds;
     }
 
-    public Map<String, IDevice> getDevices() {
-        return devices;
-    }
-
     public Map<String, Scene> getScenes() {
         return scenes;
+    }
+
+    public Set<BlindStructure> getBlinds() {
+        return blinds;
     }
 
     public int getOrder() {
@@ -60,9 +57,5 @@ public class Zone {
 
     public void addScene(Scene scene) {
         scenes.put(scene.getId(), scene);
-    }
-
-    public void setDevices(Map<String, IDevice> devices) {
-        this.devices = devices;
     }
 }

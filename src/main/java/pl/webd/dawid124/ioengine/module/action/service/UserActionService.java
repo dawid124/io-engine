@@ -1,14 +1,12 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
-import pl.webd.dawid124.ioengine.module.device.model.driver.instance.IDriver;
-import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
-import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 import pl.webd.dawid124.ioengine.mqtt.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 
@@ -47,21 +45,33 @@ public class UserActionService {
     }
 
     public UiActionRequest processActionChange(UiActionRequest action) {
-        List<ServerUiAction> serverActions = actionDataService.fromUiActionRequest(action);
 
-        List<ServerUiAction> groups = new ArrayList<>();
-        List<ServerUiAction> blinds = new ArrayList<>();
-        List<ServerUiAction> lights = new ArrayList<>();
 
-        for (ServerUiAction a: serverActions) {
-            if (a.getDevice().isGroup()) groups.add(a);
-            else if (a.getIoAction().isBlind()) blinds.add(a);
+        List<UiAction> groups = new ArrayList<>();
+        List<UiAction> blinds = new ArrayList<>();
+        List<UiAction> lights = new ArrayList<>();
+
+        for (UiAction a: action.getActions()) {
+            if (a.isGroup()) groups.add(a);
+            else if (a.isBlind()) blinds.add(a);
             else lights.add(a);
         }
 
+        if (!groups.isEmpty()) {
+            List<ServerUiAction> groupActions = actionDataService.fromUiActionRequest(
+                    new UiActionRequest(action.getZoneId(), action.getSceneId(), groups)
+            );
+            processLightGroups(groupActions);
+        }
+        if (!lights.isEmpty()) {
+            List<ServerUiAction> lightsActions = actionDataService.fromUiActionRequest(
+                    new UiActionRequest(action.getZoneId(), action.getSceneId(), lights)
+            );
+            processLights(lightsActions);
+        }
+
+
         processBlinds(blinds);
-        processLightGroups(groups);
-        processLights(lights);
 
         return action;
     }
@@ -91,7 +101,7 @@ public class UserActionService {
         mqttService.sendActionsToDevices(mqttActions);
     }
 
-    private void processBlinds(List<ServerUiAction> actions) {
+    private void processBlinds(List<UiAction> actions) {
         blindService.processBlinds(actions);
     }
 }

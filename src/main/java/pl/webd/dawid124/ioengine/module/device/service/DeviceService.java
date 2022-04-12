@@ -15,6 +15,7 @@ import pl.webd.dawid124.ioengine.module.device.model.input.BlindDevice;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.model.output.RgbwDevice;
 import pl.webd.dawid124.ioengine.module.device.model.output.RgbwNeoDevice;
+import pl.webd.dawid124.ioengine.module.device.model.output.RgbwwDevice;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -49,6 +50,11 @@ public class DeviceService {
         PicoDriverConfiguration floor1Driver0ExpanderA = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration floor1Driver0ExpanderB = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration floor1Driver0Local = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+
+        PicoDriverConfiguration floor1Driver1ExpanderA = new PicoDriverConfiguration(floor1Driver1, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
+        PicoDriverConfiguration floor1Driver1ExpanderB = new PicoDriverConfiguration(floor1Driver1, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
+        PicoDriverConfiguration floor1Driver1Local = new PicoDriverConfiguration(floor1Driver1, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
         addDevice(new RgbwDevice("rgbw-tv", "TV", floor1Driver0ExpanderA, 0, 1, 2, 3));
@@ -59,10 +65,15 @@ public class DeviceService {
         addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 15));
         addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 14));
 
+        addDevice(new RgbwNeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 15));
+        addDevice(new RgbwNeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 14));
+        addDevice(new RgbwNeoDevice("neo-wall-3", "Wall 3", floor1Driver1Local, 13));
+        addDevice(new RgbwNeoDevice("neo-wall-4", "Wall 4", floor1Driver1Local, 12));
+        addDevice(new RgbwNeoDevice("neo-wall-5", "Wall 5", floor1Driver1Local, 12));
+
         addDevice(new RgbwDevice("rgbw-lobby", "Korytarz", floor1Driver0ExpanderB, 12, 13, 14, 15));
 
-        addDevice(new RgbwDevice("rgbw-lobby", "Kuchnia góra", floor1Driver0Local, 8, 9, 10, 11));
-        addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 24));
+        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 5, 4, 3));
 
 
         addDevice(new BlindDevice("f1-hs", "HS salon", localPi, RaspiPin.GPIO_15, RaspiPin.GPIO_16));
