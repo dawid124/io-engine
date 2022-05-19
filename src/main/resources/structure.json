@@ -4,7 +4,7 @@
       "id": "floor1",
       "name": "Salon",
       "order": 0,
-      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "neo-kitchen", "neo-celling", "rgbww-kitchen"],
+      "deviceIds": ["rgbw-tv", "rgbw-kitchen", "rgbw-dinner", "neo-kitchen", "neo-tv", "neo-celling", "rgbww-kitchen"],
       "blinds": [
         {
           "ioId": "f1-hs"
@@ -78,6 +78,20 @@
             {
               "ioId": "neo-kitchen",
               "name": "Neo Kuchnia",
+              "ioType": "NEO",
+              "brightness": 0,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "neo-tv",
+              "name": "Neo TV",
               "ioType": "NEO",
               "brightness": 0,
               "animationId": 0,
@@ -201,7 +215,7 @@
             {
               "ioId": "f1-std-neo-group",
               "name": "Neo",
-              "deviceIds": ["neo-kitchen", "neo-celling"],
+              "deviceIds": ["neo-kitchen", "neo-tv", "neo-celling"],
               "ioType": "NEO",
               "initialState": {
                 "ioId": "f1-std-neo-group",
@@ -300,6 +314,20 @@
               "name": "Neo Kuchnia",
               "ioType": "NEO",
               "brightness": 100,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "neo-tv",
+              "name": "Neo TV",
+              "ioType": "NEO",
+              "brightness": 0,
               "animationId": 0,
               "speed": 1000,
               "color": {
@@ -421,7 +449,7 @@
             {
               "ioId": "f1-std-neo-group",
               "name": "Neo",
-              "deviceIds": ["neo-kitchen", "neo-celling"],
+              "deviceIds": ["neo-kitchen", "neo-tv", "neo-celling"],
               "ioType": "NEO",
               "initialState": {
                 "ioId": "f1-std-neo-group",
@@ -504,6 +532,20 @@
               }
             },
             {
+              "ioId": "neo-tv",
+              "name": "Neo TV",
+              "ioType": "NEO",
+              "brightness": 0,
+              "animationId": 0,
+              "speed": 1000,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
               "ioId": "neo-celling",
               "name": "Neo Sufit",
               "ioType": "NEO",
@@ -558,6 +600,38 @@
       ],
       "scenes": {
         "auto": {
+          "id": "auto",
+          "name": "Auto",
+          "order": 0,
+          "groups": [],
+          "lightsState": [
+            {
+              "ioId": "rgbw-office",
+              "name": "Biuro",
+              "ioType": "RGBW",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "rgbw-lobby",
+              "name": "Korytarz",
+              "ioType": "RGBW",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          ]
+        },
+        "night": {
           "id": "auto",
           "name": "Auto",
           "order": 0,

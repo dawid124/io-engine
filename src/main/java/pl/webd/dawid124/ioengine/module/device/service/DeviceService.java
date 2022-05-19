@@ -62,8 +62,9 @@ public class DeviceService {
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 
-        addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 15));
-        addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 14));
+        addDevice(new RgbwNeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 12));
+        addDevice(new RgbwNeoDevice("neo-celling", "Sufit", floor1Driver0Local, 13));
+        addDevice(new RgbwNeoDevice("neo-tv", "Neo TV", floor1Driver0Local, 14));
 
         addDevice(new RgbwNeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 15));
         addDevice(new RgbwNeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 14));
