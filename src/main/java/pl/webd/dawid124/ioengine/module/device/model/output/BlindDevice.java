@@ -1,15 +1,14 @@
-package pl.webd.dawid124.ioengine.module.device.model.input;
+package pl.webd.dawid124.ioengine.module.device.model.output;
 
 import com.pi4j.io.gpio.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
-import pl.webd.dawid124.ioengine.module.device.model.output.Device;
-import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.state.model.device.BlindDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.action.model.rest.BlindResponse;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -139,5 +138,10 @@ public class BlindDevice extends Device {
 
     @Override public DeviceState getInitialState() {
         return state;
+    }
+
+    @Override
+    public IoConfig toIoConfig() {
+        return null;
     }
 }

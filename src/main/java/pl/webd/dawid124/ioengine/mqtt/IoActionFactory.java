@@ -1,12 +1,12 @@
 package pl.webd.dawid124.ioengine.mqtt;
 
+import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.NeoDeviceState;
-import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 public final class IoActionFactory {
 

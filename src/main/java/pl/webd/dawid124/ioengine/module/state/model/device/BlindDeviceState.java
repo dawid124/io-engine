@@ -34,9 +34,4 @@ public class BlindDeviceState extends DeviceState {
     public void setDimmerPercent(int dimmerPercent) {
         this.dimmerPercent = dimmerPercent;
     }
-
-    @Override
-    public UiAction toAction() {
-        return null;
-    }
 }

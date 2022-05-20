@@ -16,8 +16,6 @@ public abstract class DeviceState implements Cloneable {
         this.ioType = ioType;
     }
 
-    public abstract UiAction toAction();
-
     public String getIoId() {
         return ioId;
     }

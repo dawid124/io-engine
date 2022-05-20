@@ -14,6 +14,7 @@ public class MqttSettings {
     private String password;
     private String topic;
     private String triggerTopic;
+    private String driverSyncTopic;
     private String actionTopic;
     private String clientId;
 
@@ -71,5 +72,13 @@ public class MqttSettings {
 
     public void setActionTopic(String actionTopic) {
         this.actionTopic = actionTopic;
+    }
+
+    public String getDriverSyncTopic() {
+        return driverSyncTopic;
+    }
+
+    public void setDriverSyncTopic(String driverSyncTopic) {
+        this.driverSyncTopic = driverSyncTopic;
     }
 }

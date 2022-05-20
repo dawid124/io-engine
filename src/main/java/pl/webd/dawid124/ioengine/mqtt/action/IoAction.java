@@ -1,4 +1,4 @@
-package pl.webd.dawid124.ioengine.mqtt;
+package pl.webd.dawid124.ioengine.mqtt.action;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
@@ -22,9 +22,9 @@ public class IoAction {
     private int time;
 
     @JsonIgnore
-    private String deviceId;
+    private transient String deviceId;
     @JsonIgnore
-    private EIoDriverType deviceType;
+    private transient EIoDriverType deviceType;
 
     public String getIoId() {
         return ioId;

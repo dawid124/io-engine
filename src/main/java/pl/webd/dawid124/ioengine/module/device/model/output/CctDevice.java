@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.device.model.output;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 
 public class CctDevice extends Device {
 
@@ -22,6 +23,11 @@ public class CctDevice extends Device {
 
     @Override public DeviceState getInitialState() {
         return new ColorLedDeviceState(id, name);
+    }
+
+    @Override
+    public IoConfig toIoConfig() {
+        return null;
     }
 
     public int getPinWW() {

@@ -3,6 +3,8 @@ package pl.webd.dawid124.ioengine.module.device.model.output;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRgb;
 
 public class LedDevice extends Device {
 
@@ -20,6 +22,11 @@ public class LedDevice extends Device {
 
     @Override public DeviceState getInitialState() {
         return new LedDeviceState(id, name);
+    }
+
+    @Override
+    public IoConfig toIoConfig() {
+        return null;
     }
 
     public int getPin() {

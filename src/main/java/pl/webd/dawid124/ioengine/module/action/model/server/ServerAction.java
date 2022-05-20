@@ -1,8 +1,8 @@
 package pl.webd.dawid124.ioengine.module.action.model.server;
 
 import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
-import pl.webd.dawid124.ioengine.mqtt.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.IoActionFactory;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.util.ArrayList;
 import java.util.List;

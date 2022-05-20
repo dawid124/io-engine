@@ -6,3 +6,4 @@ mqtt:
   topic: io-actions
   action-topic: home/actions
   trigger-topic: home/triggers
+  driver-sync-topic: home/driver-sync

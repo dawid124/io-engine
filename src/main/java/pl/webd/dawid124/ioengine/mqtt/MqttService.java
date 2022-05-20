@@ -6,8 +6,10 @@ import org.springframework.integration.support.MutableMessage;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.MqttConfig;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
-import pl.webd.dawid124.ioengine.module.action.model.server.ActionDevice;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
+import pl.webd.dawid124.ioengine.mqtt.action.IoActionRequest;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ import java.util.Map;
 @Service
 public final class MqttService {
 
-    public static final String SEPARATOR = "/";
+    private static final String SEPARATOR = "/";
     private final Gson gson = new Gson();
 
     private final MqttSettings settings;
@@ -41,6 +43,10 @@ public final class MqttService {
                 mqttGateway.sendToMqtt(mutable(new IoActionRequest(values), prepareDeviceActionTopic(id))));
     }
 
+    public void sendConfigActionToDevice(String driverId, List<IoConfig> configs) {
+        mqttGateway.sendToMqtt(mutable(new IoConfigRequest(configs), prepareDeviceActionTopic(driverId)));
+    }
+
     private MutableMessage<String> mutable(Object body, String topic) {
         String content = gson.toJson(body);
 
@@ -56,4 +62,5 @@ public final class MqttService {
     private String prepareDeviceActionTopic(String deviceId) {
         return settings.getActionTopic() + SEPARATOR + deviceId;
     }
+
 }

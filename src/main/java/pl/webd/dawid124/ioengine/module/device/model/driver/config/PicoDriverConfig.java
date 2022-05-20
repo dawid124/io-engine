@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.device.model.driver.config;
 
-public class PicoDriverConfig implements IDriverConfig {
+public class PicoDriverConfig implements IDriverConfig<EPicoDriverLocation> {
 
     private final EPicoDriverLocation location;
 

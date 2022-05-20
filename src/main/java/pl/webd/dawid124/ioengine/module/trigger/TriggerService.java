@@ -12,7 +12,7 @@ import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.share.Color;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
-import pl.webd.dawid124.ioengine.mqtt.IoAction;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 
 import java.time.LocalDateTime;
@@ -47,13 +47,13 @@ public class TriggerService implements MessageHandler {
     public void handleMessage(Message<?> message) throws MessagingException {
 //        System.out.println(message.getPayload());
 
-        SensorTrigger trigger = gson.fromJson((String) message.getPayload(), SensorTrigger.class);
+        SensorTriggerMsg trigger = gson.fromJson((String) message.getPayload(), SensorTriggerMsg.class);
         IoAction ioAction = new IoAction();
 
-        ZoneStateResponse office = stateService.fetchZoneStates().getZones().get("office");
+        ZoneStateResponse office = stateService.fetchZoneStatesResponse().getZones().get("office");
         boolean isOfficeAuto = "auto".equals(office.getActiveScene());
 
-        ZoneStateResponse floor1 = stateService.fetchZoneStates().getZones().get("floor1");
+        ZoneStateResponse floor1 = stateService.fetchZoneStatesResponse().getZones().get("floor1");
         boolean isFloor1Auto = "auto".equals(floor1.getActiveScene());
 
         int officeBrightness = 255;

@@ -1,13 +1,11 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
-import pl.webd.dawid124.ioengine.module.device.model.input.BlindDevice;
+import pl.webd.dawid124.ioengine.module.device.model.output.BlindDevice;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
-import pl.webd.dawid124.ioengine.mqtt.IoAction;
 
 import java.util.List;
 import java.util.Map;

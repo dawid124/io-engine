@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.trigger;
 
-public class SensorTrigger {
+public class SensorTriggerMsg {
 
     private String id;
 

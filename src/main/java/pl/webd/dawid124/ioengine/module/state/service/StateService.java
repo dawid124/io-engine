@@ -75,7 +75,22 @@ public class StateService {
         return zoneState.get(zoneId).getSceneStates().get(sceneId);
     }
 
-    public ZonesStateResponse fetchZoneStates() {
+    public SceneState fetchActiveScene(String zoneId) {
+        ZoneState zoneState = this.zoneState.get(zoneId);
+        return zoneState.getSceneStates().get(zoneState.getActiveScene());
+    }
+
+    public Map<String, DeviceState> fetchDeviceStates() {
+        Map<String, DeviceState> deviceStates = new HashMap<>();
+        zoneState.values().forEach(z -> {
+            SceneState scene = z.getSceneStates().get(z.getActiveScene());
+            deviceStates.putAll(scene.getDeviceState());
+        });
+
+        return deviceStates;
+    }
+
+    public ZonesStateResponse fetchZoneStatesResponse() {
         ZonesStateResponse zones = new ZonesStateResponse();
 
         zoneState.values().forEach(z -> {

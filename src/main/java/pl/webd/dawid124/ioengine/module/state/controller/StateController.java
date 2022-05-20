@@ -41,6 +41,6 @@ public class StateController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
     public ZonesStateResponse fetchZones() {
-        return stateService.fetchZoneStates();
+        return stateService.fetchZoneStatesResponse();
     }
 }

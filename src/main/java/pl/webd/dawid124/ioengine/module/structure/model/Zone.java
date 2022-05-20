@@ -1,9 +1,6 @@
 package pl.webd.dawid124.ioengine.module.structure.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javafx.collections.transformation.SortedList;
-import pl.webd.dawid124.ioengine.module.device.model.input.BlindDevice;
-import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 
 import java.util.*;
 

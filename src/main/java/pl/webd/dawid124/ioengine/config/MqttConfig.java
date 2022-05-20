@@ -16,6 +16,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
+import pl.webd.dawid124.ioengine.module.driversync.DriverSyncService;
 import pl.webd.dawid124.ioengine.module.trigger.TriggerService;
 
 @Configuration
@@ -23,10 +24,12 @@ public class MqttConfig {
 
     private final MqttSettings settings;
     private final TriggerService triggerService;
+    private final DriverSyncService driverSyncService;
 
-    public MqttConfig(MqttSettings settings, TriggerService triggerService) {
+    public MqttConfig(MqttSettings settings, TriggerService triggerService, DriverSyncService driverSyncService) {
         this.settings = settings;
         this.triggerService = triggerService;
+        this.driverSyncService = driverSyncService;
     }
 
     @Bean
@@ -35,14 +38,9 @@ public class MqttConfig {
     }
 
     @Bean
-    public MessageChannel mqttOutboundChannel() {
-        return new DirectChannel();
-    }
-
-    @Bean
     public MessageProducer triggers() {
-        MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(settings.getClientId() + "Trigger", mqttClientFactory(), settings.getTriggerTopic());
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+                settings.getClientId() + "Trigger", mqttClientFactory(), settings.getTriggerTopic());
 
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setOutputChannel(mqttTriggerChannel());
@@ -52,14 +50,45 @@ public class MqttConfig {
 
     @Bean
     @ServiceActivator(inputChannel = "mqttTriggerChannel")
-    public MessageHandler handler() {
+    public MessageHandler triggerHandler() {
         return triggerService;
     }
 
     @Bean
+    public MessageChannel mqttDriverSyncChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageProducer driverSync() {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+                settings.getClientId() + "DriverSync", mqttClientFactory(), settings.getDriverSyncTopic());
+
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setOutputChannel(mqttDriverSyncChannel());
+
+        return adapter;
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "mqttDriverSyncChannel")
+    public MessageHandler driverSyncHandler() {
+        return driverSyncService;
+    }
+
+    @Bean
+    public MessageChannel mqttOutboundChannel() {
+        return new DirectChannel();
+    }
+
+
+
+    @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(settings.getClientId() + "Actions", mqttClientFactory());
+        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(
+                settings.getClientId() + "Actions", mqttClientFactory());
+
         messageHandler.setAsync(true);
         messageHandler.setDefaultTopic(settings.getTopic());
         return messageHandler;

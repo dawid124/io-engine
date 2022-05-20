@@ -7,7 +7,7 @@ import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
-import pl.webd.dawid124.ioengine.mqtt.IoAction;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 
 import java.util.ArrayList;
@@ -42,6 +42,11 @@ public class UserActionService {
         sendMqttActions(serverActions);
 
         return sceneState;
+    }
+
+    public void sendDriverState(String driverId) {
+        List<ServerUiAction> serverActions = actionDataService.fromDriverState(driverId);
+        sendMqttActions(serverActions);
     }
 
     public UiActionRequest processActionChange(UiActionRequest action) {

@@ -8,7 +8,8 @@ public enum EDeviceType implements Serializable {
     NEO("RGBW"),
     RGBW("RGBW"),
     CCT("CCT"),
-    LED("Led");
+    LED("Led"),
+    MOTION_SENSOR("MOTION_SENSOR");
 
     final String name;
 

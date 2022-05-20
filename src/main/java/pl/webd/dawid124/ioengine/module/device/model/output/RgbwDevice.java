@@ -3,6 +3,8 @@ package pl.webd.dawid124.ioengine.module.device.model.output;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRgb;
 
 public class RgbwDevice extends Device {
 
@@ -26,6 +28,12 @@ public class RgbwDevice extends Device {
 
     @Override public DeviceState getInitialState() {
         return new ColorLedDeviceState(id, name);
+    }
+
+    @Override
+    public IoConfig toIoConfig() {
+        String location = getDriverConfiguration().getConfig().getLocation().toString();
+        return new IoConfigRgb(id, getIoType(), location, pinR, pinG, pinB, pinW);
     }
 
     public int getPinR() {

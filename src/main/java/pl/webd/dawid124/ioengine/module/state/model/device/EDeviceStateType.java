@@ -4,7 +4,8 @@ public enum EDeviceStateType {
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),
     LED(LedDeviceState.class),
-    RGBW(ColorLedDeviceState.class);
+    RGBW(ColorLedDeviceState.class),
+    MOTION_SENSOR(ColorLedDeviceState.class);
 
     Class clazz;
 
