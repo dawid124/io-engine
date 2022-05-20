@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum EDeviceType implements Serializable {
 
     BLIND("Blind"),
-    NEO("RGBW"),
+    NEO("NEO"),
     RGBW("RGBW"),
     CCT("CCT"),
     LED("Led"),

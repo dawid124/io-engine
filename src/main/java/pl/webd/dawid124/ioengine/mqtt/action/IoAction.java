@@ -1,6 +1,5 @@
 package pl.webd.dawid124.ioengine.mqtt.action;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
@@ -9,7 +8,9 @@ import pl.webd.dawid124.ioengine.module.share.Color;
 public class IoAction {
 
     private String ioId;
+
     private EDeviceType ioType;
+
     private EActionType action;
 
     private Color color;
@@ -21,10 +22,8 @@ public class IoAction {
     private int stepTime;
     private int time;
 
-    @JsonIgnore
-    private transient String deviceId;
-    @JsonIgnore
-    private transient EIoDriverType deviceType;
+    private String deviceId;
+    private EIoDriverType deviceType;
 
     public String getIoId() {
         return ioId;

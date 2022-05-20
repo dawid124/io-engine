@@ -10,7 +10,6 @@ public class Color implements Serializable {
     private int w = 0;
 
     private int ww = 0;
-    private int cw = 0;
 
     public Color() {}
 
@@ -27,9 +26,9 @@ public class Color implements Serializable {
         this.w = w;
     }
 
-    public Color(int ww, int cw) {
+    public Color(int ww, int w) {
         this.ww = ww;
-        this.cw = cw;
+        this.w = w;
     }
 
     public int getR() {
@@ -70,13 +69,5 @@ public class Color implements Serializable {
 
     public void setWw(int ww) {
         this.ww = ww;
-    }
-
-    public int getCw() {
-        return cw;
-    }
-
-    public void setCw(int cw) {
-        this.cw = cw;
     }
 }
