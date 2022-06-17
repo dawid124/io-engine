@@ -27,6 +27,7 @@ public final class IoActionFactory {
             a.setAnimationId(neoState.getAnimationId());
             a.setColor(neoState.getColor());
             a.setBrightness(neoState.getBrightness());
+            a.setStaticSubModeId(1);
         } else if (state instanceof ColorLedDeviceState) {
             ColorLedDeviceState colorState = (ColorLedDeviceState) state;
 

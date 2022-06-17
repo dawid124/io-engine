@@ -18,6 +18,7 @@ public class IoAction {
 
     private int speed;
     private int animationId;
+    private int staticSubModeId;
 
     private int stepTime;
     private int time;
@@ -111,5 +112,13 @@ public class IoAction {
 
     public void setDeviceType(EIoDriverType deviceType) {
         this.deviceType = deviceType;
+    }
+
+    public int getStaticSubModeId() {
+        return staticSubModeId;
+    }
+
+    public void setStaticSubModeId(int staticSubModeId) {
+        this.staticSubModeId = staticSubModeId;
     }
 }

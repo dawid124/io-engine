@@ -13,10 +13,7 @@ import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonAdapter;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRequest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public final class MqttService {
@@ -44,9 +41,15 @@ public final class MqttService {
             List<IoAction> group = actionsPerAddress.computeIfAbsent(action.getDeviceId(), k -> new ArrayList<>());
             group.add(action);
         }
-
+//
         actionsPerAddress.forEach((id, values) ->
                 mqttGateway.sendToMqtt(mutable(new IoActionRequest(values), prepareDeviceActionTopic(id))));
+
+//        actionsPerAddress.forEach((id, values) -> {
+//            values.forEach(v ->   mqttGateway.sendToMqtt(
+//                    mutable(new IoActionRequest(Collections.singletonList(v)), prepareDeviceActionTopic(id))
+//            ));
+//        });
     }
 
     public void sendConfigActionToDevice(String driverId, List<IoConfig> configs) {
