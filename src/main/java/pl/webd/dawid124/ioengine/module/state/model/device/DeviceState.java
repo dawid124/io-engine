@@ -1,7 +1,5 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
-
 public abstract class DeviceState implements Cloneable {
 
     private String ioId;

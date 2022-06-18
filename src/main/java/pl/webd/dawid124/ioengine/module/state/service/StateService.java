@@ -1,40 +1,32 @@
 package pl.webd.dawid124.ioengine.module.state.service;
 
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
-import pl.webd.dawid124.ioengine.module.action.model.server.ServerDevice;
-import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
-import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
-import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
-import pl.webd.dawid124.ioengine.module.state.model.device.NeoDeviceState;
+import org.springframework.util.CollectionUtils;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
+import pl.webd.dawid124.ioengine.module.state.model.device.*;
+import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
+import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.structure.model.Scene;
 import pl.webd.dawid124.ioengine.module.structure.model.Zone;
-import pl.webd.dawid124.ioengine.module.structure.model.LightGroup;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
-import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
-import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
-import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
 public class StateService {
 
-    private final DeviceService deviceService;
     private final StructureService structureService;
 
     private final Map<String, IVariable> variables;
     private final Map<String, ZoneState> zoneState;
 
-    public StateService(DeviceService deviceService, StructureService structureService) {
-        this.deviceService = deviceService;
+    public StateService(StructureService structureService) {
         this.structureService = structureService;
 
         variables = new HashMap<>();
@@ -48,21 +40,16 @@ public class StateService {
 
     public void createInitState() {
         for (Zone zoneStructure: structureService.fetchStructure().getZones().values()) {
-            String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst().map(Scene::getId).orElse("auto");
+            String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst()
+                    .map(Scene::getId).orElse("auto");
+
             ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene);
             addZoneState(zone);
 
             for (Scene sceneStructure: zoneStructure.getScenes().values()) {
                 SceneState scene = new SceneState(sceneStructure.getId(), sceneStructure.getName());
                 zone.addSceneState(scene);
-
-                for (LightGroup groupStructure: sceneStructure.getGroups()) {
-                    scene.addGroupState(groupStructure.getInitialState());
-                }
-
-                for (DeviceState deviceState: sceneStructure.getLightsState()) {
-                    scene.addDeviceState(deviceState.clone());
-                }
+                sceneStructure.getGroups().forEach(scene::addGroupState);
             }
         }
     }
@@ -80,54 +67,81 @@ public class StateService {
         return zoneState.getSceneStates().get(zoneState.getActiveScene());
     }
 
-    public Map<String, DeviceState> fetchDeviceStates() {
-        Map<String, DeviceState> deviceStates = new HashMap<>();
-        zoneState.values().forEach(z -> {
-            SceneState scene = z.getSceneStates().get(z.getActiveScene());
-            deviceStates.putAll(scene.getDeviceState());
-        });
-
-        return deviceStates;
-    }
-
     public ZonesStateResponse fetchZoneStatesResponse() {
         ZonesStateResponse zones = new ZonesStateResponse();
 
         zoneState.values().forEach(z -> {
             SceneState scene = z.getSceneStates().get(z.getActiveScene());
-            ZoneStateResponse zone = new ZoneStateResponse(z.getId(), z.getActiveScene(), scene.getDeviceState(), scene.getGroupState());
+            ZoneStateResponse zone = new ZoneStateResponse(z.getId(), z.getActiveScene(), scene.getGroupState());
             zones.getZones().put(z.getId(), zone);
         });
 
         return zones;
     }
 
-    public void updateGroupSate(ServerUiAction action) {
-        updateStateByType(action.getIoAction(), action.getDevice().getState());
+    public void updateSateByUiAction(UiActionRequest actionReq) {
+        SceneState sceneState = zoneState.get(actionReq.getZoneId()).getSceneStates().get(actionReq.getSceneId());
 
-        for (ServerDevice serverDevice : action.getDevice().getChildren()) {
-            updateStateByGroup(action.getIoAction(), serverDevice.getState());
+        for (UiAction action : actionReq.getActions()) {
+            GroupState groupState = sceneState.findStateById(action.getIoId());
+
+            updateSateByUiAction(groupState, action);
         }
     }
 
-    public void updateDeviceSate(List<ServerUiAction> actions) {
-        for (ServerUiAction action : actions) {
-            updateStateByType(action.getIoAction(), action.getDevice().getState());
+    public Map<String, ZoneState> getZoneState() {
+        return zoneState;
+    }
+
+    public void updateSateByUiAction(GroupState item, UiAction action) {
+
+        if (CollectionUtils.isEmpty(item.getChildren())) {
+            updateDeviceSateByUiAction(action, item.getState());
+        } else {
+            updateGroupSateByUiAction(action, item);
+        }
+
+    }
+
+    private void updateGroupSateByUiAction(UiAction ioAction, GroupState item) {
+        boolean onlyBrightness = false;
+        if (item.getState() instanceof ColorLedDeviceState) {
+            ColorLedDeviceState lightState = (ColorLedDeviceState) item.getState();
+
+            if (lightState.getColor().equals(ioAction.getColor())) {
+                lightState.setBrightness(ioAction.getBrightness());
+                onlyBrightness = true;
+            } else {
+                lightState.setBrightness(ioAction.getBrightness());
+                lightState.setColor(ioAction.getColor());
+            }
+
+        } else if (item.getState() instanceof NeoDeviceState) {
+            NeoDeviceState neoState = (NeoDeviceState) item.getState();
+
+            if (neoState.getColor().equals(ioAction.getColor())
+                    && neoState.getAnimationId() == ioAction.getAnimationId()
+                    && neoState.getSpeed() == ioAction.getSpeed()) {
+
+                neoState.setBrightness(ioAction.getBrightness());
+                onlyBrightness = true;
+            } else {
+                neoState.setBrightness(ioAction.getBrightness());
+                neoState.setColor(ioAction.getColor());
+                neoState.setAnimationId(ioAction.getAnimationId());
+                neoState.setSpeed(ioAction.getSpeed());
+            }
+
+        }
+
+        if (!onlyBrightness) {
+            for (GroupState child : item.getChildren()) {
+                updateSateByUiAction(child, ioAction);
+            }
         }
     }
 
-    private void updateStateByGroup(UiAction ioAction, DeviceState state) {
-        if (state instanceof ColorLedDeviceState) {
-            ((ColorLedDeviceState) state).setColor(ioAction.getColor());
-        } else if (state instanceof NeoDeviceState) {
-            NeoDeviceState neoState = (NeoDeviceState) state;
-            neoState.setColor(ioAction.getColor());
-            neoState.setAnimationId(ioAction.getAnimationId());
-            neoState.setSpeed(ioAction.getSpeed());
-        }
-    }
-
-    private void updateStateByType(UiAction a, DeviceState state) {
+    private void updateDeviceSateByUiAction(UiAction a, DeviceState state) {
         if (state instanceof ColorLedDeviceState) {
             updateColorLedState((ColorLedDeviceState) state, a);
         } else if (state instanceof NeoDeviceState) {
@@ -159,9 +173,5 @@ public class StateService {
         if (zone != null) {
             zone.setActiveScene(sceneId);
         }
-    }
-
-    public DeviceState fetchGroupState(String zoneId, String sceneId, String ioId) {
-       return fetchScene(zoneId, sceneId).getGroupState().get(ioId);
     }
 }

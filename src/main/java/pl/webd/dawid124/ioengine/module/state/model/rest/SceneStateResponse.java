@@ -7,7 +7,7 @@ public class SceneStateResponse extends SceneState {
     private String zoneId;
 
     public SceneStateResponse(String zoneId, SceneState scene) {
-        super(scene.getId(), scene.getName(), scene.getDeviceState(), scene.getGroupState());
+        super(scene.getId(), scene.getName(), scene.getGroupState());
 
         this.zoneId = zoneId;
     }

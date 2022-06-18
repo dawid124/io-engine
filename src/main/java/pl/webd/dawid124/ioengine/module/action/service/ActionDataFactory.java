@@ -1,120 +1,68 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
-import pl.webd.dawid124.ioengine.module.action.model.server.ServerUiAction;
-import pl.webd.dawid124.ioengine.module.action.model.server.ServerDevice;
+import org.springframework.util.CollectionUtils;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
+import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
-import pl.webd.dawid124.ioengine.module.structure.model.LightGroup;
-import pl.webd.dawid124.ioengine.module.structure.model.Scene;
+import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
+import pl.webd.dawid124.ioengine.mqtt.IoActionFactory;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-class ActionDataFactory {
+final class ActionDataFactory {
 
-    private final UiAction uiAction;
-    private final String ioId;
+    public static final int MAX_BRIGHTNESS = 255;
+    private static final int FULL_PERCENT = 1;
 
-    private final Map<String, IDevice> devices;
-    private final Scene sceneStructure;
-    private final SceneState sceneState;
+    public static List<IoAction> buildActionsForHome(Map<String, IDevice> devices, Map<String, ZoneState> zones) {
+        List<IoAction> fullHomeActions = new ArrayList<>();
+        zones.values().forEach(zone -> {
+            SceneState sceneState = zone.getSceneStates().get(zone.getActiveScene());
+            fullHomeActions.addAll(buildActionsForFullScene(devices, sceneState));
+        });
 
-    private ActionDataFactory(String ioId, UiAction uiAction, Map<String, IDevice> devices,
-                              Scene sceneStructure, SceneState sceneState) {
-        this.ioId = ioId;
-        this.uiAction = uiAction;
-        this.devices = devices;
-        this.sceneStructure = sceneStructure;
-        this.sceneState = sceneState;
+        return fullHomeActions;
     }
 
-    static ActionDataFactory init(String ioId, Map<String, IDevice> devices, Scene sceneStructure,
-                                  SceneState sceneState) {
-        return new ActionDataFactory(ioId,null, devices, sceneStructure, sceneState);
+    public static List<IoAction> buildActionsForFullScene(Map<String, IDevice> devices, SceneState sceneState) {
+        List<IoAction> actions = new ArrayList<>();
+        for (GroupState groupState: sceneState.getGroupState().values()) {
+            LedDeviceState state = (LedDeviceState) groupState.getState();
+            double brightnessPercent = (double) state.getBrightness() / (double) MAX_BRIGHTNESS;
+            actions.addAll(buildActions(devices, groupState, brightnessPercent));
+        }
+
+        return actions;
     }
 
-    static ActionDataFactory init(UiAction uiAction, Map<String, IDevice> devices, Scene sceneStructure,
-                                         SceneState sceneState) {
-        return new ActionDataFactory(uiAction.getIoId(), uiAction, devices, sceneStructure, sceneState);
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item) {
+        return buildActions(devices, item, FULL_PERCENT);
     }
 
-    ServerUiAction process() {
-        ServerDevice serverDevice;
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, double brightnessPercent) {
+        List<GroupState> children = item.getChildren();
+        List<IoAction> actions = new ArrayList<>();
 
-        if (uiAction == null) {
-            serverDevice = fromServerState();
-        } else if (uiAction.isGroup()) {
-            serverDevice = fromGroupUiAction();
+        if (CollectionUtils.isEmpty(children)) {
+            DeviceState deviceState = item.getState();
+            IDevice device = devices.get(deviceState.getIoId());
+            actions.add(IoActionFactory.fromDeviceState(device, deviceState, brightnessPercent));
         } else {
-            serverDevice = fromUiAction();
+            LedDeviceState deviceState = (LedDeviceState) item.getState();
+            double newBrightnessPercent =
+                    brightnessPercent * ((double) deviceState.getBrightness() / (double) MAX_BRIGHTNESS);
+
+            children.forEach(child -> {
+                List<IoAction> a = buildActions(devices, child, newBrightnessPercent);
+                if (a != null) actions.addAll(a);
+            });
         }
 
-        return new ServerUiAction(uiAction, serverDevice);
-    }
-
-    private ServerDevice fromUiAction() {
-        IDevice device = devices.get(ioId);
-        DeviceState deviceState = sceneState.getDeviceState().get(ioId);
-
-        ServerDevice parent = fetchParent();
-
-        return ServerDevice.standard(device, deviceState).setParent(parent).build();
-    }
-
-    private ServerDevice fromServerState() {
-        IDevice device = devices.get(ioId);
-        DeviceState deviceState = sceneState.getDeviceState().get(ioId);
-
-        ServerDevice parent = fetchParent();
-
-        return ServerDevice.standard(device, deviceState).setParent(parent).build();
-    }
-
-
-    private ServerDevice fetchParent() {
-        Optional<LightGroup> parentStructure = sceneStructure.getGroups().stream()
-                .filter(g -> g.getDeviceIds().contains(ioId))
-                .findFirst();
-
-        ServerDevice parent = null;
-        if (parentStructure.isPresent()) {
-            DeviceState parentState = sceneState.getGroupState().get(parentStructure.get().getIoId());
-
-            parent = ServerDevice.group(parentState).build();
-        } return parent;
-    }
-
-    private ServerDevice fromGroupUiAction() {
-        Optional<LightGroup> groupStructureOpt = sceneStructure.getGroups().stream()
-                .filter(g -> g.getIoId().equals(ioId))
-                .findFirst();
-
-        if (groupStructureOpt.isPresent()) {
-            LightGroup groupStructure = groupStructureOpt.get();
-
-            DeviceState state = sceneState.getGroupState().get(groupStructure.getIoId());
-
-            ServerDevice group = ServerDevice.group(state).build();
-
-            ArrayList<ServerDevice> children = new ArrayList<>();
-
-            for (String ioId: groupStructure.getDeviceIds()) {
-                IDevice device = devices.get(ioId);
-                DeviceState deviceState = sceneState.getDeviceState().get(ioId);
-
-                children.add(ServerDevice.standard(device, deviceState).setParent(group).build());
-            }
-
-            group.setChildren(children);
-
-            return group;
-        }
-
-        return null;
-    }
-
-    public String getIoId() {
-        return ioId;
+        return actions;
     }
 }

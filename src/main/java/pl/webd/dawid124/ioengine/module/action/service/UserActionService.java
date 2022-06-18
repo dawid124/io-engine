@@ -37,67 +37,46 @@ public class UserActionService {
         SceneState sceneState = stateService.fetchScene(zoneId, sceneId);
 
 
-        List<ServerUiAction> serverActions = actionDataService.fromSceneState(zoneId, sceneId);
+        List<IoAction> actions= actionDataService.fromSceneState(sceneState);
 
-        sendMqttActions(serverActions);
+        sendMqttActions(actions);
 
         return sceneState;
     }
 
     public void sendDriverState(String driverId) {
-        List<ServerUiAction> serverActions = actionDataService.fromDriverState(driverId);
+        List<IoAction> serverActions = actionDataService.fromDriverState(driverId);
         sendMqttActions(serverActions);
     }
 
     public UiActionRequest processActionChange(UiActionRequest action) {
 
 
-        List<UiAction> groups = new ArrayList<>();
         List<UiAction> blinds = new ArrayList<>();
         List<UiAction> lights = new ArrayList<>();
 
         for (UiAction a: action.getActions()) {
-            if (a.isGroup()) groups.add(a);
-            else if (a.isBlind()) blinds.add(a);
+            if (a.isBlind()) blinds.add(a);
             else lights.add(a);
         }
 
-        if (!groups.isEmpty()) {
-            List<ServerUiAction> groupActions = actionDataService.fromUiActionRequest(
-                    new UiActionRequest(action.getZoneId(), action.getSceneId(), groups)
-            );
-            processLightGroups(groupActions);
-        }
-        if (!lights.isEmpty()) {
-            List<ServerUiAction> lightsActions = actionDataService.fromUiActionRequest(
-                    new UiActionRequest(action.getZoneId(), action.getSceneId(), lights)
-            );
-            processLights(lightsActions);
-        }
-
-
         processBlinds(blinds);
+
+        action.setActions(lights);
+        processLights(action);
 
         return action;
     }
 
-    private void processLightGroups(List<ServerUiAction> actions) {
-        actions.forEach(stateService::updateGroupSate);
-        sendMqttActions(actions);
+
+    private void processLights(UiActionRequest action) {
+        stateService.updateSateByUiAction(action);
+
+        List<IoAction> ioActions = actionDataService.fromUiActionRequest(action);
+        sendMqttActions(ioActions);
     }
 
-    private void processLights(List<ServerUiAction> actions) {
-        stateService.updateDeviceSate(actions);
-
-        sendMqttActions(actions);
-    }
-
-    private void sendMqttActions(List<ServerUiAction> actions) {
-        List<IoAction> allActions = new ArrayList<>();
-
-        for (ServerUiAction action: actions) {
-            allActions.addAll(action.toIoActions());
-        }
+    private void sendMqttActions(List<IoAction> allActions) {
 
         List<IoAction> mqttActions = allActions.stream()
                 .filter(a -> EIoDriverType.MQTT.equals(a.getDeviceType()))

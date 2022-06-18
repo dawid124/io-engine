@@ -33,167 +33,209 @@
           "id": "auto",
           "name": "Auto",
           "order": 0,
-          "groups": [],
-          "lightsState": [
+          "groups": [
             {
-              "ioId": "rgbw-tv",
-              "name": "TV",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbw-kitchen",
-              "name": "Jadalnia 1",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinner",
-              "name": "Jadalnia 2",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbww-kitchen",
-              "name": "Kuchnia Szafki",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 255
-              }
-            },
-            {
-              "ioId": "rgbw-panel",
-              "name": "Panel Beton",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 0
-              }
-            },
-            {
-              "ioId": "neo-kitchen",
-              "name": "Neo Kuchnia",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-tv",
-              "name": "Neo TV",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-celling",
-              "name": "Neo Sufit",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-wall-1",
-              "name": "Wall 1",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-2",
-              "name": "Wall 2",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-3",
-              "name": "Wall 3",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-4",
-              "name": "Wall 4",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
+              "hidden": true,
+              "state": {
+                "ioId": "f1-auto-group",
+                "name": "Led",
+                "ioType": "NEO",
+                "brightness": 0,
+                "animationId": 0,
+                "speed": 100,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              },
+              "children": [
+                {
+                  "state": {
+                    "ioId": "rgbw-tv",
+                    "name": "TV",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbw-kitchen",
+                    "name": "Jadalnia 1",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbw-dinner",
+                    "name": "Jadalnia 2",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 100
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbww-kitchen",
+                    "name": "Kuchnia Szafki",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255,
+                      "ww": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbw-panel",
+                    "name": "Panel Beton",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255,
+                      "ww": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-kitchen",
+                    "name": "Neo Kuchnia",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 1000,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-tv",
+                    "name": "Neo TV",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-celling",
+                    "name": "Neo Sufit",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-1",
+                    "name": "Wall 1",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-2",
+                    "name": "Wall 2",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-3",
+                    "name": "Wall 3",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-4",
+                    "name": "Wall 4",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -203,400 +245,290 @@
           "order": 1,
           "groups": [
             {
-              "ioId": "f1-std-led-group",
-              "name": "Led",
-              "deviceIds": [
-                "rgbw-tv",
-                "rgbw-kitchen",
-                "rgbw-dinner",
-                "rgbww-kitchen",
-                "rgbw-panel"
-              ],
-              "ioType": "RGBW",
-              "initialState": {
-                "ioId": "f1-std-led-group",
-                "name": "Led",
-                "ioType": "RGBW",
-                "brightness": 255,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255
-                }
-              }
-            },
-            {
-              "ioId": "f1-std-neo-group",
-              "name": "Neo",
-              "deviceIds": [
-                "neo-kitchen",
-                "neo-tv",
-                "neo-celling"
-              ],
-              "ioType": "NEO",
-              "initialState": {
-                "ioId": "f1-std-neo-group",
-                "name": "Neo",
+              "state": {
+                "ioId": "f1-std-all",
+                "name": "Oświetlenie",
                 "ioType": "NEO",
+                "brightness": 150,
                 "animationId": 0,
-                "speed": 1000,
-                "brightness": 255,
+                "speed": 100,
                 "color": {
                   "r": 0,
                   "g": 0,
                   "b": 0,
                   "w": 255
                 }
-              }
-            },
-            {
-              "ioId": "f1-std-neo-wall",
-              "name": "Wall",
-              "deviceIds": [
-                "neo-wall-1",
-                "neo-wall-2",
-                "neo-wall-3",
-                "neo-wall-4"
-              ],
-              "ioType": "NEO",
-              "initialState": {
-                "ioId": "f1-std-neo-wall",
-                "name": "Wall",
-                "ioType": "NEO",
-                "animationId": 0,
-                "speed": 1000,
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 0
+              },
+              "children": [
+                {
+                  "state": {
+                    "ioId": "f1-std-tv",
+                    "name": "TV",
+                    "ioType": "RGBW",
+                    "brightness": 200,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "rgbw-tv",
+                        "name": "TV",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-tv",
+                        "name": "Neo TV",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "state": {
+                    "ioId": "f1-std-kitchen",
+                    "name": "Kuchnia",
+                    "ioType": "RGBW",
+                    "brightness": 255,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "rgbww-kitchen",
+                        "name": "Pod-Szafkowe",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-kitchen",
+                        "name": "Sufit",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 1000,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "state": {
+                    "ioId": "f1-std-dinner",
+                    "name": "Jadalnia",
+                    "ioType": "RGBW",
+                    "brightness": 200,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "rgbw-kitchen",
+                        "name": "Stół",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-dinner",
+                        "name": "Pozostałe",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "state": {
+                    "ioId": "f1-std-other",
+                    "name": "Dodatki",
+                    "ioType": "NEO",
+                    "brightness": 200,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "neo-celling",
+                        "name": "Neo Sufit",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel",
+                        "name": "Panel Beton",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "state": {
+                    "ioId": "f1-std-wall",
+                    "name": "Wall",
+                    "ioType": "NEO",
+                    "brightness": 0,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "neo-wall-1",
+                        "name": "Wall 1",
+                        "ioType": "NEO",
+                        "brightness": 0,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-2",
+                        "name": "Wall 2",
+                        "ioType": "NEO",
+                        "brightness": 0,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-3",
+                        "name": "Wall 3",
+                        "ioType": "NEO",
+                        "brightness": 0,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-4",
+                        "name": "Wall 4",
+                        "ioType": "NEO",
+                        "brightness": 0,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 0
+                        }
+                      }
+                    }
+                  ]
                 }
-              }
-            }
-          ],
-          "lightsState": [
-            {
-              "ioId": "rgbw-tv",
-              "name": "TV",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbw-kitchen",
-              "name": "Jadalnia 1",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinner",
-              "name": "Jadalnia 2",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbww-kitchen",
-              "name": "Kuchnia Szafki",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 255
-              }
-            },
-            {
-              "ioId": "rgbw-panel",
-              "name": "Panel Beton",
-              "ioType": "RGBW",
-              "brightness": 100,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 0
-              }
-            },
-            {
-              "ioId": "neo-kitchen",
-              "name": "Neo Kuchnia",
-              "ioType": "NEO",
-              "brightness": 100,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-tv",
-              "name": "Neo TV",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-celling",
-              "name": "Neo Sufit",
-              "ioType": "NEO",
-              "brightness": 100,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-wall-1",
-              "name": "Wall 1",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-2",
-              "name": "Wall 2",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-3",
-              "name": "Wall 3",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            },
-            {
-              "ioId": "neo-wall-4",
-              "name": "Wall 4",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 0
-              }
-            }
-          ]
-        },
-        "night": {
-          "id": "night",
-          "name": "Noc",
-          "order": 2,
-          "groups": [
-            {
-              "ioId": "f1-std-led-group",
-              "name": "Led",
-              "deviceIds": [
-                "rgbw-tv",
-                "rgbw-kitchen",
-                "rgbw-dinner",
-                "rgbww-kitchen",
-                "rgbw-panel"
-              ],
-              "ioType": "RGBW",
-              "initialState": {
-                "ioId": "f1-std-led-group",
-                "name": "Led",
-                "ioType": "RGBW",
-                "brightness": 50,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255
-                }
-              }
-            },
-            {
-              "ioId": "f1-std-neo-group",
-              "name": "Neo",
-              "deviceIds": [
-                "neo-kitchen",
-                "neo-tv",
-                "neo-celling"
-              ],
-              "ioType": "NEO",
-              "initialState": {
-                "ioId": "f1-std-neo-group",
-                "name": "Neo",
-                "ioType": "NEO",
-                "animationId": 0,
-                "speed": 1000,
-                "brightness": 50,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255
-                }
-              }
-            }
-          ],
-          "lightsState": [
-            {
-              "ioId": "rgbw-tv",
-              "name": "TV",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbw-kitchen",
-              "name": "Jadalnia 1",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-dinner",
-              "name": "Jadalnia 2",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 100
-              }
-            },
-            {
-              "ioId": "rgbww-kitchen",
-              "name": "Kuchnia Szafki",
-              "ioType": "RGBW",
-              "brightness": 100,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 255
-              }
-            },
-            {
-              "ioId": "rgbw-panel",
-              "name": "Panel Beton",
-              "ioType": "RGBW",
-              "brightness": 20,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 0
-              }
-            },
-            {
-              "ioId": "neo-kitchen",
-              "name": "Neo Kuchnia",
-              "ioType": "NEO",
-              "brightness": 100,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-tv",
-              "name": "Neo TV",
-              "ioType": "NEO",
-              "brightness": 0,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "neo-celling",
-              "name": "Neo Sufit",
-              "ioType": "NEO",
-              "brightness": 100,
-              "animationId": 0,
-              "speed": 1000,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
+              ]
             }
           ]
         }
@@ -614,15 +546,13 @@
           "id": "auto",
           "name": "Auto",
           "order": 0,
-          "groups": [],
-          "lightsState": []
+          "groups": []
         },
         "standard": {
           "id": "standard",
           "name": "Standard",
           "order": 1,
-          "groups": [],
-          "lightsState": []
+          "groups": []
         }
       }
     },
@@ -649,18 +579,33 @@
           "id": "auto",
           "name": "Auto",
           "order": 0,
-          "groups": [],
-          "lightsState": [
+          "groups": [
             {
-              "ioId": "rgbw-office",
-              "name": "Biuro",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
+              "state": {
+                "ioId": "rgbw-office",
+                "name": "Biuro",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "rgbw-lobby",
+                "name": "Korytarz",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
               }
             }
           ]
@@ -671,14 +616,8 @@
           "order": 1,
           "groups": [
             {
-              "ioId": "f1-std-rgbw-office",
-              "name": "Biuro",
-              "deviceIds": [
-                "rgbw-office"
-              ],
-              "ioType": "RGBW",
-              "initialState": {
-                "ioId": "f1-std-rgbw-office",
+              "state": {
+                "ioId": "rgbw-office",
                 "name": "Biuro",
                 "ioType": "RGBW",
                 "brightness": 255,
@@ -689,55 +628,19 @@
                   "w": 255
                 }
               }
-            }
-          ],
-          "lightsState": [
-            {
-              "ioId": "rgbw-office",
-              "name": "Biuro",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
             },
             {
-              "ioId": "rgbw-lobby",
-              "name": "Korytarz",
-              "ioType": "RGBW",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-wc1",
-              "name": "WC 1",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
-            },
-            {
-              "ioId": "rgbw-wc2",
-              "name": "WC 2",
-              "ioType": "RGBW",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
+              "state": {
+                "ioId": "rgbw-lobby",
+                "name": "Korytarz",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
               }
             }
           ]

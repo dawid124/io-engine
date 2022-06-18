@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.scene;
 
-import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,29 +10,22 @@ public class SceneState {
     private final String id;
     private final String name;
 
-    private Map<String, DeviceState> deviceState;
-    private Map<String, DeviceState> groupState;
+    private Map<String, GroupState> groupState;
 
     public SceneState(String id, String name) {
         this.id = id;
         this.name = name;
         this.groupState = new HashMap<>();
-        this.deviceState = new HashMap<>();
     }
 
-    public SceneState(String id, String name, Map<String, DeviceState> deviceState, Map<String, DeviceState> groupState) {
+    public SceneState(String id, String name, Map<String, GroupState> groupState) {
         this.id = id;
         this.name = name;
-        this.deviceState = deviceState;
         this.groupState = groupState;
     }
 
-    public void addGroupState(DeviceState state) {
-        groupState.put(state.getIoId(), state);
-    }
-
-    public void addDeviceState(DeviceState state) {
-        deviceState.put(state.getIoId(), state);
+    public void addGroupState(GroupState state) {
+        groupState.put(state.getState().getIoId(), state);
     }
 
     public String getId() {
@@ -43,19 +36,40 @@ public class SceneState {
         return name;
     }
 
-    public void setGroupState(Map<String, DeviceState> groupState) {
+    public void setGroupState(Map<String, GroupState> groupState) {
         this.groupState = groupState;
     }
 
-    public Map<String, DeviceState> getGroupState() {
+    public Map<String, GroupState> getGroupState() {
         return groupState;
     }
 
-    public Map<String, DeviceState> getDeviceState() {
-        return deviceState;
+    public GroupState findStateById(String ioId) {
+        for (GroupState state: groupState.values()) {
+            GroupState found = findStateById(state, ioId);
+            if (found != null) return found;
+        }
+
+        return null;
     }
 
-    public void setDeviceState(Map<String, DeviceState> deviceState) {
-        this.deviceState = deviceState;
+    private GroupState findStateById(GroupState parent, String ioId) {
+        if (ioId.equals(parent.getState().getIoId())) {
+            return parent;
+        }
+
+        if (parent.getChildren() == null) {
+            return null;
+        }
+
+        for (GroupState state: parent.getChildren()) {
+            GroupState foundState = findStateById(state, ioId);
+
+            if (foundState != null) {
+                return foundState;
+            }
+        }
+
+        return null;
     }
 }
