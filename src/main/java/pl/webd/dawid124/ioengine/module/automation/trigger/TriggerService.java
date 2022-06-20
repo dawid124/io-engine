@@ -1,23 +1,15 @@
 package pl.webd.dawid124.ioengine.module.automation.trigger;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
-import pl.webd.dawid124.ioengine.module.automation.AutomationService;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.RunnerService;
-import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
-import pl.webd.dawid124.ioengine.module.automation.macro.json.IBlockJsonAdapter;
-import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
-import pl.webd.dawid124.ioengine.module.automation.macro.json.VariableFetcherJsonAdapter;
 import pl.webd.dawid124.ioengine.module.state.SystemArg;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
@@ -25,10 +17,7 @@ import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
-import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;

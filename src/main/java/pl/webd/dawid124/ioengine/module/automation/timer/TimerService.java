@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.automation.timer;
 
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.TimerRunnerBlock;
 import pl.webd.dawid124.ioengine.module.automation.timer.structure.ETimerAction;
 import pl.webd.dawid124.ioengine.module.automation.timer.structure.Timer;
 import pl.webd.dawid124.ioengine.module.automation.timer.structure.TimerStructure;
@@ -38,18 +39,12 @@ public class TimerService {
 //        runnerService.setTimerService(timerService);
 //    }
 
-    public void runTimer(Map<String, IVariable> variables, Map<String, Object> args) {
-
-        String timerId = (String) args.get(ARGS_ID);
-        ETimerAction action = ETimerAction.valueOf((String) args.get(ARGS_ACTION));
-        Double time = (Double) args.get(ARGS_TIME);
-
-        Timer timer = timerStructure.getTimers().get(timerId);
-
-        switch (action) {
+    public void runTimer(Map<String, IVariable> variables, TimerRunnerBlock timerRunner) {
+        Timer timer = timerStructure.getTimers().get(timerRunner.getTimerId());
+        switch (timerRunner.getAction()) {
             case RUN:
             case UPDATE_TIME:
-                timer.run(scheduler, variables, time);
+                timer.run(scheduler, variables, timerRunner.getTime());
                 break;
             case CLEAR:
                 timer.cancel();

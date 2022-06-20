@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.mqtt;
 
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
@@ -12,11 +13,11 @@ public final class IoActionFactory {
 
     private IoActionFactory() {}
 
-    public static IoAction fromDeviceState(IDevice device, DeviceState state) {
-        return fromDeviceState(device, state, 1);
+    public static IoAction fromDeviceState(IDevice device, DeviceState state, double brightnessPercent) {
+        return fromDeviceState(device, state, new LedChangeData(), brightnessPercent);
     }
 
-    public static IoAction fromDeviceState(IDevice device, DeviceState state, double brightnessPercent) {
+    public static IoAction fromDeviceState(IDevice device, DeviceState state, LedChangeData ledChange, double brightnessPercent) {
         IoAction a = new IoAction();
         a.setIoId(device.getId());
         a.setIoType(device.getIoType());
@@ -41,9 +42,12 @@ public final class IoActionFactory {
             divideBrightnessByGroup(a, brightnessPercent);
         } else if (state instanceof LedDeviceState) {
             a.setBrightness(((LedDeviceState) state).getBrightness());
+
+            divideBrightnessByGroup(a, brightnessPercent);
         }
 
-        a.setTime(1000);
+        a.setTime(ledChange.getTime());
+        a.setStepTime(ledChange.getStepTime());
         return a;
     }
 

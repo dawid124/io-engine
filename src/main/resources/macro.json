@@ -48,9 +48,13 @@
                 {
                   "blockType": "RUNNER",
                   "runnerType": "LIGHT_ACTION",
-                  "args": {
-                    "id": "rgbw-lobby",
-                    "action": {
+                  "ledChangeData": {
+                    "time": 3000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "rgbw-lobby",
                       "brightness": 255,
                       "color": {
                         "r": 0,
@@ -59,7 +63,7 @@
                         "w": 255
                       }
                     }
-                  }
+                  ]
                 }
               ]
             },
@@ -69,11 +73,9 @@
                 {
                   "blockType": "RUNNER",
                   "runnerType": "TIMER",
-                  "args": {
-                    "id": "lobby-down-light-off-timer",
-                    "action": "UPDATE_TIME",
-                    "time": 5000
-                  }
+                  "timerId": "lobby-down-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 5000
                 }
               ]
             }

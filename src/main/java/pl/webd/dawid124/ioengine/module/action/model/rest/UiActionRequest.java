@@ -1,5 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.model.rest;
 
+import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,12 +12,24 @@ public class UiActionRequest implements Serializable {
 
     private List<UiAction> ioActions;
 
-    public UiActionRequest() {}
+    private LedChangeData ledChangeData;
+
+    public UiActionRequest() {
+        this.ledChangeData = new LedChangeData();
+    }
 
     public UiActionRequest(String zoneId, String sceneId, List<UiAction> ioActions) {
         this.zoneId = zoneId;
         this.sceneId = sceneId;
         this.ioActions = ioActions;
+        this.ledChangeData = new LedChangeData();
+    }
+
+    public UiActionRequest(String zoneId, String sceneId, List<UiAction> ioActions, LedChangeData ledChangeData) {
+        this.zoneId = zoneId;
+        this.sceneId = sceneId;
+        this.ioActions = ioActions;
+        this.ledChangeData = ledChangeData;
     }
 
     public List<UiAction> getActions() {
@@ -40,5 +54,13 @@ public class UiActionRequest implements Serializable {
 
     public void setSceneId(String sceneId) {
         this.sceneId = sceneId;
+    }
+
+    public LedChangeData getLedChangeData() {
+        return ledChangeData;
+    }
+
+    public void setLedChangeData(LedChangeData ledChangeData) {
+        this.ledChangeData = ledChangeData;
     }
 }

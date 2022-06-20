@@ -5,7 +5,8 @@ import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.RunnerService;
+import pl.webd.dawid124.ioengine.module.automation.macro.RunnerService;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.RunnerBlock;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IBlockJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
@@ -46,6 +47,7 @@ public class AutomationService {
         this.gson =  new GsonBuilder()
                 .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
                 .registerTypeAdapter(IBlock.class, new IBlockJsonAdapter(runnerService))
+                .registerTypeAdapter(RunnerBlock.class, variableFetcherJsonAdapter)
                 .registerTypeAdapter(IVariableFetcher.class, variableFetcherJsonAdapter)
                 .create();
     }

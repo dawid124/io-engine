@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.util.CollectionUtils;
+import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
@@ -34,32 +35,32 @@ final class ActionDataFactory {
         for (GroupState groupState: sceneState.getGroupState().values()) {
             LedDeviceState state = (LedDeviceState) groupState.getState();
             double brightnessPercent = (double) state.getBrightness() / (double) MAX_BRIGHTNESS;
-            actions.addAll(buildActions(devices, groupState, brightnessPercent));
+            actions.addAll(buildActions(devices, groupState, new LedChangeData(), brightnessPercent));
         }
 
         return actions;
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item) {
-        return buildActions(devices, item, FULL_PERCENT);
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange) {
+        return buildActions(devices, item, ledChange, FULL_PERCENT);
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, double brightnessPercent) {
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, double brightnessPercent) {
         List<GroupState> children = item.getChildren();
         List<IoAction> actions = new ArrayList<>();
 
         if (CollectionUtils.isEmpty(children)) {
             DeviceState deviceState = item.getState();
             IDevice device = devices.get(deviceState.getIoId());
-            actions.add(IoActionFactory.fromDeviceState(device, deviceState, brightnessPercent));
+            actions.add(IoActionFactory.fromDeviceState(device, deviceState, ledChange, brightnessPercent));
         } else {
             LedDeviceState deviceState = (LedDeviceState) item.getState();
             double newBrightnessPercent =
                     brightnessPercent * ((double) deviceState.getBrightness() / (double) MAX_BRIGHTNESS);
 
             children.forEach(child -> {
-                List<IoAction> a = buildActions(devices, child, newBrightnessPercent);
-                if (a != null) actions.addAll(a);
+                List<IoAction> a = buildActions(devices, child, ledChange, newBrightnessPercent);
+                actions.addAll(a);
             });
         }
 
