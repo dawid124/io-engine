@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-import pl.webd.dawid124.ioengine.module.share.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 
 public class NeoDeviceState extends LedDeviceState {
 

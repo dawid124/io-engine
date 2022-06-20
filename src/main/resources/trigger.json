@@ -1,0 +1,10 @@
+{
+  "triggers": {
+    "pir-lobby": {
+      "zoneId": "floor1",
+      "blocs": [
+
+      ]
+    }
+  }
+}

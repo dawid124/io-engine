@@ -1,7 +1,6 @@
 package pl.webd.dawid124.ioengine.module.action.model.rest;
 
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
-import pl.webd.dawid124.ioengine.module.share.Color;
 
 import java.io.Serializable;
 

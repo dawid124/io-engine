@@ -17,7 +17,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
 import pl.webd.dawid124.ioengine.module.driversync.DriverSyncService;
-import pl.webd.dawid124.ioengine.module.trigger.TriggerService;
+import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
 
 @Configuration
 public class MqttConfig {

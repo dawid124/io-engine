@@ -1,10 +1,16 @@
 package pl.webd.dawid124.ioengine.module.state.model.variable;
 
-import pl.webd.dawid124.ioengine.module.automatization.exception.WrongVariableTypeException;
+import pl.webd.dawid124.ioengine.module.automation.macro.exception.WrongVariableTypeException;
 
 public class BooleanVariable implements IVariable {
 
     private Boolean value;
+
+    public BooleanVariable() {}
+
+    public BooleanVariable(boolean value) {
+        this.value = value;
+    }
 
     @Override public EVariableType getType() {
         return EVariableType.BOOLEAN;

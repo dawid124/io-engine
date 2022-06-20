@@ -1,7 +1,8 @@
 package pl.webd.dawid124.ioengine.module.state.model.variable;
 
-import pl.webd.dawid124.ioengine.module.automatization.exception.NotSupportedConditionException;
-import pl.webd.dawid124.ioengine.module.automatization.exception.WrongVariableTypeException;
+import pl.webd.dawid124.ioengine.module.automation.macro.exception.WrongVariableTypeException;
+
+import java.util.List;
 
 public class StringVariable implements IVariable {
 
@@ -11,7 +12,8 @@ public class StringVariable implements IVariable {
         this.value = value;
     }
 
-    @Override public EVariableType getType() {
+    @Override
+    public EVariableType getType() {
         return EVariableType.STRING;
     }
 
@@ -21,6 +23,15 @@ public class StringVariable implements IVariable {
 
         StringVariable testStr = (StringVariable) test;
         return value.equals(testStr.value);
+    }
+
+    public boolean in(List<IVariable> test) {
+        for (IVariable var: test) {
+            if (this.equals(var)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

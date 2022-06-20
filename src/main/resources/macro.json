@@ -1,0 +1,92 @@
+{
+  "macros": {
+    "lobby-pir-macro": {
+      "zoneId": "floor1",
+      "id": "lobby-pir-macro",
+      "name": "Korytarz dół makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [{
+                  "type": "STRING",
+                  "value": "auto"
+                },{
+                  "type": "STRING",
+                  "value": "standard"
+                }]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "args": {
+                    "id": "rgbw-lobby",
+                    "action": {
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "args": {
+                    "id": "lobby-down-light-off-timer",
+                    "action": "UPDATE_TIME",
+                    "time": 5000
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "kitchen-pir-macro": {
+      "zoneId": "floor1",
+      "id": "kitchen-pir-macro",
+      "name": "Kuchnia makro",
+      "blocks": [
+      ]
+    }
+  }
+}

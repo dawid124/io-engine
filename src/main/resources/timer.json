@@ -1,0 +1,43 @@
+{
+  "timers": {
+    "lobby-down-light-off-timer": {
+      "zoneId": "floor1",
+      "id": "lobby-down-light-off-timer",
+      "defaultTime": 5000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "args": {
+            "id": "rgbw-lobby",
+            "action": {
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          }
+        },
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "args": {
+            "id": "rgbw-lobby",
+            "action": {
+              "brightness": 255,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

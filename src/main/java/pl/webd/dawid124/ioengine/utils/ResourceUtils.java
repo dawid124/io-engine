@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 public class ResourceUtils {
 
     public static String getResourceFileAsString(String fileName) throws IOException {
-        File file = org.springframework.util.ResourceUtils.getFile("classpath:structure.json");
+        File file = org.springframework.util.ResourceUtils.getFile(fileName);
         return new String(Files.readAllBytes(Paths.get(file.toURI())));
     }
 }

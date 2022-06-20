@@ -1,6 +1,8 @@
 package pl.webd.dawid124.ioengine.module.state.model.variable;
 
-import pl.webd.dawid124.ioengine.module.automatization.exception.NotSupportedConditionException;
+import pl.webd.dawid124.ioengine.module.automation.macro.exception.NotSupportedConditionException;
+
+import java.util.List;
 
 public interface IVariable {
 
@@ -29,6 +31,10 @@ public interface IVariable {
     }
 
     default boolean ge(IVariable test) {
+        throw new NotSupportedConditionException();
+    }
+
+    default boolean in(List<IVariable> test) {
         throw new NotSupportedConditionException();
     }
 }

@@ -3,7 +3,7 @@ package pl.webd.dawid124.ioengine.mqtt.action;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
-import pl.webd.dawid124.ioengine.module.share.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 
 public class IoAction {
 

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
-import pl.webd.dawid124.ioengine.module.share.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.lang.reflect.Type;
