@@ -47,7 +47,6 @@ public class AutomationService {
         this.gson =  new GsonBuilder()
                 .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
                 .registerTypeAdapter(IBlock.class, new IBlockJsonAdapter(runnerService))
-                .registerTypeAdapter(RunnerBlock.class, variableFetcherJsonAdapter)
                 .registerTypeAdapter(IVariableFetcher.class, variableFetcherJsonAdapter)
                 .create();
     }

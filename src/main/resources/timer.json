@@ -1,16 +1,19 @@
 {
   "timers": {
     "lobby-down-light-off-timer": {
-      "zoneId": "floor1",
-      "id": "lobby-down-light-off-timer",
+      "zoneId": "office",
       "defaultTime": 5000,
       "blocks": [
         {
           "blockType": "RUNNER",
           "runnerType": "LIGHT_ACTION",
-          "args": {
-            "id": "rgbw-lobby",
-            "action": {
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "rgbw-lobby",
               "brightness": 0,
               "color": {
                 "r": 0,
@@ -19,15 +22,25 @@
                 "w": 255
               }
             }
-          }
-        },
+          ]
+        }
+      ]
+    },
+    "office-light-off-timer": {
+      "zoneId": "office",
+      "defaultTime": 30000,
+      "blocks": [
         {
           "blockType": "RUNNER",
           "runnerType": "LIGHT_ACTION",
-          "args": {
-            "id": "rgbw-lobby",
-            "action": {
-              "brightness": 255,
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "rgbw-office",
+              "brightness": 0,
               "color": {
                 "r": 0,
                 "g": 0,
@@ -35,7 +48,18 @@
                 "w": 255
               }
             }
-          }
+          ]
+        }
+      ]
+    },
+    "kitchen-light-off-medium-timer": {
+      "zoneId": "floor1",
+      "defaultTime": 15000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "kitchen-light-off-medium-macro"
         }
       ]
     }

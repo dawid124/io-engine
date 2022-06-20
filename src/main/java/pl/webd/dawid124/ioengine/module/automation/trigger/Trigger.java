@@ -9,10 +9,10 @@ import java.util.List;
 public class Trigger {
 
     private String zoneId;
-    private List<IBlock> blocks;
+    private List<IBlock> blocs;
 
     public void run(HashMap<String, IVariable> variables) {
-        blocks.forEach(b -> b.run(variables, zoneId));
+        blocs.forEach(b -> b.run(variables, zoneId));
     }
 
     public String getZoneId() {
@@ -23,11 +23,11 @@ public class Trigger {
         this.zoneId = zoneId;
     }
 
-    public List<IBlock> getBlocks() {
-        return blocks;
+    public List<IBlock> getBlocs() {
+        return blocs;
     }
 
-    public void setBlocks(List<IBlock> blocks) {
-        this.blocks = blocks;
+    public void setBlocs(List<IBlock> blocs) {
+        this.blocs = blocs;
     }
 }

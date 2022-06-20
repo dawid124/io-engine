@@ -1,9 +1,43 @@
 {
   "triggers": {
     "pir-lobby": {
-      "zoneId": "floor1",
+      "zoneId": "office",
       "blocs": [
-
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "lobby-pir-macro"
+        }
+      ]
+    },
+    "pir-satel-lobby": {
+      "zoneId": "office",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "lobby-pir-macro"
+        }
+      ]
+    },
+    "pir-office": {
+      "zoneId": "office",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "office-pir-macro"
+        }
+      ]
+    },
+    "pir-kitchen": {
+      "zoneId": "office",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "kitchen-pir-macro"
+        }
       ]
     }
   }

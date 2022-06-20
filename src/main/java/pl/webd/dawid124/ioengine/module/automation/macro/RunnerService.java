@@ -62,7 +62,7 @@ public class RunnerService {
     private boolean processMacro(MacroRunnerBlock runner, Map<String, IVariable> variables) {
         HashMap<String, IVariable> newMap = new HashMap<>();
         newMap.putAll(variables);
-        newMap.putAll(runner.getVariables());
+        if (runner.getVariables() != null) newMap.putAll(runner.getVariables());
         macroService.runMacro(newMap, runner.getMacroId());
 
         return true;

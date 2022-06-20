@@ -31,25 +31,12 @@ import java.util.concurrent.TimeUnit;
 public class TriggerService implements MessageHandler {
 
 
-    private Gson gson;
+    private Gson gson = new Gson();
 
     private TriggerStructure triggerStructure;
 
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
 
-    private final MqttService mqttService;
-    private final StateService stateService;
-    private final DeviceService deviceService;
-
-    ScheduledFuture<?> officeFuture;
-    ScheduledFuture<?> kitchenFuture;
-    ScheduledFuture<?> lobbyFuture;
-
-    public TriggerService(MqttService mqttService, StateService stateService, DeviceService deviceService) {
-        this.mqttService = mqttService;
-        this.stateService = stateService;
-        this.deviceService = deviceService;
-    }
+    public TriggerService() {}
 
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {
@@ -59,179 +46,10 @@ public class TriggerService implements MessageHandler {
 
         if (trigger != null) {
             HashMap<String, IVariable> variables = new HashMap<>();
-            variables.put(SystemArg.PIR_VALUE, new BooleanVariable(false));
+            variables.put(SystemArg.PIR_VALUE, new BooleanVariable(triggerMsg.isState()));
 
             trigger.run(variables);
-            return;
         }
-
-
-
-
-
-
-
-        IoAction ioAction = new IoAction();
-        ZoneStateResponse office = stateService.fetchZoneStatesResponse().getZones().get("office");
-        boolean isOfficeAuto = "auto".equals(office.getActiveScene());
-
-        ZoneStateResponse floor1 = stateService.fetchZoneStatesResponse().getZones().get("floor1");
-        boolean isFloor1Auto = "auto".equals(floor1.getActiveScene());
-
-        int officeBrightness = 255;
-        int offTime = 60 * 2;
-        LocalDateTime now = LocalDateTime.now();
-        boolean night = false;
-        if (now.getHour() >= 22 || now.getHour() <= 7) {
-            officeBrightness = 25;
-            offTime = 1;
-            night = true;
-        }
-
-        switch (triggerMsg.getId()) {
-            case "pir-office":
-                if (!isOfficeAuto) {
-                    return;
-                }
-
-                if (officeFuture != null) {
-                    officeFuture.cancel(false);
-                }
-                if (triggerMsg.isState()) {
-                    officeLight(ioAction, officeBrightness, 1000);
-                    officeFuture = null;
-                } else {
-                    officeFuture = scheduler.schedule(() -> {
-                        officeLight(ioAction, 0, 2000);
-                    }, offTime, TimeUnit.SECONDS);
-                }
-
-                break;
-            case "pir-lobby":
-            case "pir-satel-lobby":
-                if (lobbyFuture != null) {
-                    lobbyFuture.cancel(false);
-                }
-                if (triggerMsg.isState()) {
-                    lobbyLight(true, 800);
-                    lobbyFuture = null;
-                } else {
-                    lobbyFuture = scheduler.schedule(() -> {
-                        lobbyLight( false, 3000);
-                    }, 5, TimeUnit.SECONDS);
-                }
-
-                break;
-            case "pir-wc":
-
-                break;
-
-            case "pir-kitchen":
-                if (!isFloor1Auto) {
-                    return;
-                }
-
-                if (kitchenFuture != null) {
-                    kitchenFuture.cancel(false);
-                }
-                if (triggerMsg.isState()) {
-                    kitchenLight(true, 1000);
-                    kitchenFuture = null;
-                } else {
-                    kitchenFuture = scheduler.schedule(() -> {
-                        kitchenLight( false, 2000);
-                    }, 60, TimeUnit.SECONDS);
-                }
-
-                break;
-
-        }
-    }
-
-    private void lobbyLight(boolean on, int time) {
-        IoAction ioAction = new IoAction();
-        String ioId = "rgbw-lobby";
-        IDevice iDevice = deviceService.fetchDevice(ioId);
-        ioAction.setDeviceId(iDevice.getDriverConfiguration().getDriver().getId());
-        ioAction.setDeviceType(iDevice.getDriverConfiguration().getDriver().getType());
-
-        ioAction.setIoId(ioId);
-        ioAction.setIoType(EDeviceType.RGBW);
-        ioAction.setAction(EActionType.CHANGE);
-        ioAction.setColor(new Color(0, 0, 0, 255));
-        ioAction.setTime(3000);
-        if (on) {
-            ioAction.setTime(time);
-            ioAction.setBrightness(255);
-        } else {
-            ioAction.setTime(time);
-            ioAction.setBrightness(0);
-        }
-
-        mqttService.sendActionsToDevices(Collections.singletonList(ioAction));
-    }
-
-    private void officeLight(IoAction ioAction, int officeBrightness, int time) {
-        String ioId = "rgbw-office";
-        IDevice iDevice = deviceService.fetchDevice(ioId);
-        ioAction.setDeviceId(iDevice.getDriverConfiguration().getDriver().getId());
-        ioAction.setDeviceType(iDevice.getDriverConfiguration().getDriver().getType());
-
-        ioAction.setIoId(ioId);
-        ioAction.setIoType(EDeviceType.RGBW);
-        ioAction.setAction(EActionType.CHANGE);
-        ioAction.setColor(new Color(0, 0, 0, 255));
-        ioAction.setTime(time);
-        ioAction.setBrightness(officeBrightness);
-
-        mqttService.sendActionsToDevices(Collections.singletonList(ioAction));
-    }
-
-    private void kitchenLight(boolean on, int time) {
-        ArrayList<IoAction> actions = new ArrayList<>();
-
-        IoAction rgbwwAction = new IoAction();
-        IDevice rgbwwDevice = deviceService.fetchDevice("rgbww-kitchen");
-        rgbwwAction.setDeviceId(rgbwwDevice.getDriverConfiguration().getDriver().getId());
-        rgbwwAction.setDeviceType(rgbwwDevice.getDriverConfiguration().getDriver().getType());
-
-        rgbwwAction.setIoId("rgbww-kitchen");
-        rgbwwAction.setIoType(EDeviceType.RGBW);
-        rgbwwAction.setAction(EActionType.CHANGE);
-        rgbwwAction.setColor(new Color(0, 0, 0, 255));
-        rgbwwAction.setTime(time);
-        rgbwwAction.setBrightness(on ? 100 : 0);
-        actions.add(rgbwwAction);
-
-        IoAction rgbwAction = new IoAction();
-        IDevice rgbwDevice = deviceService.fetchDevice("rgbw-kitchen");
-        rgbwAction.setDeviceId(rgbwDevice.getDriverConfiguration().getDriver().getId());
-        rgbwAction.setDeviceType(rgbwDevice.getDriverConfiguration().getDriver().getType());
-
-        rgbwAction.setIoId("rgbw-kitchen");
-        rgbwAction.setIoType(EDeviceType.RGBW);
-        rgbwAction.setAction(EActionType.CHANGE);
-        rgbwAction.setColor(new Color(0, 0, 0, 255));
-        rgbwAction.setTime(time);
-        rgbwAction.setBrightness(on ? 15 : 0);
-        actions.add(rgbwAction);
-
-
-        IoAction neoAction = new IoAction();
-        IDevice neoDevice = deviceService.fetchDevice("neo-kitchen");
-        neoAction.setDeviceId(neoDevice.getDriverConfiguration().getDriver().getId());
-        neoAction.setDeviceType(neoDevice.getDriverConfiguration().getDriver().getType());
-
-        neoAction.setIoId("neo-kitchen");
-        neoAction.setIoType(EDeviceType.NEO);
-        neoAction.setAction(EActionType.CHANGE);
-        neoAction.setColor(new Color(0, 0, 0, 255));
-        neoAction.setAnimationId(0);
-        neoAction.setTime(time);
-        neoAction.setBrightness(on ? 10 : 0);
-        actions.add(neoAction);
-
-        mqttService.sendActionsToDevices(actions);
     }
 
     public TriggerStructure getTriggerStructure() {
