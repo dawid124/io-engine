@@ -12,10 +12,19 @@ import pl.webd.dawid124.ioengine.mqtt.config.IoConfigMotionSensor;
 public class MotionSensor extends Device {
 
     private final int pin;
+    private final boolean reverse;
 
     public MotionSensor(String id, String name, IDriverConfiguration driverConfiguration, int pin) {
         super(id, name, driverConfiguration);
         this.pin = pin;
+        this.reverse = false;
+    }
+
+
+    public MotionSensor(String id, String name, IDriverConfiguration driverConfiguration, int pin, boolean reverse) {
+        super(id, name, driverConfiguration);
+        this.pin = pin;
+        this.reverse = reverse;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class MotionSensor extends Device {
 
     @Override
     public IoConfig toIoConfig() {
-        return new IoConfigMotionSensor(id, getIoType(), pin);
+        return new IoConfigMotionSensor(id, getIoType(), pin, reverse);
     }
 
     public int getPin() {

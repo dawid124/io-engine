@@ -37,12 +37,14 @@ public class DeviceService {
         PicoDriver floor1Driver0 = new PicoDriver("IO-DRIVER-F1-0");
         PicoDriver floor1Driver1 = new PicoDriver("IO-DRIVER-F1-1");
         PicoDriver floor2Driver0 = new PicoDriver("IO-DRIVER-F2-0");
+        PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
         LocalDriver piLocal = new LocalDriver("pi-master");
 
         drivers.add(floor1Driver0);
         drivers.add(floor1Driver1);
         drivers.add(floor2Driver0);
+        drivers.add(floor0Driver0);
         drivers.add(test);
         drivers.add(piLocal);
 
@@ -58,6 +60,8 @@ public class DeviceService {
         PicoDriverConfiguration testExpanderB = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration testLocal = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
+        PicoDriverConfiguration floor0Driver0Local = new PicoDriverConfiguration(floor0Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
         addDevice(new RgbwDevice("rgbw-tv", "TV", floor1Driver0ExpanderA, 0, 1, 2, 3));
@@ -66,7 +70,7 @@ public class DeviceService {
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
 
         addDevice(new RgbwDevice("rgbw-lobby", "Korytarz", floor1Driver0ExpanderB, 8, 9, 10, 11));
-        addDevice(new RgbwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 4, 3));
+        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 4, 3, 2));
         addDevice(new RgbwDevice("rgbw-panel", "Panele Beton", floor1Driver0ExpanderB, 12, 13, 14, 15));
 
         addDevice(new NeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 12, 98, false, ENeoType.NEO_GRBW));
@@ -100,6 +104,27 @@ public class DeviceService {
 
         addDevice(new BlindDevice("office-left", "Biuro lewa", localPi, RaspiPin.GPIO_13, RaspiPin.GPIO_14));
         addDevice(new BlindDevice("office-right", "Biuro prawa", localPi, RaspiPin.GPIO_21, RaspiPin.GPIO_22));
+
+
+
+        addDevice(new MotionSensor("pir-satel-tv", "Satel Pir TV", floor0Driver0Local, 12, true));
+        addDevice(new MotionSensor("pir-satel-dinner", "Satel Pir Dinner", floor0Driver0Local, 13, true));
+        addDevice(new MotionSensor("pir-satel-lobby", "Satel Pir Lobby", floor0Driver0Local, 14, true));
+        addDevice(new MotionSensor("pir-satel-entry", "Satel Pir Entry", floor0Driver0Local, 15, true));
+        addDevice(new MotionSensor("pir-satel-lobby-up", "Satel Pir Lobby Up", floor0Driver0Local, 21, true));
+
+//        addDevice(new MotionSensor("pir-stairs-down", "Pir Stairs Down", floor0Driver0Local, 20));
+//        addDevice(new MotionSensor("pir-stairs-up", "Pir Stairs Up", floor0Driver0Local, 22));
+
+        addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 0));
+        addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 1));
+        addDevice(new SingleColorLedDevice("led-stairs-3", "Stairs 3", floor0Driver0Local, 2));
+        addDevice(new SingleColorLedDevice("led-stairs-4", "Stairs 4", floor0Driver0Local, 3));
+
+        addDevice(new SingleColorLedDevice("led-stairs-5", "Stairs 5", floor0Driver0Local, 6));
+        addDevice(new SingleColorLedDevice("led-stairs-6", "Stairs 6", floor0Driver0Local, 7));
+        addDevice(new SingleColorLedDevice("led-stairs-7", "Stairs 7", floor0Driver0Local, 8));
+        addDevice(new SingleColorLedDevice("led-stairs-8", "Stairs 8", floor0Driver0Local, 9));
 
 
         addDevice(new NeoDevice("neo-test", "neo test", testLocal, 10, 60, false, ENeoType.NEO_GRBW));

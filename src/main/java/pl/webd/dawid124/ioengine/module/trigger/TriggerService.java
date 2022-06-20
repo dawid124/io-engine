@@ -36,6 +36,7 @@ public class TriggerService implements MessageHandler {
 
     ScheduledFuture<?> officeFuture;
     ScheduledFuture<?> kitchenFuture;
+    ScheduledFuture<?> lobbyFuture;
 
     public TriggerService(MqttService mqttService, StateService stateService, DeviceService deviceService) {
         this.mqttService = mqttService;
@@ -80,31 +81,25 @@ public class TriggerService implements MessageHandler {
                     officeFuture = null;
                 } else {
                     officeFuture = scheduler.schedule(() -> {
-                        officeLight(ioAction, 0, 1000);
+                        officeLight(ioAction, 0, 2000);
                     }, offTime, TimeUnit.SECONDS);
                 }
 
                 break;
             case "pir-lobby":
-                String ioId = "rgbw-lobby";
-                IDevice iDevice = deviceService.fetchDevice(ioId);
-                ioAction.setDeviceId(iDevice.getDriverConfiguration().getDriver().getId());
-                ioAction.setDeviceType(iDevice.getDriverConfiguration().getDriver().getType());
-
-                ioAction.setIoId(ioId);
-                ioAction.setIoType(EDeviceType.RGBW);
-                ioAction.setAction(EActionType.CHANGE);
-                ioAction.setColor(new Color(0, 0, 0, 255));
-                ioAction.setTime(3000);
+            case "pir-satel-lobby":
+                if (lobbyFuture != null) {
+                    lobbyFuture.cancel(false);
+                }
                 if (trigger.isState()) {
-                    ioAction.setTime(1000);
-                    ioAction.setBrightness(255);
+                    lobbyLight(true, 800);
+                    lobbyFuture = null;
                 } else {
-                    ioAction.setTime(3000);
-                    ioAction.setBrightness(0);
+                    lobbyFuture = scheduler.schedule(() -> {
+                        lobbyLight( false, 3000);
+                    }, 5, TimeUnit.SECONDS);
                 }
 
-                mqttService.sendActionsToDevices(Collections.singletonList(ioAction));
                 break;
             case "pir-wc":
 
@@ -123,13 +118,36 @@ public class TriggerService implements MessageHandler {
                     kitchenFuture = null;
                 } else {
                     kitchenFuture = scheduler.schedule(() -> {
-                        kitchenLight( false, 1000);
+                        kitchenLight( false, 2000);
                     }, 60, TimeUnit.SECONDS);
                 }
 
                 break;
 
         }
+    }
+
+    private void lobbyLight(boolean on, int time) {
+        IoAction ioAction = new IoAction();
+        String ioId = "rgbw-lobby";
+        IDevice iDevice = deviceService.fetchDevice(ioId);
+        ioAction.setDeviceId(iDevice.getDriverConfiguration().getDriver().getId());
+        ioAction.setDeviceType(iDevice.getDriverConfiguration().getDriver().getType());
+
+        ioAction.setIoId(ioId);
+        ioAction.setIoType(EDeviceType.RGBW);
+        ioAction.setAction(EActionType.CHANGE);
+        ioAction.setColor(new Color(0, 0, 0, 255));
+        ioAction.setTime(3000);
+        if (on) {
+            ioAction.setTime(time);
+            ioAction.setBrightness(255);
+        } else {
+            ioAction.setTime(time);
+            ioAction.setBrightness(0);
+        }
+
+        mqttService.sendActionsToDevices(Collections.singletonList(ioAction));
     }
 
     private void officeLight(IoAction ioAction, int officeBrightness, int time) {

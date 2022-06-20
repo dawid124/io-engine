@@ -44,8 +44,6 @@ public class DriverSyncService implements MessageHandler {
 
                 break;
         }
-
-
     }
 
     private void processReadyForConfig(DriverSyncMsg trigger) {

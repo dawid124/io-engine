@@ -11,17 +11,27 @@ public class SceneState {
     private final String name;
 
     private Map<String, GroupState> groupState;
+    private Map<String, SceneState> sceneStates;
 
     public SceneState(String id, String name) {
         this.id = id;
         this.name = name;
         this.groupState = new HashMap<>();
+        this.sceneStates = new HashMap<>();
+    }
+
+    public SceneState(String id, String name, Map<String, GroupState> groupState, Map<String, SceneState> sceneStates) {
+        this.id = id;
+        this.name = name;
+        this.groupState = groupState;
+        this.sceneStates = sceneStates;
     }
 
     public SceneState(String id, String name, Map<String, GroupState> groupState) {
         this.id = id;
         this.name = name;
         this.groupState = groupState;
+        this.sceneStates = new HashMap<>();
     }
 
     public void addGroupState(GroupState state) {
@@ -42,6 +52,10 @@ public class SceneState {
 
     public Map<String, GroupState> getGroupState() {
         return groupState;
+    }
+
+    public Map<String, SceneState> getSceneStates() {
+        return sceneStates;
     }
 
     public GroupState findStateById(String ioId) {
