@@ -26,6 +26,42 @@
         }
       ]
     },
+    "wc-down-light-off-timer": {
+      "zoneId": "office",
+      "defaultTime": 5000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "rgbw-wc1",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "rgbw-wc2",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
     "office-light-off-timer": {
       "zoneId": "office",
       "defaultTime": 30000,
@@ -34,7 +70,7 @@
           "blockType": "RUNNER",
           "runnerType": "LIGHT_ACTION",
           "ledChangeData": {
-            "time": 4000,
+            "time": 8000,
             "stepTime": 30
           },
           "actions": [
@@ -60,6 +96,167 @@
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
           "macroId": "kitchen-light-off-medium-macro"
+        }
+      ]
+    },
+    "lobby-up-light-off-timer": {
+      "zoneId": "floor2",
+      "defaultTime": 5000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-f2-lobby",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "bedroom-light-off-timer": {
+      "zoneId": "floor2",
+      "defaultTime": 10000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-bedroom",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "wardrobe-m-light-off-timer": {
+      "zoneId": "floor2",
+      "defaultTime": 10000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-wardrobe-m",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "lobby-stairs-down-up-off-timer": {
+      "zoneId": "other",
+      "defaultTime": 3000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 2000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "led-stairs-1",
+              "brightness": 0,
+              "delay": 700,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-2",
+              "brightness": 0,
+              "delay": 600,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-3",
+              "brightness": 0,
+              "delay": 500,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-4",
+              "brightness": 0,
+              "delay": 400,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-5",
+              "brightness": 0,
+              "delay": 300,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-6",
+              "brightness": 0,
+              "delay": 200,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-7",
+              "brightness": 0,
+              "delay": 100,
+              "color": {
+                "w": 255
+              }
+            },
+            {
+              "ioId": "led-stairs-8",
+              "brightness": 0,
+              "delay": 0,
+              "color": {
+                "w": 255
+              }
+            }
+          ]
         }
       ]
     }

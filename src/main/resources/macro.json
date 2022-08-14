@@ -22,7 +22,7 @@
                   },
                   {
                     "type": "STRING",
-                    "value": "standard"
+                    "value": "manual"
                   }
                 ]
               }
@@ -47,6 +47,12 @@
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby-down-light-off-timer",
+                  "action": "CLEAR"
+                },
                 {
                   "blockType": "RUNNER",
                   "runnerType": "LIGHT_ACTION",
@@ -81,6 +87,72 @@
                 }
               ]
             }
+          }
+        }
+      ]
+    },
+    "wc-pir-macro": {
+      "zoneId": "office",
+      "name": "WC dół",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "wc-down-light-off-timer",
+                "action": "CLEAR"
+              },
+              {
+                "blockType": "RUNNER",
+                "runnerType": "LIGHT_ACTION",
+                "ledChangeData": {
+                  "time": 1000,
+                  "stepTime": 30
+                },
+                "actions": [
+                  {
+                    "ioId": "rgbw-wc2",
+                    "brightness": 255,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "falseBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "wc-down-light-off-timer",
+                "action": "UPDATE_TIME",
+                "time": 15000
+              }
+            ]
           }
         }
       ]
@@ -125,6 +197,12 @@
               "blocs": [
                 {
                   "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "office-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
                   "runnerType": "LIGHT_ACTION",
                   "ledChangeData": {
                     "time": 1000,
@@ -152,8 +230,8 @@
                   "blockType": "RUNNER",
                   "runnerType": "TIMER",
                   "timerId": "office-light-off-timer",
-                  "action": "UPDATE_TIME",
-                  "time": 30000
+                  "action": "RUN",
+                  "time": 10000
                 }
               ]
             }
@@ -184,6 +262,14 @@
                   {
                     "type": "STRING",
                     "value": "tv"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "night"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "warm"
                   }
                 ]
               }
@@ -208,6 +294,12 @@
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "kitchen-light-off-medium-timer",
+                  "action": "CLEAR"
+                },
                 {
                   "blockType": "RUNNER",
                   "runnerType": "MACRO_RUNNER",
@@ -244,23 +336,11 @@
           "actions": [
             {
               "ioId": "neo-kitchen",
-              "brightness": 150,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
+              "brightness": 150
             },
             {
               "ioId": "rgbww-kitchen",
-              "brightness": 255,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
+              "brightness": 255
             }
           ]
         }
@@ -279,25 +359,430 @@
           "actions": [
             {
               "ioId": "neo-kitchen",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
+              "brightness": 0
             },
             {
               "ioId": "rgbww-kitchen",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
-              }
+              "brightness": 0
             }
           ]
+        }
+      ]
+    },
+    "lobby-up-pir-macro": {
+      "zoneId": "floor2",
+      "name": "Korytarz gótra makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "manual"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby-up-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-f2-lobby",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby-up-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "lobby-stairs-down-up-on-macro": {
+      "zoneId": "other",
+      "name": "Schody od góry do dołu",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "manual"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby-stairs-down-up-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 2000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "led-stairs-1",
+                      "brightness": 100,
+                      "delay": 0,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-2",
+                      "brightness": 100,
+                      "delay": 100,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-3",
+                      "brightness": 100,
+                      "delay": 200,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-4",
+                      "brightness": 100,
+                      "delay": 300,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-5",
+                      "brightness": 100,
+                      "delay": 400,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-6",
+                      "brightness": 100,
+                      "delay": 500,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-7",
+                      "brightness": 100,
+                      "delay": 600,
+                      "color": {
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "led-stairs-8",
+                      "brightness": 100,
+                      "delay": 700,
+                      "color": {
+                        "w": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby-stairs-down-up-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 4000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "wardrobe-m-pir-macro": {
+      "zoneId": "floor2",
+      "name": "Szafa Magda makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "manual"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "wardrobe-m-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-wardrobe-m",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "wardrobe-m-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "bedroom-pir-macro": {
+      "zoneId": "floor2",
+      "name": "Sypialnia makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "bedroom-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-bedroom",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "bedroom-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
         }
       ]
     }

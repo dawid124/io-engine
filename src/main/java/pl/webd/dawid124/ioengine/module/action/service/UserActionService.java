@@ -85,6 +85,9 @@ public class UserActionService {
     }
 
     private void processBlinds(List<UiAction> actions) {
-        blindService.processBlinds(actions);
+
+        List<IoAction> mqttActions = blindService.processBlinds(actions);
+
+        mqttService.sendActionsToDevices(mqttActions);
     }
 }

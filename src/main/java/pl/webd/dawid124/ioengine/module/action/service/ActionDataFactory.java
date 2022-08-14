@@ -35,31 +35,31 @@ final class ActionDataFactory {
         for (GroupState groupState: sceneState.getGroupState().values()) {
             LedDeviceState state = (LedDeviceState) groupState.getState();
             double brightnessPercent = (double) state.getBrightness() / (double) MAX_BRIGHTNESS;
-            actions.addAll(buildActions(devices, groupState, new LedChangeData(), brightnessPercent));
+            actions.addAll(buildActions(devices, groupState, new LedChangeData(), 0, brightnessPercent));
         }
 
         return actions;
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange) {
-        return buildActions(devices, item, ledChange, FULL_PERCENT);
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, int delay) {
+        return buildActions(devices, item, ledChange, delay, FULL_PERCENT);
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, double brightnessPercent) {
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, int delay, double brightnessPercent) {
         List<GroupState> children = item.getChildren();
         List<IoAction> actions = new ArrayList<>();
 
         if (CollectionUtils.isEmpty(children)) {
             DeviceState deviceState = item.getState();
             IDevice device = devices.get(deviceState.getIoId());
-            actions.add(IoActionFactory.fromDeviceState(device, deviceState, ledChange, brightnessPercent));
+            actions.add(IoActionFactory.fromDeviceState(device, deviceState, ledChange, delay, brightnessPercent));
         } else {
             LedDeviceState deviceState = (LedDeviceState) item.getState();
             double newBrightnessPercent =
                     brightnessPercent * ((double) deviceState.getBrightness() / (double) MAX_BRIGHTNESS);
 
             children.forEach(child -> {
-                List<IoAction> a = buildActions(devices, child, ledChange, newBrightnessPercent);
+                List<IoAction> a = buildActions(devices, child, ledChange, delay, newBrightnessPercent);
                 actions.addAll(a);
             });
         }

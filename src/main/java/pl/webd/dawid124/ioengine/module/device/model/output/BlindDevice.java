@@ -9,6 +9,7 @@ import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.action.model.rest.BlindResponse;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfigBlind;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,14 +23,22 @@ public class BlindDevice extends Device {
 
     public static final int FULL_CHANGE_TIME = 1300;
     public static final int FULL_DIMMER_TIME = 60 * 1000;
-    public static final int MAX_PERCENT = 100;
-    public static final int MIN_PERCENT = 0;
 
-    private GpioPinDigitalOutput up;
-    private GpioPinDigitalOutput down;
+    private transient GpioPinDigitalOutput up;
+    private transient GpioPinDigitalOutput down;
 
-    private BlindDeviceState state;
-    private boolean lock;
+    private int pinUp;
+    private int pinDown;
+
+    private transient BlindDeviceState state;
+
+    public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, int pinUp, int pinDown) {
+        super(id, name, driverConfiguration);
+        this.pinUp = pinUp;
+        this.pinDown = pinDown;
+
+        this.state = new BlindDeviceState(id, name);
+    }
 
     public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, Pin up, Pin down) {
         super(id, name, driverConfiguration);
@@ -38,7 +47,7 @@ public class BlindDevice extends Device {
             this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
             this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
             this.state = new BlindDeviceState(id, name);
-//            move(EBlindDirection.UP);
+//            moveLocal(EBlindDirection.UP);
         } catch (Exception ex) {
 
         }
@@ -48,88 +57,20 @@ public class BlindDevice extends Device {
 
     }
 
-    public BlindResponse move(EBlindDirection direction) {
-        if (lock) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        }
-
-        GpioPinDigitalOutput directionPin = setRelayOnSafe(direction);
-        if (directionPin == null) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        }
-
-        scheduler.schedule(() -> {
-            directionPin.setState(PinState.HIGH);
-            lock = false;
-        }, FULL_DIMMER_TIME, TimeUnit.MILLISECONDS);
-
-        state.setDimmerPercent(0);
-
-        return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-    }
-
-    public BlindResponse dim(EBlindDirection direction, int percent) {
-        if (lock) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        }
-
-        if (EBlindDirection.UP.equals(direction) && state.getDimmerPercent() >= MAX_PERCENT) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        } else if (EBlindDirection.DOWN.equals(direction) && state.getDimmerPercent() <= MIN_PERCENT) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        }
-
-        GpioPinDigitalOutput directionPin = setRelayOnSafe(direction);
-        if (directionPin == null) {
-            return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-        }
-
-        this.state.setPosition(EBlindDirection.DIMMER);
-        int time;
+    public void moveLocal(EBlindDirection direction, int time) {
 
         if (EBlindDirection.UP.equals(direction)) {
-            int newPercent = Math.min(state.getDimmerPercent() + percent, MAX_PERCENT);
-            time = Math.round(FULL_CHANGE_TIME / 100 * (newPercent - state.getDimmerPercent()));
-            state.setDimmerPercent(newPercent);
+            up.setState(PinState.LOW);
+            down.setState(PinState.HIGH);
         } else {
-            int newPercent = Math.max(state.getDimmerPercent() - percent, MIN_PERCENT);
-            time = Math.round(FULL_CHANGE_TIME / 100 * (state.getDimmerPercent() - newPercent));
-            state.setDimmerPercent(newPercent);
+            down.setState(PinState.LOW);
+            up.setState(PinState.HIGH);
         }
 
         scheduler.schedule(() -> {
-            directionPin.setState(PinState.HIGH);
-            lock = false;
+            down.setState(PinState.HIGH);
+            up.setState(PinState.HIGH);
         }, time, TimeUnit.MILLISECONDS);
-
-        return new BlindResponse(state.getPosition(), state.getDimmerPercent());
-    }
-
-
-    private GpioPinDigitalOutput setRelayOnSafe(EBlindDirection direction) {
-        GpioPinDigitalOutput directionPin;
-        GpioPinDigitalOutput reversePin;
-        if (EBlindDirection.UP.equals(direction)) {
-            directionPin = up;
-            reversePin = down;
-        } else {
-            directionPin = down;
-            reversePin = up;
-        }
-
-        PinState reverseState = reversePin.getState();
-
-
-        if (PinState.LOW.equals(reverseState)) {
-            LOG.warn("Stop relay on!! pinToChange: [%], valueToChange: [%], reversePin: [], reverePinVal: [%]",
-                    directionPin.getName(), PinState.LOW.getName(), reversePin.getName(), reversePin, reverseState.getName());
-            return null;
-        }
-
-        lock = true;
-        state.setPosition(direction);
-        directionPin.setState(PinState.LOW);
-        return directionPin;
     }
 
     @Override public EDeviceType getIoType() {
@@ -142,6 +83,15 @@ public class BlindDevice extends Device {
 
     @Override
     public IoConfig toIoConfig() {
-        return null;
+        String location = getDriverConfiguration().getConfig().getLocation().toString();
+        return new IoConfigBlind(id, getIoType(), location, pinUp, pinDown);
+    }
+
+    public int getPinUp() {
+        return pinUp;
+    }
+
+    public int getPinDown() {
+        return pinDown;
     }
 }

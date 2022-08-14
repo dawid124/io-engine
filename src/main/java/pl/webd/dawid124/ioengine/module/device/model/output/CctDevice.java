@@ -4,6 +4,7 @@ import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDrive
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
+import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRgb;
 
 public class CctDevice extends Device {
 
@@ -27,7 +28,8 @@ public class CctDevice extends Device {
 
     @Override
     public IoConfig toIoConfig() {
-        return null;
+        String location = getDriverConfiguration().getConfig().getLocation().toString();
+        return new IoConfigRgb(id, getIoType(), location, -1, -1, -1, pinCW, pinWW);
     }
 
     public int getPinWW() {

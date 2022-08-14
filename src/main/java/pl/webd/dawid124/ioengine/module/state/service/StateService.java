@@ -108,26 +108,26 @@ public class StateService {
         if (item.getState() instanceof ColorLedDeviceState) {
             ColorLedDeviceState lightState = (ColorLedDeviceState) item.getState();
 
-            if (lightState.getColor().equals(ioAction.getColor())) {
+            if (ioAction.getColor() == null || lightState.getColor().equals(ioAction.getColor())) {
                 lightState.setBrightness(ioAction.getBrightness());
                 onlyBrightness = true;
+
             } else {
-                lightState.setBrightness(ioAction.getBrightness());
-                lightState.setColor(ioAction.getColor());
+                if (ioAction.getColor() != null) lightState.setColor(ioAction.getColor());
             }
 
         } else if (item.getState() instanceof NeoDeviceState) {
             NeoDeviceState neoState = (NeoDeviceState) item.getState();
 
-            if (neoState.getColor().equals(ioAction.getColor())
+            if ((ioAction.getColor() == null || neoState.getColor().equals(ioAction.getColor()))
                     && neoState.getAnimationId() == ioAction.getAnimationId()
                     && neoState.getSpeed() == ioAction.getSpeed()) {
 
                 neoState.setBrightness(ioAction.getBrightness());
                 onlyBrightness = true;
+
             } else {
-                neoState.setBrightness(ioAction.getBrightness());
-                neoState.setColor(ioAction.getColor());
+                if (ioAction.getColor() != null) neoState.setColor(ioAction.getColor());
                 neoState.setAnimationId(ioAction.getAnimationId());
                 neoState.setSpeed(ioAction.getSpeed());
             }
@@ -156,15 +156,23 @@ public class StateService {
     }
 
     private void updateColorLedState(ColorLedDeviceState state, UiAction ioAction) {
-        state.setBrightness(ioAction.getBrightness());
-        state.setColor(ioAction.getColor());
+        if (ioAction.getColor() == null || state.getColor().equals(ioAction.getColor())) {
+            state.setBrightness(ioAction.getBrightness());
+        } else if (ioAction.getColor() != null) {
+            state.setColor(ioAction.getColor());
+        }
     }
 
     private void updateNeoState(NeoDeviceState state, UiAction ioAction) {
-        state.setBrightness(ioAction.getBrightness());
-        state.setColor(ioAction.getColor());
-        state.setAnimationId(ioAction.getAnimationId());
-        state.setSpeed(ioAction.getSpeed());
+        if ((ioAction.getColor() == null || state.getColor().equals(ioAction.getColor()) )
+                && state.getAnimationId() == ioAction.getAnimationId()
+                && state.getSpeed() == ioAction.getSpeed()) {
+            state.setBrightness(ioAction.getBrightness());
+        } else {
+            if (ioAction.getColor() != null) state.setColor(ioAction.getColor());
+            state.setAnimationId(ioAction.getAnimationId());
+            state.setSpeed(ioAction.getSpeed());
+        }
     }
 
     public void updateScene(String zoneId, String sceneId) {

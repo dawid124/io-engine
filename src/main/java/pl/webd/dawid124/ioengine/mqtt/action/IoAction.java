@@ -22,9 +22,23 @@ public class IoAction {
 
     private int stepTime;
     private int time;
+    private int delay;
 
     private String deviceId;
     private EIoDriverType deviceType;
+
+    public IoAction() {}
+
+    public IoAction(String ioId, EDeviceType ioType, EActionType action, Color color, int brightness, int delay, String deviceId, EIoDriverType deviceType) {
+        this.ioId = ioId;
+        this.ioType = ioType;
+        this.action = action;
+        this.color = color;
+        this.brightness = brightness;
+        this.delay = delay;
+        this.deviceId = deviceId;
+        this.deviceType = deviceType;
+    }
 
     public String getIoId() {
         return ioId;
@@ -120,5 +134,13 @@ public class IoAction {
 
     public void setStaticSubModeId(int staticSubModeId) {
         this.staticSubModeId = staticSubModeId;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

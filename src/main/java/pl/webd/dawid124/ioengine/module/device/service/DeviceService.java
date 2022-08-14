@@ -62,9 +62,15 @@ public class DeviceService {
 
         PicoDriverConfiguration floor0Driver0Local = new PicoDriverConfiguration(floor0Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
+        PicoDriverConfiguration floor2Driver0Local = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+        PicoDriverConfiguration floor2Driver0ExpanderA = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
+        PicoDriverConfiguration floor2Driver0ExpanderB = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
+
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
-        addDevice(new RgbwDevice("rgbw-tv", "TV", floor1Driver0ExpanderA, 0, 1, 2, 3));
+//        FLOOR 1 - DRIVER 0
+
+
         addDevice(new RgbwDevice("rgbw-dinner", "Jadalnia 2", floor1Driver0ExpanderA, 4, 5, 6, 7));
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
@@ -82,6 +88,9 @@ public class DeviceService {
         addDevice(new MotionSensor("pir-lobby", "Pir Korytarz", floor1Driver0Local, 8));
         addDevice(new MotionSensor("pir-kitchen", "Pir Kuchnia", floor1Driver0Local, 10));
 
+
+//        FLOOR 1 - DRIVER 1
+
 // 121 - standard led count
         addDevice(new NeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 14, 155, false, ENeoType.NEO_GRB));
         addDevice(new NeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 22, 155, true, ENeoType.NEO_GRB));
@@ -91,11 +100,15 @@ public class DeviceService {
 
         addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver1ExpanderA, 0, 1, 2, 3));
         addDevice(new RgbwDevice("rgbw-wc2", "WC 2", floor1Driver1ExpanderB, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-tv1", "TV 1", floor1Driver1ExpanderB, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-tv2", "TV 2", floor1Driver1ExpanderB, 8, 9, 10, 11));
+        addDevice(new RgbwDevice("rgbw-lobby-mirror", "Korytarz Lustro", floor1Driver0ExpanderB, 12, 13, 14, 15));
         addDevice(new MotionSensor("pir-wc", "Pir Biuro", floor1Driver1Local, 12));
 
 //        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 5, 4, 3));
 
 
+//        LOCAL PI
 
         addDevice(new BlindDevice("f1-hs", "HS salon", localPi, RaspiPin.GPIO_15, RaspiPin.GPIO_16));
         addDevice(new BlindDevice("f1-hs-corner", "HS Salon róg", localPi, RaspiPin.GPIO_04, RaspiPin.GPIO_05));
@@ -106,25 +119,48 @@ public class DeviceService {
         addDevice(new BlindDevice("office-right", "Biuro prawa", localPi, RaspiPin.GPIO_21, RaspiPin.GPIO_22));
 
 
+//        FLOOR 0 - DRIVER 0
 
         addDevice(new MotionSensor("pir-satel-tv", "Satel Pir TV", floor0Driver0Local, 12, true));
         addDevice(new MotionSensor("pir-satel-dinner", "Satel Pir Dinner", floor0Driver0Local, 13, true));
         addDevice(new MotionSensor("pir-satel-lobby", "Satel Pir Lobby", floor0Driver0Local, 14, true));
         addDevice(new MotionSensor("pir-satel-entry", "Satel Pir Entry", floor0Driver0Local, 15, true));
-        addDevice(new MotionSensor("pir-satel-lobby-up", "Satel Pir Lobby Up", floor0Driver0Local, 21, true));
+        addDevice(new MotionSensor("pir-satel-lobby-up", "Satel Pir Lobby Up", floor0Driver0Local, 20, true));
 
 //        addDevice(new MotionSensor("pir-stairs-down", "Pir Stairs Down", floor0Driver0Local, 20));
 //        addDevice(new MotionSensor("pir-stairs-up", "Pir Stairs Up", floor0Driver0Local, 22));
 
-        addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 0));
-        addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 1));
-        addDevice(new SingleColorLedDevice("led-stairs-3", "Stairs 3", floor0Driver0Local, 2));
-        addDevice(new SingleColorLedDevice("led-stairs-4", "Stairs 4", floor0Driver0Local, 3));
+        addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 1));
+        addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 2));
+        addDevice(new SingleColorLedDevice("led-stairs-3", "Stairs 3", floor0Driver0Local, 3));
+        addDevice(new SingleColorLedDevice("led-stairs-4", "Stairs 4", floor0Driver0Local, 6));
 
-        addDevice(new SingleColorLedDevice("led-stairs-5", "Stairs 5", floor0Driver0Local, 6));
-        addDevice(new SingleColorLedDevice("led-stairs-6", "Stairs 6", floor0Driver0Local, 7));
-        addDevice(new SingleColorLedDevice("led-stairs-7", "Stairs 7", floor0Driver0Local, 8));
-        addDevice(new SingleColorLedDevice("led-stairs-8", "Stairs 8", floor0Driver0Local, 9));
+        addDevice(new SingleColorLedDevice("led-stairs-5", "Stairs 5", floor0Driver0Local, 7));
+        addDevice(new SingleColorLedDevice("led-stairs-6", "Stairs 6", floor0Driver0Local, 8));
+        addDevice(new SingleColorLedDevice("led-stairs-7", "Stairs 7", floor0Driver0Local, 9));
+        addDevice(new SingleColorLedDevice("led-stairs-8", "Stairs 8", floor0Driver0Local, 10));
+
+
+//        FLOOR 2 - DRIVER 0
+        addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
+        addDevice(new CctDevice("cct-wardrobe-d", "Szafa Dawid", floor2Driver0ExpanderA, 2, 3));
+        addDevice(new CctDevice("cct-bedroom", "Sypialnia", floor2Driver0ExpanderA, 4, 5));
+        addDevice(new CctDevice("cct-f2-lobby", "Korytarz", floor2Driver0ExpanderA, 6, 7));
+        addDevice(new CctDevice("cct-p1", "Pokój 1", floor2Driver0ExpanderA, 8, 9));
+        addDevice(new CctDevice("cct-p2", "Pokój 2", floor2Driver0ExpanderA, 10, 11));
+
+        addDevice(new MotionSensor("pir-war-m", "Pir Szafa Magda", floor2Driver0Local, 0));
+        addDevice(new MotionSensor("pir-war-d", "Pir Szafa Dawid", floor2Driver0Local, 1));
+        addDevice(new MotionSensor("pir-bedroom", "Pir Sypialnia", floor2Driver0Local, 2));
+        addDevice(new MotionSensor("pir-f2-lobby", "Pir Korytarz", floor2Driver0Local, 3));
+        addDevice(new MotionSensor("pir-p1", "Pir P1", floor2Driver0Local, 6));
+        addDevice(new MotionSensor("pir-p2", "Pir P2", floor2Driver0Local, 7));
+
+        addDevice(new BlindDevice("syp", "Sypialnia", floor2Driver0ExpanderB, 0, 1));
+        addDevice(new BlindDevice("p1-l", "Pokój 1 L", floor2Driver0ExpanderB, 2, 3));
+        addDevice(new BlindDevice("p1-p", "Pokój 1 P", floor2Driver0ExpanderB, 4, 5));
+        addDevice(new BlindDevice("p2", "Pokój 2", floor2Driver0ExpanderB, 6, 7));
+        addDevice(new BlindDevice("bath", "Lazienka", floor2Driver0ExpanderB, 8, 9));
 
 
         addDevice(new NeoDevice("neo-test", "neo test", testLocal, 10, 60, false, ENeoType.NEO_GRBW));

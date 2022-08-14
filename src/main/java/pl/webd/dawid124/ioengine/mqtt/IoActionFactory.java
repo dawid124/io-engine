@@ -13,11 +13,7 @@ public final class IoActionFactory {
 
     private IoActionFactory() {}
 
-    public static IoAction fromDeviceState(IDevice device, DeviceState state, double brightnessPercent) {
-        return fromDeviceState(device, state, new LedChangeData(), brightnessPercent);
-    }
-
-    public static IoAction fromDeviceState(IDevice device, DeviceState state, LedChangeData ledChange, double brightnessPercent) {
+    public static IoAction fromDeviceState(IDevice device, DeviceState state, LedChangeData ledChange, int delay, double brightnessPercent) {
         IoAction a = new IoAction();
         a.setIoId(device.getId());
         a.setIoType(device.getIoType());
@@ -42,12 +38,12 @@ public final class IoActionFactory {
             divideBrightnessByGroup(a, brightnessPercent);
         } else if (state instanceof LedDeviceState) {
             a.setBrightness(((LedDeviceState) state).getBrightness());
-
             divideBrightnessByGroup(a, brightnessPercent);
         }
 
         a.setTime(ledChange.getTime());
         a.setStepTime(ledChange.getStepTime());
+        a.setDelay(delay);
         return a;
     }
 

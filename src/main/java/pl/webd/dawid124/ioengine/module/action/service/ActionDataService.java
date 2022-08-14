@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
@@ -31,7 +32,7 @@ public class ActionDataService {
 
         List<IoAction> list = new ArrayList<>();
         actions.getActions().forEach(a -> {
-            list.addAll(ActionDataFactory.buildActions(devices, sceneState.findStateById(a.getIoId()), actions.getLedChangeData()));
+            list.addAll(ActionDataFactory.buildActions(devices, sceneState.findStateById(a.getIoId()), actions.getLedChangeData(), a.getDelay()));
         });
 
         return list;
@@ -44,7 +45,7 @@ public class ActionDataService {
     }
 
     public List<IoAction> fromDriverState(String driverId) {
-        Map<String, IDevice> devices = deviceService.fetchDevicesByDriverId(driverId);
+        Map<String, IDevice> devices = deviceService.fetchAll();
         Map<String, ZoneState> zones = stateService.getZoneState();
 
         List<IoAction> appActions = ActionDataFactory.buildActionsForHome(devices, zones);

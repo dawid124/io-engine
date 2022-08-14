@@ -15,29 +15,13 @@ import java.util.concurrent.ScheduledExecutorService;
 public class TimerService {
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(12);
-    public static final String ARGS_ID = "id";
-    public static final String ARGS_ACTION = "action";
-    public static final String ARGS_TIME = "time";
+
     private TimerStructure timerStructure;
 
     public TimerService() {
         this.timerStructure = new TimerStructure();
     }
 
-//    public static void main(String[] args) {
-//        StructureService structureService = new StructureService();
-//        structureService.init();
-//        StateService stateService = new StateService(structureService);
-//        stateService.init();
-//        VariableFetcherJsonAdapter variableFetcher = new VariableFetcherJsonAdapter(
-//                new CurrentStateVariableFetcher(stateService));
-//
-//        RunnerService runnerService = new RunnerService(stateService, null);
-//
-//        TimerService timerService = new TimerService(variableFetcher, runnerService);
-//        timerService.init();
-//        runnerService.setTimerService(timerService);
-//    }
 
     public void runTimer(Map<String, IVariable> variables, TimerRunnerBlock timerRunner) {
         Timer timer = timerStructure.getTimers().get(timerRunner.getTimerId());

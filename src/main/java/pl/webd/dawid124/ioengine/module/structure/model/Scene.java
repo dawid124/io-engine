@@ -2,9 +2,7 @@ package pl.webd.dawid124.ioengine.module.structure.model;
 
 import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Scene {
 
@@ -14,7 +12,7 @@ public class Scene {
 
     private final Map<String, Scene> scenes;
 
-    private List<GroupState> groups;
+    private Set<GroupState> groups;
 
 
     public Scene(String id, String name, int order) {
@@ -22,6 +20,7 @@ public class Scene {
         this.name = name;
         this.order = order;
         this.scenes = new HashMap<>();
+        this.groups = new HashSet<>();
     }
 
     public String getId() {
@@ -36,11 +35,11 @@ public class Scene {
         return order;
     }
 
-    public List<GroupState> getGroups() {
+    public Set<GroupState> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<GroupState> groups) {
+    public void setGroups(Set<GroupState> groups) {
         this.groups = groups;
     }
 

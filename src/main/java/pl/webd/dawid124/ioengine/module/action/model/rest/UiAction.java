@@ -19,6 +19,7 @@ public class UiAction implements Serializable {
 
     private int stepTime;
     private int time;
+    private int delay;
 
     private int percent;
 
@@ -122,5 +123,13 @@ public class UiAction implements Serializable {
 
     public boolean isBlind() {
         return EDeviceType.BLIND.equals(ioType);
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

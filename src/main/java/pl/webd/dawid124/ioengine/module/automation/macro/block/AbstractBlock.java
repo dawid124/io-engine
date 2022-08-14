@@ -32,6 +32,7 @@ public abstract class AbstractBlock implements IBlock {
     }
 
     public Integer getOrder() {
+        if (order == null) return 0;
         return order;
     }
 

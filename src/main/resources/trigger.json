@@ -39,6 +39,61 @@
           "macroId": "kitchen-pir-macro"
         }
       ]
+    },
+    "pir-wc": {
+      "zoneId": "office",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "wc-pir-macro"
+        }
+      ]
+    },
+    "pir-satel-lobby-up": {
+      "zoneId": "other",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "lobby-up-pir-macro"
+        },
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "lobby-stairs-down-up-on-macro"
+        }
+      ]
+    },
+    "pir-f2-lobby": {
+      "zoneId": "floor2",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "lobby-up-pir-macro"
+        }
+      ]
+    },
+    "pir-bedroom": {
+      "zoneId": "floor2",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "bedroom-pir-macro"
+        }
+      ]
+    },
+    "pir-war-m": {
+      "zoneId": "floor2",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "wardrobe-m-pir-macro"
+        }
+      ]
     }
   }
 }

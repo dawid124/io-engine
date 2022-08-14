@@ -4,6 +4,7 @@ public enum EDeviceStateType {
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),
     LED(LedDeviceState.class),
+    CCT(ColorLedDeviceState.class),
     RGBW(ColorLedDeviceState.class),
     MOTION_SENSOR(ColorLedDeviceState.class);
 
