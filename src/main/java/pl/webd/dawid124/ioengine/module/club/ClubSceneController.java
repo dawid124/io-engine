@@ -100,6 +100,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, n1.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );
@@ -109,6 +110,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, n2.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );
@@ -118,6 +120,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, n3.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );
@@ -127,6 +130,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, n4.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );
@@ -152,6 +156,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, wc1.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );
@@ -161,6 +166,7 @@ public class ClubSceneController {
                 EActionType.CHANGE,
                 new Color(0,0,0,255),
                 0,
+                0,0,
                 0, wc2.getDriverConfiguration().getDriver().getId(),
                 EIoDriverType.MQTT
         );

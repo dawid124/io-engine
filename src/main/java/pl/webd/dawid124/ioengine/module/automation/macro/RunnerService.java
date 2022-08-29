@@ -1,25 +1,28 @@
 package pl.webd.dawid124.ioengine.module.automation.macro;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.LightActionRunnerBlock;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.MacroRunnerBlock;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.RunnerBlock;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.TimerRunnerBlock;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.*;
+import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
 import pl.webd.dawid124.ioengine.module.state.SystemArg;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.StringVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
-import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class RunnerService {
+
+    private static final Logger LOG = LogManager.getLogger( RunnerService.class );
 
     private final StateService stateService;
     private final TimerService timerService;
@@ -34,14 +37,18 @@ public class RunnerService {
     }
 
     public boolean run(RunnerBlock runner, Map<String, IVariable> variables, String zoneId) {
-        ZoneState zoneState = stateService.getZoneState().get(zoneId);
         switch (runner.getRunnerType()) {
             case LIGHT_ACTION:
-                return processAction((LightActionRunnerBlock) runner, variables, zoneId, zoneState);
+                ZoneState zoneState = stateService.getZoneState().get(zoneId);
+                return processLitghtAction((LightActionRunnerBlock) runner, variables, zoneId, zoneState);
             case TIMER:
                 return processTimer((TimerRunnerBlock) runner, variables);
             case MACRO_RUNNER:
                 return processMacro((MacroRunnerBlock) runner, variables);
+            case CMD:
+                return processCmd((CMDRunnerBlock) runner, variables);
+            case ACTION:
+                return processAction((ActionRunnerBlock) runner);
             case BLIND_ACTION:
 
                 break;
@@ -59,6 +66,42 @@ public class RunnerService {
         return false;
     }
 
+    public static boolean executeBashCommand(String command) {
+        boolean success = false;
+//        LOG.warn("Executing BASH command:\n   " + command);
+        Runtime r = Runtime.getRuntime();
+        String[] commands = {"bash", "-c", command};
+        try {
+            Process p = r.exec(commands);
+
+            int i = p.waitFor();
+            BufferedReader b = null;
+            if (i == 0) {
+                b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            } else {
+                b = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            }
+            String line;
+
+//            while ((line = b.readLine()) != null) {
+//                LOG.warn(line);
+//            }
+
+            b.close();
+            success = true;
+        } catch (Exception e) {
+            LOG.error("Failed to execute bash with command: " + command);
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+    private boolean processCmd(CMDRunnerBlock runner, Map<String, IVariable> variables) {
+        executeBashCommand(runner.getCmd());
+
+        return true;
+    }
+
     private boolean processMacro(MacroRunnerBlock runner, Map<String, IVariable> variables) {
         HashMap<String, IVariable> newMap = new HashMap<>();
         newMap.putAll(variables);
@@ -74,11 +117,17 @@ public class RunnerService {
         return true;
     }
 
-    private boolean processAction(LightActionRunnerBlock runner, Map<String, IVariable> variables, String zoneId, ZoneState zoneState) {
+    private boolean processLitghtAction(LightActionRunnerBlock runner, Map<String, IVariable> variables, String zoneId, ZoneState zoneState) {
         String stateId = getStateId(variables, zoneState);
         SceneState sceneState = zoneState.getSceneStates().get(stateId);
 
         userActionService.processActionChange(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
+
+        return true;
+    }
+
+    private boolean processAction(ActionRunnerBlock runner) {
+        userActionService.processSimpleActions(runner.getActions());
 
         return true;
     }

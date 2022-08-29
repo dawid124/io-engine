@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
 public enum EDeviceStateType {
+    SWITCH(SwitchDeviceState.class),
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),
     LED(LedDeviceState.class),

@@ -1,6 +1,9 @@
 package pl.webd.dawid124.ioengine.module.action.model.rest;
 
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
+import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.io.Serializable;
 
@@ -131,5 +134,21 @@ public class UiAction implements Serializable {
 
     public void setDelay(int delay) {
         this.delay = delay;
+    }
+
+    public IoAction toIoAction(IDevice device) {
+        String deviceId = device.getDriverConfiguration().getDriver().getId();
+        EIoDriverType deviceType = device.getDriverConfiguration().getDriver().getType();
+        return new IoAction(
+                this.getIoId(),
+                device.getIoType(),
+                this.getAction(),
+                this.getColor(),
+                this.getBrightness(),
+                this.getDelay(),
+                this.getTime(),
+                this.getStepTime(),
+                deviceId,
+                deviceType);
     }
 }

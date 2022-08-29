@@ -36,6 +36,7 @@ public class DeviceService {
     public void init() {
         PicoDriver floor1Driver0 = new PicoDriver("IO-DRIVER-F1-0");
         PicoDriver floor1Driver1 = new PicoDriver("IO-DRIVER-F1-1");
+        PicoDriver floor1Driver2 = new PicoDriver("IO-DRIVER-F1-2");
         PicoDriver floor2Driver0 = new PicoDriver("IO-DRIVER-F2-0");
         PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
@@ -43,6 +44,7 @@ public class DeviceService {
 
         drivers.add(floor1Driver0);
         drivers.add(floor1Driver1);
+        drivers.add(floor1Driver2);
         drivers.add(floor2Driver0);
         drivers.add(floor0Driver0);
         drivers.add(test);
@@ -56,6 +58,10 @@ public class DeviceService {
         PicoDriverConfiguration floor1Driver1ExpanderB = new PicoDriverConfiguration(floor1Driver1, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration floor1Driver1Local = new PicoDriverConfiguration(floor1Driver1, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
+        PicoDriverConfiguration floor1Driver2ExpanderA = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
+        PicoDriverConfiguration floor1Driver2ExpanderB = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
+        PicoDriverConfiguration floor1Driver2Local = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+
         PicoDriverConfiguration testExpanderA = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration testExpanderB = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration testLocal = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
@@ -68,46 +74,6 @@ public class DeviceService {
 
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
-//        FLOOR 1 - DRIVER 0
-
-
-        addDevice(new RgbwDevice("rgbw-dinner", "Jadalnia 2", floor1Driver0ExpanderA, 4, 5, 6, 7));
-        addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
-        addDevice(new RgbwDevice("rgbw-kitchen", "Jadalnia 1", floor1Driver0ExpanderA, 12, 13, 14, 15));
-
-        addDevice(new RgbwDevice("rgbw-lobby", "Korytarz", floor1Driver0ExpanderB, 8, 9, 10, 11));
-        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 4, 3, 2));
-        addDevice(new RgbwDevice("rgbw-panel", "Panele Beton", floor1Driver0ExpanderB, 12, 13, 14, 15));
-
-        addDevice(new NeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 12, 98, false, ENeoType.NEO_GRBW));
-        addDevice(new NeoDevice("neo-celling", "Sufit", floor1Driver0Local, 13, 225, false, ENeoType.NEO_GRBW));
-        addDevice(new NeoDevice("neo-tv", "Neo TV", floor1Driver0Local, 11, 133, true, ENeoType.NEO_GRBW));
-
-
-        addDevice(new MotionSensor("pir-office", "Pir Biuro", floor1Driver0Local, 7));
-        addDevice(new MotionSensor("pir-lobby", "Pir Korytarz", floor1Driver0Local, 8));
-        addDevice(new MotionSensor("pir-kitchen", "Pir Kuchnia", floor1Driver0Local, 10));
-
-
-//        FLOOR 1 - DRIVER 1
-
-// 121 - standard led count
-        addDevice(new NeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 14, 155, false, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 22, 155, true, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-3", "Wall 3", floor1Driver1Local, 20, 155, false, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-4", "Wall 4", floor1Driver1Local, 21, 155, true, ENeoType.NEO_GRB));
-
-
-        addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver1ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-wc2", "WC 2", floor1Driver1ExpanderB, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-tv1", "TV 1", floor1Driver1ExpanderB, 4, 5, 6, 7));
-        addDevice(new RgbwDevice("rgbw-tv2", "TV 2", floor1Driver1ExpanderB, 8, 9, 10, 11));
-        addDevice(new RgbwDevice("rgbw-lobby-mirror", "Korytarz Lustro", floor1Driver0ExpanderB, 12, 13, 14, 15));
-        addDevice(new MotionSensor("pir-wc", "Pir Biuro", floor1Driver1Local, 12));
-
-//        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 7, 6, 5, 4, 3));
-
-
 //        LOCAL PI
 
         addDevice(new BlindDevice("f1-hs", "HS salon", localPi, RaspiPin.GPIO_15, RaspiPin.GPIO_16));
@@ -118,7 +84,6 @@ public class DeviceService {
         addDevice(new BlindDevice("office-left", "Biuro lewa", localPi, RaspiPin.GPIO_13, RaspiPin.GPIO_14));
         addDevice(new BlindDevice("office-right", "Biuro prawa", localPi, RaspiPin.GPIO_21, RaspiPin.GPIO_22));
 
-
 //        FLOOR 0 - DRIVER 0
 
         addDevice(new MotionSensor("pir-satel-tv", "Satel Pir TV", floor0Driver0Local, 12, true));
@@ -127,8 +92,10 @@ public class DeviceService {
         addDevice(new MotionSensor("pir-satel-entry", "Satel Pir Entry", floor0Driver0Local, 15, true));
         addDevice(new MotionSensor("pir-satel-lobby-up", "Satel Pir Lobby Up", floor0Driver0Local, 20, true));
 
-//        addDevice(new MotionSensor("pir-stairs-down", "Pir Stairs Down", floor0Driver0Local, 20));
-//        addDevice(new MotionSensor("pir-stairs-up", "Pir Stairs Up", floor0Driver0Local, 22));
+        addDevice(new SwitchDevice("cookerHood", "Okap", floor0Driver0Local, 22, ESwitchType.INPUT_OFF_LOW_ON));
+        addDevice(new SwitchDevice("entryGate1", "Brama wjazdowa 1", floor0Driver0Local, 26, ESwitchType.INPUT_OFF_LOW_ON));
+        addDevice(new SwitchDevice("garageGate", "Brama wjazdowa 2", floor0Driver0Local, 27, ESwitchType.INPUT_OFF_LOW_ON));
+        addDevice(new SwitchDevice("gateway", "Brama garażowa", floor0Driver0Local, 28, ESwitchType.INPUT_OFF_LOW_ON));
 
         addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 1));
         addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 2));
@@ -139,6 +106,66 @@ public class DeviceService {
         addDevice(new SingleColorLedDevice("led-stairs-6", "Stairs 6", floor0Driver0Local, 8));
         addDevice(new SingleColorLedDevice("led-stairs-7", "Stairs 7", floor0Driver0Local, 9));
         addDevice(new SingleColorLedDevice("led-stairs-8", "Stairs 8", floor0Driver0Local, 10));
+
+//        FLOOR 1 - DRIVER 0
+
+        addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver0ExpanderA, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-lamel", "Lamele", floor1Driver0ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
+
+        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 0, 1, 2, 3, 4));
+        addDevice(new RgbwDevice("rgbw-lobby-mirror", "Korytarz Lustro", floor1Driver0ExpanderB, 8, 9, 10, 11));
+//        addDevice(new RgbwDevice("rgbw-island", "Wyspa", floor1Driver0ExpanderB, 12, 13, 14, 15));
+
+        addDevice(new NeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 21, 98, false, ENeoType.NEO_GRBW));
+        addDevice(new NeoDevice("neo-celling", "Sufit", floor1Driver0Local, 14, 225, false, ENeoType.NEO_GRBW));
+        addDevice(new NeoDevice("neo-tv", "Neo TV", floor1Driver0Local, 20, 133, true, ENeoType.NEO_GRBW));
+
+
+        addDevice(new MotionSensor("pir-office", "Pir Biuro", floor1Driver0Local, 7));
+        addDevice(new MotionSensor("pir-lobby", "Pir Korytarz", floor1Driver0Local, 8));
+        addDevice(new MotionSensor("pir-kitchen", "Pir Kuchnia", floor1Driver0Local, 9));
+
+
+//        FLOOR 1 - DRIVER 1
+
+// 121 - standard led count
+        addDevice(new NeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 12, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 13, 155, true, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("neo-wall-3", "Wall 3", floor1Driver1Local, 14, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("neo-wall-4", "Wall 4", floor1Driver1Local, 15, 155, true, ENeoType.NEO_GRB));
+
+
+
+        addDevice(new RgbwDevice("rgbw-dinner-main", "Jadalnia 1", floor1Driver1ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwwDevice("rgbww-cooker", "Okap", floor1Driver1ExpanderA, 8, 9, 10, 11, 12));
+
+        addDevice(new RgbwDevice("rgbw-wc2", "WC 2", floor1Driver1ExpanderB, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-tv1", "TV 1", floor1Driver1ExpanderB, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-tv2", "TV 2", floor1Driver1ExpanderB, 8, 9, 10, 11));
+        addDevice(new RgbwDevice("rgbw-lobby", "Korytarz", floor1Driver1ExpanderB, 12, 13, 14, 15));
+
+        addDevice(new MotionSensor("pir-wc", "Pir WC", floor1Driver1Local, 22));
+
+
+//        FLOOR 1 - DRIVER 2
+        addDevice(new RgbwDevice("rgbw-panel1", "Panel1", floor1Driver2ExpanderA, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-panel2", "Panel2", floor1Driver2ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("rgbw-panel3", "Panel3", floor1Driver2ExpanderA, 8, 9, 10, 11));
+        addDevice(new RgbwDevice("rgbw-panel4", "Panel4", floor1Driver2ExpanderA, 12, 13, 14, 15));
+
+//        addDevice(new RgbwDevice("rgbw-plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
+//        addDevice(new RgbwDevice("rgbw-dinner-window", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
+
+
+        addDevice(new RgbwDevice("rgbw-plants", "Doniczka", floor1Driver2Local, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("rgbw-dinner-window", "Jadalnia Okno", floor1Driver2Local, 6, 7, 8, 9));
+
+
+
+        addDevice(new NeoDevice("neo-wall-5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("neo-wall-6", "Wall 6", floor1Driver2Local, 13, 155, true, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("neo-wall-7", "Wall 7", floor1Driver2Local, 14, 155, false, ENeoType.NEO_GRB));
 
 
 //        FLOOR 2 - DRIVER 0

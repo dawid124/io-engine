@@ -29,13 +29,17 @@ public class IoAction {
 
     public IoAction() {}
 
-    public IoAction(String ioId, EDeviceType ioType, EActionType action, Color color, int brightness, int delay, String deviceId, EIoDriverType deviceType) {
+    public IoAction(String ioId, EDeviceType ioType, EActionType action, Color color,
+                    int brightness, int delay, int time, int stepTime,
+                    String deviceId, EIoDriverType deviceType) {
         this.ioId = ioId;
         this.ioType = ioType;
         this.action = action;
         this.color = color;
         this.brightness = brightness;
         this.delay = delay;
+        this.time = time;
+        this.stepTime = stepTime;
         this.deviceId = deviceId;
         this.deviceType = deviceType;
     }

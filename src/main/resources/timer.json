@@ -2,7 +2,7 @@
   "timers": {
     "lobby-down-light-off-timer": {
       "zoneId": "office",
-      "defaultTime": 5000,
+      "defaultTime": 15000,
       "blocks": [
         {
           "blockType": "RUNNER",
@@ -127,7 +127,7 @@
       ]
     },
     "bedroom-light-off-timer": {
-      "zoneId": "floor2",
+      "zoneId": "bedroom",
       "defaultTime": 10000,
       "blocks": [
         {
@@ -154,7 +154,7 @@
       ]
     },
     "wardrobe-m-light-off-timer": {
-      "zoneId": "floor2",
+      "zoneId": "bedroom",
       "defaultTime": 10000,
       "blocks": [
         {

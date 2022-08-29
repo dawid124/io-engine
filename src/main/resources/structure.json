@@ -75,7 +75,7 @@
                 },
                 {
                   "state": {
-                    "ioId": "rgbw-kitchen",
+                    "ioId": "rgbw-dinner-main",
                     "name": "Jadalnia 1",
                     "ioType": "RGBW",
                     "brightness": 0,
@@ -89,8 +89,22 @@
                 },
                 {
                   "state": {
-                    "ioId": "rgbw-dinner",
-                    "name": "Jadalnia 2",
+                    "ioId": "rgbw-dinner-window",
+                    "name": "Jadalnia Okno",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 100
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbw-lamel",
+                    "name": "Lamele",
                     "ioType": "RGBW",
                     "brightness": 0,
                     "color": {
@@ -118,8 +132,23 @@
                 },
                 {
                   "state": {
-                    "ioId": "rgbw-panel",
-                    "name": "Panel Beton",
+                    "ioId": "rgbww-cooker",
+                    "name": "OKAP",
+                    "ioType": "RGBW",
+                    "brightness": 0,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255,
+                      "ww": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "f1-auto-panels",
+                    "name": "Panele Beton",
                     "ioType": "RGBW",
                     "brightness": 0,
                     "color": {
@@ -129,7 +158,69 @@
                       "w": 255,
                       "ww": 0
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel1",
+                        "name": "Panel1",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel2",
+                        "name": "Panel2",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel3",
+                        "name": "Panel3",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel4",
+                        "name": "Panel4",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
                   "state": {
@@ -231,6 +322,54 @@
                   "state": {
                     "ioId": "neo-wall-4",
                     "name": "Wall 4",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-5",
+                    "name": "Wall 5",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-6",
+                    "name": "Wall 6",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-7",
+                    "name": "Wall 7",
                     "ioType": "NEO",
                     "brightness": 255,
                     "animationId": 0,
@@ -359,6 +498,21 @@
                     },
                     {
                       "state": {
+                        "ioId": "rgbww-cooker",
+                        "name": "Okap",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
                         "ioId": "neo-kitchen",
                         "name": "Kuchnia",
                         "ioType": "NEO",
@@ -391,7 +545,7 @@
                   "children": [
                     {
                       "state": {
-                        "ioId": "rgbw-kitchen",
+                        "ioId": "rgbw-dinner-main",
                         "name": "Stół",
                         "ioType": "RGBW",
                         "brightness": 255,
@@ -405,8 +559,22 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-dinner",
+                        "ioId": "rgbw-dinner-window",
                         "name": "Jadalnia",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-lamel",
+                        "name": "Lamele",
                         "ioType": "RGBW",
                         "brightness": 255,
                         "color": {
@@ -453,8 +621,8 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-panel",
-                        "name": "Panel Beton",
+                        "ioId": "f1-std-panels",
+                        "name": "Panele Beton",
                         "ioType": "RGBW",
                         "brightness": 255,
                         "color": {
@@ -464,7 +632,69 @@
                           "w": 255,
                           "ww": 0
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel1",
+                            "name": "Panel1",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel2",
+                            "name": "Panel2",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel3",
+                            "name": "Panel3",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel4",
+                            "name": "Panel4",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        }
+                      ]
                     },
                     {
                       "state": {
@@ -475,10 +705,10 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
-                          "w": 255
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
                         }
                       },
                       "children": [
@@ -491,9 +721,9 @@
                             "animationId": 0,
                             "speed": 100,
                             "color": {
-                              "r": 0,
-                              "g": 0,
-                              "b": 0,
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
                               "w": 0
                             }
                           }
@@ -507,9 +737,9 @@
                             "animationId": 0,
                             "speed": 100,
                             "color": {
-                              "r": 0,
-                              "g": 0,
-                              "b": 0,
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
                               "w": 0
                             }
                           }
@@ -523,9 +753,9 @@
                             "animationId": 0,
                             "speed": 100,
                             "color": {
-                              "r": 0,
-                              "g": 0,
-                              "b": 0,
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
                               "w": 0
                             }
                           }
@@ -539,9 +769,57 @@
                             "animationId": 0,
                             "speed": 100,
                             "color": {
-                              "r": 0,
-                              "g": 0,
-                              "b": 0,
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
+                              "w": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "neo-wall-5",
+                            "name": "Wall 5",
+                            "ioType": "NEO",
+                            "brightness": 255,
+                            "animationId": 0,
+                            "speed": 100,
+                            "color": {
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
+                              "w": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "neo-wall-6",
+                            "name": "Wall 6",
+                            "ioType": "NEO",
+                            "brightness": 255,
+                            "animationId": 0,
+                            "speed": 100,
+                            "color": {
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
+                              "w": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "neo-wall-7",
+                            "name": "Wall 7",
+                            "ioType": "NEO",
+                            "brightness": 255,
+                            "animationId": 0,
+                            "speed": 100,
+                            "color": {
+                              "r": 255,
+                              "g": 255,
+                              "b": 255,
                               "w": 0
                             }
                           }
@@ -650,6 +928,21 @@
                 },
                 {
                   "state": {
+                    "ioId": "rgbww-cooker",
+                    "name": "Okap",
+                    "ioType": "RGBW",
+                    "brightness": 255,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255,
+                      "ww": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
                     "ioId": "neo-kitchen",
                     "name": "Kuchnia",
                     "ioType": "NEO",
@@ -682,7 +975,7 @@
               "children": [
                 {
                   "state": {
-                    "ioId": "rgbw-kitchen",
+                    "ioId": "rgbw-dinner-main",
                     "name": "Stół",
                     "ioType": "RGBW",
                     "brightness": 255,
@@ -696,8 +989,22 @@
                 },
                 {
                   "state": {
-                    "ioId": "rgbw-dinner",
+                    "ioId": "rgbw-dinner-window",
                     "name": "Jadalnia",
+                    "ioType": "RGBW",
+                    "brightness": 255,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "rgbw-lamel",
+                    "name": "Lamele",
                     "ioType": "RGBW",
                     "brightness": 255,
                     "color": {
@@ -744,17 +1051,80 @@
                 },
                 {
                   "state": {
-                    "ioId": "rgbw-panel",
-                    "name": "Panel Beton",
+                    "ioId": "f1-tv-panels",
+                    "name": "Panele Beton",
                     "ioType": "RGBW",
                     "brightness": 255,
                     "color": {
                       "r": 255,
                       "g": 0,
                       "b": 255,
-                      "w": 0
+                      "w": 0,
+                      "ww": 0
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel1",
+                        "name": "Panel1",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 255,
+                          "g": 0,
+                          "b": 255,
+                          "w": 0,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel2",
+                        "name": "Panel2",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 255,
+                          "g": 0,
+                          "b": 255,
+                          "w": 0,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel3",
+                        "name": "Panel3",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 255,
+                          "g": 0,
+                          "b": 255,
+                          "w": 0,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-panel4",
+                        "name": "Panel4",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             },
@@ -767,10 +1137,10 @@
                 "animationId": 0,
                 "speed": 100,
                 "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255
+                  "r": 255,
+                  "g": 255,
+                  "b": 255,
+                  "w": 0
                 }
               },
               "children": [
@@ -783,9 +1153,9 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
                       "w": 0
                     }
                   }
@@ -799,9 +1169,9 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
                       "w": 0
                     }
                   }
@@ -815,9 +1185,9 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
                       "w": 0
                     }
                   }
@@ -831,9 +1201,57 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-5",
+                    "name": "Wall 5",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-6",
+                    "name": "Wall 6",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "w": 0
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "ioId": "neo-wall-7",
+                    "name": "Wall 7",
+                    "ioType": "NEO",
+                    "brightness": 255,
+                    "animationId": 0,
+                    "speed": 100,
+                    "color": {
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
                       "w": 0
                     }
                   }
@@ -954,6 +1372,21 @@
                     },
                     {
                       "state": {
+                        "ioId": "rgbww-cooker",
+                        "name": "Okap",
+                        "ioType": "RGBW",
+                        "brightness": 150,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255,
+                          "ww": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
                         "ioId": "neo-kitchen",
                         "name": "Kuchnia",
                         "ioType": "NEO",
@@ -986,7 +1419,7 @@
                   "children": [
                     {
                       "state": {
-                        "ioId": "rgbw-kitchen",
+                        "ioId": "rgbw-dinner-main",
                         "name": "Stół",
                         "ioType": "RGBW",
                         "brightness": 255,
@@ -1000,8 +1433,22 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-dinner",
+                        "ioId": "rgbw-dinner-window",
                         "name": "Jadalnia",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "w": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-lamel",
+                        "name": "Lamele",
                         "ioType": "RGBW",
                         "brightness": 255,
                         "color": {
@@ -1048,17 +1495,80 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-panel",
-                        "name": "Panel Beton",
+                        "ioId": "f1-night-panels",
+                        "name": "Panele Beton",
                         "ioType": "RGBW",
-                        "brightness": 255,
+                        "brightness": 100,
                         "color": {
                           "r": 0,
                           "g": 0,
                           "b": 0,
-                          "w": 255
+                          "w": 255,
+                          "ww": 0
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel1",
+                            "name": "Panel1",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel2",
+                            "name": "Panel2",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel3",
+                            "name": "Panel3",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel4",
+                            "name": "Panel4",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1071,10 +1581,10 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
-                      "w": 255
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "w": 0
                     }
                   },
                   "children": [
@@ -1087,9 +1597,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1103,9 +1613,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1119,9 +1629,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1135,9 +1645,57 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-5",
+                        "name": "Wall 5",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-6",
+                        "name": "Wall 6",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-7",
+                        "name": "Wall 7",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1260,6 +1818,21 @@
                     },
                     {
                       "state": {
+                        "ioId": "rgbww-cooker",
+                        "name": "Okap",
+                        "ioType": "RGBW",
+                        "brightness": 150,
+                        "color": {
+                          "r": 255,
+                          "g": 106,
+                          "b": 0,
+                          "w": 0,
+                          "ww": 255
+                        }
+                      }
+                    },
+                    {
+                      "state": {
                         "ioId": "neo-kitchen",
                         "name": "Kuchnia",
                         "ioType": "NEO",
@@ -1292,7 +1865,7 @@
                   "children": [
                     {
                       "state": {
-                        "ioId": "rgbw-kitchen",
+                        "ioId": "rgbw-dinner-main",
                         "name": "Stół",
                         "ioType": "RGBW",
                         "brightness": 255,
@@ -1306,8 +1879,22 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-dinner",
+                        "ioId": "rgbw-dinner-window",
                         "name": "Jadalnia",
+                        "ioType": "RGBW",
+                        "brightness": 255,
+                        "color": {
+                          "r": 255,
+                          "g": 106,
+                          "b": 0,
+                          "w": 150
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "rgbw-lamel",
+                        "name": "Lamele",
                         "ioType": "RGBW",
                         "brightness": 255,
                         "color": {
@@ -1354,17 +1941,80 @@
                     },
                     {
                       "state": {
-                        "ioId": "rgbw-panel",
-                        "name": "Panel Beton",
+                        "ioId": "f1-warm-panels",
+                        "name": "Panele Beton",
                         "ioType": "RGBW",
-                        "brightness": 255,
+                        "brightness": 180,
                         "color": {
                           "r": 255,
-                          "g": 106,
+                          "g": 0,
                           "b": 0,
-                          "w": 150
+                          "w": 255,
+                          "ww": 0
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel1",
+                            "name": "Panel1",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel2",
+                            "name": "Panel2",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel3",
+                            "name": "Panel3",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        },
+                        {
+                          "state": {
+                            "ioId": "rgbw-panel4",
+                            "name": "Panel4",
+                            "ioType": "RGBW",
+                            "brightness": 255,
+                            "color": {
+                              "r": 255,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 0
+                            }
+                          }
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1377,10 +2027,10 @@
                     "animationId": 0,
                     "speed": 100,
                     "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
-                      "w": 255
+                      "r": 255,
+                      "g": 255,
+                      "b": 255,
+                      "w": 0
                     }
                   },
                   "children": [
@@ -1393,9 +2043,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1409,9 +2059,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1425,9 +2075,9 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1441,9 +2091,57 @@
                         "animationId": 0,
                         "speed": 100,
                         "color": {
-                          "r": 0,
-                          "g": 0,
-                          "b": 0,
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-5",
+                        "name": "Wall 5",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-6",
+                        "name": "Wall 6",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
+                          "w": 0
+                        }
+                      }
+                    },
+                    {
+                      "state": {
+                        "ioId": "neo-wall-7",
+                        "name": "Wall 7",
+                        "ioType": "NEO",
+                        "brightness": 255,
+                        "animationId": 0,
+                        "speed": 100,
+                        "color": {
+                          "r": 255,
+                          "g": 255,
+                          "b": 255,
                           "w": 0
                         }
                       }
@@ -1461,10 +2159,6 @@
       "name": "Góra",
       "order": 1,
       "blinds": [
-        {
-          "ioId": "syp",
-          "shortName": "S"
-        },
         {
           "ioId": "p1-l",
           "shortName": "P1-L"
@@ -1484,12 +2178,131 @@
       ],
       "deviceIds": [
         "led-bathroom",
-        "cct-wardrobe-m",
-        "cct-wardrobe-d",
-        "cct-bedroom",
         "cct-f2-lobby",
         "cct-p1",
         "cct-p2"
+      ],
+      "scenes": {
+        "auto": {
+          "id": "auto",
+          "name": "Auto",
+          "order": 0,
+          "groups": [
+            {
+              "state": {
+                "ioId": "cct-f2-lobby",
+                "name": "Korytarz",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "cct-p1",
+                "name": "P1",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "cct-p2",
+                "name": "p2",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            }
+          ]
+        },
+        "manual": {
+          "id": "manual",
+          "name": "Manual",
+          "order": 1,
+          "groups": [
+            {
+              "state": {
+                "ioId": "cct-f2-lobby",
+                "name": "Korytarz",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "cct-p1",
+                "name": "P1",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "cct-p2",
+                "name": "p2",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "bedroom" : {
+      "id": "bedroom",
+      "name": "Sypialnia",
+      "order": 3,
+      "deviceIds": [
+        "cct-wardrobe-m",
+        "cct-wardrobe-d",
+        "cct-bedroom"
+      ],
+      "blinds": [
+        {
+          "ioId": "syp",
+          "shortName": "S"
+        }
       ],
       "scenes": {
         "auto": {
@@ -1531,51 +2344,6 @@
               "state": {
                 "ioId": "cct-bedroom",
                 "name": "Sypialnia",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
-            },
-            {
-              "state": {
-                "ioId": "cct-f2-lobby",
-                "name": "Korytarz",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
-            },
-            {
-              "state": {
-                "ioId": "cct-p1",
-                "name": "P1",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
-            },
-            {
-              "state": {
-                "ioId": "cct-p2",
-                "name": "p2",
                 "ioType": "CCT",
                 "brightness": 0,
                 "color": {
@@ -1638,51 +2406,6 @@
                   "ww": 255
                 }
               }
-            },
-            {
-              "state": {
-                "ioId": "cct-f2-lobby",
-                "name": "Korytarz",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
-            },
-            {
-              "state": {
-                "ioId": "cct-p1",
-                "name": "P1",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
-            },
-            {
-              "state": {
-                "ioId": "cct-p2",
-                "name": "p2",
-                "ioType": "CCT",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255,
-                  "ww": 255
-                }
-              }
             }
           ]
         }
@@ -1691,10 +2414,12 @@
     "office": {
       "id": "office",
       "name": "Parter",
-      "order": 2,
+      "order": 4,
       "deviceIds": [
         "rgbw-office",
         "rgbw-lobby",
+        "rgbw-lobby-mirror",
+        "rgbw-plants",
         "rgbw-wc1",
         "rgbw-wc2"
       ],
@@ -1732,6 +2457,34 @@
               "state": {
                 "ioId": "rgbw-lobby",
                 "name": "Korytarz",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "rgbw-lobby-mirror",
+                "name": "Lustro",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "rgbw-plants",
+                "name": "Doniczka",
                 "ioType": "RGBW",
                 "brightness": 0,
                 "color": {
@@ -1807,6 +2560,34 @@
             },
             {
               "state": {
+                "ioId": "rgbw-lobby-mirror",
+                "name": "Lustro",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "rgbw-plants",
+                "name": "Doniczka",
+                "ioType": "RGBW",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            },
+            {
+              "state": {
                 "ioId": "rgbw-wc1",
                 "name": "Wc 1",
                 "ioType": "RGBW",
@@ -1840,7 +2621,7 @@
     "other": {
       "id": "other",
       "name": "Inne",
-      "order": 2,
+      "order": 5,
       "blinds": [
         {
           "ioId": "bath",
@@ -1958,6 +2739,30 @@
           ]
         }
       }
+    }
+  },
+  "downBlindMacros": {
+    "doorEntryGate": {
+      "id": "doorEntryGate",
+      "label": "Brama",
+      "clickMacroId": "door-entry-gate-macro"
+    },
+    "doorGateway": {
+      "id": "doorGateway",
+      "label": "Furtka",
+      "clickMacroId": "door-gateway-click-macro",
+      "holdClickMacroId": "door-gateway-hold-macro"
+    },
+    "garageEntry": {
+      "id": "garageEntry",
+      "label": "Garaż",
+      "clickMacroId": "door-gateway-macro"
+    },
+    "cookerHood": {
+      "id": "cookerHood",
+      "label": "Okap",
+      "clickMacroId": "cookerHood-15m-macro",
+      "holdClickMacroId": "cookerHood-60m-macro"
     }
   }
 }

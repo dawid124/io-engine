@@ -30,6 +30,12 @@ public class UserActionService {
         this.actionDataService = actionDataService;
     }
 
+    public void processSimpleActions(List<UiAction> actions) {
+        List<IoAction> mqttActions = actionDataService.fromUiAction(actions);
+
+        mqttService.sendActionsToDevices(mqttActions);
+    }
+
     public SceneState processSceneChange(String zoneId, String sceneId) {
         stateService.updateScene(zoneId, sceneId);
 
@@ -50,13 +56,14 @@ public class UserActionService {
 
     public UiActionRequest processActionChange(UiActionRequest action) {
 
-
         List<UiAction> blinds = new ArrayList<>();
         List<UiAction> lights = new ArrayList<>();
 
-        for (UiAction a: action.getActions()) {
-            if (a.isBlind()) blinds.add(a);
-            else lights.add(a);
+        if (action.getActions() != null) {
+            for (UiAction a: action.getActions()) {
+                if (a.isBlind()) blinds.add(a);
+                else lights.add(a);
+            }
         }
 
         processBlinds(blinds);

@@ -7,6 +7,11 @@
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
           "macroId": "lobby-pir-macro"
+        },
+        {
+          "blockType": "RUNNER",
+          "runnerType": "CMD",
+          "cmd": "sudo -u pi DISPLAY=:0.0 xscreensaver-command -deactivate"
         }
       ]
     },
@@ -17,6 +22,11 @@
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
           "macroId": "lobby-pir-macro"
+        },
+        {
+          "blockType": "RUNNER",
+          "runnerType": "CMD",
+          "cmd": "sudo -u pi DISPLAY=:0.0 xscreensaver-command -deactivate"
         }
       ]
     },
@@ -76,7 +86,7 @@
       ]
     },
     "pir-bedroom": {
-      "zoneId": "floor2",
+      "zoneId": "bedroom",
       "blocs": [
         {
           "blockType": "RUNNER",
@@ -86,7 +96,7 @@
       ]
     },
     "pir-war-m": {
-      "zoneId": "floor2",
+      "zoneId": "bedroom",
       "blocs": [
         {
           "blockType": "RUNNER",
