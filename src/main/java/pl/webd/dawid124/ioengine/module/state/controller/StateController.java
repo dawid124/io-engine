@@ -13,11 +13,17 @@ import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
 import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StateController {
+
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
     private final StateService stateService;
     private final UserActionService userActionService;
@@ -32,6 +38,30 @@ public class StateController {
     @ResponseBody
     public ResponseEntity<SceneStateResponse> changeScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
 
+        SceneState sceneState = userActionService.processSceneChange(zoneId, sceneId);
+
+        return ResponseEntity.ok(new SceneStateResponse(zoneId, sceneState));
+    }
+
+    @PostMapping(value = "/api/zone/{zoneId}/{sceneId}/delay", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<SceneStateResponse> changeSceneDelay(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
+
+        scheduler.schedule(() -> {
+            userActionService.processSceneChange(zoneId, sceneId);
+        }, 1, TimeUnit.MINUTES);
+
+        return ResponseEntity.ok().build();
+    }
+
+
+    @PostMapping(value = "/api/zone/{zoneId}/{sceneId}/reset", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<SceneStateResponse> resetScene(@PathVariable("zoneId") String zoneId, @PathVariable("sceneId") String sceneId) {
+
+        stateService.resetScene(zoneId, sceneId);
         SceneState sceneState = userActionService.processSceneChange(zoneId, sceneId);
 
         return ResponseEntity.ok(new SceneStateResponse(zoneId, sceneState));

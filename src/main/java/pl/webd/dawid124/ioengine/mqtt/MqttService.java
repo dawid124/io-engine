@@ -10,6 +10,7 @@ import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.action.IoActionRequest;
 import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonAdapter;
+import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonPartyAdapter;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfigRequest;
 
@@ -20,6 +21,7 @@ public final class MqttService {
 
     private static final String SEPARATOR = "/";
     private final Gson gson;
+    private final Gson gsonParty;
 
     private final MqttSettings settings;
     private final MqttConfig.MqttGateway mqttGateway;
@@ -31,6 +33,23 @@ public final class MqttService {
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(IoAction.class, new IoActionJsonAdapter())
                 .create();
+
+        this.gsonParty = new GsonBuilder()
+                .registerTypeAdapter(IoAction.class, new IoActionJsonPartyAdapter())
+                .create();
+    }
+
+    public void sendActionsToDevicesParty(List<IoAction> actions) {
+
+        Map<String, List<IoAction>> actionsPerAddress = new HashMap<>();
+
+        for (IoAction action: actions) {
+            List<IoAction> group = actionsPerAddress.computeIfAbsent(action.getDeviceId(), k -> new ArrayList<>());
+            group.add(action);
+        }
+
+        actionsPerAddress.forEach((id, values) ->
+                mqttGateway.sendToMqtt(mutableParty(new IoActionRequest(values), prepareDeviceActionTopic(id))));
     }
 
     public void sendActionsToDevices(List<IoAction> actions) {
@@ -41,15 +60,9 @@ public final class MqttService {
             List<IoAction> group = actionsPerAddress.computeIfAbsent(action.getDeviceId(), k -> new ArrayList<>());
             group.add(action);
         }
-//
+
         actionsPerAddress.forEach((id, values) ->
                 mqttGateway.sendToMqtt(mutable(new IoActionRequest(values), prepareDeviceActionTopic(id))));
-
-//        actionsPerAddress.forEach((id, values) -> {
-//            values.forEach(v ->   mqttGateway.sendToMqtt(
-//                    mutable(new IoActionRequest(Collections.singletonList(v)), prepareDeviceActionTopic(id))
-//            ));
-//        });
     }
 
     public void sendConfigActionToDevice(String driverId, List<IoConfig> configs) {
@@ -58,6 +71,12 @@ public final class MqttService {
 
     private MutableMessage<String> mutable(Object body, String topic) {
         String content = gson.toJson(body);
+
+        return new MutableMessage<>(content, getTopicHeader(topic));
+    }
+
+    private MutableMessage<String> mutableParty(Object body, String topic) {
+        String content = gsonParty.toJson(body);
 
         return new MutableMessage<>(content, getTopicHeader(topic));
     }

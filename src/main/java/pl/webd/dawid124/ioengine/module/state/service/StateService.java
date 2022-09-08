@@ -54,6 +54,13 @@ public class StateService {
         }
     }
 
+    public void resetScene(String zoneId, String sceneId) {
+        Scene sceneStructure = structureService.fetchScene(zoneId, sceneId);
+        SceneState scene = zoneState.get(zoneId).getSceneStates().get(sceneId);
+        scene.setGroupState(new HashMap<>());
+        sceneStructure.getGroups().forEach(scene::addGroupState);
+    }
+
     private void addZoneState(ZoneState state) {
         zoneState.put(state.getId(), state);
     }
@@ -113,7 +120,7 @@ public class StateService {
                 onlyBrightness = true;
 
             } else {
-                if (ioAction.getColor() != null) lightState.setColor(ioAction.getColor());
+                if (ioAction.getColor() != null) lightState.getColor().update(ioAction.getColor());
             }
 
         } else if (item.getState() instanceof NeoDeviceState) {
@@ -127,7 +134,7 @@ public class StateService {
                 onlyBrightness = true;
 
             } else {
-                if (ioAction.getColor() != null) neoState.setColor(ioAction.getColor());
+                if (ioAction.getColor() != null) neoState.getColor().update(ioAction.getColor());
                 neoState.setAnimationId(ioAction.getAnimationId());
                 neoState.setSpeed(ioAction.getSpeed());
             }
@@ -159,7 +166,7 @@ public class StateService {
         if (ioAction.getColor() == null || state.getColor().equals(ioAction.getColor())) {
             state.setBrightness(ioAction.getBrightness());
         } else if (ioAction.getColor() != null) {
-            state.setColor(ioAction.getColor());
+            state.getColor().update(ioAction.getColor());
         }
     }
 
@@ -169,7 +176,7 @@ public class StateService {
                 && state.getSpeed() == ioAction.getSpeed()) {
             state.setBrightness(ioAction.getBrightness());
         } else {
-            if (ioAction.getColor() != null) state.setColor(ioAction.getColor());
+            if (ioAction.getColor() != null) state.getColor().update(ioAction.getColor());
             state.setAnimationId(ioAction.getAnimationId());
             state.setSpeed(ioAction.getSpeed());
         }

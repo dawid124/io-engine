@@ -15,6 +15,7 @@ public class UiAction implements Serializable {
     private EActionType action;
 
     private Color color;
+    private Color color2;
     private int brightness;
 
     private int speed;
@@ -150,5 +151,13 @@ public class UiAction implements Serializable {
                 this.getStepTime(),
                 deviceId,
                 deviceType);
+    }
+
+    public Color getColor2() {
+        return color2;
+    }
+
+    public void setColor2(Color color2) {
+        this.color2 = color2;
     }
 }

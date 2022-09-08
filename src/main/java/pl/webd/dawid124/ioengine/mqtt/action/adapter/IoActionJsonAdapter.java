@@ -24,10 +24,17 @@ public class IoActionJsonAdapter implements JsonSerializer<IoAction> {
 
             Color color = ioAction.getColor();
             String colorStr = String.format("%02x%02x%02x%02x%02x", color.getR(), color.getG(), color.getB(), color.getW(), color.getWw());
+            object.addProperty("c", colorStr);
+
+            if (ioAction.getColor2() != null) {
+                Color color2 = ioAction.getColor2();
+                String color2Str = String.format("%02x%02x%02x%02x%02x",
+                        color2.getR(), color2.getG(), color2.getB(), color2.getW(), color2.getWw());
+                object.addProperty("c2", color2Str);
+            }
 
             object.addProperty("an", ioAction.getAnimationId());
             object.addProperty("ssm", ioAction.getStaticSubModeId());
-            object.addProperty("c", colorStr);
             object.addProperty("b", ioAction.getBrightness());
             object.addProperty("s", ioAction.getSpeed());
             if (ioAction.getStepTime() > 0) object.addProperty("st", ioAction.getStepTime());
@@ -39,11 +46,12 @@ public class IoActionJsonAdapter implements JsonSerializer<IoAction> {
 
             Color color = ioAction.getColor();
             String colorStr = String.format("%02x%02x%02x%02x%02x", color.getR(), color.getG(), color.getB(), color.getW(), color.getWw());
+            object.addProperty("c", colorStr);
+
 
             if (ioAction.getStepTime() > 0) object.addProperty("st", ioAction.getStepTime());
             object.addProperty("t", ioAction.getTime());
             if (ioAction.getDelay() > 0) object.addProperty("d", ioAction.getDelay());
-            object.addProperty("c", colorStr);
             object.addProperty("b", ioAction.getBrightness());
 
         } else if (EDeviceType.BLIND.equals(ioAction.getIoType())

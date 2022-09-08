@@ -1,8 +1,9 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GroupState {
+public class GroupState implements Serializable {
 
     private boolean hidden;
     private DeviceState state;

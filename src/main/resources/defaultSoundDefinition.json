@@ -1,0 +1,652 @@
+{
+  "id": "classpath:defaultSoundDefinition.json",
+  "lightDefinitions": [
+    {
+      "active": true,
+      "ioId": "w1",
+      "name": "Wall 1",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 6,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w2",
+      "name": "Wall 2",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 5,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w3",
+      "name": "Wall 3",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 4,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w4",
+      "name": "Wall 4",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 3,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w5",
+      "name": "Wall 5",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 2,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w6",
+      "name": "Wall 6",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 1,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+    {
+      "active": true,
+      "ioId": "w7",
+      "name": "Wall 7",
+      "toneType": "TYPE_B1",
+      "effect": "ANIMATION_VALUE",
+      "toneIndex": 0,
+      "scale": 1.5,
+
+      "color": {
+        "r": 255,
+        "g": 104,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 1,
+      "minBrightness": 1,
+      "initialBrightness": 30,
+
+      "staticLeds": 40,
+      "animationId": 0,
+      "subAnimationId": 10
+    },
+
+
+
+
+
+    {
+      "active": true,
+      "ioId": "n-cell",
+      "name": "Sufit Neo",
+      "toneType": "TYPE_B5",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 0,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 0,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 30,
+      "minBrightness": 30,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "n-tv",
+      "name": "TV - Neo",
+      "toneType": "TYPE_B10",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "w": 255
+      },
+
+      "threshold": 50,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+
+    {
+      "active": true,
+      "ioId": "lamel",
+      "name": "Lamele",
+      "toneType": "TYPE_B10",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 4,
+      "scale": 3,
+
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 255,
+        "w": 50
+      },
+
+      "threshold": 40,
+      "minBrightness": 10,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "kit-blat",
+      "name": "Kuchnia - Zlew",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "n-kit",
+      "name": "Kuchnia - Neo",
+      "toneType": "TYPE_B10",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "w": 255
+      },
+
+      "threshold": 50,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "cooker",
+      "name": "Kuchnia - Okap",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 3,
+      "scale": 2,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "w": 255
+      },
+
+      "threshold": 20,
+      "minBrightness": 20,
+      "initialBrightness": 20,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+
+
+    {
+      "active": true,
+      "ioId": "dinner-m",
+      "name": "Jadalnia - główne",
+      "toneType": "TYPE_B10",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 0,
+      "scale": 1.2,
+
+      "color": {
+        "r": 212,
+        "g": 235,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 100,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "active": false,
+      "ioId": "led-hs",
+      "name": "Jadalnie - Okno",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "rgbw-tv1",
+      "name": "TV 1",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 0,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "rgbw-tv2",
+      "name": "TV 2",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 0,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "l-mirror",
+      "name": "Korytarz Lustro",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "rgbw-lobby",
+      "name": "Korytarz",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "plants",
+      "name": "Korytarz - donniczka",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "rgbw-wc1",
+      "name": "WC dół 1",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": false,
+      "ioId": "rgbw-wc2",
+      "name": "WC dół 2",
+      "toneType": "TYPE_B1",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 0,
+        "w": 0
+      },
+
+      "threshold": 0,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+
+
+
+
+    {
+      "active": true,
+      "ioId": "p1",
+      "name": "Panel 1",
+      "toneType": "TYPE_B5",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 0,
+      "scale": 1,
+
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 20,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "pa2",
+      "name": "Panel 2",
+      "toneType": "TYPE_B5",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 1,
+      "scale": 1.5,
+
+      "color": {
+        "r": 201,
+        "g": 226,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 20,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "p3",
+      "name": "Panel 3",
+      "toneType": "TYPE_B5",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 2,
+      "scale": 1.5,
+
+      "color": {
+        "r": 64,
+        "g": 156,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 20,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    },
+    {
+      "active": true,
+      "ioId": "p4",
+      "name": "Panel 4",
+      "toneType": "TYPE_B5",
+      "effect": "BRIGHTNESS",
+      "toneIndex": 3,
+      "scale": 1.5,
+
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 255,
+        "w": 0
+      },
+
+      "threshold": 20,
+      "minBrightness": 0,
+      "initialBrightness": 0,
+
+      "staticLeds": 0,
+      "animationId": 0,
+      "subAnimationId": 0
+    }
+  ]
+}

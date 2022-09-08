@@ -5,6 +5,7 @@ import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 public class NeoDeviceState extends LedDeviceState {
 
     private Color color;
+    private Color color2;
     private int animationId;
     private int speed;
 
@@ -12,14 +13,6 @@ public class NeoDeviceState extends LedDeviceState {
         super(id, name, EDeviceStateType.NEO);
         this.color = new Color();
         this.brightness = 0;
-    }
-
-    public NeoDeviceState(String id, String name, Color color, int brightness, int animationId, int speed) {
-        super(id, name, EDeviceStateType.NEO);
-        this.color = color;
-        this.brightness = brightness;
-        this.animationId = animationId;
-        this.speed = speed;
     }
 
     public Color getColor() {
@@ -44,5 +37,13 @@ public class NeoDeviceState extends LedDeviceState {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public Color getColor2() {
+        return color2;
+    }
+
+    public void setColor2(Color color2) {
+        this.color2 = color2;
     }
 }

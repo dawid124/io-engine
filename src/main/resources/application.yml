@@ -7,3 +7,6 @@ mqtt:
   action-topic: home/actions
   trigger-topic: home/triggers
   driver-sync-topic: home/driver-sync
+sound:
+  preset-location: /home/pi/sound-preset
+

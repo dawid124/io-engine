@@ -335,15 +335,15 @@
           },
           "actions": [
             {
-              "ioId": "neo-kitchen",
+              "ioId": "n-kit",
               "brightness": 150
             },
             {
-              "ioId": "rgbww-kitchen",
+              "ioId": "kit-blat",
               "brightness": 255
             },
             {
-              "ioId": "rgbww-cooker",
+              "ioId": "cooker",
               "brightness": 255
             }
           ]
@@ -362,15 +362,15 @@
           },
           "actions": [
             {
-              "ioId": "neo-kitchen",
+              "ioId": "n-kit",
               "brightness": 0
             },
             {
-              "ioId": "rgbww-kitchen",
+              "ioId": "kit-blat",
               "brightness": 0
             },
             {
-              "ioId": "rgbww-cooker",
+              "ioId": "cooker",
               "brightness": 0
             }
           ]

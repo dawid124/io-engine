@@ -14,6 +14,7 @@ public class IoAction {
     private EActionType action;
 
     private Color color;
+    private Color color2;
     private int brightness;
 
     private int speed;
@@ -23,6 +24,8 @@ public class IoAction {
     private int stepTime;
     private int time;
     private int delay;
+
+    private int intParam;
 
     private String deviceId;
     private EIoDriverType deviceType;
@@ -146,5 +149,65 @@ public class IoAction {
 
     public void setDelay(int delay) {
         this.delay = delay;
+    }
+
+    public int getIntParam() {
+        return intParam;
+    }
+
+    public void setIntParam(int intParam) {
+        this.intParam = intParam;
+    }
+
+    public Color getColor2() {
+        return color2;
+    }
+
+    public void setColor2(Color color2) {
+        this.color2 = color2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IoAction action1 = (IoAction) o;
+
+        if (brightness != action1.brightness) return false;
+        if (speed != action1.speed) return false;
+        if (animationId != action1.animationId) return false;
+        if (staticSubModeId != action1.staticSubModeId) return false;
+        if (stepTime != action1.stepTime) return false;
+        if (time != action1.time) return false;
+        if (delay != action1.delay) return false;
+        if (intParam != action1.intParam) return false;
+        if (ioId != null ? !ioId.equals(action1.ioId) : action1.ioId != null) return false;
+        if (ioType != action1.ioType) return false;
+        if (action != action1.action) return false;
+        if (color != null ? !color.equals(action1.color) : action1.color != null) return false;
+        if (color2 != null ? !color2.equals(action1.color2) : action1.color2 != null) return false;
+        if (deviceId != null ? !deviceId.equals(action1.deviceId) : action1.deviceId != null) return false;
+        return deviceType == action1.deviceType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ioId != null ? ioId.hashCode() : 0;
+        result = 31 * result + (ioType != null ? ioType.hashCode() : 0);
+        result = 31 * result + (action != null ? action.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (color2 != null ? color2.hashCode() : 0);
+        result = 31 * result + brightness;
+        result = 31 * result + speed;
+        result = 31 * result + animationId;
+        result = 31 * result + staticSubModeId;
+        result = 31 * result + stepTime;
+        result = 31 * result + time;
+        result = 31 * result + delay;
+        result = 31 * result + intParam;
+        result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
+        result = 31 * result + (deviceType != null ? deviceType.hashCode() : 0);
+        return result;
     }
 }

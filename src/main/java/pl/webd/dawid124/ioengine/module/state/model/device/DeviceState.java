@@ -1,6 +1,8 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-public abstract class DeviceState implements Cloneable {
+import java.io.Serializable;
+
+public abstract class DeviceState implements Cloneable, Serializable {
 
     private String ioId;
     private String name;

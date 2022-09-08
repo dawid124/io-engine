@@ -110,16 +110,16 @@ public class DeviceService {
 //        FLOOR 1 - DRIVER 0
 
         addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver0ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-lamel", "Lamele", floor1Driver0ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("lamel", "Lamele", floor1Driver0ExpanderA, 4, 5, 6, 7));
         addDevice(new RgbwDevice("rgbw-office", "Biuro", floor1Driver0ExpanderA, 8, 9, 10, 11));
 
-        addDevice(new RgbwwDevice("rgbww-kitchen", "Kuchania szafki", floor1Driver0ExpanderB, 0, 1, 2, 3, 4));
-        addDevice(new RgbwDevice("rgbw-lobby-mirror", "Korytarz Lustro", floor1Driver0ExpanderB, 8, 9, 10, 11));
+        addDevice(new RgbwwDevice("kit-blat", "Kuchania szafki", floor1Driver0ExpanderB, 0, 1, 2, 3, 4));
+        addDevice(new RgbwDevice("l-mirror", "Korytarz Lustro", floor1Driver0ExpanderB, 8, 9, 10, 11));
 //        addDevice(new RgbwDevice("rgbw-island", "Wyspa", floor1Driver0ExpanderB, 12, 13, 14, 15));
 
-        addDevice(new NeoDevice("neo-kitchen", "Kuchnia Neo", floor1Driver0Local, 21, 98, false, ENeoType.NEO_GRBW));
-        addDevice(new NeoDevice("neo-celling", "Sufit", floor1Driver0Local, 14, 225, false, ENeoType.NEO_GRBW));
-        addDevice(new NeoDevice("neo-tv", "Neo TV", floor1Driver0Local, 20, 133, true, ENeoType.NEO_GRBW));
+        addDevice(new NeoDevice("n-kit", "Kuchnia Neo", floor1Driver0Local, 21, 98, false, ENeoType.NEO_GRBW));
+        addDevice(new NeoDevice("n-cell", "Sufit", floor1Driver0Local, 14, 225, false, ENeoType.NEO_GRBW));
+        addDevice(new NeoDevice("n-tv", "Neo TV", floor1Driver0Local, 20, 133, true, ENeoType.NEO_GRBW));
 
 
         addDevice(new MotionSensor("pir-office", "Pir Biuro", floor1Driver0Local, 7));
@@ -130,15 +130,15 @@ public class DeviceService {
 //        FLOOR 1 - DRIVER 1
 
 // 121 - standard led count
-        addDevice(new NeoDevice("neo-wall-1", "Wall 1", floor1Driver1Local, 12, 155, false, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-2", "Wall 2", floor1Driver1Local, 13, 155, true, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-3", "Wall 3", floor1Driver1Local, 14, 155, false, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-4", "Wall 4", floor1Driver1Local, 15, 155, true, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w1", "Wall 1", floor1Driver1Local, 12, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w2", "Wall 2", floor1Driver1Local, 13, 155, true, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w3", "Wall 3", floor1Driver1Local, 14, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w4", "Wall 4", floor1Driver1Local, 15, 155, true, ENeoType.NEO_GRB));
 
 
 
-        addDevice(new RgbwDevice("rgbw-dinner-main", "Jadalnia 1", floor1Driver1ExpanderA, 4, 5, 6, 7));
-        addDevice(new RgbwwDevice("rgbww-cooker", "Okap", floor1Driver1ExpanderA, 8, 9, 10, 11, 12));
+        addDevice(new RgbwDevice("dinner-m", "Jadalnia 1", floor1Driver1ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwwDevice("cooker", "Okap", floor1Driver1ExpanderA, 8, 9, 10, 11, 12));
 
         addDevice(new RgbwDevice("rgbw-wc2", "WC 2", floor1Driver1ExpanderB, 0, 1, 2, 3));
         addDevice(new RgbwDevice("rgbw-tv1", "TV 1", floor1Driver1ExpanderB, 4, 5, 6, 7));
@@ -149,23 +149,23 @@ public class DeviceService {
 
 
 //        FLOOR 1 - DRIVER 2
-        addDevice(new RgbwDevice("rgbw-panel1", "Panel1", floor1Driver2ExpanderA, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-panel2", "Panel2", floor1Driver2ExpanderA, 4, 5, 6, 7));
-        addDevice(new RgbwDevice("rgbw-panel3", "Panel3", floor1Driver2ExpanderA, 8, 9, 10, 11));
-        addDevice(new RgbwDevice("rgbw-panel4", "Panel4", floor1Driver2ExpanderA, 12, 13, 14, 15));
+        addDevice(new RgbwDevice("p1", "Panel1", floor1Driver2ExpanderA, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("pa2", "Panel2", floor1Driver2ExpanderA, 4, 5, 6, 7));
+        addDevice(new RgbwDevice("p3", "Panel3", floor1Driver2ExpanderA, 8, 9, 10, 11));
+        addDevice(new RgbwDevice("p4", "Panel4", floor1Driver2ExpanderA, 12, 13, 14, 15));
 
-//        addDevice(new RgbwDevice("rgbw-plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
-//        addDevice(new RgbwDevice("rgbw-dinner-window", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
-
-
-        addDevice(new RgbwDevice("rgbw-plants", "Doniczka", floor1Driver2Local, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("rgbw-dinner-window", "Jadalnia Okno", floor1Driver2Local, 6, 7, 8, 9));
+//        addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
+//        addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
 
 
+        addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2Local, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2Local, 6, 7, 8, 9));
 
-        addDevice(new NeoDevice("neo-wall-5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-6", "Wall 6", floor1Driver2Local, 13, 155, true, ENeoType.NEO_GRB));
-        addDevice(new NeoDevice("neo-wall-7", "Wall 7", floor1Driver2Local, 14, 155, false, ENeoType.NEO_GRB));
+
+
+        addDevice(new NeoDevice("w5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w6", "Wall 6", floor1Driver2Local, 13, 155, true, ENeoType.NEO_GRB));
+        addDevice(new NeoDevice("w7", "Wall 7", floor1Driver2Local, 14, 155, false, ENeoType.NEO_GRB));
 
 
 //        FLOOR 2 - DRIVER 0

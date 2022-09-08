@@ -94,4 +94,12 @@ public class Color implements Serializable {
         result = 31 * result + ww;
         return result;
     }
+
+    public void update(Color color) {
+        this.r = color.r;
+        this.g = color.g;
+        this.b = color.b;
+        this.w = color.w;
+        this.ww = color.w;
+    }
 }

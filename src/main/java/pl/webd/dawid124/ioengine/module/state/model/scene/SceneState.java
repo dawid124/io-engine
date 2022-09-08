@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.scene;
 
+import org.apache.commons.lang3.SerializationUtils;
 import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
 
 import java.util.HashMap;
@@ -35,7 +36,8 @@ public class SceneState {
     }
 
     public void addGroupState(GroupState state) {
-        groupState.put(state.getState().getIoId(), state);
+        GroupState copyOfState = SerializationUtils.clone(state);
+        groupState.put(state.getState().getIoId(), copyOfState);
     }
 
     public String getId() {
