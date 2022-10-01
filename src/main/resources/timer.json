@@ -26,6 +26,42 @@
         }
       ]
     },
+    "lobby2-a-down-light-off-timer": {
+      "zoneId": "office",
+      "defaultTime": 15000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "l-mirror",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "plants",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
     "wc-down-light-off-timer": {
       "zoneId": "office",
       "defaultTime": 5000,
@@ -167,6 +203,87 @@
           "actions": [
             {
               "ioId": "cct-wardrobe-m",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "wardrobe-d-light-off-timer": {
+      "zoneId": "bedroom",
+      "defaultTime": 10000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-wardrobe-d",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "p1-light-off-timer": {
+      "zoneId": "floor2",
+      "defaultTime": 10000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-p1",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "p2-light-off-timer": {
+      "zoneId": "floor2",
+      "defaultTime": 10000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "LIGHT_ACTION",
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "cct-p2",
               "brightness": 0,
               "color": {
                 "r": 0,

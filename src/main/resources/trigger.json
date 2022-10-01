@@ -21,7 +21,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
-          "macroId": "lobby-pir-macro"
+          "macroId": "lobby2-a-pir-macro"
         },
         {
           "blockType": "RUNNER",
@@ -102,6 +102,36 @@
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
           "macroId": "wardrobe-m-pir-macro"
+        }
+      ]
+    },
+    "pir-war-d": {
+      "zoneId": "bedroom",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "wardrobe-d-pir-macro"
+        }
+      ]
+    },
+    "pir-p1": {
+      "zoneId": "floor1",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "p1-pir-macro"
+        }
+      ]
+    },
+    "pir-p2": {
+      "zoneId": "floor2",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "p2-pir-macro"
         }
       ]
     }

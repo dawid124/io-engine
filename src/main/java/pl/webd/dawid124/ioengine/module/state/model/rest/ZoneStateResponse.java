@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.state.model.rest;
 
 import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
+import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -11,14 +12,19 @@ public class ZoneStateResponse implements Serializable {
 
     private String activeScene;
 
+    private Map<String, IVariable> variables;
+
     private Map<String, GroupState> groupState;
 
     public ZoneStateResponse() {}
 
-    public ZoneStateResponse(String id, String activeScene, Map<String, GroupState> groupState) {
+    public ZoneStateResponse(
+            String id, String activeScene, Map<String, GroupState> groupState, Map<String, IVariable> variables) {
+
         this.id = id;
         this.activeScene = activeScene;
         this.groupState = groupState;
+        this.variables = variables;
     }
 
     public String getActiveScene() {
@@ -43,5 +49,13 @@ public class ZoneStateResponse implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Map<String, IVariable> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(Map<String, IVariable> variables) {
+        this.variables = variables;
     }
 }

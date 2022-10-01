@@ -30,6 +30,8 @@ public class IoActionJsonPartyAdapter implements JsonSerializer<IoAction> {
         }
 
         object.addProperty("b", ioAction.getBrightness());
+        object.addProperty("s", 0);
+
         if (ioAction.getStaticSubModeId() >= 10) object.addProperty("i", ioAction.getIntParam());
         if (ioAction.getStaticSubModeId() > -1) object.addProperty("ssm", ioAction.getStaticSubModeId());
         if (ioAction.getAnimationId() > -1) object.addProperty("an", ioAction.getAnimationId());

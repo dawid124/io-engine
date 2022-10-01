@@ -100,6 +100,6 @@ public class Color implements Serializable {
         this.g = color.g;
         this.b = color.b;
         this.w = color.w;
-        this.ww = color.w;
+        this.ww = color.ww;
     }
 }

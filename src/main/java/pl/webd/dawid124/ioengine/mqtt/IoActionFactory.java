@@ -27,7 +27,7 @@ public final class IoActionFactory {
             a.setSpeed(neoState.getSpeed());
             a.setAnimationId(neoState.getAnimationId());
             a.setColor(neoState.getColor());
-            a.setColor2(neoState.getColor2());
+//            a.setColor2(neoState.getColor2());
             a.setBrightness(neoState.getBrightness());
             a.setStaticSubModeId(1);
             divideBrightnessByGroup(a, brightnessPercent);

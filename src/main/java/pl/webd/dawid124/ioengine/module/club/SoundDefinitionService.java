@@ -29,6 +29,8 @@ public class SoundDefinitionService {
 
     private static final Logger LOG = LogManager.getLogger(SoundDefinitionService.class);
     public static final String DEFAULT_SOUND_DEFINITION = "classpath:defaultSoundDefinition.json";
+    public static final String DEFAULT_EQ1 = "classpath:equalizer1.json";
+    public static final String DEFAULT_EQ2 = "classpath:equalizer2.json";
 
     private final SoundProperties soundProperties;
 
@@ -43,8 +45,12 @@ public class SoundDefinitionService {
 
     @PostConstruct
     public synchronized void init() {
+        loadClasspath(DEFAULT_SOUND_DEFINITION);
+    }
+
+    private void loadClasspath(String name) {
         try {
-            String def = ResourceUtils.getResourceFileAsString(DEFAULT_SOUND_DEFINITION);
+            String def = ResourceUtils.getResourceFileAsString(name);
             soundDefinition = gson.fromJson(def, SoundDefinition.class);
 //            presetSoundDefinition = gson.fromJson(def, SoundDefinition.class);
         } catch (IOException e) {
@@ -55,6 +61,8 @@ public class SoundDefinitionService {
     public List<String> loadPresetsIds() {
         ArrayList<String> list = new ArrayList<>();
         list.add(DEFAULT_SOUND_DEFINITION);
+        list.add(DEFAULT_EQ1);
+        list.add(DEFAULT_EQ2);
 
         try (Stream<Path> paths = Files.walk(Paths.get(soundProperties.getPresetLocation()))) {
             list.addAll(paths
@@ -70,8 +78,8 @@ public class SoundDefinitionService {
     }
 
     public synchronized void loadPreset(String id) {
-        if (DEFAULT_SOUND_DEFINITION.equals(id)) {
-            init();
+        if (id.startsWith("classpath")) {
+            loadClasspath(id);
         } else {
             try {
                 Path path = Paths.get(soundProperties.getPresetLocation(), id + ".json");

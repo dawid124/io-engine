@@ -91,6 +91,103 @@
         }
       ]
     },
+    "lobby2-a-pir-macro": {
+      "zoneId": "office",
+      "name": "Korytarz 2 dół makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby2-a-down-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "l-mirror",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255
+                      }
+                    },
+                    {
+                      "ioId": "plants",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "lobby2-a-down-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 15000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
     "wc-pir-macro": {
       "zoneId": "office",
       "name": "WC dół",
@@ -633,10 +730,6 @@
                   {
                     "type": "STRING",
                     "value": "auto"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "manual"
                   }
                 ]
               }
@@ -697,6 +790,270 @@
                   "blockType": "RUNNER",
                   "runnerType": "TIMER",
                   "timerId": "wardrobe-m-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "wardrobe-d-pir-macro": {
+      "zoneId": "bedroom",
+      "name": "Szafa Dawid makro",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "wardrobe-d-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-wardrobe-d",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "wardrobe-d-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "p1-pir-macro": {
+      "zoneId": "floor2",
+      "name": "Pokoj 1",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p1",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 10000
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "p2-pir-macro": {
+      "zoneId": "floor2",
+      "name": "Pokoj 2",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "IN",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "LIST",
+                "value": [
+                  {
+                    "type": "STRING",
+                    "value": "auto"
+                  }
+                ]
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "conditionType": "SIMPLE",
+            "conditions": [
+              {
+                "logicalCondition": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ],
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "LIGHT_ACTION",
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p2",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
                   "action": "UPDATE_TIME",
                   "time": 10000
                 }

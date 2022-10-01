@@ -154,13 +154,8 @@ public class DeviceService {
         addDevice(new RgbwDevice("p3", "Panel3", floor1Driver2ExpanderA, 8, 9, 10, 11));
         addDevice(new RgbwDevice("p4", "Panel4", floor1Driver2ExpanderA, 12, 13, 14, 15));
 
-//        addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
-//        addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
-
-
-        addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2Local, 0, 1, 2, 3));
-        addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2Local, 6, 7, 8, 9));
-
+        addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
+        addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
 
 
         addDevice(new NeoDevice("w5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));

@@ -31,7 +31,7 @@ public class SoundUiController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "/api/sound/preset", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/sound/preset/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
     public ResponseEntity<SoundDefinitionUiResponse> loadPreset(@PathVariable("id") String id) {
@@ -44,7 +44,7 @@ public class SoundUiController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "/api/sound/preset", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/api/sound/preset/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseBody
     public ResponseEntity<SoundDefinitionUiResponse> saveAsPreset(@PathVariable("id") String id) {

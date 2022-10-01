@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiMacroRequest;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
@@ -59,4 +60,5 @@ public class UserActionController {
         macroService.runMacro(action.getVariable(), action.getId());
         return ResponseEntity.ok().build();
     }
+
 }

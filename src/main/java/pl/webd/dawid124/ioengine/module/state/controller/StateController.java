@@ -1,17 +1,19 @@
 package pl.webd.dawid124.ioengine.module.state.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
+import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
 import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
+import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
+import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonAdapter;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,10 +29,14 @@ public class StateController {
 
     private final StateService stateService;
     private final UserActionService userActionService;
+    private final Gson gson;
 
     public StateController(StateService stateService, UserActionService userActionService) {
         this.stateService = stateService;
         this.userActionService = userActionService;
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
+                .create();
     }
 
     @PostMapping(value = "/api/zone/{zoneId}/{sceneId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
@@ -72,5 +78,16 @@ public class StateController {
     @ResponseBody
     public ZonesStateResponse fetchZones() {
         return stateService.fetchZoneStatesResponse();
+    }
+
+    @PostMapping(value = "/api/var", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<VarChangeRequest> var(@RequestBody String change) {
+
+        VarChangeRequest varChangeRequest = gson.fromJson(change, VarChangeRequest.class);
+        stateService.changeStateVar(varChangeRequest);
+
+        return ResponseEntity.ok(varChangeRequest);
     }
 }

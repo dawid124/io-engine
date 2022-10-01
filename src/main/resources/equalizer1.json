@@ -1,5 +1,5 @@
 {
-  "id": "classpath:defaultSoundDefinition.json",
+  "id": "classpath:equalizer1.json",
   "lightDefinitions": [
     {
       "active": true,
@@ -156,7 +156,7 @@
       "subAnimationId": 11
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "n-cell",
       "name": "Sufit Neo",
       "toneType": "TYPE_B5",
@@ -178,7 +178,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "n-tv",
       "name": "TV - Neo",
       "toneType": "TYPE_A",
@@ -200,7 +200,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "lamel",
       "name": "Lamele",
       "toneType": "TYPE_A",
@@ -222,7 +222,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "kit-blat",
       "name": "Kuchnia - Zlew",
       "toneType": "TYPE_A",
@@ -244,7 +244,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "n-kit",
       "name": "Kuchnia - Neo",
       "toneType": "TYPE_A",
@@ -266,7 +266,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "cooker",
       "name": "Kuchnia - Okap",
       "toneType": "TYPE_A",
@@ -288,7 +288,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "dinner-m",
       "name": "Jadalnia - główne",
       "toneType": "TYPE_B10",
@@ -376,7 +376,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "l-mirror",
       "name": "Korytarz Lustro",
       "toneType": "TYPE_B15",
@@ -398,7 +398,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "rgbw-lobby",
       "name": "Korytarz",
       "toneType": "TYPE_A",
@@ -486,7 +486,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "p1",
       "name": "Panel 1",
       "toneType": "TYPE_B15",
@@ -508,7 +508,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "pa2",
       "name": "Panel 2",
       "toneType": "TYPE_B15",
@@ -530,7 +530,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "p3",
       "name": "Panel 3",
       "toneType": "TYPE_B15",
@@ -552,7 +552,7 @@
       "subAnimationId": 0
     },
     {
-      "active": true,
+      "active": false,
       "ioId": "p4",
       "name": "Panel 4",
       "toneType": "TYPE_B15",

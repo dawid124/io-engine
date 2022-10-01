@@ -2,6 +2,8 @@ package pl.webd.dawid124.ioengine.module.state.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
@@ -39,14 +41,14 @@ public class StateService {
     }
 
     public void createInitState() {
-        for (Zone zoneStructure: structureService.fetchStructure().getZones().values()) {
+        for (Zone zoneStructure : structureService.fetchStructure().getZones().values()) {
             String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst()
                     .map(Scene::getId).orElse("auto");
 
             ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene);
             addZoneState(zone);
 
-            for (Scene sceneStructure: zoneStructure.getScenes().values()) {
+            for (Scene sceneStructure : zoneStructure.getScenes().values()) {
                 SceneState scene = new SceneState(sceneStructure.getId(), sceneStructure.getName());
                 zone.addSceneState(scene);
                 sceneStructure.getGroups().forEach(scene::addGroupState);
@@ -79,9 +81,12 @@ public class StateService {
 
         zoneState.values().forEach(z -> {
             SceneState scene = z.getSceneStates().get(z.getActiveScene());
-            ZoneStateResponse zone = new ZoneStateResponse(z.getId(), z.getActiveScene(), scene.getGroupState());
+            ZoneStateResponse zone =
+                    new ZoneStateResponse(z.getId(), z.getActiveScene(), scene.getGroupState(), z.getVariables());
             zones.getZones().put(z.getId(), zone);
         });
+
+        zones.setVariables(variables);
 
         return zones;
     }
@@ -98,6 +103,10 @@ public class StateService {
 
     public Map<String, ZoneState> getZoneState() {
         return zoneState;
+    }
+
+    public Map<String, IVariable> getVariables() {
+        return variables;
     }
 
     public void updateSateByUiAction(GroupState item, UiAction action) {
@@ -171,7 +180,7 @@ public class StateService {
     }
 
     private void updateNeoState(NeoDeviceState state, UiAction ioAction) {
-        if ((ioAction.getColor() == null || state.getColor().equals(ioAction.getColor()) )
+        if ((ioAction.getColor() == null || state.getColor().equals(ioAction.getColor()))
                 && state.getAnimationId() == ioAction.getAnimationId()
                 && state.getSpeed() == ioAction.getSpeed()) {
             state.setBrightness(ioAction.getBrightness());
@@ -187,6 +196,17 @@ public class StateService {
         ZoneState zone = this.zoneState.get(zoneId);
         if (zone != null) {
             zone.setActiveScene(sceneId);
+        }
+    }
+
+    public void changeStateVar(VarChangeRequest change) {
+        if (StringUtils.hasText(change.getZoneId())) {
+            zoneState.values().stream()
+                    .filter(z -> change.getZoneId().equals(z.getId()))
+                    .findFirst()
+                    .ifPresent(z -> z.getVariables().put(change.getName(), change.getValue()));
+        } else {
+            this.variables.put(change.getName(), change.getValue());
         }
     }
 }
