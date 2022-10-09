@@ -3,10 +3,11 @@ package pl.webd.dawid124.ioengine.module.automation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.automation.cron.CronService;
+import pl.webd.dawid124.ioengine.module.automation.cron.CronStructure;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.automation.macro.RunnerService;
-import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.RunnerBlock;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IBlockJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
@@ -26,8 +27,6 @@ import java.io.IOException;
 public class AutomationService {
 
     private final Gson gson;
-    private final VariableFetcherJsonAdapter variableFetcherJsonAdapter;
-    private final RunnerService runnerService;
 
     private final TimerService timerService;
 
@@ -35,14 +34,15 @@ public class AutomationService {
 
     private final TriggerService triggerService;
 
+    private final CronService cronService;
+
 
     public AutomationService(VariableFetcherJsonAdapter variableFetcherJsonAdapter, RunnerService runnerService, TimerService timerService,
-            MacroService macroService, TriggerService triggerService) {
-        this.variableFetcherJsonAdapter = variableFetcherJsonAdapter;
-        this.runnerService = runnerService;
+                             MacroService macroService, TriggerService triggerService, CronService cronService) {
         this.timerService = timerService;
         this.macroService = macroService;
         this.triggerService = triggerService;
+        this.cronService = cronService;
 
         this.gson =  new GsonBuilder()
                 .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
@@ -56,6 +56,7 @@ public class AutomationService {
         macroService.setMacroHome(fetchMacroStructure());
         timerService.setTimerStructure(fetchTimerStructure());
         triggerService.setTriggerStructure(fetchTriggerStructure());
+        cronService.setCronStructure(fetchCronStructure());
     }
 
     public TriggerStructure fetchTriggerStructure() throws IOException {
@@ -71,5 +72,10 @@ public class AutomationService {
     public TimerStructure fetchTimerStructure() throws IOException {
         String structure = ResourceUtils.getResourceFileAsString("classpath:timer.json");
         return gson.fromJson(structure, TimerStructure.class);
+    }
+
+    public CronStructure fetchCronStructure() throws IOException {
+        String structure = ResourceUtils.getResourceFileAsString("classpath:cron.json");
+        return gson.fromJson(structure, CronStructure.class);
     }
 }

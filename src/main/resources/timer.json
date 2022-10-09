@@ -175,7 +175,7 @@
           },
           "actions": [
             {
-              "ioId": "cct-bedroom",
+              "ioId": "cct-bedroom-o",
               "brightness": 0,
               "color": {
                 "r": 0,

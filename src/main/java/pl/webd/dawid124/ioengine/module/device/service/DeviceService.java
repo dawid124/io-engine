@@ -164,12 +164,13 @@ public class DeviceService {
 
 
 //        FLOOR 2 - DRIVER 0
-        addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
+        addDevice(new CctDevice("cct-bedroom-w", "Szafa Dawid", floor2Driver0ExpanderA, 0, 1));
         addDevice(new CctDevice("cct-wardrobe-d", "Szafa Dawid", floor2Driver0ExpanderA, 2, 3));
         addDevice(new CctDevice("cct-bedroom", "Sypialnia", floor2Driver0ExpanderA, 4, 5));
         addDevice(new CctDevice("cct-f2-lobby", "Korytarz", floor2Driver0ExpanderA, 6, 7));
         addDevice(new CctDevice("cct-p1", "Pokój 1", floor2Driver0ExpanderA, 8, 9));
         addDevice(new CctDevice("cct-p2", "Pokój 2", floor2Driver0ExpanderA, 10, 11));
+        addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
 
         addDevice(new MotionSensor("pir-war-m", "Pir Szafa Magda", floor2Driver0Local, 0));
         addDevice(new MotionSensor("pir-war-d", "Pir Szafa Dawid", floor2Driver0Local, 1));
@@ -183,6 +184,8 @@ public class DeviceService {
         addDevice(new BlindDevice("p1-p", "Pokój 1 P", floor2Driver0ExpanderB, 4, 5));
         addDevice(new BlindDevice("p2", "Pokój 2", floor2Driver0ExpanderB, 6, 7));
         addDevice(new BlindDevice("bath", "Lazienka", floor2Driver0ExpanderB, 8, 9));
+
+        addDevice(new RgbwwDevice("cct-bedroom-o", "okno", floor2Driver0ExpanderB, 15, 14, 13, 12, 11));
 
 
         addDevice(new NeoDevice("neo-test", "neo test", testLocal, 10, 60, false, ENeoType.NEO_GRBW));

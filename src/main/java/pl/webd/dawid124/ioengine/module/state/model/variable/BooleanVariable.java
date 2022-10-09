@@ -4,6 +4,9 @@ import pl.webd.dawid124.ioengine.module.automation.macro.exception.WrongVariable
 
 public class BooleanVariable implements IVariable {
 
+    public final static BooleanVariable TRUE = new BooleanVariable(true);
+    public final static BooleanVariable FALE = new BooleanVariable(false);
+
     private Boolean value;
 
     public BooleanVariable() {}

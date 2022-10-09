@@ -20,7 +20,7 @@ public class Condition {
             case EQUAL:
                 return variable.equals(testValue);
             case NOT_EQUAL:
-                return !variable.notEquals(testValue);
+                return variable.notEquals(testValue);
             case CONTAIN:
                 return variable.contains(testValue);
             case LESS_THEN:

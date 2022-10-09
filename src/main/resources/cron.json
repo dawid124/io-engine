@@ -1,0 +1,106 @@
+{
+  "crons": {
+    "bedroom-clear-to-auto-if-no-motion": {
+      "id": "bedroom-clear-to-auto-if-no-motion",
+      "zoneId": "bedroom",
+      "cron": "0 0/5 * * * ?",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "logicalCondition": "NOT_EQUAL",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "STRING",
+                "value": "auto"
+              }
+            },
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                "second": 1200,
+                "sensorId": "pir-bedroom"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "SCENE_CHANGE",
+                "newSceneId": "auto"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "livingroom-clear-to-auto-if-no-motion": {
+      "id": "livingroom-clear-to-auto-if-no-motion",
+      "zoneId": "floor1",
+      "cron": "0 0/5 * * * ?",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "logicalCondition": "NOT_EQUAL",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "STRING",
+                "value": "auto"
+              }
+            },
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                "second": 7200,
+                "sensorId": "pir-satel-dinner"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            },
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                "second": 7200,
+                "sensorId": "pir-kitchen"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "SCENE_CHANGE",
+                "newSceneId": "auto"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

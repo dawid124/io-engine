@@ -49,6 +49,8 @@ public class RunnerService {
                 return processCmd((CMDRunnerBlock) runner, variables);
             case ACTION:
                 return processAction((ActionRunnerBlock) runner);
+            case SCENE_CHANGE:
+                return processSceneChange((SceneChangeRunnerBlock) runner, zoneId);
             case BLIND_ACTION:
 
                 break;
@@ -65,6 +67,7 @@ public class RunnerService {
 
         return false;
     }
+
 
     public static boolean executeBashCommand(String command) {
         boolean success = false;
@@ -123,6 +126,11 @@ public class RunnerService {
 
         userActionService.processActionChange(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
 
+        return true;
+    }
+
+    private boolean processSceneChange(SceneChangeRunnerBlock runner, String zoneId) {
+        userActionService.processSceneChange(zoneId, runner.getNewSceneId());
         return true;
     }
 

@@ -6,6 +6,7 @@ public enum ERunnerBlockType {
     LIGHT_ACTION(LightActionRunnerBlock.class),
     ACTION(ActionRunnerBlock.class),
     CMD(CMDRunnerBlock.class),
+    SCENE_CHANGE(SceneChangeRunnerBlock.class),
     BLIND_ACTION(null),
     GLOBAL_VARIABLE_CHANGE(null),
     ZONE_VARIABLE_CHANGE(null),

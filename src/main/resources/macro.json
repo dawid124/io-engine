@@ -83,7 +83,7 @@
                   "runnerType": "TIMER",
                   "timerId": "lobby-down-light-off-timer",
                   "action": "UPDATE_TIME",
-                  "time": 15000
+                  "time": 25000
                 }
               ]
             }
@@ -180,7 +180,7 @@
                   "runnerType": "TIMER",
                   "timerId": "lobby2-a-down-light-off-timer",
                   "action": "UPDATE_TIME",
-                  "time": 15000
+                  "time": 25000
                 }
               ]
             }
@@ -247,7 +247,7 @@
                 "runnerType": "TIMER",
                 "timerId": "wc-down-light-off-timer",
                 "action": "UPDATE_TIME",
-                "time": 15000
+                "time": 30000
               }
             ]
           }
@@ -731,6 +731,10 @@
                     "type": "STRING",
                     "value": "auto"
                   }
+//                  {
+//                    "type": "STRING",
+//                    "value": "manual"
+//                  }
                 ]
               }
             }
@@ -818,6 +822,10 @@
                   {
                     "type": "STRING",
                     "value": "auto"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "manual"
                   }
                 ]
               }
@@ -1077,13 +1085,8 @@
                 "fetcherType": "CURRENT_STATE_VARIABLE"
               },
               "testValue": {
-                "type": "LIST",
-                "value": [
-                  {
-                    "type": "STRING",
-                    "value": "auto"
-                  }
-                ]
+                "type": "STRING",
+                "value": "auto"
               }
             }
           ],
@@ -1121,7 +1124,7 @@
                   },
                   "actions": [
                     {
-                      "ioId": "cct-bedroom",
+                      "ioId": "cct-bedroom-o",
                       "brightness": 255,
                       "color": {
                         "r": 0,

@@ -4,6 +4,23 @@
       "id": "floor1",
       "name": "Salon",
       "order": 0,
+      "sensors": {
+        "pir-satel-tv": {
+          "ioId": "pir-satel-tv",
+          "name": "S-TV",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-satel-dinner": {
+          "ioId": "pir-satel-dinner",
+          "name": "Jadalnia",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-kitchen": {
+          "ioId": "pir-kitchen",
+          "name": "Kuchnia",
+          "ioType": "MOTION_SENSOR"
+        }
+      },
       "blinds": [
         {
           "ioId": "f1-fix-360",
@@ -1296,10 +1313,10 @@
                         "ioType": "RGBW",
                         "brightness": 255,
                         "color": {
-                          "r": 0,
+                          "r": 255,
                           "g": 0,
-                          "b": 0,
-                          "w": 255,
+                          "b": 255,
+                          "w": 0,
                           "ww": 0
                         }
                       }
@@ -3102,6 +3119,18 @@
         "cct-p1",
         "cct-p2"
       ],
+      "sensors": {
+        "pir-p1": {
+          "ioId": "pir-p1",
+          "name": "P1",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-p2": {
+          "ioId": "pir-p2",
+          "name": "P2",
+          "ioType": "MOTION_SENSOR"
+        }
+      },
       "scenes": {
         "auto": {
           "id": "auto",
@@ -3216,7 +3245,9 @@
       "deviceIds": [
         "cct-wardrobe-m",
         "cct-wardrobe-d",
-        "cct-bedroom"
+        "cct-bedroom",
+        "cct-bedroom-w",
+        "cct-bedroom-o"
       ],
       "blinds": [
         {
@@ -3224,6 +3255,23 @@
           "shortName": "S"
         }
       ],
+      "sensors": {
+        "pir-bedroom": {
+          "ioId": "pir-bedroom",
+          "name": "Sypialnia",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-war-m": {
+          "ioId": "pir-war-m",
+          "name": "Magda",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-war-d": {
+          "ioId": "pir-war-d",
+          "name": "Dawid",
+          "ioType": "MOTION_SENSOR"
+        }
+      },
       "scenes": {
         "auto": {
           "id": "auto",
@@ -3231,6 +3279,7 @@
           "order": 0,
           "groups": [
             {
+              "hidden": true,
               "state": {
                 "ioId": "cct-wardrobe-m",
                 "name": "Szafa Magdy",
@@ -3246,6 +3295,7 @@
               }
             },
             {
+              "hidden": true,
               "state": {
                 "ioId": "cct-wardrobe-d",
                 "name": "Szafa Dawida",
@@ -3261,9 +3311,42 @@
               }
             },
             {
+              "hidden": true,
               "state": {
                 "ioId": "cct-bedroom",
                 "name": "Sypialnia",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "hidden": true,
+              "state": {
+                "ioId": "cct-bedroom-w",
+                "name": "Sciana",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "hidden": true,
+              "state": {
+                "ioId": "cct-bedroom-o",
+                "name": "Okno",
                 "ioType": "CCT",
                 "brightness": 0,
                 "color": {
@@ -3326,6 +3409,36 @@
                   "ww": 255
                 }
               }
+            },
+            {
+              "state": {
+                "ioId": "cct-bedroom-w",
+                "name": "Sciana",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
+            },
+            {
+              "state": {
+                "ioId": "cct-bedroom-o",
+                "name": "Okno",
+                "ioType": "CCT",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255,
+                  "ww": 255
+                }
+              }
             }
           ]
         }
@@ -3353,6 +3466,23 @@
           "shortName": "P"
         }
       ],
+      "sensors": {
+        "pir-office": {
+          "ioId": "pir-office",
+          "name": "Biuro",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-lobby": {
+          "ioId": "pir-lobby",
+          "name": "Kor",
+          "ioType": "MOTION_SENSOR"
+        },
+        "pir-satel-lobby": {
+          "ioId": "pir-satel-lobby",
+          "name": "S-Kor",
+          "ioType": "MOTION_SENSOR"
+        }
+      },
       "scenes": {
         "auto": {
           "id": "auto",
@@ -3548,6 +3678,13 @@
           "shortName": "Łazienka"
         }
       ],
+      "sensors": {
+        "pir-satel-lobby-up": {
+          "ioId": "pir-satel-lobby-up",
+          "name": "Kor-Schody",
+          "ioType": "MOTION_SENSOR"
+        }
+      },
       "scenes": {
         "auto": {
           "id": "auto",

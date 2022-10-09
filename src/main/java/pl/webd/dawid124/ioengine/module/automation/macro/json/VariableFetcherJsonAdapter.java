@@ -5,11 +5,9 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import org.springframework.stereotype.Component;
-import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.CurrentStateVariableFetcher;
-import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.EVariableFetcherType;
-import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
-import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.MacroVariableFetcher;
+import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.*;
 import pl.webd.dawid124.ioengine.module.state.SystemArg;
+import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import java.lang.reflect.Type;
 
@@ -19,9 +17,12 @@ public class VariableFetcherJsonAdapter implements JsonDeserializer<IVariableFet
     private static final String TYPE_ATTR = "fetcherType";
     private static final String ERROR_MSG = "Error on parsing IBlock Type, type: [%s]";
 
+    private final StateService stateService;
+
     private final CurrentStateVariableFetcher currentStateVariableFetcher;
 
-    public VariableFetcherJsonAdapter(CurrentStateVariableFetcher currentStateVariableFetcher) {
+    public VariableFetcherJsonAdapter(StateService stateService, CurrentStateVariableFetcher currentStateVariableFetcher) {
+        this.stateService = stateService;
         this.currentStateVariableFetcher = currentStateVariableFetcher;
     }
 
@@ -36,6 +37,11 @@ public class VariableFetcherJsonAdapter implements JsonDeserializer<IVariableFet
                     return new MacroVariableFetcher(jsonElement.getAsJsonObject().get(SystemArg.KEY).getAsString());
                 case CURRENT_STATE_VARIABLE:
                     return currentStateVariableFetcher;
+                case SENSOR_INACTIVE_FOR_TIME:
+                    SensorInactiveForTimeVariableFetcher fetcher =
+                            context.deserialize(jsonElement, SensorInactiveForTimeVariableFetcher.class);
+                    fetcher.setStateService(stateService);
+                    return fetcher;
             }
         } catch (Exception e) {
             throw new JsonParseException(String.format(ERROR_MSG, jsonElement), e);

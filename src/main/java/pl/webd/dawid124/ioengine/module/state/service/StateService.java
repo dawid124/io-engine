@@ -6,6 +6,8 @@ import org.springframework.util.StringUtils;
 import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
+import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
+import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
@@ -27,12 +29,14 @@ public class StateService {
 
     private final Map<String, IVariable> variables;
     private final Map<String, ZoneState> zoneState;
+    private final Map<String, DeviceState> sensors;
 
     public StateService(StructureService structureService) {
         this.structureService = structureService;
 
         variables = new HashMap<>();
         zoneState = new HashMap<>();
+        sensors = new HashMap<>();
     }
 
     @PostConstruct
@@ -53,6 +57,8 @@ public class StateService {
                 zone.addSceneState(scene);
                 sceneStructure.getGroups().forEach(scene::addGroupState);
             }
+
+            sensors.putAll(zoneStructure.getSensors());
         }
     }
 
@@ -208,5 +214,9 @@ public class StateService {
         } else {
             this.variables.put(change.getName(), change.getValue());
         }
+    }
+
+    public Map<String, DeviceState> getSensors() {
+        return sensors;
     }
 }

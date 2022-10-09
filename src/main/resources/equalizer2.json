@@ -21,7 +21,7 @@
       "initialBrightness": 30,
       "staticLeds": 50,
       "animationId": 0,
-      "subAnimationId": 11
+      "subAnimationId": 10
     },
     {
       "active": true,
