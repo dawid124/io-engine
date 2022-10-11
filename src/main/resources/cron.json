@@ -45,10 +45,46 @@
         }
       ]
     },
+    "bedroom-dim-up-blinds": {
+      "id": "bedroom-up-down-blinds",
+      "zoneId": "bedroom",
+      "cron": "0 30 6 * * ?",
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "BLIND_ACTION",
+          "actions": [
+            {
+              "ioId": "syp",
+              "action": "UP",
+              "time": 690
+            }
+          ]
+        }
+      ]
+    },
+    "bedroom-dim-down-blinds": {
+      "id": "bedroom-dim-down-blinds",
+      "zoneId": "bedroom",
+      "cron": "0 0 20 * * ?",
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "BLIND_ACTION",
+          "actions": [
+            {
+              "ioId": "syp",
+              "action": "DOWN",
+              "time": 1300
+            }
+          ]
+        }
+      ]
+    },
     "livingroom-clear-to-auto-if-no-motion": {
       "id": "livingroom-clear-to-auto-if-no-motion",
       "zoneId": "floor1",
-      "cron": "0 0/5 * * * ?",
+      "cron": "20 0/5 * * * ?",
       "blocks": [
         {
           "blockType": "CONDITION",
@@ -82,6 +118,51 @@
                 "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
                 "second": 7200,
                 "sensorId": "pir-kitchen"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "SCENE_CHANGE",
+                "newSceneId": "auto"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "office-clear-to-auto-if-no-motion": {
+      "id": "office-clear-to-auto-if-no-motion",
+      "zoneId": "office",
+      "cron": "40 0/5 * * * ?",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "logicalCondition": "NOT_EQUAL",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "STRING",
+                "value": "auto"
+              }
+            },
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                "second": 1200,
+                "sensorId": "pir-office"
               },
               "testValue": {
                 "type": "BOOLEAN",

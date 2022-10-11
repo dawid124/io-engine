@@ -3,11 +3,11 @@ package pl.webd.dawid124.ioengine.module.automation.macro.block.runner;
 public enum ERunnerBlockType {
     LOG(null),
     MACRO_RUNNER(MacroRunnerBlock.class),
-    LIGHT_ACTION(LightActionRunnerBlock.class),
+    STATE_ACTION(LightStateActionRunnerBlock.class),
     ACTION(ActionRunnerBlock.class),
     CMD(CMDRunnerBlock.class),
     SCENE_CHANGE(SceneChangeRunnerBlock.class),
-    BLIND_ACTION(null),
+    BLIND_ACTION(ActionRunnerBlock.class),
     GLOBAL_VARIABLE_CHANGE(null),
     ZONE_VARIABLE_CHANGE(null),
     TIMER(TimerRunnerBlock.class);

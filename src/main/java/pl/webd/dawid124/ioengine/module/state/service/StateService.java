@@ -20,6 +20,7 @@ import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
@@ -35,7 +36,7 @@ public class StateService {
         this.structureService = structureService;
 
         variables = new HashMap<>();
-        zoneState = new HashMap<>();
+        zoneState = new LinkedHashMap<>();
         sensors = new HashMap<>();
     }
 
@@ -65,7 +66,7 @@ public class StateService {
     public void resetScene(String zoneId, String sceneId) {
         Scene sceneStructure = structureService.fetchScene(zoneId, sceneId);
         SceneState scene = zoneState.get(zoneId).getSceneStates().get(sceneId);
-        scene.setGroupState(new HashMap<>());
+        scene.setGroupState(new LinkedHashMap<>());
         sceneStructure.getGroups().forEach(scene::addGroupState);
     }
 
@@ -101,9 +102,7 @@ public class StateService {
         SceneState sceneState = zoneState.get(actionReq.getZoneId()).getSceneStates().get(actionReq.getSceneId());
 
         for (UiAction action : actionReq.getActions()) {
-            GroupState groupState = sceneState.findStateById(action.getIoId());
-
-            updateSateByUiAction(groupState, action);
+            sceneState.findStateById(action.getIoId()).ifPresent(state -> updateSateByUiAction(state, action));
         }
     }
 

@@ -6,20 +6,20 @@ import pl.webd.dawid124.ioengine.module.automation.macro.RunnerService;
 
 import java.util.List;
 
-public class LightActionRunnerBlock extends RunnerBlock {
+public class LightStateActionRunnerBlock extends RunnerBlock {
 
     private final List<UiAction> actions;
 
     private final LedChangeData ledChangeData;
 
-    public LightActionRunnerBlock(RunnerService runnerService, List<UiAction> actions, LedChangeData ledChangeData) {
+    public LightStateActionRunnerBlock(RunnerService runnerService, List<UiAction> actions, LedChangeData ledChangeData) {
         super(runnerService);
         this.actions = actions;
         this.ledChangeData = ledChangeData;
     }
 
     @Override public ERunnerBlockType getRunnerType() {
-        return ERunnerBlockType.LIGHT_ACTION;
+        return ERunnerBlockType.STATE_ACTION;
     }
 
     public List<UiAction> getActions() {

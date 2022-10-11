@@ -55,7 +55,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -142,7 +142,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -219,7 +219,7 @@
               },
               {
                 "blockType": "RUNNER",
-                "runnerType": "LIGHT_ACTION",
+                "runnerType": "STATE_ACTION",
                 "ledChangeData": {
                   "time": 1000,
                   "stepTime": 30
@@ -300,7 +300,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -425,7 +425,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 1000,
             "stepTime": 30
@@ -452,7 +452,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -475,7 +475,7 @@
       ]
     },
     "lobby-up-pir-macro": {
-      "zoneId": "floor2",
+      "zoneId": "other",
       "name": "Korytarz gótra makro",
       "blocks": [
         {
@@ -529,7 +529,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -621,7 +621,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 2000,
                     "stepTime": 30
@@ -766,11 +766,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
-                  "ledChangeData": {
-                    "time": 1000,
-                    "stepTime": 30
-                  },
+                  "runnerType": "ACTION",
                   "actions": [
                     {
                       "ioId": "cct-wardrobe-m",
@@ -781,7 +777,9 @@
                         "b": 0,
                         "w": 255,
                         "ww": 255
-                      }
+                      },
+                      "time": 1000,
+                      "stepTime": 30
                     }
                   ]
                 }
@@ -858,11 +856,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
-                  "ledChangeData": {
-                    "time": 1000,
-                    "stepTime": 30
-                  },
+                  "runnerType": "ACTION",
                   "actions": [
                     {
                       "ioId": "cct-wardrobe-d",
@@ -873,7 +867,9 @@
                         "b": 0,
                         "w": 255,
                         "ww": 255
-                      }
+                      },
+                      "time": 1000,
+                      "stepTime": 30
                     }
                   ]
                 }
@@ -896,7 +892,7 @@
       ]
     },
     "p1-pir-macro": {
-      "zoneId": "floor2",
+      "zoneId": "p1",
       "name": "Pokoj 1",
       "blocks": [
         {
@@ -946,7 +942,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -984,7 +980,7 @@
       ]
     },
     "p2-pir-macro": {
-      "zoneId": "floor2",
+      "zoneId": "p2",
       "name": "Pokoj 2",
       "blocks": [
         {
@@ -1034,7 +1030,7 @@
                 },
                 {
                   "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
+                  "runnerType": "STATE_ACTION",
                   "ledChangeData": {
                     "time": 1000,
                     "stepTime": 30
@@ -1080,7 +1076,7 @@
           "conditionType": "SIMPLE",
           "conditions": [
             {
-              "logicalCondition": "IN",
+              "logicalCondition": "EQUAL",
               "fetcher": {
                 "fetcherType": "CURRENT_STATE_VARIABLE"
               },
@@ -1091,65 +1087,512 @@
             }
           ],
           "trueBlock": {
-            "blockType": "CONDITION",
-            "conditionType": "SIMPLE",
-            "conditions": [
+            "blockType": "BLOCK",
+            "blocs": [
               {
-                "logicalCondition": "EQUAL",
-                "fetcher": {
-                  "fetcherType": "MACRO_VARIABLE",
-                  "key": "pir-value"
-                },
-                "testValue": {
-                  "type": "BOOLEAN",
-                  "value": true
-                }
-              }
-            ],
-            "trueBlock": {
-              "blockType": "BLOCK",
-              "blocs": [
-                {
-                  "blockType": "RUNNER",
-                  "runnerType": "TIMER",
-                  "timerId": "bedroom-light-off-timer",
-                  "action": "CLEAR"
-                },
-                {
-                  "blockType": "RUNNER",
-                  "runnerType": "LIGHT_ACTION",
-                  "ledChangeData": {
-                    "time": 1000,
-                    "stepTime": 30
+                "blockType": "CONDITION",
+                "conditionType": "AND",
+                "conditions": [
+                  {
+                    "logicalCondition": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "06:30:00"
+                    }
                   },
-                  "actions": [
+                  {
+                    "logicalCondition": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "08:59:59"
+                    }
+                  }
+                ],
+                "trueBlock": {
+                  "blockType": "CONDITION",
+                  "conditionType": "SIMPLE",
+                  "conditions": [
                     {
-                      "ioId": "cct-bedroom-o",
-                      "brightness": 255,
-                      "color": {
-                        "r": 0,
-                        "g": 0,
-                        "b": 0,
-                        "w": 255,
-                        "ww": 255
+                      "logicalCondition": "EQUAL",
+                      "fetcher": {
+                        "fetcherType": "MACRO_VARIABLE",
+                        "key": "pir-value"
+                      },
+                      "testValue": {
+                        "type": "BOOLEAN",
+                        "value": true
                       }
                     }
-                  ]
+                  ],
+                  "trueBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "CLEAR"
+                      },
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "STATE_ACTION",
+                        "ledChangeData": {
+                          "time": 1000,
+                          "stepTime": 30
+                        },
+                        "actions": [
+                          {
+                            "ioId": "cct-bedroom-o",
+                            "brightness": 90,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom-w",
+                            "brightness": 0,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom",
+                            "brightness": 0,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "falseBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "UPDATE_TIME",
+                        "time": 10000
+                      }
+                    ]
+                  }
                 }
-              ]
-            },
-            "falseBlock": {
-              "blockType": "BLOCK",
-              "blocs": [
-                {
-                  "blockType": "RUNNER",
-                  "runnerType": "TIMER",
-                  "timerId": "bedroom-light-off-timer",
-                  "action": "UPDATE_TIME",
-                  "time": 10000
+              },
+              {
+                "blockType": "CONDITION",
+                "conditionType": "AND",
+                "conditions": [
+                  {
+                    "logicalCondition": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "09:00:00"
+                    }
+                  },
+                  {
+                    "logicalCondition": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "20:59:59"
+                    }
+                  }
+                ],
+                "trueBlock": {
+                  "blockType": "CONDITION",
+                  "conditionType": "SIMPLE",
+                  "conditions": [
+                    {
+                      "logicalCondition": "EQUAL",
+                      "fetcher": {
+                        "fetcherType": "MACRO_VARIABLE",
+                        "key": "pir-value"
+                      },
+                      "testValue": {
+                        "type": "BOOLEAN",
+                        "value": true
+                      }
+                    }
+                  ],
+                  "trueBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "CLEAR"
+                      },
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "STATE_ACTION",
+                        "ledChangeData": {
+                          "time": 1000,
+                          "stepTime": 30
+                        },
+                        "actions": [
+                          {
+                            "ioId": "cct-bedroom-w",
+                            "brightness": 255,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom-o",
+                            "brightness": 255,
+                            "delay": 300,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom",
+                            "brightness": 100,
+                            "delay": 300,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 255,
+                              "ww": 255
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "falseBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "UPDATE_TIME",
+                        "time": 30000
+                      }
+                    ]
+                  }
                 }
-              ]
-            }
+              },
+              {
+                "blockType": "CONDITION",
+                "conditionType": "AND",
+                "conditions": [
+                  {
+                    "logicalCondition": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "21:00:00"
+                    }
+                  },
+                  {
+                    "logicalCondition": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:00:00"
+                    }
+                  }
+                ],
+                "trueBlock": {
+                  "blockType": "CONDITION",
+                  "conditionType": "SIMPLE",
+                  "conditions": [
+                    {
+                      "logicalCondition": "EQUAL",
+                      "fetcher": {
+                        "fetcherType": "MACRO_VARIABLE",
+                        "key": "pir-value"
+                      },
+                      "testValue": {
+                        "type": "BOOLEAN",
+                        "value": true
+                      }
+                    }
+                  ],
+                  "trueBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "CLEAR"
+                      },
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "STATE_ACTION",
+                        "ledChangeData": {
+                          "time": 1000,
+                          "stepTime": 30
+                        },
+                        "actions": [
+                          {
+                            "ioId": "cct-bedroom",
+                            "brightness": 0,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom-o",
+                            "brightness": 80,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          },
+                          {
+                            "ioId": "cct-bedroom-w",
+                            "brightness": 80,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "falseBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "UPDATE_TIME",
+                        "time": 30000
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "blockType": "CONDITION",
+                "conditionType": "AND",
+                "conditions": [
+                  {
+                    "logicalCondition": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:00:00"
+                    }
+                  },
+                  {
+                    "logicalCondition": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:59:59"
+                    }
+                  }
+                ],
+                "trueBlock": {
+                  "blockType": "CONDITION",
+                  "conditionType": "SIMPLE",
+                  "conditions": [
+                    {
+                      "logicalCondition": "EQUAL",
+                      "fetcher": {
+                        "fetcherType": "MACRO_VARIABLE",
+                        "key": "pir-value"
+                      },
+                      "testValue": {
+                        "type": "BOOLEAN",
+                        "value": true
+                      }
+                    }
+                  ],
+                  "trueBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "CLEAR"
+                      },
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "STATE_ACTION",
+                        "ledChangeData": {
+                          "time": 0,
+                          "stepTime": 30
+                        },
+                        "actions": [
+                          {
+                            "ioId": "cct-bedroom-o",
+                            "brightness": 3,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "falseBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "UPDATE_TIME",
+                        "time": 5000
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "blockType": "CONDITION",
+                "conditionType": "AND",
+                "conditions": [
+                  {
+                    "logicalCondition": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "00:00:00"
+                    }
+                  },
+                  {
+                    "logicalCondition": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "06:29:59"
+                    }
+                  }
+                ],
+                "trueBlock": {
+                  "blockType": "CONDITION",
+                  "conditionType": "SIMPLE",
+                  "conditions": [
+                    {
+                      "logicalCondition": "EQUAL",
+                      "fetcher": {
+                        "fetcherType": "MACRO_VARIABLE",
+                        "key": "pir-value"
+                      },
+                      "testValue": {
+                        "type": "BOOLEAN",
+                        "value": true
+                      }
+                    }
+                  ],
+                  "trueBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "CLEAR"
+                      },
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "STATE_ACTION",
+                        "ledChangeData": {
+                          "time": 0,
+                          "stepTime": 30
+                        },
+                        "actions": [
+                          {
+                            "ioId": "cct-bedroom-o",
+                            "brightness": 3,
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "w": 0,
+                              "ww": 255
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "falseBlock": {
+                    "blockType": "BLOCK",
+                    "blocs": [
+                      {
+                        "blockType": "RUNNER",
+                        "runnerType": "TIMER",
+                        "timerId": "bedroom-light-off-timer",
+                        "action": "UPDATE_TIME",
+                        "time": 5000
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
           }
         }
       ]

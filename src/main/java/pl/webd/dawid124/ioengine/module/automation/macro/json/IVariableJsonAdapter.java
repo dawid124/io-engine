@@ -6,12 +6,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import pl.webd.dawid124.ioengine.module.state.model.variable.EVariableType;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
+import pl.webd.dawid124.ioengine.module.state.model.variable.TimeVariable;
 
 import java.lang.reflect.Type;
 
 public class IVariableJsonAdapter implements JsonDeserializer<IVariable> {
 
     private static final String TYPE_ATTR = "type";
+    private static final String VALUE_ATTR = "value";
 
     private static final String ERROR_MSG = "Error on parsing IVariable Type, content: [%s]";
 
@@ -21,7 +23,11 @@ public class IVariableJsonAdapter implements JsonDeserializer<IVariable> {
 
         try {
             EVariableType blockType = EVariableType.valueOf(messageType.getAsString());
-            return context.deserialize(jsonElement, blockType.getClazz());
+            if (EVariableType.TIME.equals(blockType)) {
+                return new TimeVariable(jsonElement.getAsJsonObject().get(VALUE_ATTR).getAsString());
+            } else {
+                return context.deserialize(jsonElement, blockType.getClazz());
+            }
         } catch (Exception e) {
             throw new JsonParseException(String.format(ERROR_MSG, jsonElement), e);
         }

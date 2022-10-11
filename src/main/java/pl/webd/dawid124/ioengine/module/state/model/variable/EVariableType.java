@@ -4,7 +4,8 @@ public enum EVariableType {
     STRING(StringVariable.class),
     BOOLEAN(BooleanVariable.class),
     NUMBER(NumberVariable.class),
-    LIST(ListVariable.class);
+    LIST(ListVariable.class),
+    TIME(TimeVariable.class);
 
     Class clazz;
     EVariableType(Class clazz) {

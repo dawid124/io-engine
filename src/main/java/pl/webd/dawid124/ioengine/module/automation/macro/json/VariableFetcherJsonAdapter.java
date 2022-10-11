@@ -19,10 +19,14 @@ public class VariableFetcherJsonAdapter implements JsonDeserializer<IVariableFet
 
     private final StateService stateService;
 
+    private final CurrentTimeFetcher curentTimeFetcher;
+
     private final CurrentStateVariableFetcher currentStateVariableFetcher;
 
-    public VariableFetcherJsonAdapter(StateService stateService, CurrentStateVariableFetcher currentStateVariableFetcher) {
+    public VariableFetcherJsonAdapter(StateService stateService, CurrentTimeFetcher curentTimeFetcher,
+                                      CurrentStateVariableFetcher currentStateVariableFetcher) {
         this.stateService = stateService;
+        this.curentTimeFetcher = curentTimeFetcher;
         this.currentStateVariableFetcher = currentStateVariableFetcher;
     }
 
@@ -42,6 +46,8 @@ public class VariableFetcherJsonAdapter implements JsonDeserializer<IVariableFet
                             context.deserialize(jsonElement, SensorInactiveForTimeVariableFetcher.class);
                     fetcher.setStateService(stateService);
                     return fetcher;
+                case CURRENT_TIME:
+                    return curentTimeFetcher;
             }
         } catch (Exception e) {
             throw new JsonParseException(String.format(ERROR_MSG, jsonElement), e);

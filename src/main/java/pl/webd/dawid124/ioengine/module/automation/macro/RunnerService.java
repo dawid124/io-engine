@@ -38,9 +38,9 @@ public class RunnerService {
 
     public boolean run(RunnerBlock runner, Map<String, IVariable> variables, String zoneId) {
         switch (runner.getRunnerType()) {
-            case LIGHT_ACTION:
+            case STATE_ACTION:
                 ZoneState zoneState = stateService.getZoneState().get(zoneId);
-                return processLitghtAction((LightActionRunnerBlock) runner, variables, zoneId, zoneState);
+                return processStateAction((LightStateActionRunnerBlock) runner, variables, zoneId, zoneState);
             case TIMER:
                 return processTimer((TimerRunnerBlock) runner, variables);
             case MACRO_RUNNER:
@@ -52,13 +52,11 @@ public class RunnerService {
             case SCENE_CHANGE:
                 return processSceneChange((SceneChangeRunnerBlock) runner, zoneId);
             case BLIND_ACTION:
+                return processBlind((ActionRunnerBlock) runner);
+            case ZONE_VARIABLE_CHANGE:
 
                 break;
             case GLOBAL_VARIABLE_CHANGE:
-
-                break;
-            case ZONE_VARIABLE_CHANGE:
-
                 break;
             case LOG:
 
@@ -120,11 +118,11 @@ public class RunnerService {
         return true;
     }
 
-    private boolean processLitghtAction(LightActionRunnerBlock runner, Map<String, IVariable> variables, String zoneId, ZoneState zoneState) {
+    private boolean processStateAction(LightStateActionRunnerBlock runner, Map<String, IVariable> variables, String zoneId, ZoneState zoneState) {
         String stateId = getStateId(variables, zoneState);
         SceneState sceneState = zoneState.getSceneStates().get(stateId);
 
-        userActionService.processActionChange(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
+        userActionService.processLights(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
 
         return true;
     }
@@ -136,6 +134,12 @@ public class RunnerService {
 
     private boolean processAction(ActionRunnerBlock runner) {
         userActionService.processSimpleActions(runner.getActions());
+
+        return true;
+    }
+
+    private boolean processBlind(ActionRunnerBlock runner) {
+        userActionService.processBlinds(runner.getActions());
 
         return true;
     }

@@ -1,20 +1,22 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupState implements Serializable {
 
     private boolean hidden;
     private DeviceState state;
-    private List<GroupState> children;
+    private ArrayList<GroupState> children;
 
-    public GroupState(DeviceState state, List<GroupState> children) {
+    public GroupState(DeviceState state, ArrayList<GroupState> children) {
         this.state = state;
         this.children = children;
     }
 
-    public GroupState(DeviceState state, List<GroupState> children, boolean hidden) {
+    public GroupState(DeviceState state, ArrayList<GroupState> children, boolean hidden) {
         this.hidden = hidden;
         this.state = state;
         this.children = children;
@@ -24,7 +26,7 @@ public class GroupState implements Serializable {
         return state;
     }
 
-    public List<GroupState> getChildren() {
+    public ArrayList<GroupState> getChildren() {
         return children;
     }
 
@@ -40,7 +42,7 @@ public class GroupState implements Serializable {
         this.state = state;
     }
 
-    public void setChildren(List<GroupState> children) {
+    public void setChildren(ArrayList<GroupState> children) {
         this.children = children;
     }
 }

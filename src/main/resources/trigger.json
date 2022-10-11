@@ -76,7 +76,7 @@
       ]
     },
     "pir-f2-lobby": {
-      "zoneId": "floor2",
+      "zoneId": "other",
       "blocs": [
         {
           "blockType": "RUNNER",
@@ -116,7 +116,7 @@
       ]
     },
     "pir-p1": {
-      "zoneId": "floor1",
+      "zoneId": "p1",
       "blocs": [
         {
           "blockType": "RUNNER",
@@ -126,7 +126,7 @@
       ]
     },
     "pir-p2": {
-      "zoneId": "floor2",
+      "zoneId": "p2",
       "blocs": [
         {
           "blockType": "RUNNER",

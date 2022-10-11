@@ -11,6 +11,7 @@ import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfigBlind;
 
+import javax.annotation.PreDestroy;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -93,5 +94,10 @@ public class BlindDevice extends Device {
 
     public int getPinDown() {
         return pinDown;
+    }
+
+    @PreDestroy
+    public void destructor() {
+        scheduler.shutdown();
     }
 }

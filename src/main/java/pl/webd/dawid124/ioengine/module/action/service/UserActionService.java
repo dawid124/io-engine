@@ -75,8 +75,9 @@ public class UserActionService {
     }
 
 
-    private void processLights(UiActionRequest action) {
+    public void processLights(UiActionRequest action) {
         stateService.updateSateByUiAction(action);
+
 
         List<IoAction> ioActions = actionDataService.fromUiActionRequest(action);
         sendMqttActions(ioActions);
@@ -91,7 +92,7 @@ public class UserActionService {
         mqttService.sendActionsToDevices(mqttActions);
     }
 
-    private void processBlinds(List<UiAction> actions) {
+    public void processBlinds(List<UiAction> actions) {
 
         List<IoAction> mqttActions = blindService.processBlinds(actions);
 

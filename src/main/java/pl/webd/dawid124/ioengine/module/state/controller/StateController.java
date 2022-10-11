@@ -15,6 +15,7 @@ import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonAdapter;
 
+import javax.annotation.PreDestroy;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -89,5 +90,10 @@ public class StateController {
         stateService.changeStateVar(varChangeRequest);
 
         return ResponseEntity.ok(varChangeRequest);
+    }
+
+    @PreDestroy
+    public void destructor() {
+        scheduler.shutdown();
     }
 }

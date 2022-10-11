@@ -7,6 +7,7 @@ import pl.webd.dawid124.ioengine.module.automation.timer.structure.Timer;
 import pl.webd.dawid124.ioengine.module.automation.timer.structure.TimerStructure;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
+import javax.annotation.PreDestroy;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,6 +35,11 @@ public class TimerService {
                 timer.cancel();
                 break;
         }
+    }
+
+    @PreDestroy
+    public void destructor() {
+        scheduler.shutdown();
     }
 
     public TimerStructure getTimerStructure() {

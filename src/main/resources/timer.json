@@ -6,7 +6,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -32,7 +32,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -68,7 +68,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -103,24 +103,40 @@
       "defaultTime": 30000,
       "blocks": [
         {
-          "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
-          "ledChangeData": {
-            "time": 8000,
-            "stepTime": 30
-          },
-          "actions": [
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
             {
-              "ioId": "rgbw-office",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "STRING",
+                "value": "auto"
               }
             }
-          ]
+          ],
+          "trueBlock": {
+            "blockType": "RUNNER",
+            "runnerType": "STATE_ACTION",
+            "ledChangeData": {
+              "time": 8000,
+              "stepTime": 30
+            },
+            "actions": [
+              {
+                "ioId": "rgbw-office",
+                "brightness": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "w": 255
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -129,19 +145,35 @@
       "defaultTime": 15000,
       "blocks": [
         {
-          "blockType": "RUNNER",
-          "runnerType": "MACRO_RUNNER",
-          "macroId": "kitchen-light-off-medium-macro"
+          "blockType": "CONDITION",
+          "conditionType": "SIMPLE",
+          "conditions": [
+            {
+              "logicalCondition": "EQUAL",
+              "fetcher": {
+                "fetcherType": "CURRENT_STATE_VARIABLE"
+              },
+              "testValue": {
+                "type": "STRING",
+                "value": "auto"
+              }
+            }
+          ],
+          "trueBlock": {
+            "blockType": "RUNNER",
+            "runnerType": "MACRO_RUNNER",
+            "macroId": "kitchen-light-off-medium-macro"
+          }
         }
       ]
     },
     "lobby-up-light-off-timer": {
-      "zoneId": "floor2",
+      "zoneId": "other",
       "defaultTime": 5000,
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -168,22 +200,23 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
           },
           "actions": [
             {
+              "ioId": "cct-bedroom",
+              "brightness": 0
+            },
+            {
               "ioId": "cct-bedroom-o",
-              "brightness": 0,
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "w": 255,
-                "ww": 255
-              }
+              "brightness": 0
+            },
+            {
+              "ioId": "cct-bedroom-w",
+              "brightness": 0
             }
           ]
         }
@@ -195,11 +228,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
-          "ledChangeData": {
-            "time": 4000,
-            "stepTime": 30
-          },
+          "runnerType": "ACTION",
           "actions": [
             {
               "ioId": "cct-wardrobe-m",
@@ -210,7 +239,9 @@
                 "b": 0,
                 "w": 255,
                 "ww": 255
-              }
+              },
+              "time": 4000,
+              "stepTime": 30
             }
           ]
         }
@@ -222,11 +253,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
-          "ledChangeData": {
-            "time": 4000,
-            "stepTime": 30
-          },
+          "runnerType": "ACTION",
           "actions": [
             {
               "ioId": "cct-wardrobe-d",
@@ -237,19 +264,21 @@
                 "b": 0,
                 "w": 255,
                 "ww": 255
-              }
+              },
+              "time": 4000,
+              "stepTime": 30
             }
           ]
         }
       ]
     },
     "p1-light-off-timer": {
-      "zoneId": "floor2",
+      "zoneId": "p1",
       "defaultTime": 10000,
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -271,12 +300,12 @@
       ]
     },
     "p2-light-off-timer": {
-      "zoneId": "floor2",
+      "zoneId": "p2",
       "defaultTime": 10000,
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -303,7 +332,7 @@
       "blocks": [
         {
           "blockType": "RUNNER",
-          "runnerType": "LIGHT_ACTION",
+          "runnerType": "STATE_ACTION",
           "ledChangeData": {
             "time": 2000,
             "stepTime": 30

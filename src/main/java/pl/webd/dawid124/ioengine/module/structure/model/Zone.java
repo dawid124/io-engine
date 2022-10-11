@@ -10,8 +10,6 @@ public class Zone {
     private final String id;
     private final String name;
 
-    private final int order;
-
     private final Set<BlindStructure> blinds;
     private final Map<String, Scene> scenes;
     private final Map<String, MotionSensorState> sensors;
@@ -20,10 +18,9 @@ public class Zone {
     private final List<String> deviceIds;
 
 
-    public Zone(String id, String name, int order) {
+    public Zone(String id, String name) {
         this.id = id;
         this.name = name;
-        this.order = order;
 
         this.deviceIds = new ArrayList<>();
         this.blinds = new TreeSet<>();
@@ -49,10 +46,6 @@ public class Zone {
 
     public Set<BlindStructure> getBlinds() {
         return blinds;
-    }
-
-    public int getOrder() {
-        return order;
     }
 
     public void addScene(Scene scene) {

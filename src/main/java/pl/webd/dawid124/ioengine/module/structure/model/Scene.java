@@ -12,7 +12,7 @@ public class Scene {
 
     private final Map<String, Scene> scenes;
 
-    private Set<GroupState> groups;
+    private ArrayList<GroupState> groups;
 
 
     public Scene(String id, String name, int order) {
@@ -20,7 +20,7 @@ public class Scene {
         this.name = name;
         this.order = order;
         this.scenes = new HashMap<>();
-        this.groups = new HashSet<>();
+        this.groups = new ArrayList<>();
     }
 
     public String getId() {
@@ -35,11 +35,11 @@ public class Scene {
         return order;
     }
 
-    public Set<GroupState> getGroups() {
+    public ArrayList<GroupState> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<GroupState> groups) {
+    public void setGroups(ArrayList<GroupState> groups) {
         this.groups = groups;
     }
 

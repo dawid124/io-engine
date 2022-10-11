@@ -4,35 +4,33 @@ import org.apache.commons.lang3.SerializationUtils;
 import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SceneState {
 
     private final String id;
     private final String name;
 
-    private Map<String, GroupState> groupState;
-    private Map<String, SceneState> sceneStates;
+    private LinkedHashMap<String, GroupState> groupState;
 
     public SceneState(String id, String name) {
         this.id = id;
         this.name = name;
-        this.groupState = new HashMap<>();
-        this.sceneStates = new HashMap<>();
+        this.groupState = new LinkedHashMap<>();
     }
 
-    public SceneState(String id, String name, Map<String, GroupState> groupState, Map<String, SceneState> sceneStates) {
+    public SceneState(String id, String name, LinkedHashMap<String, GroupState> groupState, Map<String, SceneState> sceneStates) {
         this.id = id;
         this.name = name;
         this.groupState = groupState;
-        this.sceneStates = sceneStates;
     }
 
-    public SceneState(String id, String name, Map<String, GroupState> groupState) {
+    public SceneState(String id, String name, LinkedHashMap<String, GroupState> groupState) {
         this.id = id;
         this.name = name;
         this.groupState = groupState;
-        this.sceneStates = new HashMap<>();
     }
 
     public void addGroupState(GroupState state) {
@@ -48,25 +46,22 @@ public class SceneState {
         return name;
     }
 
-    public void setGroupState(Map<String, GroupState> groupState) {
+    public void setGroupState(LinkedHashMap<String, GroupState> groupState) {
         this.groupState = groupState;
     }
 
-    public Map<String, GroupState> getGroupState() {
+    public LinkedHashMap<String, GroupState> getGroupState() {
         return groupState;
     }
 
-    public Map<String, SceneState> getSceneStates() {
-        return sceneStates;
-    }
 
-    public GroupState findStateById(String ioId) {
+    public Optional<GroupState> findStateById(String ioId) {
         for (GroupState state: groupState.values()) {
             GroupState found = findStateById(state, ioId);
-            if (found != null) return found;
+            if (found != null) return Optional.of(found);
         }
 
-        return null;
+        return Optional.empty();
     }
 
     private GroupState findStateById(GroupState parent, String ioId) {

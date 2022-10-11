@@ -3,6 +3,8 @@ package pl.webd.dawid124.ioengine.module.automation.cron;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PreDestroy;
+
 @Service
 public class CronService {
 
@@ -15,6 +17,11 @@ public class CronService {
         scheduler.setPoolSize(5);
         scheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
         scheduler.initialize();
+    }
+
+    @PreDestroy
+    public void destructor() {
+        scheduler.shutdown();
     }
 
     public CronStructure getCronStructure() {

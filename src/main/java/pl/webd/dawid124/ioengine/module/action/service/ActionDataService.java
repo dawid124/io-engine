@@ -39,7 +39,9 @@ public class ActionDataService {
 
         List<IoAction> list = new ArrayList<>();
         actions.getActions().forEach(a -> {
-            list.addAll(ActionDataFactory.buildActions(devices, sceneState.findStateById(a.getIoId()), actions.getLedChangeData(), a.getDelay()));
+            sceneState.findStateById(a.getIoId()).ifPresent(state -> {
+                list.addAll(ActionDataFactory.buildActions(devices, state, actions.getLedChangeData(), a.getDelay()));
+            });
         });
 
         return list;
