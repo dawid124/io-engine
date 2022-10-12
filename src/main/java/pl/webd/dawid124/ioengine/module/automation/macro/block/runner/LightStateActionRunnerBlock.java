@@ -36,14 +36,14 @@ public class LightStateActionRunnerBlock extends RunnerBlock {
 
         ZoneState zoneState = context.getStateService().getZoneState().get(zoneId);
 
-        List<String> sceneIds = new ArrayList<>();
+        List<String> scenes = new ArrayList<>();
         if (CollectionUtils.isEmpty(sceneIds)) {
-            sceneIds.add(zoneState.getActiveScene());
+            scenes.add(zoneState.getActiveScene());
         } else {
-            sceneIds.addAll(sceneIds);
+            scenes.addAll(sceneIds);
         }
 
-        sceneIds.forEach(id -> {
+        scenes.forEach(id -> {
             SceneState sceneState = zoneState.getSceneStates().get(id);
             UiActionRequest action = new UiActionRequest(zoneId, sceneState.getId(), actions, ledChangeData);
             context.getActionService().processLights(action);

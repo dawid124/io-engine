@@ -7,31 +7,36 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "AND",
-          "conditions": [
-            {
-              "logicalCondition": "NOT_EQUAL",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
+              {
+                "type": "COMPARE",
+                "compareType": "NOT_EQUAL",
+                "fetcher": {
+                  "fetcherType": "CURRENT_STATE_VARIABLE"
+                },
+                "testValue": {
+                  "type": "STRING",
+                  "value": "auto"
+                }
               },
-              "testValue": {
-                "type": "STRING",
-                "value": "auto"
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 1200,
+                  "sensorId": "pir-bedroom"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
               }
-            },
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                "second": 1200,
-                "sensorId": "pir-bedroom"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
-            }
-          ],
+              ]
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -88,43 +93,49 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "AND",
-          "conditions": [
-            {
-              "logicalCondition": "NOT_EQUAL",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
+              {
+                "type": "COMPARE",
+                "compareType": "NOT_EQUAL",
+                "fetcher": {
+                  "fetcherType": "CURRENT_STATE_VARIABLE"
+                },
+                "testValue": {
+                  "type": "STRING",
+                  "value": "auto"
+                }
               },
-              "testValue": {
-                "type": "STRING",
-                "value": "auto"
-              }
-            },
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                "second": 7200,
-                "sensorId": "pir-satel-dinner"
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 7200,
+                  "sensorId": "pir-satel-dinner"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
               },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 7200,
+                  "sensorId": "pir-kitchen"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
               }
-            },
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                "second": 7200,
-                "sensorId": "pir-kitchen"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
-            }
-          ],
+            ]
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -146,30 +157,36 @@
         {
           "blockType": "CONDITION",
           "conditionType": "AND",
-          "conditions": [
-            {
-              "logicalCondition": "NOT_EQUAL",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
+              {
+                "type": "COMPARE",
+                "compareType": "NOT_EQUAL",
+                "fetcher": {
+                  "fetcherType": "CURRENT_STATE_VARIABLE"
+                },
+                "testValue": {
+                  "type": "STRING",
+                  "value": "auto"
+                }
               },
-              "testValue": {
-                "type": "STRING",
-                "value": "auto"
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 1200,
+                  "sensorId": "pir-office"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
               }
-            },
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                "second": 1200,
-                "sensorId": "pir-office"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
-            }
-          ],
+            ]
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [

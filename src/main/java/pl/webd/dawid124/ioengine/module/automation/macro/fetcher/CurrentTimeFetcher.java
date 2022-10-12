@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.fetcher;
 
 import org.springframework.stereotype.Component;
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.TimeVariable;
 
@@ -17,7 +18,8 @@ public class CurrentTimeFetcher implements IVariableFetcher {
     }
 
     @Override
-    public IVariable fetch(Map<String, IVariable> variables, String zoneId) {
+    public IVariable fetch(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
         return new TimeVariable(LocalTime.now());
     }
+
 }

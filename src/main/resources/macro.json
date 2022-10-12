@@ -6,20 +6,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -76,20 +74,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -156,20 +152,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -226,20 +220,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -295,20 +287,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -412,44 +402,40 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "IN",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "LIST",
-                "value": [
-                  {
-                    "type": "STRING",
-                    "value": "auto"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "manual"
-                  }
-                ]
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "IN",
+            "fetcher": {
+              "fetcherType": "CURRENT_STATE_VARIABLE"
+            },
+            "testValue": {
+              "type": "LIST",
+              "value": [
+                {
+                  "type": "STRING",
+                  "value": "auto"
+                },
+                {
+                  "type": "STRING",
+                  "value": "manual"
+                }
+              ]
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "CONDITION",
-            "conditionType": "SIMPLE",
-            "conditions": [
-              {
-                "logicalCondition": "EQUAL",
-                "fetcher": {
-                  "fetcherType": "MACRO_VARIABLE",
-                  "key": "pir-value"
-                },
-                "testValue": {
-                  "type": "BOOLEAN",
-                  "value": true
-                }
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ],
+            },
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
@@ -504,44 +490,40 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "IN",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "LIST",
-                "value": [
-                  {
-                    "type": "STRING",
-                    "value": "auto"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "manual"
-                  }
-                ]
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "IN",
+            "fetcher": {
+              "fetcherType": "CURRENT_STATE_VARIABLE"
+            },
+            "testValue": {
+              "type": "LIST",
+              "value": [
+                {
+                  "type": "STRING",
+                  "value": "auto"
+                },
+                {
+                  "type": "STRING",
+                  "value": "manual"
+                }
+              ]
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "CONDITION",
-            "conditionType": "SIMPLE",
-            "conditions": [
-              {
-                "logicalCondition": "EQUAL",
-                "fetcher": {
-                  "fetcherType": "MACRO_VARIABLE",
-                  "key": "pir-value"
-                },
-                "testValue": {
-                  "type": "BOOLEAN",
-                  "value": true
-                }
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ],
+            },
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
@@ -649,44 +631,40 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "IN",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "LIST",
-                "value": [
-                  {
-                    "type": "STRING",
-                    "value": "auto"
-                  }
-                  //                  {
-                  //                    "type": "STRING",
-                  //                    "value": "manual"
-                  //                  }
-                ]
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "IN",
+            "fetcher": {
+              "fetcherType": "CURRENT_STATE_VARIABLE"
+            },
+            "testValue": {
+              "type": "LIST",
+              "value": [
+                {
+                  "type": "STRING",
+                  "value": "auto"
+                }
+                //                  {
+                //                    "type": "STRING",
+                //                    "value": "manual"
+                //                  }
+              ]
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "CONDITION",
-            "conditionType": "SIMPLE",
-            "conditions": [
-              {
-                "logicalCondition": "EQUAL",
-                "fetcher": {
-                  "fetcherType": "MACRO_VARIABLE",
-                  "key": "pir-value"
-                },
-                "testValue": {
-                  "type": "BOOLEAN",
-                  "value": true
-                }
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ],
+            },
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
@@ -739,44 +717,40 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "IN",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "LIST",
-                "value": [
-                  {
-                    "type": "STRING",
-                    "value": "auto"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "manual"
-                  }
-                ]
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "IN",
+            "fetcher": {
+              "fetcherType": "CURRENT_STATE_VARIABLE"
+            },
+            "testValue": {
+              "type": "LIST",
+              "value": [
+                {
+                  "type": "STRING",
+                  "value": "auto"
+                },
+                {
+                  "type": "STRING",
+                  "value": "manual"
+                }
+              ]
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "CONDITION",
-            "conditionType": "SIMPLE",
-            "conditions": [
-              {
-                "logicalCondition": "EQUAL",
-                "fetcher": {
-                  "fetcherType": "MACRO_VARIABLE",
-                  "key": "pir-value"
-                },
-                "testValue": {
-                  "type": "BOOLEAN",
-                  "value": true
-                }
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ],
+            },
             "trueBlock": {
               "blockType": "BLOCK",
               "blocs": [
@@ -829,20 +803,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -899,20 +871,18 @@
       "blocks": [
         {
           "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "MACRO_VARIABLE",
-                "key": "pir-value"
-              },
-              "testValue": {
-                "type": "BOOLEAN",
-                "value": true
-              }
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
             }
-          ],
+          },
           "trueBlock": {
             "blockType": "BLOCK",
             "blocs": [
@@ -972,45 +942,48 @@
           "blocs": [
             {
               "blockType": "CONDITION",
-              "conditionType": "AND",
-              "conditions": [
-                {
-                  "logicalCondition": "GREATER_EQUALS",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "06:30:00"
-                  }
-                },
-                {
-                  "logicalCondition": "LESS_THEN",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "08:59:59"
-                  }
-                }
-              ],
-              "trueBlock": {
-                "blockType": "CONDITION",
-                "conditionType": "SIMPLE",
+              "condition": {
+                "type": "LOGIC",
+                "logicalType": "AND",
                 "conditions": [
                   {
-                    "logicalCondition": "EQUAL",
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
                     "fetcher": {
-                      "fetcherType": "MACRO_VARIABLE",
-                      "key": "pir-value"
+                      "fetcherType": "CURRENT_TIME"
                     },
                     "testValue": {
-                      "type": "BOOLEAN",
-                      "value": true
+                      "type": "TIME",
+                      "value": "06:30:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "09:00:00"
                     }
                   }
-                ],
+                ]
+              },
+              "trueBlock": {
+                "blockType": "CONDITION",
+                "condition": {
+                  "type": "COMPARE",
+                  "compareType": "EQUAL",
+                  "fetcher": {
+                    "fetcherType": "MACRO_VARIABLE",
+                    "key": "pir-value"
+                  },
+                  "testValue": {
+                    "type": "BOOLEAN",
+                    "value": true
+                  }
+                },
                 "trueBlock": {
                   "blockType": "BLOCK",
                   "blocs": [
@@ -1084,45 +1057,48 @@
             },
             {
               "blockType": "CONDITION",
-              "conditionType": "AND",
-              "conditions": [
-                {
-                  "logicalCondition": "GREATER_EQUALS",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "09:00:00"
-                  }
-                },
-                {
-                  "logicalCondition": "LESS_THEN",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "20:59:59"
-                  }
-                }
-              ],
-              "trueBlock": {
-                "blockType": "CONDITION",
-                "conditionType": "SIMPLE",
+              "condition": {
+                "type": "LOGIC",
+                "logicalType": "AND",
                 "conditions": [
                   {
-                    "logicalCondition": "EQUAL",
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
                     "fetcher": {
-                      "fetcherType": "MACRO_VARIABLE",
-                      "key": "pir-value"
+                      "fetcherType": "CURRENT_TIME"
                     },
                     "testValue": {
-                      "type": "BOOLEAN",
-                      "value": true
+                      "type": "TIME",
+                      "value": "09:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "21:00:00"
                     }
                   }
-                ],
+                ]
+              },
+              "trueBlock": {
+                "blockType": "CONDITION",
+                "condition": {
+                  "type": "COMPARE",
+                  "compareType": "EQUAL",
+                  "fetcher": {
+                    "fetcherType": "MACRO_VARIABLE",
+                    "key": "pir-value"
+                  },
+                  "testValue": {
+                    "type": "BOOLEAN",
+                    "value": true
+                  }
+                },
                 "trueBlock": {
                   "blockType": "BLOCK",
                   "blocs": [
@@ -1198,45 +1174,48 @@
             },
             {
               "blockType": "CONDITION",
-              "conditionType": "AND",
-              "conditions": [
-                {
-                  "logicalCondition": "GREATER_EQUALS",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "21:00:00"
-                  }
-                },
-                {
-                  "logicalCondition": "LESS_THEN",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "23:00:00"
-                  }
-                }
-              ],
-              "trueBlock": {
-                "blockType": "CONDITION",
-                "conditionType": "SIMPLE",
+              "condition": {
+                "type": "LOGIC",
+                "logicalType": "AND",
                 "conditions": [
                   {
-                    "logicalCondition": "EQUAL",
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
                     "fetcher": {
-                      "fetcherType": "MACRO_VARIABLE",
-                      "key": "pir-value"
+                      "fetcherType": "CURRENT_TIME"
                     },
                     "testValue": {
-                      "type": "BOOLEAN",
-                      "value": true
+                      "type": "TIME",
+                      "value": "21:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:00:00"
                     }
                   }
-                ],
+                ]
+              },
+              "trueBlock": {
+                "blockType": "CONDITION",
+                "condition": {
+                  "type": "COMPARE",
+                  "compareType": "EQUAL",
+                  "fetcher": {
+                    "fetcherType": "MACRO_VARIABLE",
+                    "key": "pir-value"
+                  },
+                  "testValue": {
+                    "type": "BOOLEAN",
+                    "value": true
+                  }
+                },
                 "trueBlock": {
                   "blockType": "BLOCK",
                   "blocs": [
@@ -1310,135 +1289,82 @@
             },
             {
               "blockType": "CONDITION",
-              "conditionType": "AND",
-              "conditions": [
-                {
-                  "logicalCondition": "GREATER_EQUALS",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "23:00:00"
-                  }
-                },
-                {
-                  "logicalCondition": "LESS_THEN",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "23:59:59"
-                  }
-                }
-              ],
-              "trueBlock": {
-                "blockType": "CONDITION",
-                "conditionType": "SIMPLE",
+              "condition": {
+                "type": "LOGIC",
+                "logicalType": "OR",
                 "conditions": [
                   {
-                    "logicalCondition": "EQUAL",
-                    "fetcher": {
-                      "fetcherType": "MACRO_VARIABLE",
-                      "key": "pir-value"
-                    },
-                    "testValue": {
-                      "type": "BOOLEAN",
-                      "value": true
-                    }
-                  }
-                ],
-                "trueBlock": {
-                  "blockType": "BLOCK",
-                  "blocs": [
-                    {
-                      "blockType": "RUNNER",
-                      "runnerType": "TIMER",
-                      "timerId": "bedroom-light-off-timer",
-                      "action": "CLEAR"
-                    },
-                    {
-                      "blockType": "RUNNER",
-                      "runnerType": "STATE_ACTION",
-                      "sceneIds": [
-                        "auto"
-                      ],
-                      "ledChangeData": {
-                        "time": 0,
-                        "stepTime": 30
-                      },
-                      "actions": [
-                        {
-                          "ioId": "cct-bedroom-o",
-                          "brightness": 3,
-                          "color": {
-                            "r": 0,
-                            "g": 0,
-                            "b": 0,
-                            "w": 0,
-                            "ww": 255
-                          }
+                    "type": "LOGIC",
+                    "logicalType": "AND",
+                    "conditions": [
+                      {
+                        "type": "COMPARE",
+                        "compareType": "GREATER_EQUALS",
+                        "fetcher": {
+                          "fetcherType": "CURRENT_TIME"
+                        },
+                        "testValue": {
+                          "type": "TIME",
+                          "value": "23:00:00"
                         }
-                      ]
-                    }
-                  ]
-                },
-                "falseBlock": {
-                  "blockType": "BLOCK",
-                  "blocs": [
-                    {
-                      "blockType": "RUNNER",
-                      "runnerType": "TIMER",
-                      "timerId": "bedroom-light-off-timer",
-                      "action": "UPDATE_TIME",
-                      "time": 5000
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "blockType": "CONDITION",
-              "conditionType": "AND",
-              "conditions": [
-                {
-                  "logicalCondition": "GREATER_EQUALS",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
+                      },
+                      {
+                        "type": "COMPARE",
+                        "compareType": "LESS_THEN",
+                        "fetcher": {
+                          "fetcherType": "CURRENT_TIME"
+                        },
+                        "testValue": {
+                          "type": "TIME",
+                          "value": "23:59:59"
+                        }
+                      }
+                    ]
                   },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "00:00:00"
+                  {
+                    "type": "LOGIC",
+                    "logicalType": "AND",
+                    "conditions": [
+                      {
+                        "type": "COMPARE",
+                        "compareType": "GREATER_EQUALS",
+                        "fetcher": {
+                          "fetcherType": "CURRENT_TIME"
+                        },
+                        "testValue": {
+                          "type": "TIME",
+                          "value": "00:00:00"
+                        }
+                      },
+                      {
+                        "type": "COMPARE",
+                        "compareType": "LESS_THEN",
+                        "fetcher": {
+                          "fetcherType": "CURRENT_TIME"
+                        },
+                        "testValue": {
+                          "type": "TIME",
+                          "value": "06:30:00"
+                        }
+                      }
+                    ]
                   }
-                },
-                {
-                  "logicalCondition": "LESS_THEN",
-                  "fetcher": {
-                    "fetcherType": "CURRENT_TIME"
-                  },
-                  "testValue": {
-                    "type": "TIME",
-                    "value": "06:29:59"
-                  }
-                }
-              ],
+                ]
+              },
               "trueBlock": {
                 "blockType": "CONDITION",
-                "conditionType": "SIMPLE",
-                "conditions": [
-                  {
-                    "logicalCondition": "EQUAL",
-                    "fetcher": {
-                      "fetcherType": "MACRO_VARIABLE",
-                      "key": "pir-value"
-                    },
-                    "testValue": {
-                      "type": "BOOLEAN",
-                      "value": true
-                    }
+                "condition": {
+                  "type": "COMPARE",
+                  "compareType": "EQUAL",
+                  "fetcher": {
+                    "fetcherType": "MACRO_VARIABLE",
+                    "key": "pir-value"
+                  },
+                  "testValue": {
+                    "type": "BOOLEAN",
+                    "value": true
                   }
-                ],
+                },
                 "trueBlock": {
                   "blockType": "BLOCK",
                   "blocs": [

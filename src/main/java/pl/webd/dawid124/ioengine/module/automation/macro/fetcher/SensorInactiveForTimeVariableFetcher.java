@@ -1,19 +1,14 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.fetcher;
 
-import org.springframework.stereotype.Component;
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
-import pl.webd.dawid124.ioengine.module.state.model.variable.StringVariable;
-import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Component
 public class SensorInactiveForTimeVariableFetcher implements IVariableFetcher {
-
-    private StateService stateService;
 
     private String sensorId;
     private int second;
@@ -27,8 +22,8 @@ public class SensorInactiveForTimeVariableFetcher implements IVariableFetcher {
     }
 
     @Override
-    public BooleanVariable fetch(Map<String, IVariable> variables, String zoneId) {
-        MotionSensorState sensorState = (MotionSensorState) stateService.getSensors().get(sensorId);
+    public BooleanVariable fetch(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
+        MotionSensorState sensorState = (MotionSensorState) context.getStateService().getSensors().get(sensorId);
         LocalDateTime lastActiveDate = sensorState.getLastActiveDate();
         LocalDateTime lastInactiveDate = sensorState.getLastInactiveDate();
         if (lastActiveDate == null || lastInactiveDate == null) {
@@ -40,10 +35,6 @@ public class SensorInactiveForTimeVariableFetcher implements IVariableFetcher {
         }
 
         return BooleanVariable.FALE;
-    }
-
-    public void setStateService(StateService stateService) {
-        this.stateService = stateService;
     }
 
     public String getSensorId() {

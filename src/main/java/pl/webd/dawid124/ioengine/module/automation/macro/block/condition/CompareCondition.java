@@ -1,22 +1,31 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block.condition;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.ListVariable;
 
 import java.util.Map;
 
-public class Condition {
+public class CompareCondition implements ICondition {
 
-    private ELogicalCondition logicalCondition;
+    private final ECompareCondition compareType;
 
-    private IVariableFetcher fetcher;
-    private IVariable testValue;
+    private final IVariableFetcher fetcher;
+    private final IVariable testValue;
 
-    public boolean test(Map<String, IVariable> variables, String zoneId) {
-        IVariable variable = fetcher.fetch(variables, zoneId);
 
-        switch (logicalCondition) {
+    public CompareCondition(ECompareCondition compareType, IVariableFetcher fetcher, IVariable testValue) {
+        this.compareType = compareType;
+        this.fetcher = fetcher;
+        this.testValue = testValue;
+    }
+
+    @Override
+    public boolean test(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
+        IVariable variable = fetcher.fetch(context, variables, zoneId);
+
+        switch (compareType) {
             case EQUAL:
                 return variable.equals(testValue);
             case NOT_EQUAL:
@@ -39,27 +48,21 @@ public class Condition {
         return false;
     }
 
+    @Override
+    public EConditionType getType() {
+        return EConditionType.COMPARE;
+    }
+
+    public ECompareCondition getCompareType() {
+        return compareType;
+    }
+
     public IVariableFetcher getFetcher() {
         return fetcher;
     }
 
-    public void setFetcher(IVariableFetcher fetcher) {
-        this.fetcher = fetcher;
-    }
-
-    public ELogicalCondition getLogicalCondition() {
-        return logicalCondition;
-    }
-
-    public void setLogicalCondition(ELogicalCondition logicalCondition) {
-        this.logicalCondition = logicalCondition;
-    }
 
     public IVariable getTestValue() {
         return testValue;
-    }
-
-    public void setTestValue(IVariable testValue) {
-        this.testValue = testValue;
     }
 }
