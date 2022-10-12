@@ -5,8 +5,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.module.device.model.input.MotionSensor;
-import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.SystemArg;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
@@ -15,21 +14,20 @@ import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 
 @Service
 public class TriggerService implements MessageHandler {
 
-
     private Gson gson = new Gson();
 
     private TriggerStructure triggerStructure;
 
-    private final StateService stateService;
 
-    public TriggerService(StateService stateService) {
-        this.stateService = stateService;
+    private final AutomationContext context;
+
+    public TriggerService(StateService stateService, AutomationContext context) {
+        this.context = context;
     }
 
 
@@ -44,12 +42,12 @@ public class TriggerService implements MessageHandler {
             HashMap<String, IVariable> variables = new HashMap<>();
             variables.put(SystemArg.PIR_VALUE, new BooleanVariable(triggerMsg.isState()));
 
-            trigger.run(variables);
+            trigger.run(context, variables);
         }
     }
 
     private void updateSensorState(SensorTriggerMsg triggerMsg) {
-        DeviceState deviceState = stateService.getSensors().get(triggerMsg.getId());
+        DeviceState deviceState = context.getStateService().getSensors().get(triggerMsg.getId());
 
         if (deviceState == null || !(deviceState instanceof MotionSensorState)) return;
 

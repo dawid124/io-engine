@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.util.Map;
@@ -11,7 +12,7 @@ public abstract class AbstractBlock implements IBlock {
     private EBlockType blockType;
 
     @Override
-    public abstract void run(Map<String, IVariable> variables, String zoneId);
+    public abstract void run(AutomationContext context, Map<String, IVariable> variables, String zoneId);
 
     @Override
     public String getName() {

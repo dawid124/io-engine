@@ -2,6 +2,7 @@ package pl.webd.dawid124.ioengine.module.automation.cron;
 
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
@@ -23,8 +24,8 @@ public class CronTask {
 
     private List<IBlock> blocks;
 
-    public void run(ThreadPoolTaskScheduler scheduler) {
-        future = scheduler.schedule(() -> blocks.forEach(b -> b.run(variable, zoneId)), new CronTrigger(cron));
+    public void run(AutomationContext context, ThreadPoolTaskScheduler scheduler) {
+        future = scheduler.schedule(() -> blocks.forEach(b -> b.run(context, variable, zoneId)), new CronTrigger(cron));
     }
 
     public void cancel() {

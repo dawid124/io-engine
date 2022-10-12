@@ -5,7 +5,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
+import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
@@ -21,9 +21,9 @@ public class DriverSyncService implements MessageHandler {
 
     private final MqttService mqttService;
     private final DeviceService deviceService;
-    private final UserActionService userActionService;
+    private final ActionService userActionService;
 
-    public DriverSyncService(MqttService mqttService, DeviceService deviceService, UserActionService userActionService) {
+    public DriverSyncService(MqttService mqttService, DeviceService deviceService, ActionService userActionService) {
         this.mqttService = mqttService;
         this.deviceService = deviceService;
         this.userActionService = userActionService;

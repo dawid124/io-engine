@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.util.Map;
@@ -12,5 +13,5 @@ public interface IBlock {
 
     EBlockType getBlockType();
 
-    void run(Map<String, IVariable> variables, String zoneId);
+    void run(AutomationContext context, Map<String, IVariable> variables, String zoneId);
 }

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
-import pl.webd.dawid124.ioengine.module.automation.macro.RunnerService;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
@@ -17,9 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserActionService {
+public class ActionService {
 
-    private static final Logger LOG = LogManager.getLogger( UserActionService.class );
+    private static final Logger LOG = LogManager.getLogger( ActionService.class );
 
     private final StateService stateService;
 
@@ -27,8 +26,8 @@ public class UserActionService {
     private final MqttService mqttService;
     private final ActionDataService actionDataService;
 
-    public UserActionService(StateService stateService, BlindService blindService, MqttService mqttService,
-                             ActionDataService actionDataService) {
+    public ActionService(StateService stateService, BlindService blindService, MqttService mqttService,
+                         ActionDataService actionDataService) {
         this.mqttService = mqttService;
         this.stateService = stateService;
         this.blindService = blindService;

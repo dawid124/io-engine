@@ -9,11 +9,9 @@ import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapt
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
-import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
+import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
-import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
-import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonAdapter;
 
 import javax.annotation.PreDestroy;
 import java.util.concurrent.Executors;
@@ -29,10 +27,10 @@ public class StateController {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
     private final StateService stateService;
-    private final UserActionService userActionService;
+    private final ActionService userActionService;
     private final Gson gson;
 
-    public StateController(StateService stateService, UserActionService userActionService) {
+    public StateController(StateService stateService, ActionService userActionService) {
         this.stateService = stateService;
         this.userActionService = userActionService;
         this.gson = new GsonBuilder()

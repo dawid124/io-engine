@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.condition.Condition;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.condition.EConditionBlockType;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
@@ -23,11 +24,11 @@ public class ConditionBlock extends AbstractBlock {
     }
 
     @Override
-    public void run(Map<String, IVariable> variables, String zoneId) {
+    public void run(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
         if (test(variables, zoneId)) {
-            if (trueBlock != null) trueBlock.run(variables, zoneId);
+            if (trueBlock != null) trueBlock.run(context, variables, zoneId);
         } else {
-            if (falseBlock != null) falseBlock.run(variables, zoneId);
+            if (falseBlock != null) falseBlock.run(context, variables, zoneId);
         }
     }
 

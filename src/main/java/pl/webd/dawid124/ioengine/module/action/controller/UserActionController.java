@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiMacroRequest;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
-import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
+import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -21,11 +20,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserActionController {
 
-    private final UserActionService userActionService;
+    private final ActionService userActionService;
     private final MacroService macroService;
     private final StateService stateService;
 
-    public UserActionController(UserActionService userActionService, MacroService macroService, StateService stateService) {
+    public UserActionController(ActionService userActionService, MacroService macroService, StateService stateService) {
         this.userActionService = userActionService;
         this.macroService = macroService;
         this.stateService = stateService;

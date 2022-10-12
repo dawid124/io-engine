@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.timer.structure;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
@@ -20,12 +21,13 @@ public class Timer {
 
     private List<IBlock> blocks;
 
-    public void run(ScheduledExecutorService scheduler, Map<String, IVariable> variable, Integer time) {
+    public void run(AutomationContext context, ScheduledExecutorService scheduler,
+                    Map<String, IVariable> variable, Integer time) {
         cancel();
 
         if (time == null) time = defaultTime;
 
-        future = scheduler.schedule(() -> blocks.forEach(b -> b.run(variable, zoneId)), time, TimeUnit.MILLISECONDS);
+        future = scheduler.schedule(() -> blocks.forEach(b -> b.run(context, variable, zoneId)), time, TimeUnit.MILLISECONDS);
     }
 
     public void cancel() {

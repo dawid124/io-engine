@@ -7,7 +7,7 @@ public enum ERunnerBlockType {
     ACTION(ActionRunnerBlock.class),
     CMD(CMDRunnerBlock.class),
     SCENE_CHANGE(SceneChangeRunnerBlock.class),
-    BLIND_ACTION(ActionRunnerBlock.class),
+    BLIND_ACTION(BlindActionRunnerBlock.class),
     GLOBAL_VARIABLE_CHANGE(null),
     ZONE_VARIABLE_CHANGE(null),
     TIMER(TimerRunnerBlock.class);

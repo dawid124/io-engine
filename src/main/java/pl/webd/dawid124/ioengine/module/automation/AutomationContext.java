@@ -1,0 +1,34 @@
+package pl.webd.dawid124.ioengine.module.automation;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import pl.webd.dawid124.ioengine.module.action.service.ActionService;
+import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
+import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
+import pl.webd.dawid124.ioengine.module.state.service.StateService;
+
+@Component
+public class AutomationContext {
+
+    private final ApplicationContext appContext;
+
+    public AutomationContext(ApplicationContext appContext) {
+        this.appContext = appContext;
+    }
+
+    public TimerService getTimerService() {
+        return (TimerService) appContext.getBean("timerService");
+    }
+
+    public MacroService getMacroService() {
+        return (MacroService) appContext.getBean("macroService");
+    }
+
+    public StateService getStateService() {
+        return (StateService) appContext.getBean("stateService");
+    }
+
+    public ActionService getActionService() {
+        return (ActionService) appContext.getBean("actionService");
+    }
+}

@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.sctructure;
 
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
@@ -21,8 +22,8 @@ public class Macro {
         blocks = new ArrayList<>();
     }
 
-    public void run(Map <String, IVariable> variables) {
-        blocks.forEach(b -> b.run(variables, zoneId));
+    public void run(AutomationContext context, Map <String, IVariable> variables) {
+        blocks.forEach(b -> b.run(context, variables, zoneId));
     }
 
     public String getId() {
