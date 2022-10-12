@@ -12,10 +12,14 @@ public class LightStateActionRunnerBlock extends RunnerBlock {
 
     private final LedChangeData ledChangeData;
 
-    public LightStateActionRunnerBlock(RunnerService runnerService, List<UiAction> actions, LedChangeData ledChangeData) {
+    private final List<String> sceneIds;
+
+    public LightStateActionRunnerBlock(RunnerService runnerService, List<UiAction> actions,
+                                       LedChangeData ledChangeData, List<String> sceneIds) {
         super(runnerService);
         this.actions = actions;
         this.ledChangeData = ledChangeData;
+        this.sceneIds = sceneIds;
     }
 
     @Override public ERunnerBlockType getRunnerType() {
@@ -28,5 +32,9 @@ public class LightStateActionRunnerBlock extends RunnerBlock {
 
     public LedChangeData getLedChangeData() {
         return ledChangeData;
+    }
+
+    public List<String> getSceneIds() {
+        return sceneIds;
     }
 }

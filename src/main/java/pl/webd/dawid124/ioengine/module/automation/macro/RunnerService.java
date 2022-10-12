@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.automation.macro;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.service.UserActionService;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.*;
@@ -16,7 +17,9 @@ import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -40,7 +43,7 @@ public class RunnerService {
         switch (runner.getRunnerType()) {
             case STATE_ACTION:
                 ZoneState zoneState = stateService.getZoneState().get(zoneId);
-                return processStateAction((LightStateActionRunnerBlock) runner, variables, zoneId, zoneState);
+                return processStateAction((LightStateActionRunnerBlock) runner, zoneId, zoneState);
             case TIMER:
                 return processTimer((TimerRunnerBlock) runner, variables);
             case MACRO_RUNNER:
@@ -118,11 +121,18 @@ public class RunnerService {
         return true;
     }
 
-    private boolean processStateAction(LightStateActionRunnerBlock runner, Map<String, IVariable> variables, String zoneId, ZoneState zoneState) {
-        String stateId = getStateId(variables, zoneState);
-        SceneState sceneState = zoneState.getSceneStates().get(stateId);
+    private boolean processStateAction(LightStateActionRunnerBlock runner, String zoneId, ZoneState zoneState) {
+        List<String> sceneIds = new ArrayList<>();
+        if (CollectionUtils.isEmpty(runner.getSceneIds())) {
+            sceneIds.add(zoneState.getActiveScene());
+        } else {
+            sceneIds.addAll(runner.getSceneIds());
+        }
 
-        userActionService.processLights(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
+        sceneIds.forEach(id -> {
+            SceneState sceneState = zoneState.getSceneStates().get(id);
+            userActionService.processLights(new UiActionRequest(zoneId, sceneState.getId(), runner.getActions(), runner.getLedChangeData()));
+        });
 
         return true;
     }

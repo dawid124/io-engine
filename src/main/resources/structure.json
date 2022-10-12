@@ -3250,7 +3250,7 @@
                 "ioId": "other-manual-group",
                 "name": "Parter",
                 "ioType": "RGBW",
-                "brightness": 0,
+                "brightness": 255,
                 "animationId": 0,
                 "color": {
                   "r": 0,

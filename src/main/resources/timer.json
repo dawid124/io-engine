@@ -7,6 +7,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto", "manual"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -33,6 +34,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto", "manual"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -69,6 +71,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto", "manual"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -103,40 +106,25 @@
       "defaultTime": 30000,
       "blocks": [
         {
-          "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
+          "blockType": "RUNNER",
+          "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto"],
+          "ledChangeData": {
+            "time": 8000,
+            "stepTime": 30
+          },
+          "actions": [
             {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "STRING",
-                "value": "auto"
+              "ioId": "rgbw-office",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
               }
             }
-          ],
-          "trueBlock": {
-            "blockType": "RUNNER",
-            "runnerType": "STATE_ACTION",
-            "ledChangeData": {
-              "time": 8000,
-              "stepTime": 30
-            },
-            "actions": [
-              {
-                "ioId": "rgbw-office",
-                "brightness": 0,
-                "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
-                  "w": 255
-                }
-              }
-            ]
-          }
+          ]
         }
       ]
     },
@@ -145,25 +133,9 @@
       "defaultTime": 15000,
       "blocks": [
         {
-          "blockType": "CONDITION",
-          "conditionType": "SIMPLE",
-          "conditions": [
-            {
-              "logicalCondition": "EQUAL",
-              "fetcher": {
-                "fetcherType": "CURRENT_STATE_VARIABLE"
-              },
-              "testValue": {
-                "type": "STRING",
-                "value": "auto"
-              }
-            }
-          ],
-          "trueBlock": {
-            "blockType": "RUNNER",
-            "runnerType": "MACRO_RUNNER",
-            "macroId": "kitchen-light-off-medium-macro"
-          }
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "kitchen-light-off-medium-macro"
         }
       ]
     },
@@ -201,6 +173,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -279,6 +252,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
@@ -306,6 +280,7 @@
         {
           "blockType": "RUNNER",
           "runnerType": "STATE_ACTION",
+          "sceneIds": ["auto"],
           "ledChangeData": {
             "time": 4000,
             "stepTime": 30
