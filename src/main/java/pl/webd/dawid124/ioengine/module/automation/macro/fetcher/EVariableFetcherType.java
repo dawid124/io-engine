@@ -7,6 +7,7 @@ public enum EVariableFetcherType {
     ZONE_VARIABLE(null),
     CURRENT_STATE_VARIABLE(CurrentStateVariableFetcher.class),
     SENSOR_INACTIVE_FOR_TIME(SensorInactiveForTimeVariableFetcher.class),
+    SENSOR_ACTIVE_IN_TIME(SensorActiveInTimeVariableFetcher.class),
     TIMER(null),
     CURRENT_TIME(CurrentTimeFetcher.class);
 

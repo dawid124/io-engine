@@ -1,0 +1,94 @@
+triggers:
+  pir-lobby:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: lobby-pir-macro
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: sudo -u pi DISPLAY=:0.0 xscreensaver-command -deactivate
+  pir-satel-lobby:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: lobby2-a-pir-macro
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: sudo -u pi DISPLAY=:0.0 xscreensaver-command -deactivate
+  pir-office:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: office-pir-macro
+  pir-kitchen:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: kitchen-pir-macro
+  pir-tv:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-pir-macro
+  pir-satel-dinner:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: dinner-pir-macro
+  pir-wc:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: wc-pir-macro
+  pir-satel-lobby-up:
+    zoneId: other
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: lobby-up-pir-macro
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: lobby-stairs-down-up-on-macro
+  pir-f2-lobby:
+    zoneId: other
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: lobby-up-pir-macro
+  pir-bedroom:
+    zoneId: bedroom
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: bedroom-pir-macro
+  pir-war-m:
+    zoneId: bedroom
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: wardrobe-m-pir-macro
+  pir-war-d:
+    zoneId: bedroom
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: wardrobe-d-pir-macro
+  pir-p1:
+    zoneId: p1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: p1-pir-macro
+  pir-p2:
+    zoneId: p2
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: p2-pir-macro

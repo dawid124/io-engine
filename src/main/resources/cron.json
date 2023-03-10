@@ -27,7 +27,7 @@
                 "compareType": "EQUAL",
                 "fetcher": {
                   "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                  "second": 1200,
+                  "second": 2700,
                   "sensorId": "pir-bedroom"
                 },
                 "testValue": {
@@ -36,6 +36,56 @@
                 }
               }
               ]
+          },
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "SCENE_CHANGE",
+                "newSceneId": "auto"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "war-m-clear-to-auto-if-no-motion": {
+      "id": "war-m-clear-to-auto-if-no-motion",
+      "zoneId": "war-m",
+      "cron": "0 0/3 * * * ?",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
+              {
+                "type": "COMPARE",
+                "compareType": "NOT_EQUAL",
+                "fetcher": {
+                  "fetcherType": "CURRENT_STATE_VARIABLE"
+                },
+                "testValue": {
+                  "type": "STRING",
+                  "value": "auto"
+                }
+              },
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 900,
+                  "sensorId": "pir-war-m"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ]
           },
           "trueBlock": {
             "blockType": "BLOCK",
@@ -61,8 +111,8 @@
           "actions": [
             {
               "ioId": "syp",
-              "action": "UP",
-              "time": 780
+              "action": "DIM_UP",
+              "percent": 60
             }
           ]
         }
@@ -79,8 +129,8 @@
           "actions": [
             {
               "ioId": "syp",
-              "action": "DOWN",
-              "time": 1300
+              "action": "DIM_DOWN",
+              "percent": 100
             }
           ]
         }
@@ -133,6 +183,19 @@
                   "type": "BOOLEAN",
                   "value": true
                 }
+              },
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
+                  "second": 7200,
+                  "sensorId": "pir-tv"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
               }
             ]
           },
@@ -177,7 +240,7 @@
                 "compareType": "EQUAL",
                 "fetcher": {
                   "fetcherType": "SENSOR_INACTIVE_FOR_TIME",
-                  "second": 1200,
+                  "second": 2700,
                   "sensorId": "pir-office"
                 },
                 "testValue": {

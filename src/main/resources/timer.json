@@ -101,6 +101,78 @@
         }
       ]
     },
+    "tv-light-off-timer": {
+      "zoneId": "floor1",
+      "defaultTime": 5000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "STATE_ACTION",
+          "sceneIds": [
+            "auto"
+          ],
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "n-tv",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "rgbw-tv1",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            },
+            {
+              "ioId": "rgbw-tv2",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dinner-light-off-timer": {
+      "zoneId": "floor1",
+      "defaultTime": 5000,
+      "blocks": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "STATE_ACTION",
+          "sceneIds": [
+            "auto", "tv", "night"
+          ],
+          "ledChangeData": {
+            "time": 4000,
+            "stepTime": 30
+          },
+          "actions": [
+            {
+              "ioId": "dinner-m",
+              "brightness": 0
+            }
+          ]
+        }
+      ]
+    },
     "office-light-off-timer": {
       "zoneId": "office",
       "defaultTime": 30000,
@@ -196,7 +268,7 @@
       ]
     },
     "wardrobe-m-light-off-timer": {
-      "zoneId": "bedroom",
+      "zoneId": "war-m",
       "defaultTime": 10000,
       "blocks": [
         {
@@ -205,6 +277,19 @@
           "actions": [
             {
               "ioId": "cct-wardrobe-m",
+              "brightness": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "w": 255,
+                "ww": 255
+              },
+              "time": 4000,
+              "stepTime": 30
+            },
+            {
+              "ioId": "cct-wardrobe-m2",
               "brightness": 0,
               "color": {
                 "r": 0,

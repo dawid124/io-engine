@@ -17,7 +17,7 @@ public class BlindActionRunnerBlock extends RunnerBlock {
     }
 
     @Override public ERunnerBlockType getRunnerType() {
-        return ERunnerBlockType.ACTION;
+        return ERunnerBlockType.BLIND_ACTION;
     }
 
     @Override

@@ -41,12 +41,32 @@
       ]
     },
     "pir-kitchen": {
-      "zoneId": "office",
+      "zoneId": "floor1",
       "blocs": [
         {
           "blockType": "RUNNER",
           "runnerType": "MACRO_RUNNER",
           "macroId": "kitchen-pir-macro"
+        }
+      ]
+    },
+    "pir-tv": {
+      "zoneId": "floor1",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "tv-pir-macro"
+        }
+      ]
+    },
+    "pir-satel-dinner": {
+      "zoneId": "floor1",
+      "blocs": [
+        {
+          "blockType": "RUNNER",
+          "runnerType": "MACRO_RUNNER",
+          "macroId": "dinner-pir-macro"
         }
       ]
     },

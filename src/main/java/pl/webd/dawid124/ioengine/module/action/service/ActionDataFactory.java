@@ -34,9 +34,9 @@ final class ActionDataFactory {
     public static List<IoAction> buildActionsForFullScene(Map<String, IDevice> devices, SceneState sceneState) {
         List<IoAction> actions = new ArrayList<>();
         for (GroupState groupState: sceneState.getGroupState().values()) {
-            LedDeviceState state = (LedDeviceState) groupState.getState();
-            double brightnessPercent = (double) state.getBrightness() / (double) MAX_BRIGHTNESS;
-            actions.addAll(buildActions(devices, groupState, new LedChangeData(), 0, brightnessPercent));
+//            LedDeviceState state = (LedDeviceState) groupState.getState();
+//            double brightnessPercent = (double) state.getBrightness() / (double) MAX_BRIGHTNESS;
+            actions.addAll(buildActions(devices, groupState, new LedChangeData(), 0, FULL_PERCENT));
         }
 
         return actions;

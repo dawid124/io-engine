@@ -11,7 +11,6 @@ import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
-import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -23,10 +22,9 @@ public class TriggerService implements MessageHandler {
 
     private TriggerStructure triggerStructure;
 
-
     private final AutomationContext context;
 
-    public TriggerService(StateService stateService, AutomationContext context) {
+    public TriggerService(AutomationContext context) {
         this.context = context;
     }
 
@@ -35,7 +33,13 @@ public class TriggerService implements MessageHandler {
     public void handleMessage(Message<?> message) throws MessagingException {
         SensorTriggerMsg triggerMsg = gson.fromJson((String) message.getPayload(), SensorTriggerMsg.class);
 
-        updateSensorState(triggerMsg);
+        DeviceState deviceState = context.getStateService().getSensors().get(triggerMsg.getId());
+
+        if (((MotionSensorState) deviceState).isLock()) {
+            return;
+        }
+
+        updateSensorState(deviceState, triggerMsg);
 
         Trigger trigger = triggerStructure.getTriggers().get(triggerMsg.getId());
         if (trigger != null) {
@@ -46,9 +50,7 @@ public class TriggerService implements MessageHandler {
         }
     }
 
-    private void updateSensorState(SensorTriggerMsg triggerMsg) {
-        DeviceState deviceState = context.getStateService().getSensors().get(triggerMsg.getId());
-
+    private void updateSensorState(DeviceState deviceState, SensorTriggerMsg triggerMsg) {
         if (deviceState == null || !(deviceState instanceof MotionSensorState)) return;
 
         if (triggerMsg.isState()) {

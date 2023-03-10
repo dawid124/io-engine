@@ -31,6 +31,8 @@ public class SoundDefinitionService {
     public static final String DEFAULT_SOUND_DEFINITION = "classpath:defaultSoundDefinition.json";
     public static final String DEFAULT_EQ1 = "classpath:equalizer1.json";
     public static final String DEFAULT_EQ2 = "classpath:equalizer2.json";
+    public static final String SYLWESTER = "classpath:sylwester.json";
+    public static final String SYLWESTER_LIGHT = "classpath:sylwester-light.json";
 
     private final SoundProperties soundProperties;
 
@@ -63,6 +65,8 @@ public class SoundDefinitionService {
         list.add(DEFAULT_SOUND_DEFINITION);
         list.add(DEFAULT_EQ1);
         list.add(DEFAULT_EQ2);
+        list.add(SYLWESTER);
+        list.add(SYLWESTER_LIGHT);
 
         try (Stream<Path> paths = Files.walk(Paths.get(soundProperties.getPresetLocation()))) {
             list.addAll(paths

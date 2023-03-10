@@ -157,6 +157,8 @@ public class DeviceService {
         addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
         addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
 
+        addDevice(new MotionSensor("pir-tv", "Pir Tv", floor1Driver2Local, 20));
+
 
         addDevice(new NeoDevice("w5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));
         addDevice(new NeoDevice("w6", "Wall 6", floor1Driver2Local, 13, 155, true, ENeoType.NEO_GRB));
@@ -171,6 +173,7 @@ public class DeviceService {
         addDevice(new CctDevice("cct-p1", "Pokój 1", floor2Driver0ExpanderA, 8, 9));
         addDevice(new CctDevice("cct-p2", "Pokój 2", floor2Driver0ExpanderA, 10, 11));
         addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
+        addDevice(new CctDevice("cct-wardrobe-m2", "Szafa Magda 2", floor2Driver0ExpanderA, 14, 15));
 
         addDevice(new MotionSensor("pir-war-m", "Pir Szafa Magda", floor2Driver0Local, 0));
         addDevice(new MotionSensor("pir-war-d", "Pir Szafa Dawid", floor2Driver0Local, 1));

@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiMacroRequest;
+import pl.webd.dawid124.ioengine.module.action.model.rest.UiSensorRequest;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
+import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
@@ -50,6 +53,18 @@ public class UserActionController {
         SceneState sceneState = stateService.fetchScene(action.getZoneId(), action.getSceneId());
 
         return ResponseEntity.ok(new SceneStateResponse(action.getZoneId(), sceneState));
+    }
+
+    @PostMapping(value = "/api/sensor-lock", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<UiSensorRequest> sensorLock(@RequestBody UiSensorRequest action) {
+
+        MotionSensorState sensorState = (MotionSensorState) stateService.getSensors().get(action.getSensorId());
+        sensorState.setLock(!action.isLock());
+        action.setLock(!action.isLock());
+
+        return ResponseEntity.ok(action);
     }
 
     @PostMapping(value = "/api/macros", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

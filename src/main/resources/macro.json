@@ -274,7 +274,174 @@
                 "runnerType": "TIMER",
                 "timerId": "office-light-off-timer",
                 "action": "RUN",
-                "time": 10000
+                "time": 30000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "tv-pir-macro": {
+      "zoneId": "floor1",
+      "name": "TV",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "condition": {
+            "type": "COMPARE",
+            "compareType": "EQUAL",
+            "fetcher": {
+              "fetcherType": "MACRO_VARIABLE",
+              "key": "pir-value"
+            },
+            "testValue": {
+              "type": "BOOLEAN",
+              "value": true
+            }
+          },
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "tv-light-off-timer",
+                "action": "CLEAR"
+              },
+              {
+                "blockType": "RUNNER",
+                "sceneIds": [
+                  "auto"
+                ],
+                "runnerType": "STATE_ACTION",
+                "ledChangeData": {
+                  "time": 1000,
+                  "stepTime": 30
+                },
+                "actions": [
+                  {
+                    "ioId": "n-tv",
+                    "brightness": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  {
+                    "ioId": "rgbw-tv1",
+                    "brightness": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  },
+                  {
+                    "ioId": "rgbw-tv2",
+                    "brightness": 100,
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "w": 255
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "falseBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "tv-light-off-timer",
+                "action": "UPDATE_TIME",
+                "time": 30000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "dinner-pir-macro": {
+      "zoneId": "floor1",
+      "name": "TV",
+      "blocks": [
+        {
+          "blockType": "CONDITION",
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "SENSOR_ACTIVE_IN_TIME",
+                  "second": 600,
+                  "sensorId": "pir-kitchen"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              },
+              {
+                "type": "COMPARE",
+                "compareType": "EQUAL",
+                "fetcher": {
+                  "fetcherType": "MACRO_VARIABLE",
+                  "key": "pir-value"
+                },
+                "testValue": {
+                  "type": "BOOLEAN",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "trueBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "dinner-light-off-timer",
+                "action": "CLEAR"
+              },
+              {
+                "blockType": "RUNNER",
+                "sceneIds": [
+                  "auto", "night"
+                ],
+                "runnerType": "STATE_ACTION",
+                "ledChangeData": {
+                  "time": 1000,
+                  "stepTime": 30
+                },
+                "actions": [
+                  {
+                    "ioId": "dinner-m",
+                    "brightness": 150
+                  }
+                ]
+              }
+            ]
+          },
+          "falseBlock": {
+            "blockType": "BLOCK",
+            "blocs": [
+              {
+                "blockType": "RUNNER",
+                "runnerType": "TIMER",
+                "timerId": "dinner-light-off-timer",
+                "action": "UPDATE_TIME",
+                "time": 25000
               }
             ]
           }
@@ -323,7 +490,7 @@
                 "runnerType": "TIMER",
                 "timerId": "kitchen-light-off-medium-timer",
                 "action": "UPDATE_TIME",
-                "time": 10000
+                "time": 20000
               }
             ]
           }
@@ -626,29 +793,20 @@
       ]
     },
     "wardrobe-m-pir-macro": {
-      "zoneId": "bedroom",
+      "zoneId": "war-m",
       "name": "Szafa Magda makro",
       "blocks": [
         {
           "blockType": "CONDITION",
           "condition": {
             "type": "COMPARE",
-            "compareType": "IN",
+            "compareType": "EQUAL",
             "fetcher": {
               "fetcherType": "CURRENT_STATE_VARIABLE"
             },
             "testValue": {
-              "type": "LIST",
-              "value": [
-                {
-                  "type": "STRING",
-                  "value": "auto"
-                }
-                //                  {
-                //                    "type": "STRING",
-                //                    "value": "manual"
-                //                  }
-              ]
+              "type": "STRING",
+              "value": "auto"
             }
           },
           "trueBlock": {
@@ -680,12 +838,25 @@
                   "actions": [
                     {
                       "ioId": "cct-wardrobe-m",
-                      "brightness": 255,
+                      "brightness": 200,
                       "color": {
                         "r": 0,
                         "g": 0,
                         "b": 0,
                         "w": 255,
+                        "ww": 255
+                      },
+                      "time": 1000,
+                      "stepTime": 30
+                    },
+                    {
+                      "ioId": "cct-wardrobe-m2",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 0,
                         "ww": 255
                       },
                       "time": 1000,
@@ -703,7 +874,7 @@
                   "runnerType": "TIMER",
                   "timerId": "wardrobe-m-light-off-timer",
                   "action": "UPDATE_TIME",
-                  "time": 10000
+                  "time": 30000
                 }
               ]
             }
@@ -804,63 +975,221 @@
         {
           "blockType": "CONDITION",
           "condition": {
-            "type": "COMPARE",
-            "compareType": "EQUAL",
-            "fetcher": {
-              "fetcherType": "MACRO_VARIABLE",
-              "key": "pir-value"
-            },
-            "testValue": {
-              "type": "BOOLEAN",
-              "value": true
-            }
-          },
-          "trueBlock": {
-            "blockType": "BLOCK",
-            "blocs": [
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
               {
-                "blockType": "RUNNER",
-                "runnerType": "TIMER",
-                "timerId": "p1-light-off-timer",
-                "action": "CLEAR"
+                "type": "COMPARE",
+                "compareType": "GREATER_EQUALS",
+                "fetcher": {
+                  "fetcherType": "CURRENT_TIME"
+                },
+                "testValue": {
+                  "type": "TIME",
+                  "value": "06:30:00"
+                }
               },
               {
-                "blockType": "RUNNER",
-                "runnerType": "STATE_ACTION",
-                "sceneIds": [
-                  "auto"
-                ],
-                "ledChangeData": {
-                  "time": 1000,
-                  "stepTime": 30
+                "type": "COMPARE",
+                "compareType": "LESS_THEN",
+                "fetcher": {
+                  "fetcherType": "CURRENT_TIME"
                 },
-                "actions": [
+                "testValue": {
+                  "type": "TIME",
+                  "value": "21:00:00"
+                }
+              }
+            ]
+          },
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            },
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "STATE_ACTION",
+                  "sceneIds": [
+                    "auto"
+                  ],
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p1",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 60000
+                }
+              ]
+            }
+          }
+        },
+        {
+          "blockType": "CONDITION",
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "OR",
+            "conditions": [
+              {
+                "type": "LOGIC",
+                "logicalType": "AND",
+                "conditions": [
                   {
-                    "ioId": "cct-p1",
-                    "brightness": 255,
-                    "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
-                      "w": 255,
-                      "ww": 255
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "21:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:59:59"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "LOGIC",
+                "logicalType": "AND",
+                "conditions": [
+                  {
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "00:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "06:30:00"
                     }
                   }
                 ]
               }
             ]
           },
-          "falseBlock": {
-            "blockType": "BLOCK",
-            "blocs": [
-              {
-                "blockType": "RUNNER",
-                "runnerType": "TIMER",
-                "timerId": "p1-light-off-timer",
-                "action": "UPDATE_TIME",
-                "time": 10000
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ]
+            },
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "STATE_ACTION",
+                  "sceneIds": [
+                    "auto"
+                  ],
+                  "ledChangeData": {
+                    "time": 30,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p1",
+                      "brightness": 10,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p1-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 60000
+                }
+              ]
+            }
           }
         }
       ]
@@ -872,63 +1201,221 @@
         {
           "blockType": "CONDITION",
           "condition": {
-            "type": "COMPARE",
-            "compareType": "EQUAL",
-            "fetcher": {
-              "fetcherType": "MACRO_VARIABLE",
-              "key": "pir-value"
-            },
-            "testValue": {
-              "type": "BOOLEAN",
-              "value": true
-            }
-          },
-          "trueBlock": {
-            "blockType": "BLOCK",
-            "blocs": [
+            "type": "LOGIC",
+            "logicalType": "AND",
+            "conditions": [
               {
-                "blockType": "RUNNER",
-                "runnerType": "TIMER",
-                "timerId": "p2-light-off-timer",
-                "action": "CLEAR"
+                "type": "COMPARE",
+                "compareType": "GREATER_EQUALS",
+                "fetcher": {
+                  "fetcherType": "CURRENT_TIME"
+                },
+                "testValue": {
+                  "type": "TIME",
+                  "value": "06:30:00"
+                }
               },
               {
-                "blockType": "RUNNER",
-                "runnerType": "STATE_ACTION",
-                "sceneIds": [
-                  "auto"
-                ],
-                "ledChangeData": {
-                  "time": 1000,
-                  "stepTime": 30
+                "type": "COMPARE",
+                "compareType": "LESS_THEN",
+                "fetcher": {
+                  "fetcherType": "CURRENT_TIME"
                 },
-                "actions": [
+                "testValue": {
+                  "type": "TIME",
+                  "value": "21:00:00"
+                }
+              }
+            ]
+          },
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
+              }
+            },
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "STATE_ACTION",
+                  "sceneIds": [
+                    "auto"
+                  ],
+                  "ledChangeData": {
+                    "time": 1000,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p2",
+                      "brightness": 255,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 60000
+                }
+              ]
+            }
+          }
+        },
+        {
+          "blockType": "CONDITION",
+          "condition": {
+            "type": "LOGIC",
+            "logicalType": "OR",
+            "conditions": [
+              {
+                "type": "LOGIC",
+                "logicalType": "AND",
+                "conditions": [
                   {
-                    "ioId": "cct-p2",
-                    "brightness": 255,
-                    "color": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
-                      "w": 255,
-                      "ww": 255
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "21:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "23:59:59"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "LOGIC",
+                "logicalType": "AND",
+                "conditions": [
+                  {
+                    "type": "COMPARE",
+                    "compareType": "GREATER_EQUALS",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "00:00:00"
+                    }
+                  },
+                  {
+                    "type": "COMPARE",
+                    "compareType": "LESS_THEN",
+                    "fetcher": {
+                      "fetcherType": "CURRENT_TIME"
+                    },
+                    "testValue": {
+                      "type": "TIME",
+                      "value": "06:30:00"
                     }
                   }
                 ]
               }
             ]
           },
-          "falseBlock": {
-            "blockType": "BLOCK",
-            "blocs": [
-              {
-                "blockType": "RUNNER",
-                "runnerType": "TIMER",
-                "timerId": "p2-light-off-timer",
-                "action": "UPDATE_TIME",
-                "time": 10000
+          "trueBlock": {
+            "blockType": "CONDITION",
+            "condition": {
+              "type": "COMPARE",
+              "compareType": "EQUAL",
+              "fetcher": {
+                "fetcherType": "MACRO_VARIABLE",
+                "key": "pir-value"
+              },
+              "testValue": {
+                "type": "BOOLEAN",
+                "value": true
               }
-            ]
+            },
+            "trueBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
+                  "action": "CLEAR"
+                },
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "STATE_ACTION",
+                  "sceneIds": [
+                    "auto"
+                  ],
+                  "ledChangeData": {
+                    "time": 30,
+                    "stepTime": 30
+                  },
+                  "actions": [
+                    {
+                      "ioId": "cct-p2",
+                      "brightness": 10,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "w": 255,
+                        "ww": 255
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "falseBlock": {
+              "blockType": "BLOCK",
+              "blocs": [
+                {
+                  "blockType": "RUNNER",
+                  "runnerType": "TIMER",
+                  "timerId": "p2-light-off-timer",
+                  "action": "UPDATE_TIME",
+                  "time": 60000
+                }
+              ]
+            }
           }
         }
       ]
@@ -1381,13 +1868,13 @@
                         "auto"
                       ],
                       "ledChangeData": {
-                        "time": 0,
+                        "time": 30,
                         "stepTime": 30
                       },
                       "actions": [
                         {
                           "ioId": "cct-bedroom-o",
-                          "brightness": 3,
+                          "brightness": 4,
                           "color": {
                             "r": 0,
                             "g": 0,
@@ -1429,7 +1916,7 @@
             {
               "ioId": "entryGate1",
               "action": "TEMP_ON",
-              "time": 300
+              "time": 500
             }
           ]
         }

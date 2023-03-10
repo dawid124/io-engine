@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
+import pl.webd.dawid124.ioengine.module.state.model.device.NeoDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
+import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
@@ -44,6 +46,30 @@ public class ActionService {
         stateService.updateScene(zoneId, sceneId);
 
         SceneState sceneState = stateService.fetchScene(zoneId, sceneId);
+
+
+        List<IoAction> actions= actionDataService.fromSceneState(sceneState);
+
+        sendMqttActions(actions);
+
+        return sceneState;
+    }
+
+    public SceneState chngeLightPercent(String zoneId, int percent) {
+        int val = (int) ((percent / (float) 100) * 255);
+        ZoneState zone = stateService.getZoneState().get(zoneId);
+        SceneState scece = zone.getSceneStates().get(zone.getActiveScene());
+        scece.getGroupState().forEach((name, gs) -> {
+            UiAction action = new UiAction();
+            if (gs.getState() instanceof NeoDeviceState) {
+                NeoDeviceState state = (NeoDeviceState) gs.getState();
+                action.setAnimationId(state.getAnimationId());
+                action.setSpeed(state.getSpeed());
+            }
+            action.setBrightness(val);
+            stateService.updateSateByUiAction(gs, action);
+        });
+        SceneState sceneState = stateService.fetchScene(zoneId, zone.getActiveScene());
 
 
         List<IoAction> actions= actionDataService.fromSceneState(sceneState);

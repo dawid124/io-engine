@@ -7,6 +7,8 @@ public class MotionSensorState extends DeviceState {
 
     private boolean state;
 
+    private boolean lock;
+
     private LocalDateTime lastActiveDate;
     private LocalDateTime lastDeActiveDate;
 
@@ -29,6 +31,14 @@ public class MotionSensorState extends DeviceState {
 
     public void setLastActiveDate(LocalDateTime lastActiveDate) {
         this.lastActiveDate = lastActiveDate;
+    }
+
+    public boolean isLock() {
+        return lock;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 
     public LocalDateTime getLastInactiveDate() {

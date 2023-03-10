@@ -35,7 +35,8 @@ public class Recorder {
         Mixer.Info[] mi = AudioSystem.getMixerInfo();
 
         for (Mixer.Info info : mi) {
-            if (info.getDescription().equals("Direct Audio Device: Creative Live! Cam Sync 1080p V, USB Audio, USB Audio")) {
+            if (info.getDescription().equals("Direct Audio Device: Creative Live! Cam Sync 1080p V, USB Audio, USB Audio") ||
+                    info.getDescription().equals("Direct Audio Device: USB Audio Device, USB Audio, USB Audio")) {
                 Mixer m = AudioSystem.getMixer(info);
                 Line.Info[] sl = m.getTargetLineInfo();
                 for (Line.Info info2 : sl) {
