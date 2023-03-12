@@ -29,7 +29,7 @@ import java.io.IOException;
     @PostConstruct
     public void init() {
         try {
-            String structure = ResourceUtils.getResourceFileAsString("classpath:structure.json");
+            String structure = ResourceUtils.getResourceYamlAsJson("classpath:structure.yaml");
             home = gson.fromJson(structure, Home.class);
         } catch (IOException e) {
             e.printStackTrace();

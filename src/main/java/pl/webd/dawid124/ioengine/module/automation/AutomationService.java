@@ -61,22 +61,22 @@ public class AutomationService {
     }
 
     public TriggerStructure fetchTriggerStructure() throws IOException {
-        String structure = ResourceUtils.getResourceFileAsString("classpath:trigger.json");
+        String structure = ResourceUtils.getResourceYamlAsJson("classpath:trigger.yaml");
         return gson.fromJson(structure, TriggerStructure.class);
     }
 
     public MacroStructure fetchMacroStructure() throws IOException {
-        String structure = ResourceUtils.getResourceFileAsString("classpath:macro.json");
+        String structure = ResourceUtils.getResourceYamlAsJson("classpath:macro.yaml");
         return gson.fromJson(structure, MacroStructure.class);
     }
 
     public TimerStructure fetchTimerStructure() throws IOException {
-        String structure = ResourceUtils.getResourceFileAsString("classpath:timer.json");
+        String structure = ResourceUtils.getResourceYamlAsJson("classpath:timer.yaml");
         return gson.fromJson(structure, TimerStructure.class);
     }
 
     public CronStructure fetchCronStructure() throws IOException {
-        String structure = ResourceUtils.getResourceFileAsString("classpath:cron.json");
+        String structure = ResourceUtils.getResourceYamlAsJson("classpath:cron.yaml");
         return gson.fromJson(structure, CronStructure.class);
     }
 }
