@@ -3,8 +3,10 @@ package pl.webd.dawid124.ioengine.module.structure.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonAdapter;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.structure.model.Home;
 import pl.webd.dawid124.ioengine.module.structure.model.Scene;
 import pl.webd.dawid124.ioengine.utils.ResourceUtils;
@@ -23,6 +25,7 @@ import java.io.IOException;
         this.home = new Home();
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(DeviceState.class, new DeviceStateJsonAdapter())
+                .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
                 .create();
     }
 

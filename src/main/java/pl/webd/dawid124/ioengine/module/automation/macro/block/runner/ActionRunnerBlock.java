@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block.runner;
 
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class ActionRunnerBlock extends RunnerBlock {
 
-    private final List<UiAction> actions;
+    private final List<IUiAction> actions;
 
 
-    public ActionRunnerBlock(List<UiAction> actions) {
+    public ActionRunnerBlock(List<IUiAction> actions) {
         this.actions = actions;
     }
 
@@ -25,7 +25,7 @@ public class ActionRunnerBlock extends RunnerBlock {
         context.getActionService().processSimpleActions(actions);
     }
 
-    public List<UiAction> getActions() {
+    public List<IUiAction> getActions() {
         return actions;
     }
 }

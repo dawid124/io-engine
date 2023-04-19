@@ -1,5 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.model.rest;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 
 import java.io.Serializable;
@@ -9,8 +11,7 @@ public class UiActionRequest implements Serializable {
 
     private String zoneId;
     private String sceneId;
-
-    private List<UiAction> ioActions;
+    private List<IUiAction> ioActions;
 
     private LedChangeData ledChangeData;
 
@@ -18,25 +19,25 @@ public class UiActionRequest implements Serializable {
         this.ledChangeData = new LedChangeData();
     }
 
-    public UiActionRequest(String zoneId, String sceneId, List<UiAction> ioActions) {
+    public UiActionRequest(String zoneId, String sceneId, List<IUiAction> ioActions) {
         this.zoneId = zoneId;
         this.sceneId = sceneId;
         this.ioActions = ioActions;
         this.ledChangeData = new LedChangeData();
     }
 
-    public UiActionRequest(String zoneId, String sceneId, List<UiAction> ioActions, LedChangeData ledChangeData) {
+    public UiActionRequest(String zoneId, String sceneId, List<IUiAction> ioActions, LedChangeData ledChangeData) {
         this.zoneId = zoneId;
         this.sceneId = sceneId;
         this.ioActions = ioActions;
         this.ledChangeData = ledChangeData;
     }
 
-    public List<UiAction> getActions() {
+    public List<IUiAction> getActions() {
         return ioActions;
     }
 
-    public void setActions(List<UiAction> ioActions) {
+    public void setActions(List<IUiAction> ioActions) {
         this.ioActions = ioActions;
     }
 

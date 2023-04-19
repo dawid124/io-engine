@@ -2995,3 +2995,13 @@ downBlindMacros:
     label: Okap
     clickMacroId: cookerHood-15m-macro
     holdClickMacroId: cookerHood-60m-macro
+variables:
+  bedroom-brightness-o:
+    type: NUMBER
+    value: 255
+  bedroom-brightness-w:
+    type: NUMBER
+    value: 255
+  bedroom-brightness-cct:
+    type: NUMBER
+    value: 255

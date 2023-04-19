@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.action.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
@@ -36,7 +37,7 @@ public class ActionService {
         this.actionDataService = actionDataService;
     }
 
-    public void processSimpleActions(List<UiAction> actions) {
+    public void processSimpleActions(List<IUiAction> actions) {
         List<IoAction> mqttActions = actionDataService.fromUiAction(actions);
 
         mqttService.sendActionsToDevices(mqttActions);
@@ -86,11 +87,11 @@ public class ActionService {
 
     public UiActionRequest processActionChange(UiActionRequest action) {
 
-        List<UiAction> blinds = new ArrayList<>();
-        List<UiAction> lights = new ArrayList<>();
+        List<IUiAction> blinds = new ArrayList<>();
+        List<IUiAction> lights = new ArrayList<>();
 
         if (action.getActions() != null) {
-            for (UiAction a: action.getActions()) {
+            for (IUiAction a: action.getActions()) {
                 if (a.isBlind()) blinds.add(a);
                 else lights.add(a);
             }
@@ -122,7 +123,7 @@ public class ActionService {
         mqttService.sendActionsToDevices(mqttActions);
     }
 
-    public void processBlinds(List<UiAction> actions) {
+    public void processBlinds(List<IUiAction> actions) {
 
         List<IoAction> mqttActions = blindService.processBlinds(actions);
 

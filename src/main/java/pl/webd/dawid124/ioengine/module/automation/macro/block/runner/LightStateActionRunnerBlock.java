@@ -1,7 +1,7 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block.runner;
 
 import org.springframework.util.CollectionUtils;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
@@ -15,13 +15,13 @@ import java.util.Map;
 
 public class LightStateActionRunnerBlock extends RunnerBlock {
 
-    private final List<UiAction> actions;
+    private final List<IUiAction> actions;
 
     private final LedChangeData ledChangeData;
 
     private final List<String> sceneIds;
 
-    public LightStateActionRunnerBlock(List<UiAction> actions, LedChangeData ledChangeData, List<String> sceneIds) {
+    public LightStateActionRunnerBlock(List<IUiAction> actions, LedChangeData ledChangeData, List<String> sceneIds) {
         this.actions = actions;
         this.ledChangeData = ledChangeData;
         this.sceneIds = sceneIds;
@@ -51,7 +51,7 @@ public class LightStateActionRunnerBlock extends RunnerBlock {
 
     }
 
-    public List<UiAction> getActions() {
+    public List<IUiAction> getActions() {
         return actions;
     }
 

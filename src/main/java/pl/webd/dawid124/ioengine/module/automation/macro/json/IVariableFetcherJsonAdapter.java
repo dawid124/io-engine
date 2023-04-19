@@ -19,6 +19,7 @@ public class IVariableFetcherJsonAdapter implements JsonDeserializer<IVariableFe
     public IVariableFetcher deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
         JsonElement messageType = getType(jsonElement);
 
+
         try {
             EVariableFetcherType blockType = EVariableFetcherType.valueOf(messageType.getAsString());
             return context.deserialize(jsonElement, blockType.getClazz());

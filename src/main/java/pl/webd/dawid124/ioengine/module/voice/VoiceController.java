@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.voice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
@@ -59,7 +60,7 @@ public class VoiceController {
         Entities percent = entities.stream().filter(e -> "percent".equals(e.getEntity())).findFirst().orElse(null);
 
 
-        ArrayList<UiAction> list = new ArrayList<>();
+        ArrayList<IUiAction> list = new ArrayList<>();
 
         structureService.fetchStructure().getZones().get(FLOOR_1).getBlinds().forEach(b -> {
             UiAction uiAction = new UiAction();

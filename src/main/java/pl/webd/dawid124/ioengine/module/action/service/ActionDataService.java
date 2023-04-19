@@ -1,7 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.stereotype.Service;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
@@ -27,7 +27,7 @@ public class ActionDataService {
         this.stateService = stateService;
     }
 
-    public List<IoAction> fromUiAction(List<UiAction> actions) {
+    public List<IoAction> fromUiAction(List<IUiAction> actions) {
         return actions.stream()
                 .map(a -> a.toIoAction(deviceService.fetchDevice(a.getIoId())))
                 .collect(Collectors.toList());

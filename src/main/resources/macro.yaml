@@ -127,7 +127,7 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: rgbw-wc2
-                  brightness: 255
+                  brightness: ${bedroom-brightness-cct}
                   color:
                     r: 0
                     g: 0

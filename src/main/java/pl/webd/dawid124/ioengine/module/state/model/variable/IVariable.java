@@ -8,6 +8,8 @@ public interface IVariable {
 
     EVariableType getType();
 
+    Object getValue();
+
     boolean equals(IVariable test);
 
     default boolean contains(IVariable test) {

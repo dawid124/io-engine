@@ -4,10 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
-import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
-import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
@@ -61,6 +59,8 @@ public class StateService {
 
             sensors.putAll(zoneStructure.getSensors());
         }
+
+        variables.putAll(structureService.fetchStructure().getVariables());
     }
 
     public void resetScene(String zoneId, String sceneId) {
@@ -101,7 +101,7 @@ public class StateService {
     public void updateSateByUiAction(UiActionRequest actionReq) {
         SceneState sceneState = zoneState.get(actionReq.getZoneId()).getSceneStates().get(actionReq.getSceneId());
 
-        for (UiAction action : actionReq.getActions()) {
+        for (IUiAction action : actionReq.getActions()) {
             sceneState.findStateById(action.getIoId()).ifPresent(state -> updateSateByUiAction(state, action));
         }
     }
@@ -114,7 +114,7 @@ public class StateService {
         return variables;
     }
 
-    public void updateSateByUiAction(GroupState item, UiAction action) {
+    public void updateSateByUiAction(GroupState item, IUiAction action) {
 
         if (CollectionUtils.isEmpty(item.getChildren())) {
             updateDeviceSateByUiAction(action, item.getState());
@@ -124,7 +124,7 @@ public class StateService {
 
     }
 
-    private void updateGroupSateByUiAction(UiAction ioAction, GroupState item) {
+    private void updateGroupSateByUiAction(IUiAction ioAction, GroupState item) {
         boolean onlyBrightness = false;
         if (item.getState() instanceof ColorLedDeviceState) {
             ColorLedDeviceState lightState = (ColorLedDeviceState) item.getState();
@@ -162,7 +162,7 @@ public class StateService {
         }
     }
 
-    private void updateDeviceSateByUiAction(UiAction a, DeviceState state) {
+    private void updateDeviceSateByUiAction(IUiAction a, DeviceState state) {
         if (state instanceof ColorLedDeviceState) {
             updateColorLedState((ColorLedDeviceState) state, a);
         } else if (state instanceof NeoDeviceState) {
@@ -172,11 +172,11 @@ public class StateService {
         }
     }
 
-    private void updateLedState(LedDeviceState state, UiAction ioAction) {
+    private void updateLedState(LedDeviceState state, IUiAction ioAction) {
         state.setBrightness(ioAction.getBrightness());
     }
 
-    private void updateColorLedState(ColorLedDeviceState state, UiAction ioAction) {
+    private void updateColorLedState(ColorLedDeviceState state, IUiAction ioAction) {
         if (ioAction.getColor() == null || state.getColor().equals(ioAction.getColor())) {
             state.setBrightness(ioAction.getBrightness());
         } else if (ioAction.getColor() != null) {
@@ -184,7 +184,7 @@ public class StateService {
         }
     }
 
-    private void updateNeoState(NeoDeviceState state, UiAction ioAction) {
+    private void updateNeoState(NeoDeviceState state, IUiAction ioAction) {
         if ((ioAction.getColor() == null || state.getColor().equals(ioAction.getColor()))
                 && state.getAnimationId() == ioAction.getAnimationId()
                 && state.getSpeed() == ioAction.getSpeed()) {

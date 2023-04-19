@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 
 public class BlindDeviceState extends DeviceState {
 

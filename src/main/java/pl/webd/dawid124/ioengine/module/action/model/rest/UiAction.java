@@ -7,7 +7,7 @@ import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.io.Serializable;
 
-public class UiAction implements Serializable {
+public class UiAction implements IUiAction {
 
     private String ioId;
     private String name;
