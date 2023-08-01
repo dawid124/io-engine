@@ -8,6 +8,7 @@ import pl.webd.dawid124.ioengine.module.automation.timer.structure.TimerStructur
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,10 +28,19 @@ public class TimerService {
     }
 
 
-    public void runTimer(Map<String, IVariable> variables, TimerRunnerBlock timerRunner) {
+    public void runTimer(Map<String, IVariable> variables, String zoneId, TimerRunnerBlock timerRunner) {
         Timer timer = timerStructure.getTimers().get(timerRunner.getTimerId());
+
+        if (timer == null) {
+            timer = timerStructure.createTimer(
+                    timerRunner.getTimerId(), zoneId, new ArrayList<>());
+        }
+
         switch (timerRunner.getAction()) {
             case RUN:
+                if (timerRunner.getBlocs() != null) timer.setBlocks(timerRunner.getBlocs());
+                timer.run(context, scheduler, variables, timerRunner.getTime());
+                break;
             case UPDATE_TIME:
                 timer.run(context, scheduler, variables, timerRunner.getTime());
                 break;

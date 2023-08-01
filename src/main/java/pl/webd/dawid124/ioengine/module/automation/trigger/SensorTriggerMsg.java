@@ -21,4 +21,12 @@ public class SensorTriggerMsg {
     public void setState(boolean state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "SensorTriggerMsg{" +
+                "id='" + id + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

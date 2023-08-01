@@ -21,6 +21,15 @@ public class Timer {
 
     private List<IBlock> blocks;
 
+    public Timer() {}
+
+    public Timer(String zoneId, String id, int defaultTime, List<IBlock> blocks) {
+        this.zoneId = zoneId;
+        this.id = id;
+        this.defaultTime = defaultTime;
+        this.blocks = blocks;
+    }
+
     public void run(AutomationContext context, ScheduledExecutorService scheduler,
                     Map<String, IVariable> variable, Integer time) {
         cancel();

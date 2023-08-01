@@ -37,6 +37,7 @@ public class DeviceService {
         PicoDriver floor1Driver0 = new PicoDriver("IO-DRIVER-F1-0");
         PicoDriver floor1Driver1 = new PicoDriver("IO-DRIVER-F1-1");
         PicoDriver floor1Driver2 = new PicoDriver("IO-DRIVER-F1-2");
+        PicoDriver floor1Driver5 = new PicoDriver("IO-DRIVER-F1-5");
         PicoDriver floor2Driver0 = new PicoDriver("IO-DRIVER-F2-0");
         PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
@@ -45,6 +46,7 @@ public class DeviceService {
         drivers.add(floor1Driver0);
         drivers.add(floor1Driver1);
         drivers.add(floor1Driver2);
+        drivers.add(floor1Driver5);
         drivers.add(floor2Driver0);
         drivers.add(floor0Driver0);
         drivers.add(test);
@@ -61,6 +63,8 @@ public class DeviceService {
         PicoDriverConfiguration floor1Driver2ExpanderA = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration floor1Driver2ExpanderB = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
         PicoDriverConfiguration floor1Driver2Local = new PicoDriverConfiguration(floor1Driver2, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+
+        PicoDriverConfiguration floor1Driver5Local = new PicoDriverConfiguration(floor1Driver5, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
         PicoDriverConfiguration testExpanderA = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration testExpanderB = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
@@ -164,6 +168,12 @@ public class DeviceService {
         addDevice(new NeoDevice("w6", "Wall 6", floor1Driver2Local, 13, 155, true, ENeoType.NEO_GRB));
         addDevice(new NeoDevice("w7", "Wall 7", floor1Driver2Local, 14, 155, false, ENeoType.NEO_GRB));
 
+//        FLOOR 1 - DRIVER 5
+
+        addDevice(new SwitchDevice("rainBirdPump", "Zraszacz pompa", floor1Driver5Local, 1, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone1", "Zraszacz strefa 1 - Tuje", floor1Driver5Local, 2, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone2", "Zraszacz strefa 2", floor1Driver5Local, 3, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone3", "Zraszacz strefa 3", floor1Driver5Local, 6, ESwitchType.HIGH_ON));
 
 //        FLOOR 2 - DRIVER 0
         addDevice(new CctDevice("cct-bedroom-w", "Szafa Dawid", floor2Driver0ExpanderA, 0, 1));

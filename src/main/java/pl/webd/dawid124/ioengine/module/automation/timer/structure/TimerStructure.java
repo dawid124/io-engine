@@ -1,6 +1,9 @@
 package pl.webd.dawid124.ioengine.module.automation.timer.structure;
 
+import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TimerStructure {
@@ -13,5 +16,11 @@ public class TimerStructure {
 
     public Map<String, Timer> getTimers() {
         return timers;
+    }
+
+    public Timer createTimer(String id, String zoneId, List<IBlock> blocks) {
+        Timer timer = new Timer(zoneId, id, 0, blocks);
+        timers.put(id, timer);
+        return timer;
     }
 }

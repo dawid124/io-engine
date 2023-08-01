@@ -1,5 +1,7 @@
 package pl.webd.dawid124.ioengine.module.automation.macro.block.condition;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
@@ -9,6 +11,7 @@ import java.util.Map;
 
 public class CompareCondition implements ICondition {
 
+    private static final Logger LOG = LogManager.getLogger(CompareCondition.class);
     private final ECompareCondition compareType;
 
     private final IVariableFetcher fetcher;
@@ -24,6 +27,10 @@ public class CompareCondition implements ICondition {
     @Override
     public boolean test(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
         IVariable variable = fetcher.fetch(context, variables, zoneId);
+
+//        LOG.info("variable: [" + variable.getValue() + "]; " +
+//                "testValue: [" + testValue.getValue() + "]; " +
+//                "compareType: [" + compareType +"]");
 
         switch (compareType) {
             case EQUAL:

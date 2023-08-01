@@ -2995,6 +2995,11 @@ downBlindMacros:
     label: Okap
     clickMacroId: cookerHood-15m-macro
     holdClickMacroId: cookerHood-60m-macro
+  rainBirdPump:
+    id: rain-bird-8m
+    label: Trawin
+    clickMacroId: rain-bird-8m
+    holdClickMacroId: rain-bird-clear
 variables:
   bedroom-brightness-o:
     type: NUMBER

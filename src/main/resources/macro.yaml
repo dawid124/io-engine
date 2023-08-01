@@ -592,6 +592,10 @@ macros:
                 value: auto
               - type: STRING
                 value: manual
+              - type: STRING
+                value: chill
+              - type: STRING
+                value: night
         trueBlock:
           blockType: CONDITION
           condition:
@@ -1303,3 +1307,140 @@ macros:
           - ioId: cookerHood
             action: TEMP_ON
             time: 3600000
+
+  rain-bird-8m:
+    zoneId: ''
+    name: Pompa zraszacze 20m
+    blocks:
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone3
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-3-off-12
+        action: RUN
+        time: 300000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone3
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-1-on-12
+        action: RUN
+        time: 300000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone1
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-1-off-30
+        action: RUN
+        time: 780000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone1
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-2-on-30
+        action: RUN
+        time: 780000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-2-off-48
+        action: RUN
+        time: 1200000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-pump-off-48
+        action: RUN
+        time: 1200000
+        blocs:
+        - blockType: RUNNER
+          runnerType: ACTION
+          actions:
+            - ioId: rainBirdPump
+              action: 'OFF'
+  rain-bird-clear:
+    zoneId: ''
+    name: Pompa zraszacze stop
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'OFF'
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone3
+            action: 'OFF'
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone2
+            action: 'OFF'
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'OFF'
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-3-off-12
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-1-on-12
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-1-off-30
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-3-on-30
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-3-off-48
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-pump-off-48
+        action: CLEAR

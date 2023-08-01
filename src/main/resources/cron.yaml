@@ -20,7 +20,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 2700
+                second: 1500
                 sensorId: pir-bedroom
               testValue:
                 type: BOOLEAN

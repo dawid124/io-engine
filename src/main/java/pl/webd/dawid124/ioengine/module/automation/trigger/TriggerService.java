@@ -1,6 +1,8 @@
 package pl.webd.dawid124.ioengine.module.automation.trigger;
 
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
@@ -18,6 +20,7 @@ import java.util.HashMap;
 @Service
 public class TriggerService implements MessageHandler {
 
+    private static final Logger LOG = LogManager.getLogger( TriggerService.class );
     private Gson gson = new Gson();
 
     private TriggerStructure triggerStructure;

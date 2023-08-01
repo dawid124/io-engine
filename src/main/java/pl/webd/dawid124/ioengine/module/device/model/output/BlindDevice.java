@@ -45,8 +45,8 @@ public class BlindDevice extends Device {
         super(id, name, driverConfiguration);
         try {
             GpioController GPIO = GpioFactory.getInstance();
-            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.HIGH);
-            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.HIGH);
+            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.LOW);
+            this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.LOW);
             this.state = new BlindDeviceState(id, name);
 //            moveLocal(EBlindDirection.UP);
         } catch (Exception | Error ex) {
@@ -61,16 +61,16 @@ public class BlindDevice extends Device {
     public void moveLocal(EBlindDirection direction, int time) {
 
         if (EBlindDirection.UP.equals(direction)) {
-            up.setState(PinState.LOW);
-            down.setState(PinState.HIGH);
-        } else {
-            down.setState(PinState.LOW);
             up.setState(PinState.HIGH);
+            down.setState(PinState.LOW);
+        } else {
+            down.setState(PinState.HIGH);
+            up.setState(PinState.LOW);
         }
 
         scheduler.schedule(() -> {
-            down.setState(PinState.HIGH);
-            up.setState(PinState.HIGH);
+            down.setState(PinState.LOW);
+            up.setState(PinState.LOW);
         }, time, TimeUnit.MILLISECONDS);
     }
 
