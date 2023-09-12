@@ -1396,6 +1396,46 @@ macros:
           actions:
             - ioId: rainBirdPump
               action: 'OFF'
+  rain-bird-1h:
+    zoneId: ''
+    name: Pompa wypompowanie 1h
+    blocks:
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-zone-2-off-48
+        action: RUN
+        time: 3600000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone1
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-pump-off-48
+        action: RUN
+        time: 3600000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdPump
+                action: 'OFF'
   rain-bird-clear:
     zoneId: ''
     name: Pompa zraszacze stop

@@ -2302,6 +2302,406 @@ zones:
                             g: 0
                             b: 0
                             w: 0
+      color:
+        id: color
+        name: Color
+        order: 1
+        groups:
+          - state:
+              ioId: f1-std-all
+              name: Oświetlenie
+              ioType: NEO
+              brightness: 150
+              animationId: 0
+              speed: 100
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+              color2:
+                r: 0
+                g: 0
+                b: 0
+                w: 0
+            children:
+              - state:
+                  ioId: f1-std-tv
+                  name: TV
+                  ioType: NEO
+                  brightness: 200
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                  color2:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 0
+                children:
+                  - state:
+                      ioId: rgbw-tv1
+                      name: TV 1
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 128
+                        g: 0
+                        b: 255
+                        w: 0
+                  - state:
+                      ioId: rgbw-tv2
+                      name: TV 2
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 128
+                        g: 255
+                        b: 0
+                        w: 0
+                  - state:
+                      ioId: n-tv
+                      name: Neo TV
+                      ioType: NEO
+                      brightness: 255
+                      animationId: 12
+                      speed: 100
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 255
+                      color2:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 0
+              - state:
+                  ioId: f1-std-kitchen
+                  name: Kuchnia
+                  ioType: NEO
+                  brightness: 255
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                  color2:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 0
+                children:
+                  - state:
+                      ioId: kit-blat
+                      name: Pod-Szafkowe
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 255
+                        g: 0
+                        b: 255
+                        w: 0
+                        ww: 0
+                  - state:
+                      ioId: cooker
+                      name: Okap
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 255
+                        g: 0
+                        b: 0
+                        w: 0
+                        ww: 0
+                  - state:
+                      ioId: n-kit
+                      name: Kuchnia
+                      ioType: NEO
+                      brightness: 255
+                      animationId: 12
+                      speed: 1000
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 255
+                      color2:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 0
+              - state:
+                  ioId: f1-std-dinner
+                  name: Jadalnia
+                  ioType: RGBW
+                  brightness: 200
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                children:
+                  - state:
+                      ioId: dinner-m
+                      name: Stół
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 0
+                        g: 255
+                        b: 255
+                        w: 0
+                  - state:
+                      ioId: led-hs
+                      name: Jadalnia
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 255
+                        g: 0
+                        b: 0
+                        w: 0
+                  - state:
+                      ioId: lamel
+                      name: Lamele
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 128
+                        g: 255
+                        b: 0
+                        w: 0
+              - state:
+                  ioId: f1-std-other
+                  name: Dodatki
+                  ioType: NEO
+                  brightness: 200
+                  animationId: 0
+                  speed: 100
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                  color2:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 0
+                children:
+                  - state:
+                      ioId: n-cell
+                      name: Neo Sufit
+                      ioType: NEO
+                      brightness: 255
+                      animationId: 12
+                      speed: 100
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 255
+                      color2:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 0
+                  - state:
+                      ioId: f1-std-panels
+                      name: Panele Beton
+                      ioType: RGBW
+                      brightness: 255
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 255
+                        ww: 0
+                    children:
+                      - state:
+                          ioId: p1
+                          name: Panel1
+                          ioType: RGBW
+                          brightness: 255
+                          color:
+                            r: 255
+                            g: 0
+                            b: 0
+                            w: 0
+                            ww: 0
+                      - state:
+                          ioId: pa2
+                          name: Panel2
+                          ioType: RGBW
+                          brightness: 255
+                          color:
+                            r: 128
+                            g: 255
+                            b: 0
+                            w: 0
+                            ww: 0
+                      - state:
+                          ioId: p3
+                          name: Panel3
+                          ioType: RGBW
+                          brightness: 255
+                          color:
+                            r: 0
+                            g: 255
+                            b: 255
+                            w: 0
+                            ww: 0
+                      - state:
+                          ioId: p4
+                          name: Panel4
+                          ioType: RGBW
+                          brightness: 255
+                          color:
+                            r: 128
+                            g: 0
+                            b: 255
+                            w: 0
+                            ww: 0
+                  - state:
+                      ioId: f1-std-wall
+                      name: Wall
+                      ioType: NEO
+                      brightness: 0
+                      animationId: 12
+                      speed: 100
+                      color:
+                        r: 255
+                        g: 255
+                        b: 255
+                        w: 0
+                      color2:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 0
+                    children:
+                      - state:
+                          ioId: w1
+                          name: Wall 1
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w2
+                          name: Wall 2
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w3
+                          name: Wall 3
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w4
+                          name: Wall 4
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w5
+                          name: Wall 5
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w6
+                          name: Wall 6
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
+                      - state:
+                          ioId: w7
+                          name: Wall 7
+                          ioType: NEO
+                          brightness: 255
+                          animationId: 12
+                          speed: 100
+                          color:
+                            r: 255
+                            g: 255
+                            b: 255
+                            w: 0
+                          color2:
+                            r: 0
+                            g: 0
+                            b: 0
+                            w: 0
   office:
     id: office
     name: Biuro
@@ -2999,6 +3399,11 @@ downBlindMacros:
     id: rain-bird-8m
     label: Trawin
     clickMacroId: rain-bird-8m
+    holdClickMacroId: rain-bird-clear
+  rainBirdPumpFull:
+    id: rain-bird-1h
+    label: Wypompowanie
+    clickMacroId: rain-bird-1h
     holdClickMacroId: rain-bird-clear
 variables:
   bedroom-brightness-o:

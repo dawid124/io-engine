@@ -76,6 +76,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.beryx</groupId>
+            <artifactId>awt-color-factory</artifactId>
+            <version>1.0.2</version>
+        </dependency>
 
     </dependencies>
 

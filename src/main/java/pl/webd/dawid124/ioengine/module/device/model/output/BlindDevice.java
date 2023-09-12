@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.state.model.device.BlindDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
-import pl.webd.dawid124.ioengine.module.action.model.rest.BlindResponse;
 import pl.webd.dawid124.ioengine.module.state.model.device.EBlindDirection;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfigBlind;
@@ -25,27 +24,27 @@ public class BlindDevice extends Device {
     public static final int FULL_CHANGE_TIME = 1300;
     public static final int FULL_DIMMER_TIME = 60 * 1000;
 
-    private transient GpioPinDigitalOutput up;
+    private transient GpioPinDigitalOutput power;
     private transient GpioPinDigitalOutput down;
 
-    private int pinUp;
+    private int pinPower;
     private int pinDown;
 
     private transient BlindDeviceState state;
 
-    public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, int pinUp, int pinDown) {
+    public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, int pinPower, int pinDown) {
         super(id, name, driverConfiguration);
-        this.pinUp = pinUp;
+        this.pinPower = pinPower;
         this.pinDown = pinDown;
 
         this.state = new BlindDeviceState(id, name);
     }
 
-    public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, Pin up, Pin down) {
+    public BlindDevice(String id, String name, IDriverConfiguration driverConfiguration, Pin power, Pin down) {
         super(id, name, driverConfiguration);
         try {
             GpioController GPIO = GpioFactory.getInstance();
-            this.up = GPIO.provisionDigitalOutputPin(up, "blind-" + name + "-up", PinState.LOW);
+            this.power = GPIO.provisionDigitalOutputPin(power, "blind-" + name + "-power", PinState.LOW);
             this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.LOW);
             this.state = new BlindDeviceState(id, name);
 //            moveLocal(EBlindDirection.UP);
@@ -61,16 +60,16 @@ public class BlindDevice extends Device {
     public void moveLocal(EBlindDirection direction, int time) {
 
         if (EBlindDirection.UP.equals(direction)) {
-            up.setState(PinState.HIGH);
+            power.setState(PinState.HIGH);
             down.setState(PinState.LOW);
         } else {
+            power.setState(PinState.HIGH);
             down.setState(PinState.HIGH);
-            up.setState(PinState.LOW);
         }
 
         scheduler.schedule(() -> {
             down.setState(PinState.LOW);
-            up.setState(PinState.LOW);
+            power.setState(PinState.LOW);
         }, time, TimeUnit.MILLISECONDS);
     }
 
@@ -85,11 +84,11 @@ public class BlindDevice extends Device {
     @Override
     public IoConfig toIoConfig() {
         String location = getDriverConfiguration().getConfig().getLocation().toString();
-        return new IoConfigBlind(id, getIoType(), location, pinUp, pinDown);
+        return new IoConfigBlind(id, getIoType(), location, pinPower, pinDown);
     }
 
-    public int getPinUp() {
-        return pinUp;
+    public int getPinPower() {
+        return pinPower;
     }
 
     public int getPinDown() {
