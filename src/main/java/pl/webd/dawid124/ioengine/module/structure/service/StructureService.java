@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonAdapter;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.LocalTimeAdapter;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.structure.model.Home;
@@ -13,6 +14,7 @@ import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.time.LocalTime;
 
 @Service public class StructureService {
 
@@ -25,6 +27,7 @@ import java.io.IOException;
         this.home = new Home();
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(DeviceState.class, new DeviceStateJsonAdapter())
+                .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
                 .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
                 .create();
     }

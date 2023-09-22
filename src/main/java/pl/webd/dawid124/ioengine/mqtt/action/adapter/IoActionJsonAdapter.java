@@ -57,7 +57,7 @@ public class IoActionJsonAdapter implements JsonSerializer<IoAction> {
         } else if (EDeviceType.BLIND.equals(ioAction.getIoType())
                 || EDeviceType.SWITCH.equals(ioAction.getIoType())) {
 
-            object.addProperty("a", ioAction.getAction().toString());
+            if (ioAction.getAction() != null) object.addProperty("a", ioAction.getAction().toString());
             object.addProperty("t", ioAction.getTime());
 
         }

@@ -8,10 +8,15 @@ import pl.webd.dawid124.ioengine.module.device.model.driver.config.LocalDriverCo
 import pl.webd.dawid124.ioengine.module.device.model.driver.config.PicoDriverConfig;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.LocalDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.PicoDriverConfiguration;
+import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.ZigbeeDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.IDriver;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.LocalDriver;
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.MqttDriver;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.PicoDriver;
 import pl.webd.dawid124.ioengine.module.device.model.input.MotionSensor;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.ESonoff3GangSwitchLocation;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.Sonoff3GangSwitch;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.temperature.SonoffTemperatureSensor;
 import pl.webd.dawid124.ioengine.module.device.model.output.*;
 
 import javax.annotation.PostConstruct;
@@ -42,6 +47,8 @@ public class DeviceService {
         PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
         LocalDriver piLocal = new LocalDriver("pi-master");
+        MqttDriver zigbee2mqttUp = new MqttDriver("zigbee2mqttUp", "zigbee2mqttUp");
+        MqttDriver zigbee2mqttDown = new MqttDriver("zigbee2mqttDown", "zigbee2mqttDown");
 
         drivers.add(floor1Driver0);
         drivers.add(floor1Driver1);
@@ -51,6 +58,11 @@ public class DeviceService {
         drivers.add(floor0Driver0);
         drivers.add(test);
         drivers.add(piLocal);
+        drivers.add(zigbee2mqttUp);
+        drivers.add(zigbee2mqttDown);
+
+        ZigbeeDriverConfiguration zigbeeDriverConfigurationUp = new ZigbeeDriverConfiguration(zigbee2mqttUp);
+        ZigbeeDriverConfiguration zigbeeDriverConfigurationDown = new ZigbeeDriverConfiguration(zigbee2mqttDown);
 
         PicoDriverConfiguration floor1Driver0ExpanderA = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration floor1Driver0ExpanderB = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
@@ -100,6 +112,7 @@ public class DeviceService {
         addDevice(new SwitchDevice("entryGate1", "Brama wjazdowa 1", floor0Driver0Local, 26, ESwitchType.INPUT_OFF_LOW_ON));
         addDevice(new SwitchDevice("garageGate", "Brama wjazdowa 2", floor0Driver0Local, 27, ESwitchType.INPUT_OFF_LOW_ON));
         addDevice(new SwitchDevice("gateway", "Brama garażowa", floor0Driver0Local, 28, ESwitchType.INPUT_OFF_LOW_ON));
+        addDevice(new SwitchDevice("home-pump-switch", "home-pump-switch", floor0Driver0Local, 11, ESwitchType.INPUT_OFF_LOW_ON));
 
         addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 1));
         addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 2));
@@ -202,6 +215,27 @@ public class DeviceService {
 
 
         addDevice(new NeoDevice("neo-test", "neo test", testLocal, 10, 60, false, ENeoType.NEO_GRBW));
+
+        addDevice(new SonoffTemperatureSensor("t-office", "Temperatura Biuro", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffTemperatureSensor("t-livingroom", "Temperatura Salon", zigbeeDriverConfigurationDown));
+
+        addDevice(new SonoffTemperatureSensor("t-bethroom", "Sypialnia", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffTemperatureSensor("t-bathroom", "Łazienka", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffTemperatureSensor("t-p1", "Pokój 1", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffTemperatureSensor("t-p2", "Pokój 2", zigbeeDriverConfigurationUp));
+
+        addDevice(new Sonoff3GangSwitch("temperature-bathroom-switch", "f2-temperature-switch-1","temperature-bathroom-switch",
+                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationUp));
+        addDevice(new Sonoff3GangSwitch("temperature-bedroom-switch", "f2-temperature-switch-1","temperature-bedroom-switch",
+                ESonoff3GangSwitchLocation.L2, zigbeeDriverConfigurationUp));
+        addDevice(new Sonoff3GangSwitch("temperature-p1-switch", "f2-temperature-switch-1", "temperature-p1-switch",
+                ESonoff3GangSwitchLocation.L3, zigbeeDriverConfigurationUp));
+
+        addDevice(new Sonoff3GangSwitch("temperature-p2-switch", "f2-temperature-switch-2","temperature-p2-switch",
+                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationUp));
+
+        addDevice(new SwitchDevice("temperature-livingroom-switch", "temperature-livingroom-switch", floor1Driver0Local, 12, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("temperature-office-switch", "temperature-office-switch", floor1Driver0Local, 13, ESwitchType.HIGH_ON));
     }
 
     private void addDevice(IDevice device) {

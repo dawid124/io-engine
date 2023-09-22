@@ -19,6 +19,10 @@ zones:
         ioId: pir-tv
         name: TV
         ioType: MOTION_SENSOR
+      t-livingroom:
+        ioId: t-livingroom
+        name: Salon
+        ioType: MQTT_TEMPERATURE_SENSOR
     blinds:
       - ioId: f1-fix-360
         shortName: TV-L
@@ -28,6 +32,43 @@ zones:
         shortName: HS-L
       - ioId: f1-hs
         shortName: HS-P
+    temperature:
+      sensors:
+        - t-livingroom
+      switchId: temperature-livingroom-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        auto:
+          id: auto
+          name: Auto
+          lock: true
+          ranges:
+            - id: auto-night
+              name: Night
+              hourFrom: 22:00
+              hourTo: 05:00
+              temperature: 19.0
+            - id: auto-day
+              name: Day
+              hourFrom: 05:00
+              hourTo: 22:00
+              temperature: 23.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
     scenes:
       auto:
         id: auto
@@ -2734,6 +2775,47 @@ zones:
         ioId: pir-wc
         name: WC
         ioType: MOTION_SENSOR
+      t-office:
+        ioId: t-office
+        name: Biuro
+        ioType: MQTT_TEMPERATURE_SENSOR
+    temperature:
+      sensors:
+        - t-office
+      switchId: temperature-office-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        auto:
+          id: auto
+          name: Auto
+          lock: true
+          ranges:
+            - id: auto-night
+              name: Night
+              hourFrom: 22:00
+              hourTo: 05:00
+              temperature: 19.0
+            - id: auto-day
+              name: Day
+              hourFrom: 05:00
+              hourTo: 22:00
+              temperature: 22.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
     scenes:
       auto:
         id: auto
@@ -2903,6 +2985,52 @@ zones:
         ioId: pir-war-d
         name: Dawid
         ioType: MOTION_SENSOR
+      t-bethroom:
+        ioId: t-bethroom
+        name: Sypialnia
+        ioType: MQTT_TEMPERATURE_SENSOR
+    temperature:
+      sensors:
+        - t-bethroom
+      switchId: temperature-bedroom-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        auto:
+          id: auto
+          name: Auto
+          lock: true
+          ranges:
+            - id: auto-morning
+              name: Morning
+              hourFrom: 05:00
+              hourTo: 08:00
+              temperature: 25.0
+            - id: auto-day
+              name: Day
+              hourFrom: 08:00
+              hourTo: 21:00
+              temperature: 18.0
+            - id: auto-night
+              name: Noc
+              hourFrom: 21:00
+              hourTo: 05:00
+              temperature: 21.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
     scenes:
       auto:
         id: auto
@@ -3152,6 +3280,32 @@ zones:
         ioId: pir-p1
         name: P1
         ioType: MOTION_SENSOR
+      t-p1:
+        ioId: t-p1
+        name: P1
+        ioType: MQTT_TEMPERATURE_SENSOR
+    temperature:
+      sensors:
+        - t-p1
+      switchId: temperature-p1-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
     scenes:
       auto:
         id: auto
@@ -3229,6 +3383,32 @@ zones:
         ioId: pir-p2
         name: P2
         ioType: MOTION_SENSOR
+      t-p2:
+        ioId: t-p2
+        name: P2
+        ioType: MQTT_TEMPERATURE_SENSOR
+    temperature:
+      sensors:
+        - t-p2
+      switchId: temperature-p2-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
     scenes:
       auto:
         id: auto
@@ -3294,6 +3474,56 @@ zones:
         ioId: pir-f2-lobby
         name: Kor
         ioType: MOTION_SENSOR
+      t-bathroom:
+        ioId: t-bathroom
+        name: Łazienka
+        ioType: MQTT_TEMPERATURE_SENSOR
+    temperature:
+      sensors:
+        - t-bathroom
+      switchId: temperature-bathroom-switch
+      pumpSwitchId: home-pump-switch
+      scenes:
+        auto:
+          id: auto
+          name: Auto
+          ranges:
+            - id: auto-morning
+              name: Morning
+              hourFrom: 05:00
+              hourTo: 09:00
+              temperature: 26.0
+            - id: auto-day
+              name: Day
+              hourFrom: 09:00
+              hourTo: 20:00
+              temperature: 22.0
+            - id: auto-evning
+              name: Wieczór
+              hourFrom: 20:00
+              hourTo: 23:00
+              temperature: 26.0
+            - id: auto-night
+              name: Noc
+              hourFrom: 23:00
+              hourTo: 05:00
+              temperature: 20.0
+        manual:
+          id: manual
+          name: Manual
+          ranges:
+            - id: manual
+              name: Manual
+              allTime: true
+              temperature: 23.0
+        eco:
+          id: eco
+          name: Eco
+          ranges:
+            - id: eco
+              name: Eco
+              allTime: true
+              temperature: 16.0
     scenes:
       auto:
         id: auto

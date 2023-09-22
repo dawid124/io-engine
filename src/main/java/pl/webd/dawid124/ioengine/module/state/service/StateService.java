@@ -13,6 +13,7 @@ import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.structure.model.Scene;
+import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
 import pl.webd.dawid124.ioengine.module.structure.model.Zone;
 import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 
@@ -48,7 +49,14 @@ public class StateService {
             String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst()
                     .map(Scene::getId).orElse("auto");
 
-            ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene);
+            String firstTemperatureScene = null;
+            Map<String, TemperatureScenes> temperatureScenes = new HashMap<>();
+            if (zoneStructure.getTemperature() != null) {
+                temperatureScenes = zoneStructure.getTemperature().getScenes();
+                firstTemperatureScene = temperatureScenes.keySet().iterator().next();
+            }
+
+            ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene, firstTemperatureScene);
             addZoneState(zone);
 
             for (Scene sceneStructure : zoneStructure.getScenes().values()) {
@@ -56,6 +64,8 @@ public class StateService {
                 zone.addSceneState(scene);
                 sceneStructure.getGroups().forEach(scene::addGroupState);
             }
+
+            zone.getTemperatureSceneStates().putAll(temperatureScenes);
 
             sensors.putAll(zoneStructure.getSensors());
         }
@@ -89,11 +99,17 @@ public class StateService {
         zoneState.values().forEach(z -> {
             SceneState scene = z.getSceneStates().get(z.getActiveScene());
             ZoneStateResponse zone =
-                    new ZoneStateResponse(z.getId(), z.getActiveScene(), scene.getGroupState(), z.getVariables());
+                    new ZoneStateResponse(
+                            z.getId(), z.getActiveScene(),
+                            z.getActiveTemperatureScene(),
+                            scene.getGroupState(),
+                            z.getTemperatureSceneStates(),
+                            z.getVariables());
             zones.getZones().put(z.getId(), zone);
         });
 
         zones.setVariables(variables);
+        zones.setSensors(sensors);
 
         return zones;
     }

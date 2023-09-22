@@ -7,7 +7,8 @@ public enum EDeviceStateType {
     LED(LedDeviceState.class),
     CCT(ColorLedDeviceState.class),
     RGBW(ColorLedDeviceState.class),
-    MOTION_SENSOR(ColorLedDeviceState.class);
+    MOTION_SENSOR(MotionSensorState.class),
+    MQTT_TEMPERATURE_SENSOR(MqttTemperatureSensorState.class);
 
     Class clazz;
 
@@ -17,5 +18,9 @@ public enum EDeviceStateType {
 
     public Class getClazz() {
         return clazz;
+    }
+
+    public boolean isMqtt() {
+        return MQTT_TEMPERATURE_SENSOR.equals(this);
     }
 }

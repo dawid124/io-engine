@@ -10,7 +10,8 @@ public enum EDeviceType implements Serializable {
     RGBW("RGBW"),
     CCT("CCT"),
     LED("Led"),
-    MOTION_SENSOR("MOTION_SENSOR");
+    MOTION_SENSOR("MOTION_SENSOR"),
+    MQTT_TEMPERATURE_SENSOR("TEMPERATURE_SENSOR");
 
     final String name;
 

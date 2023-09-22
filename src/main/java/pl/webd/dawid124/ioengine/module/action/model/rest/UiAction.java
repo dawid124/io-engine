@@ -29,6 +29,8 @@ public class UiAction implements IUiAction {
 
     private boolean group;
 
+    private String zigbeeAction;
+
     public String getIoId() {
         return ioId;
     }
@@ -137,6 +139,14 @@ public class UiAction implements IUiAction {
         this.delay = delay;
     }
 
+    public String getZigbeeAction() {
+        return zigbeeAction;
+    }
+
+    public void setZigbeeAction(String zigbeeAction) {
+        this.zigbeeAction = zigbeeAction;
+    }
+
     public IoAction toIoAction(IDevice device) {
         String deviceId = device.getDriverConfiguration().getDriver().getId();
         EIoDriverType deviceType = device.getDriverConfiguration().getDriver().getType();
@@ -150,7 +160,8 @@ public class UiAction implements IUiAction {
                 this.getTime(),
                 this.getStepTime(),
                 deviceId,
-                deviceType);
+                deviceType,
+                this.getZigbeeAction());
     }
 
     public Color getColor2() {

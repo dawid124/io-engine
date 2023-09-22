@@ -16,19 +16,32 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.MqttDriver;
+import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.driversync.DriverSyncService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
+import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
+import pl.webd.dawid124.ioengine.module.zigbee.ZigbeeService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 public class MqttConfig {
 
     private final MqttSettings settings;
     private final TriggerService triggerService;
+    private final ZigbeeService zigbeeService;
+    private final DeviceService deviceService;
     private final DriverSyncService driverSyncService;
 
-    public MqttConfig(MqttSettings settings, TriggerService triggerService, DriverSyncService driverSyncService) {
+    public MqttConfig(MqttSettings settings, TriggerService triggerService, ZigbeeService zigbeeService,
+                      DeviceService deviceService, DriverSyncService driverSyncService, StructureService structureService) {
         this.settings = settings;
         this.triggerService = triggerService;
+        this.zigbeeService = zigbeeService;
+        this.deviceService = deviceService;
         this.driverSyncService = driverSyncService;
     }
 
@@ -36,6 +49,12 @@ public class MqttConfig {
     public MessageChannel mqttTriggerChannel() {
         return new DirectChannel();
     }
+
+    @Bean
+    public MessageChannel mqttZigbeeChannel() {
+        return new DirectChannel();
+    }
+
 
     @Bean
     public MessageProducer triggers() {
@@ -49,9 +68,37 @@ public class MqttConfig {
     }
 
     @Bean
+    public MessageProducer zigbee() {
+        List<String> zigbeeTopics = deviceService.fetchAll().values().stream()
+                .filter(d -> EIoDriverType.ZIGBEE_MQTT.equals(d.getDriverConfiguration().getDriver().getType()))
+                .filter(d -> d.getDriverConfiguration().getDriver() instanceof MqttDriver)
+                .map(device -> ((MqttDriver) device.getDriverConfiguration().getDriver()).getTopic() + "/" + device.getId())
+                .collect(Collectors.toList());
+
+        if (zigbeeTopics.isEmpty()) return null;
+
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+                settings.getClientId() + "Zigbee", mqttClientFactory(), zigbeeTopics.remove(0));
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setOutputChannel(mqttZigbeeChannel());
+
+        if (zigbeeTopics.isEmpty()) return adapter;
+
+        zigbeeTopics.forEach(adapter::addTopic);
+
+        return adapter;
+    }
+
+    @Bean
     @ServiceActivator(inputChannel = "mqttTriggerChannel")
     public MessageHandler triggerHandler() {
         return triggerService;
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "mqttZigbeeChannel")
+    public MessageHandler zigbeeHandler() {
+        return zigbeeService;
     }
 
     @Bean

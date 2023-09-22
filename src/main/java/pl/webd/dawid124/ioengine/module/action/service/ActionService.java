@@ -24,7 +24,6 @@ public class ActionService {
     private static final Logger LOG = LogManager.getLogger( ActionService.class );
 
     private final StateService stateService;
-
     private final BlindService blindService;
     private final MqttService mqttService;
     private final ActionDataService actionDataService;

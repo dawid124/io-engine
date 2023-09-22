@@ -70,4 +70,8 @@ public interface IUiAction extends Serializable {
     Color getColor2();
 
     void setColor2(Color color2);
+
+    String getZigbeeAction();
+
+    void setZigbeeAction(String zigbeeAction);
 }

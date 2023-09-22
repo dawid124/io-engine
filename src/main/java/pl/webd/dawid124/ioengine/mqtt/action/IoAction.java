@@ -15,6 +15,8 @@ public class IoAction {
 
     private Color color;
     private Color color2;
+
+    private String zigbeeAction;
     private int brightness;
 
     private int speed;
@@ -34,7 +36,7 @@ public class IoAction {
 
     public IoAction(String ioId, EDeviceType ioType, EActionType action, Color color,
                     int brightness, int delay, int time, int stepTime,
-                    String deviceId, EIoDriverType deviceType) {
+                    String deviceId, EIoDriverType deviceType, String zigbeeAction) {
         this.ioId = ioId;
         this.ioType = ioType;
         this.action = action;
@@ -45,6 +47,7 @@ public class IoAction {
         this.stepTime = stepTime;
         this.deviceId = deviceId;
         this.deviceType = deviceType;
+        this.zigbeeAction = zigbeeAction;
     }
 
     public String getIoId() {
@@ -209,5 +212,13 @@ public class IoAction {
         result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
         result = 31 * result + (deviceType != null ? deviceType.hashCode() : 0);
         return result;
+    }
+
+    public String getZigbeeAction() {
+        return zigbeeAction;
+    }
+
+    public void setZigbeeAction(String zigbeeAction) {
+        this.zigbeeAction = zigbeeAction;
     }
 }

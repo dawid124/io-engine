@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiMacroRequest;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiSensorRequest;
+import pl.webd.dawid124.ioengine.module.action.model.rest.*;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.rest.SceneStateResponse;
-import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
@@ -63,6 +61,29 @@ public class UserActionController {
         MotionSensorState sensorState = (MotionSensorState) stateService.getSensors().get(action.getSensorId());
         sensorState.setLock(!action.isLock());
         action.setLock(!action.isLock());
+
+        return ResponseEntity.ok(action);
+    }
+
+    @PostMapping(value = "/api/temperature", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<UiTemperatureChangeRequest> temperatureChange(@RequestBody UiTemperatureChangeRequest action) {
+
+        stateService.getZoneState().get(action.getZoneId())
+                .getTemperatureSceneStates().get(action.getSceneId())
+                .getRanges().stream().filter(r -> action.getRangeId().equals(r.getId())).findFirst()
+                .ifPresent(r -> r.setTemperature(action.getTemperature()));
+
+        return ResponseEntity.ok(action);
+    }
+
+    @PostMapping(value = "/api/temperature-scene", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<UiTemperatureSceneChangeRequest> temperatureChange(@RequestBody UiTemperatureSceneChangeRequest action) {
+
+        stateService.getZoneState().get(action.getZoneId()).setActiveTemperatureScene(action.getSceneId());
 
         return ResponseEntity.ok(action);
     }

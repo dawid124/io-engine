@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.structure.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MotionSensorState;
 
 import java.util.*;
@@ -12,15 +13,17 @@ public class Zone {
 
     private final Set<BlindStructure> blinds;
     private final Map<String, Scene> scenes;
-    private final Map<String, MotionSensorState> sensors;
+    private final Map<String, DeviceState> sensors;
+    private final Temperature temperature;
 
     @JsonIgnore
     private final List<String> deviceIds;
 
 
-    public Zone(String id, String name) {
+    public Zone(String id, String name, Temperature temperature) {
         this.id = id;
         this.name = name;
+        this.temperature = temperature;
 
         this.deviceIds = new ArrayList<>();
         this.blinds = new TreeSet<>();
@@ -52,7 +55,11 @@ public class Zone {
         scenes.put(scene.getId(), scene);
     }
 
-    public Map<String, MotionSensorState> getSensors() {
+    public Map<String, DeviceState> getSensors() {
         return sensors;
+    }
+
+    public Temperature getTemperature() {
+        return temperature;
     }
 }
