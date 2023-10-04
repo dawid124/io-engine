@@ -9,6 +9,8 @@ import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MqttTemperatureSensorState;
+import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
+import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureRange;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class TemperatureService {
 
+    public static final String ACTIVE_FLAG_KEY = "home-temperature-service-active";
     private final StructureService structureService;
     private final StateService stateService;
     private final DeviceService deviceService;
@@ -37,10 +40,12 @@ public class TemperatureService {
         this.deviceService = deviceService;
         this.actionService = actionService;
         this.pumpActiveIds = new HashMap<>();
+        this.structureService.fetchStructure().getVariables().put(ACTIVE_FLAG_KEY, new BooleanVariable(false));
     }
 
     @Scheduled(fixedDelay = 1000 * 60 * 5)
     public void run() {
+        if (!isActive()) return;
         Map<String, Zone> zones = structureService.fetchStructure().getZones();
         Map<String, IDevice> devices = deviceService.fetchAll();
 
@@ -130,5 +135,9 @@ public class TemperatureService {
         } else {
             return hour >= from && hour < to;
         }
+    }
+
+    private boolean isActive() {
+        return (Boolean) this.structureService.fetchStructure().getVariables().get(ACTIVE_FLAG_KEY).getValue();
     }
 }

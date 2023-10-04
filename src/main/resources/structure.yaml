@@ -3625,16 +3625,21 @@ downBlindMacros:
     label: Okap
     clickMacroId: cookerHood-15m-macro
     holdClickMacroId: cookerHood-60m-macro
+  hotWaterPump:
+    id: hotWaterPump-5m-btn
+    label: Woda
+    clickMacroId: hotWaterPump-5m-macro
+    holdClickMacroId: hotWaterPump-5m-macro
   rainBirdPump:
     id: rain-bird-8m
     label: Trawin
     clickMacroId: rain-bird-8m
     holdClickMacroId: rain-bird-clear
-  rainBirdPumpFull:
-    id: rain-bird-1h
-    label: Wypompowanie
-    clickMacroId: rain-bird-1h
-    holdClickMacroId: rain-bird-clear
+#  rainBirdPumpFull:
+#    id: rain-bird-1h
+#    label: Wypompowanie
+#    clickMacroId: rain-bird-1h
+#    holdClickMacroId: rain-bird-clear
 variables:
   bedroom-brightness-o:
     type: NUMBER

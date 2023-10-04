@@ -1297,6 +1297,16 @@ macros:
           - ioId: cookerHood
             action: TEMP_ON
             time: 900000
+  hotWaterPump-5m-macro:
+    zoneId: ''
+    name: Cyrkulacja
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: hot-water-pump-switch
+            action: TEMP_ON
+            time: 300000
   cookerHood-60m-macro:
     zoneId: ''
     name: Okap
@@ -1307,6 +1317,14 @@ macros:
           - ioId: cookerHood
             action: TEMP_ON
             time: 3600000
+
+  restart-livingroom-panel-app:
+    zoneId: ''
+    name: Reset-panel
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: sudo systemctl restart kiosk.service
 
   rain-bird-8m:
     zoneId: ''

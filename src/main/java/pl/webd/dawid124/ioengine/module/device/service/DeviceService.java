@@ -113,6 +113,7 @@ public class DeviceService {
         addDevice(new SwitchDevice("garageGate", "Brama wjazdowa 2", floor0Driver0Local, 27, ESwitchType.INPUT_OFF_LOW_ON));
         addDevice(new SwitchDevice("gateway", "Brama garażowa", floor0Driver0Local, 28, ESwitchType.INPUT_OFF_LOW_ON));
         addDevice(new SwitchDevice("home-pump-switch", "home-pump-switch", floor0Driver0Local, 11, ESwitchType.INPUT_OFF_LOW_ON));
+        addDevice(new SwitchDevice("hot-water-pump-switch", "hot-water-pump-switch", floor0Driver0Local, 0, ESwitchType.INPUT_OFF_LOW_ON));
 
         addDevice(new SingleColorLedDevice("led-stairs-1", "Stairs 1", floor0Driver0Local, 1));
         addDevice(new SingleColorLedDevice("led-stairs-2", "Stairs 2", floor0Driver0Local, 2));
