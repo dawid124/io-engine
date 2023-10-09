@@ -5,6 +5,8 @@ import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 
 public interface ZigbeeApi {
 
-    void processIncomingMsg(AutomationContext context, Message<?> message);
-    ZigbeeAction processAction(String action, Object params);
+    default void processIncomingMsg(AutomationContext context, Message<?> message) {};
+    default ZigbeeAction processAction(String action, Object params) {
+        return null;
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
+import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 @Component
@@ -30,5 +31,9 @@ public class AutomationContext {
 
     public ActionService getActionService() {
         return (ActionService) appContext.getBean("actionService");
+    }
+
+    public TriggerService getTriggerService() {
+        return (TriggerService) appContext.getBean("triggerService");
     }
 }

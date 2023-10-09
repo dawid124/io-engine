@@ -2,13 +2,15 @@ package pl.webd.dawid124.ioengine.module.state.model.device;
 
 public enum EDeviceStateType {
     SWITCH(SwitchDeviceState.class),
+    POWER_METER_SWITCH(SwitchDeviceState.class),
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),
     LED(LedDeviceState.class),
     CCT(ColorLedDeviceState.class),
     RGBW(ColorLedDeviceState.class),
     MOTION_SENSOR(MotionSensorState.class),
-    MQTT_TEMPERATURE_SENSOR(MqttTemperatureSensorState.class);
+    MQTT_TEMPERATURE_SENSOR(MqttTemperatureSensorState.class),
+    ZIGBEE_STATE_LESS(ZigbeeStateLessDeviceState.class);
 
     Class clazz;
 

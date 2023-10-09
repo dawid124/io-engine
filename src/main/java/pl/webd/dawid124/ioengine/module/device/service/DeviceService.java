@@ -14,7 +14,9 @@ import pl.webd.dawid124.ioengine.module.device.model.driver.instance.LocalDriver
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.MqttDriver;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.PicoDriver;
 import pl.webd.dawid124.ioengine.module.device.model.input.MotionSensor;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.button.SonoffSinlgeButton;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.ESonoff3GangSwitchLocation;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.OneGangWithPowerSwitch;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.Sonoff3GangSwitch;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.temperature.SonoffTemperatureSensor;
 import pl.webd.dawid124.ioengine.module.device.model.output.*;
@@ -219,11 +221,15 @@ public class DeviceService {
 
         addDevice(new SonoffTemperatureSensor("t-office", "Temperatura Biuro", zigbeeDriverConfigurationDown));
         addDevice(new SonoffTemperatureSensor("t-livingroom", "Temperatura Salon", zigbeeDriverConfigurationDown));
+        addDevice(new OneGangWithPowerSwitch("t-kitchen-power", "t-kitchen-power", zigbeeDriverConfigurationDown));
 
         addDevice(new SonoffTemperatureSensor("t-bethroom", "Sypialnia", zigbeeDriverConfigurationUp));
         addDevice(new SonoffTemperatureSensor("t-bathroom", "Łazienka", zigbeeDriverConfigurationUp));
         addDevice(new SonoffTemperatureSensor("t-p1", "Pokój 1", zigbeeDriverConfigurationUp));
         addDevice(new SonoffTemperatureSensor("t-p2", "Pokój 2", zigbeeDriverConfigurationUp));
+
+        addDevice(new SonoffSinlgeButton("bedroom-btn-1", "bedroom-btn-1", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffSinlgeButton("bedroom-btn-2", "bedroom-btn-2", zigbeeDriverConfigurationUp));
 
         addDevice(new Sonoff3GangSwitch("temperature-bathroom-switch", "f2-temperature-switch-1","temperature-bathroom-switch",
                 ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationUp));

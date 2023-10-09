@@ -52,7 +52,7 @@ zones:
               name: Day
               hourFrom: 05:00
               hourTo: 22:00
-              temperature: 23.0
+              temperature: 22.5
         manual:
           id: manual
           name: Manual
@@ -3014,7 +3014,7 @@ zones:
               name: Noc
               hourFrom: 21:00
               hourTo: 05:00
-              temperature: 21.0
+              temperature: 20.0
         manual:
           id: manual
           name: Manual
@@ -3502,7 +3502,7 @@ zones:
               name: Wieczór
               hourFrom: 20:00
               hourTo: 23:00
-              temperature: 26.0
+              temperature: 24.0
             - id: auto-night
               name: Noc
               hourFrom: 23:00

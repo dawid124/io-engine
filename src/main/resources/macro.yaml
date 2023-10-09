@@ -935,23 +935,15 @@ macros:
         blocs:
           - blockType: CONDITION
             condition:
-              type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '06:30:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '09:00:00'
+              type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '06:30:00'
+              toTime:
+                type: TIME
+                value: '09:00:00'
             trueBlock:
               blockType: CONDITION
               condition:
@@ -1012,23 +1004,15 @@ macros:
                     time: 10000
           - blockType: CONDITION
             condition:
-              type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '09:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '21:00:00'
+              type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '09:00:00'
+              toTime:
+                type: TIME
+                value: '21:00:00'
             trueBlock:
               blockType: CONDITION
               condition:
@@ -1091,23 +1075,15 @@ macros:
                     time: 30000
           - blockType: CONDITION
             condition:
-              type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '21:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '23:00:00'
+              type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '21:00:00'
+              toTime:
+                type: TIME
+                value: '23:00:00'
             trueBlock:
               blockType: CONDITION
               condition:
@@ -1168,43 +1144,15 @@ macros:
                     time: 30000
           - blockType: CONDITION
             condition:
-              type: LOGIC
-              logicalType: OR
-              conditions:
-                - type: LOGIC
-                  logicalType: AND
-                  conditions:
-                    - type: COMPARE
-                      compareType: GREATER_EQUALS
-                      fetcher:
-                        fetcherType: CURRENT_TIME
-                      testValue:
-                        type: TIME
-                        value: '23:00:00'
-                    - type: COMPARE
-                      compareType: LESS_THEN
-                      fetcher:
-                        fetcherType: CURRENT_TIME
-                      testValue:
-                        type: TIME
-                        value: '23:59:59'
-                - type: LOGIC
-                  logicalType: AND
-                  conditions:
-                    - type: COMPARE
-                      compareType: GREATER_EQUALS
-                      fetcher:
-                        fetcherType: CURRENT_TIME
-                      testValue:
-                        type: TIME
-                        value: '00:00:00'
-                    - type: COMPARE
-                      compareType: LESS_THEN
-                      fetcher:
-                        fetcherType: CURRENT_TIME
-                      testValue:
-                        type: TIME
-                        value: '06:30:00'
+              type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '23:00:00'
+              toTime:
+                type: TIME
+                value: '06:30:00'
             trueBlock:
               blockType: CONDITION
               condition:
@@ -1325,6 +1273,96 @@ macros:
       - blockType: RUNNER
         runnerType: CMD
         cmd: sudo systemctl restart kiosk.service
+
+  t-kitchen-power-meter-macro:
+    zoneId: floor1
+    name: Zurzycie płyta
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: GREATER_THEN
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: power
+          testValue:
+            type: DOUBLE
+            value: 300
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: kitchen-oven-off-timer
+              action: CLEAR
+            - blockType: RUNNER
+              runnerType: ACTION
+              actions:
+                - ioId: cookerHood
+                  action: 'ON'
+        falseBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: kitchen-oven-off-timer
+              action: RUN
+              time: 180000
+
+  bedroom-btn-macro:
+    zoneId: bedroom
+    name: bedroom button
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: single
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: auto
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: double
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: manual
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: long
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: night
+
+
 
   rain-bird-8m:
     zoneId: ''

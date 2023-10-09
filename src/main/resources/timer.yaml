@@ -184,6 +184,15 @@ timers:
             brightness: 0
           - ioId: cct-bedroom-w
             brightness: 0
+  kitchen-oven-off-timer:
+    zoneId: floor1
+    defaultTime: 300000
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: cookerHood
+            action: 'OFF'
   wardrobe-m-light-off-timer:
     zoneId: war-m
     defaultTime: 10000

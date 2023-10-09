@@ -1,11 +1,10 @@
 package pl.webd.dawid124.ioengine.module.zigbee.devices;
 
-public class SonoffSNZB02Msg {
+import pl.webd.dawid124.ioengine.module.zigbee.ZigbeeMessage;
+
+public class SonoffSNZB02Msg extends ZigbeeMessage {
     private double battery;
     private double humidity;
-    private double linkquality;
-    private double temperature;
-    private double voltage;
 
     public double getBattery() {
         return battery;
@@ -21,29 +20,5 @@ public class SonoffSNZB02Msg {
 
     public void setHumidity(double humidity) {
         this.humidity = humidity;
-    }
-
-    public double getLinkquality() {
-        return linkquality;
-    }
-
-    public void setLinkquality(double linkquality) {
-        this.linkquality = linkquality;
-    }
-
-    public double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public double getVoltage() {
-        return voltage;
-    }
-
-    public void setVoltage(double voltage) {
-        this.voltage = voltage;
     }
 }

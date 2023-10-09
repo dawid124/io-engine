@@ -6,6 +6,8 @@ import org.springframework.util.StringUtils;
 import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
+import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
+import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
@@ -26,13 +28,15 @@ import java.util.Map;
 public class StateService {
 
     private final StructureService structureService;
+    private final DeviceService deviceService;
 
     private final Map<String, IVariable> variables;
     private final Map<String, ZoneState> zoneState;
     private final Map<String, DeviceState> sensors;
 
-    public StateService(StructureService structureService) {
+    public StateService(StructureService structureService, DeviceService deviceService) {
         this.structureService = structureService;
+        this.deviceService = deviceService;
 
         variables = new HashMap<>();
         zoneState = new LinkedHashMap<>();
@@ -67,8 +71,12 @@ public class StateService {
 
             zone.getTemperatureSceneStates().putAll(temperatureScenes);
 
-            sensors.putAll(zoneStructure.getSensors());
+//            sensors.putAll(zoneStructure.getSensors());
         }
+
+       deviceService.fetchAll().values().forEach(device -> {
+           sensors.put(device.getId(), device.getInitialState());
+       });
 
         variables.putAll(structureService.fetchStructure().getVariables());
     }

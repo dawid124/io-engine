@@ -16,6 +16,7 @@ import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class TriggerService implements MessageHandler {
@@ -31,6 +32,13 @@ public class TriggerService implements MessageHandler {
         this.context = context;
     }
 
+    public void handleZigbeeMessage(String id, Map<String, IVariable> variables) throws MessagingException {
+
+        Trigger trigger = triggerStructure.getTriggers().get(id);
+        if (trigger != null) {
+            trigger.run(context, variables);
+        }
+    }
 
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {

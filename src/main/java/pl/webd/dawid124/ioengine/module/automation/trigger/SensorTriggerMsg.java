@@ -3,8 +3,8 @@ package pl.webd.dawid124.ioengine.module.automation.trigger;
 public class SensorTriggerMsg {
 
     private String id;
-
     private boolean state;
+    private String action;
 
     public String getId() {
         return id;
@@ -27,6 +27,15 @@ public class SensorTriggerMsg {
         return "SensorTriggerMsg{" +
                 "id='" + id + '\'' +
                 ", state=" + state +
+                ", action='" + action + '\'' +
                 '}';
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }

@@ -92,3 +92,22 @@ triggers:
       - blockType: RUNNER
         runnerType: MACRO_RUNNER
         macroId: p2-pir-macro
+
+  bedroom-btn-1:
+    zoneId: bedroom
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: bedroom-btn-macro
+  bedroom-btn-2:
+    zoneId: bedroom
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: bedroom-btn-macro
+  t-kitchen-power:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: t-kitchen-power-meter-macro

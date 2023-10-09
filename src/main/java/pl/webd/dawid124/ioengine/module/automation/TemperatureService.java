@@ -10,17 +10,18 @@ import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MqttTemperatureSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
-import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureRange;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
 import pl.webd.dawid124.ioengine.module.structure.model.Zone;
 import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
+import pl.webd.dawid124.ioengine.utils.TimeUtils;
 
-import java.time.LocalTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class TemperatureService {
@@ -40,7 +41,7 @@ public class TemperatureService {
         this.deviceService = deviceService;
         this.actionService = actionService;
         this.pumpActiveIds = new HashMap<>();
-        this.structureService.fetchStructure().getVariables().put(ACTIVE_FLAG_KEY, new BooleanVariable(false));
+        this.structureService.fetchStructure().getVariables().put(ACTIVE_FLAG_KEY, new BooleanVariable(true));
     }
 
     @Scheduled(fixedDelay = 1000 * 60 * 5)
@@ -69,7 +70,7 @@ public class TemperatureService {
         double currentTemperature = calculateTemperature(devices, sensors);
 
         temperatureScenes.getRanges().stream()
-                .filter(range -> range.isAllTime() || isInRange(range.getHourFrom(), range.getHourTo()))
+                .filter(range -> range.isAllTime() || TimeUtils.isInRange(range.getHourFrom(), range.getHourTo()))
                 .findFirst()
                 .ifPresent(range -> processSwitchAction(zoneStructure, currentTemperature, range));
     }
@@ -121,20 +122,6 @@ public class TemperatureService {
         }
 
         return sumTemperature / sensorCount;
-    }
-
-    private boolean isInRange(LocalTime f, LocalTime t) {
-        int hour, from, to;
-        LocalTime now = LocalTime.now();
-        hour = 60 * now.getHour() + now.getMinute();
-        from = 60 * f.getHour() + f.getMinute();
-        to = 60 * t.getHour() + t.getMinute();
-
-        if (from > to) {
-            return hour >= from || hour <= to;
-        } else {
-            return hour >= from && hour < to;
-        }
     }
 
     private boolean isActive() {

@@ -1,11 +1,12 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-public class SwitchDeviceState extends DeviceState {
+public class SwitchDeviceState extends ZigbeeDeviceState {
 
     private boolean on;
+    private double power;
 
     public SwitchDeviceState(String ioId, String name, EDeviceStateType ioType, boolean on) {
-        super(ioId, name, ioType);
+        super(ioId, name, ioType, 0 ,0);
         this.on = on;
     }
 
@@ -15,5 +16,13 @@ public class SwitchDeviceState extends DeviceState {
 
     public void setOn(boolean on) {
         this.on = on;
+    }
+
+    public double getPower() {
+        return power;
+    }
+
+    public void setPower(double power) {
+        this.power = power;
     }
 }

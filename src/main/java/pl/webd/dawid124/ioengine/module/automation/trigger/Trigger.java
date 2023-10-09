@@ -6,13 +6,14 @@ import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Trigger {
 
     private String zoneId;
     private List<IBlock> blocs;
 
-    public void run(AutomationContext context, HashMap<String, IVariable> variables) {
+    public void run(AutomationContext context, Map<String, IVariable> variables) {
         blocs.forEach(b -> b.run(context, variables, zoneId));
     }
 

@@ -3,7 +3,8 @@ package pl.webd.dawid124.ioengine.module.state.model.variable;
 public enum EVariableType {
     STRING(StringVariable.class),
     BOOLEAN(BooleanVariable.class),
-    NUMBER(NumberVariable.class),
+    NUMBER(IntegerVariable.class),
+    DOUBLE(DoubleVariable.class),
     LIST(ListVariable.class),
     TIME(TimeVariable.class);
 
