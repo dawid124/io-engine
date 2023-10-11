@@ -1,5 +1,6 @@
 package pl.webd.dawid124.ioengine.module.state.model.rest;
 
+import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 public class ZonesStateResponse implements Serializable {
 
     private Map<String, ZoneStateResponse> zones;
-    private Map<String, IVariable> variables;
+    private Map<String, StateVariable> variables;
     private Map<String, DeviceState> sensors;
 
     public ZonesStateResponse() {
@@ -25,11 +26,11 @@ public class ZonesStateResponse implements Serializable {
         this.zones = zones;
     }
 
-    public Map<String, IVariable> getVariables() {
+    public Map<String, StateVariable> getVariables() {
         return variables;
     }
 
-    public void setVariables(Map<String, IVariable> variables) {
+    public void setVariables(Map<String, StateVariable> variables) {
         this.variables = variables;
     }
 

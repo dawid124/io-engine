@@ -9,8 +9,10 @@ public class MotionSensorState extends DeviceState {
 
     private boolean lock;
 
-    private LocalDateTime lastActiveDate;
-    private LocalDateTime lastDeActiveDate;
+    private transient LocalDateTime lastActiveDate;
+    private transient LocalDateTime lastDeActiveDate;
+
+    public MotionSensorState() {}
 
     public MotionSensorState(String ioId, String name, EDeviceStateType ioType, boolean state) {
         super(ioId, name, ioType);

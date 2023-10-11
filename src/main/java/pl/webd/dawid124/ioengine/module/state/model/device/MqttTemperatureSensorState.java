@@ -4,6 +4,8 @@ public class MqttTemperatureSensorState extends ZigbeeDeviceState {
     private double humidity;
     private double temperature;
 
+    public MqttTemperatureSensorState() {}
+
     public MqttTemperatureSensorState(String ioId, String name, EDeviceStateType ioType) {
         super(ioId, name, ioType, 0 ,0);
         this.humidity = 0;

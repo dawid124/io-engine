@@ -55,7 +55,7 @@ public class VariableUIActionJsonAdapter implements JsonDeserializer<IUiAction> 
                     String expression = expressions.get(filed.toLowerCase());
                     if (expression != null) {
                         String variable = expression.substring(2, expression.length() - 1);
-                        return context.getStateService().getVariables().get(variable).getValue();
+                        return context.getStateService().getVariables().get(variable).getVar().getValue();
                     } else {
                         return uiAction.getClass().getDeclaredMethod(method.getName()).invoke(uiAction, methodArgs);
                     }

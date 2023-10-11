@@ -10,11 +10,13 @@ public class Home {
 
     private final LinkedHashMap<String, Zone> zones;
     private final LinkedHashMap<String, Macro> downBlindMacros;
+    private final LinkedHashMap<String, Macro> rightBlindMacros;
     private final Map<String, IVariable> variables;
 
     public Home() {
         this.zones = new LinkedHashMap<>();
         this.downBlindMacros = new LinkedHashMap<>();
+        this.rightBlindMacros = new LinkedHashMap<>();
         this.variables = new LinkedHashMap<>();
     }
 
@@ -24,6 +26,10 @@ public class Home {
 
     public HashMap<String, Macro> getDownBlindMacros() {
         return downBlindMacros;
+    }
+
+    public LinkedHashMap<String, Macro> getRightBlindMacros() {
+        return rightBlindMacros;
     }
 
     public Map<String, IVariable> getVariables() {

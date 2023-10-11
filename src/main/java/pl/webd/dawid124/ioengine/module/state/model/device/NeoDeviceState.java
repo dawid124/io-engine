@@ -9,6 +9,8 @@ public class NeoDeviceState extends LedDeviceState {
     private int animationId;
     private int speed;
 
+    public NeoDeviceState() {}
+
     public NeoDeviceState(String id, String name) {
         super(id, name, EDeviceStateType.NEO);
         this.color = new Color();

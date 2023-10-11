@@ -11,6 +11,8 @@ public class GroupState implements Serializable {
     private DeviceState state;
     private ArrayList<GroupState> children;
 
+    public GroupState() {}
+
     public GroupState(DeviceState state, ArrayList<GroupState> children) {
         this.state = state;
         this.children = children;

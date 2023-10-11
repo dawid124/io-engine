@@ -6,6 +6,8 @@ public class ColorLedDeviceState extends LedDeviceState {
 
     private Color color;
 
+    public ColorLedDeviceState() {}
+
     public ColorLedDeviceState(String id, String name) {
         super(id, name, EDeviceStateType.RGBW);
         this.color = new Color();

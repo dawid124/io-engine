@@ -62,6 +62,8 @@ public class UserActionController {
         sensorState.setLock(!action.isLock());
         action.setLock(!action.isLock());
 
+        stateService.updateDeviceState(sensorState.getIoId(), sensorState);
+
         return ResponseEntity.ok(action);
     }
 
@@ -75,6 +77,8 @@ public class UserActionController {
                 .getRanges().stream().filter(r -> action.getRangeId().equals(r.getId())).findFirst()
                 .ifPresent(r -> r.setTemperature(action.getTemperature()));
 
+        stateService.updateDbZone(stateService.getZoneState().get(action.getZoneId()));
+
         return ResponseEntity.ok(action);
     }
 
@@ -84,6 +88,8 @@ public class UserActionController {
     public ResponseEntity<UiTemperatureSceneChangeRequest> temperatureChange(@RequestBody UiTemperatureSceneChangeRequest action) {
 
         stateService.getZoneState().get(action.getZoneId()).setActiveTemperatureScene(action.getSceneId());
+
+        stateService.updateDbZone(stateService.getZoneState().get(action.getZoneId()));
 
         return ResponseEntity.ok(action);
     }

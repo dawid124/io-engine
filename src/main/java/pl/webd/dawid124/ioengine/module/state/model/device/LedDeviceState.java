@@ -4,6 +4,8 @@ public class LedDeviceState extends DeviceState {
 
     protected int brightness;
 
+    public LedDeviceState() {}
+
     public LedDeviceState(String id, String name) {
         super(id, name, EDeviceStateType.LED);
         this.brightness = 0;

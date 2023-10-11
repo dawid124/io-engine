@@ -1,5 +1,7 @@
 package pl.webd.dawid124.ioengine.module.state.model.zone;
 
+import io.jsondb.annotation.Document;
+import io.jsondb.annotation.Id;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
@@ -7,16 +9,20 @@ import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
 import java.util.HashMap;
 import java.util.Map;
 
+@Document(collection = "zone-state", schemaVersion= "1.0")
 public class ZoneState {
 
-    private final String id;
-    private final String name;
+    @Id
+    private String id;
+    private String name;
 
     private String activeScene;
     private String activeTemperatureScene;
     private Map<String, SceneState> sceneStates;
     private Map<String, TemperatureScenes> temperatureSceneStates;
     private Map<String, IVariable> variables;
+
+    public ZoneState() {}
 
     public ZoneState(String id, String name, String activeScene, String activeTemperatureScene) {
         this.id = id;

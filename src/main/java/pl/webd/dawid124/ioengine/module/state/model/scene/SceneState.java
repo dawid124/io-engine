@@ -10,10 +10,12 @@ import java.util.Optional;
 
 public class SceneState {
 
-    private final String id;
-    private final String name;
+    private String id;
+    private String name;
 
     private LinkedHashMap<String, GroupState> groupState;
+
+    public SceneState() {}
 
     public SceneState(String id, String name) {
         this.id = id;

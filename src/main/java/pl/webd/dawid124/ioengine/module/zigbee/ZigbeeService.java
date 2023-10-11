@@ -106,6 +106,7 @@ public class ZigbeeService implements MessageHandler {
                 }
             } catch (Exception e) {}
         }
+        context.getStateService().updateDeviceState(deviceState.getIoId(), deviceState);
     }
 
     public static Field findUnderlying(Class<?> clazz, String fieldName) {

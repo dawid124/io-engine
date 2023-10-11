@@ -1,5 +1,5 @@
 mqtt:
-  host: tcp://localhost:1883
+  host: tcp://pi-master:1883
   username:
   password:
   client-id: io-engine
@@ -9,4 +9,6 @@ mqtt:
   driver-sync-topic: home/driver-sync
 sound:
   preset-location: /home/pi/sound-preset
+db:
+  path: /home/pi/smart-db
 

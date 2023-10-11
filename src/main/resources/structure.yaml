@@ -52,7 +52,7 @@ zones:
               name: Day
               hourFrom: 05:00
               hourTo: 22:00
-              temperature: 22.5
+              temperature: 22.0
         manual:
           id: manual
           name: Manual
@@ -3002,18 +3002,18 @@ zones:
           ranges:
             - id: auto-morning
               name: Morning
-              hourFrom: 05:00
+              hourFrom: 04:00
               hourTo: 08:00
               temperature: 25.0
             - id: auto-day
               name: Day
               hourFrom: 08:00
-              hourTo: 21:00
-              temperature: 18.0
+              hourTo: 20:00
+              temperature: 19.0
             - id: auto-night
               name: Noc
-              hourFrom: 21:00
-              hourTo: 05:00
+              hourFrom: 20:00
+              hourTo: 04:00
               temperature: 20.0
         manual:
           id: manual
@@ -3490,24 +3490,19 @@ zones:
           ranges:
             - id: auto-morning
               name: Morning
-              hourFrom: 05:00
-              hourTo: 09:00
-              temperature: 26.0
+              hourFrom: 04:00
+              hourTo: 08:00
+              temperature: 23.0
             - id: auto-day
               name: Day
-              hourFrom: 09:00
-              hourTo: 20:00
-              temperature: 22.0
-            - id: auto-evning
-              name: Wieczór
-              hourFrom: 20:00
-              hourTo: 23:00
-              temperature: 24.0
+              hourFrom: 08:00
+              hourTo: 21:00
+              temperature: 21.0
             - id: auto-night
               name: Noc
-              hourFrom: 23:00
-              hourTo: 05:00
-              temperature: 20.0
+              hourFrom: 21:00
+              hourTo: 04:00
+              temperature: 22.0
         manual:
           id: manual
           name: Manual
@@ -3630,16 +3625,17 @@ downBlindMacros:
     label: Woda
     clickMacroId: hotWaterPump-5m-macro
     holdClickMacroId: hotWaterPump-5m-macro
+rightBlindMacros:
   rainBirdPump:
     id: rain-bird-8m
     label: Trawin
     clickMacroId: rain-bird-8m
     holdClickMacroId: rain-bird-clear
-#  rainBirdPumpFull:
-#    id: rain-bird-1h
-#    label: Wypompowanie
-#    clickMacroId: rain-bird-1h
-#    holdClickMacroId: rain-bird-clear
+  rainBirdPumpFull:
+    id: rain-bird-1h
+    label: Wypompowanie
+    clickMacroId: rain-bird-1h
+    holdClickMacroId: rain-bird-clear
 variables:
   bedroom-brightness-o:
     type: NUMBER

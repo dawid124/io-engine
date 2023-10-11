@@ -1,18 +1,20 @@
 package pl.webd.dawid124.ioengine.module.state.service;
 
+import io.jsondb.JsonDBTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import pl.webd.dawid124.ioengine.database.Jsondb;
 import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
+import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZoneStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.rest.ZonesStateResponse;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
-import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.structure.model.Scene;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
@@ -20,6 +22,7 @@ import pl.webd.dawid124.ioengine.module.structure.model.Zone;
 import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 
 import javax.annotation.PostConstruct;
+import javax.swing.plaf.nimbus.State;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,14 +32,18 @@ public class StateService {
 
     private final StructureService structureService;
     private final DeviceService deviceService;
+    private final JsonDBTemplate db;
 
-    private final Map<String, IVariable> variables;
+    private final Map<String, StateVariable> variables;
     private final Map<String, ZoneState> zoneState;
     private final Map<String, DeviceState> sensors;
 
-    public StateService(StructureService structureService, DeviceService deviceService) {
+
+
+    public StateService(StructureService structureService, DeviceService deviceService, Jsondb db) {
         this.structureService = structureService;
         this.deviceService = deviceService;
+        this.db = db.instance();
 
         variables = new HashMap<>();
         zoneState = new LinkedHashMap<>();
@@ -45,40 +52,88 @@ public class StateService {
 
     @PostConstruct
     public void init() {
+        if (!db.collectionExists(ZoneState.class)) {
+            db.createCollection(ZoneState.class);
+        }
+        if (!db.collectionExists(DeviceState.class)) {
+            db.createCollection(DeviceState.class);
+        }
+        if (!db.collectionExists(StateVariable.class)) {
+            db.createCollection(StateVariable.class);
+        }
         createInitState();
     }
 
     public void createInitState() {
         for (Zone zoneStructure : structureService.fetchStructure().getZones().values()) {
-            String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst()
-                    .map(Scene::getId).orElse("auto");
 
-            String firstTemperatureScene = null;
-            Map<String, TemperatureScenes> temperatureScenes = new HashMap<>();
-            if (zoneStructure.getTemperature() != null) {
-                temperatureScenes = zoneStructure.getTemperature().getScenes();
-                firstTemperatureScene = temperatureScenes.keySet().iterator().next();
+            ZoneState zone = db.findById(zoneStructure.getId(), ZoneState.class);
+
+            if (zone == null) {
+                zone = createInitialZone(zoneStructure);
+                db.insert(zone);
             }
 
-            ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene, firstTemperatureScene);
             addZoneState(zone);
-
-            for (Scene sceneStructure : zoneStructure.getScenes().values()) {
-                SceneState scene = new SceneState(sceneStructure.getId(), sceneStructure.getName());
-                zone.addSceneState(scene);
-                sceneStructure.getGroups().forEach(scene::addGroupState);
-            }
-
-            zone.getTemperatureSceneStates().putAll(temperatureScenes);
-
-//            sensors.putAll(zoneStructure.getSensors());
         }
 
-       deviceService.fetchAll().values().forEach(device -> {
-           sensors.put(device.getId(), device.getInitialState());
+       deviceService.fetchAll().forEach((id, device) -> {
+           DeviceState state = db.findById(id, DeviceState.class);
+           if (state == null) {
+               state = device.getInitialState();
+               db.insert(state);
+           }
+           sensors.put(id, state);
        });
 
-        variables.putAll(structureService.fetchStructure().getVariables());
+        structureService.fetchStructure().getVariables().forEach((k, v) -> {
+            StateVariable variable = db.findById(k, StateVariable.class);
+            if (variable == null) {
+                variable = new StateVariable(k, v);
+                db.insert(variable);
+            }
+            variables.put(k, variable);
+        });
+    }
+
+    public void updateDbZone(ZoneState instance) {
+        db.save(instance, ZoneState.class);
+    }
+
+    private void updateDbVariable(StateVariable instance) {
+        try {
+            db.insert(instance);
+        } catch (Exception ex) {
+            db.save(instance, StateVariable.class);
+        }
+    }
+
+    private void updateDbDeviceState(DeviceState instance) {
+        db.save(instance, DeviceState.class);
+    }
+
+    private ZoneState createInitialZone(Zone zoneStructure) {
+        String firstScene = zoneStructure.getScenes().values().stream().filter(s -> s.getOrder() == 0).findFirst()
+                .map(Scene::getId).orElse("auto");
+
+        String firstTemperatureScene = null;
+        Map<String, TemperatureScenes> temperatureScenes = new HashMap<>();
+        if (zoneStructure.getTemperature() != null) {
+            temperatureScenes = zoneStructure.getTemperature().getScenes();
+            firstTemperatureScene = temperatureScenes.keySet().iterator().next();
+        }
+
+        ZoneState zone = new ZoneState(zoneStructure.getId(), zoneStructure.getName(), firstScene, firstTemperatureScene);
+
+        for (Scene sceneStructure : zoneStructure.getScenes().values()) {
+            SceneState scene = new SceneState(sceneStructure.getId(), sceneStructure.getName());
+            zone.addSceneState(scene);
+            sceneStructure.getGroups().forEach(scene::addGroupState);
+        }
+
+        zone.getTemperatureSceneStates().putAll(temperatureScenes);
+
+        return zone;
     }
 
     public void resetScene(String zoneId, String sceneId) {
@@ -126,29 +181,37 @@ public class StateService {
         SceneState sceneState = zoneState.get(actionReq.getZoneId()).getSceneStates().get(actionReq.getSceneId());
 
         for (IUiAction action : actionReq.getActions()) {
-            sceneState.findStateById(action.getIoId()).ifPresent(state -> updateSateByUiAction(state, action));
+            sceneState.findStateById(action.getIoId()).ifPresent(state -> updateSateByUiAction(actionReq.getZoneId(), state, action));
         }
+
+        updateDbZone(zoneState.get(actionReq.getZoneId()));
     }
 
     public Map<String, ZoneState> getZoneState() {
         return zoneState;
     }
 
-    public Map<String, IVariable> getVariables() {
+    public Map<String, StateVariable> getVariables() {
         return variables;
     }
 
-    public void updateSateByUiAction(GroupState item, IUiAction action) {
+    public void updateVariable(String id, StateVariable var) {
+        variables.put(id, var);
+        updateDbVariable(var);
+    }
+
+    public void updateSateByUiAction(String zoneId, GroupState item, IUiAction action) {
 
         if (CollectionUtils.isEmpty(item.getChildren())) {
             updateDeviceSateByUiAction(action, item.getState());
         } else {
-            updateGroupSateByUiAction(action, item);
+            updateGroupSateByUiAction(zoneId, action, item);
         }
 
+        updateDbZone(zoneState.get(zoneId));
     }
 
-    private void updateGroupSateByUiAction(IUiAction ioAction, GroupState item) {
+    private void updateGroupSateByUiAction(String zoneId, IUiAction ioAction, GroupState item) {
         boolean onlyBrightness = false;
         if (item.getState() instanceof ColorLedDeviceState) {
             ColorLedDeviceState lightState = (ColorLedDeviceState) item.getState();
@@ -181,7 +244,7 @@ public class StateService {
 
         if (!onlyBrightness) {
             for (GroupState child : item.getChildren()) {
-                updateSateByUiAction(child, ioAction);
+                updateSateByUiAction(zoneId, child, ioAction);
             }
         }
     }
@@ -226,6 +289,8 @@ public class StateService {
         if (zone != null) {
             zone.setActiveScene(sceneId);
         }
+
+        updateDbZone(zone);
     }
 
     public void changeStateVar(VarChangeRequest change) {
@@ -235,11 +300,16 @@ public class StateService {
                     .findFirst()
                     .ifPresent(z -> z.getVariables().put(change.getName(), change.getValue()));
         } else {
-            this.variables.put(change.getName(), change.getValue());
+            this.variables.put(change.getName(), new StateVariable(change.getName(), change.getValue()));
         }
     }
 
     public Map<String, DeviceState> getSensors() {
         return sensors;
+    }
+
+    public void updateDeviceState(String id, DeviceState state) {
+        sensors.put(id, state);
+        updateDbDeviceState(state);
     }
 }

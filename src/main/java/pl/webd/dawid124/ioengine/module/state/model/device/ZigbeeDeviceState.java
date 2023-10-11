@@ -5,6 +5,8 @@ public class ZigbeeDeviceState extends DeviceState {
     private double battery;
     private double linkquality;
 
+    public ZigbeeDeviceState() {}
+
     public ZigbeeDeviceState(String ioId, String name, EDeviceStateType ioType, double battery, double linkquality) {
         super(ioId, name, ioType);
         this.battery = battery;

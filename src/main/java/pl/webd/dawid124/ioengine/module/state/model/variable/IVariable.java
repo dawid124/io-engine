@@ -1,9 +1,14 @@
 package pl.webd.dawid124.ioengine.module.state.model.variable;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.jsondb.annotation.Document;
 import pl.webd.dawid124.ioengine.module.automation.macro.exception.NotSupportedConditionException;
+import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonDeserializer;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonDeserializer;
 
 import java.util.List;
 
+@JsonDeserialize(using = IVariableJsonDeserializer.class)
 public interface IVariable {
 
     EVariableType getType();

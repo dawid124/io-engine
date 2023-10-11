@@ -67,7 +67,7 @@ public class ActionService {
                 action.setSpeed(state.getSpeed());
             }
             action.setBrightness(val);
-            stateService.updateSateByUiAction(gs, action);
+            stateService.updateSateByUiAction(zoneId, gs, action);
         });
         SceneState sceneState = stateService.fetchScene(zoneId, zone.getActiveScene());
 

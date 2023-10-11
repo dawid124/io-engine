@@ -69,6 +69,8 @@ public class TriggerService implements MessageHandler {
         } else {
             ((MotionSensorState) deviceState).setLastDeActiveDate(LocalDateTime.now());
         }
+
+        context.getStateService().updateDeviceState(deviceState.getIoId(), deviceState);
     }
 
     public TriggerStructure getTriggerStructure() {

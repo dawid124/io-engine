@@ -5,6 +5,8 @@ public class SwitchDeviceState extends ZigbeeDeviceState {
     private boolean on;
     private double power;
 
+    public SwitchDeviceState() {}
+
     public SwitchDeviceState(String ioId, String name, EDeviceStateType ioType, boolean on) {
         super(ioId, name, ioType, 0 ,0);
         this.on = on;

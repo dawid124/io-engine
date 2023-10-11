@@ -7,6 +7,8 @@ public class BlindDeviceState extends DeviceState {
     private EBlindDirection position;
     private int dimmerPercent;
 
+    public BlindDeviceState() {}
+
     public BlindDeviceState(String id, String name) {
         super(id, name, EDeviceStateType.BLIND);
         this.position = EBlindDirection.UP;

@@ -15,6 +15,7 @@ import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverTy
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
+import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
@@ -74,13 +75,14 @@ public class SoundEngine {
 
     @PostConstruct
     public void init() {
-        stateService.getVariables().put(SOUND_VISUALIZER_ACTIVE, new BooleanVariable(false));
+        StateVariable value = new StateVariable(SOUND_VISUALIZER_ACTIVE, new BooleanVariable(false));
+        stateService.updateVariable(SOUND_VISUALIZER_ACTIVE, value);
     }
 
 
     @Scheduled(fixedDelay = 1000)
     public void checkScene() {
-        boolean clubActive = ((BooleanVariable) stateService.getVariables().get(SOUND_VISUALIZER_ACTIVE)).getValue();
+        boolean clubActive = ((BooleanVariable) stateService.getVariables().get(SOUND_VISUALIZER_ACTIVE).getVar()).getValue();
         if (clubActive && !active) {
             this.active = true;
             startRecording();
