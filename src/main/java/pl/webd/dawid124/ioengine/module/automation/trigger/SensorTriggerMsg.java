@@ -4,7 +4,6 @@ public class SensorTriggerMsg {
 
     private String id;
     private boolean state;
-    private String action;
 
     public String getId() {
         return id;
@@ -20,22 +19,5 @@ public class SensorTriggerMsg {
 
     public void setState(boolean state) {
         this.state = state;
-    }
-
-    @Override
-    public String toString() {
-        return "SensorTriggerMsg{" +
-                "id='" + id + '\'' +
-                ", state=" + state +
-                ", action='" + action + '\'' +
-                '}';
-    }
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
     }
 }

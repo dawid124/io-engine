@@ -28,6 +28,10 @@ public class CompareCondition implements ICondition {
     public boolean test(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
         IVariable variable = fetcher.fetch(context, variables, zoneId);
 
+        if (variable == null) {
+            return false;
+        }
+
         switch (compareType) {
             case EQUAL:
                 return variable.equals(testValue);

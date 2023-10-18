@@ -6,6 +6,7 @@ import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
+import pl.webd.dawid124.ioengine.module.logs.EventLogService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
 
 @Component
@@ -35,5 +36,8 @@ public class AutomationContext {
 
     public TriggerService getTriggerService() {
         return (TriggerService) appContext.getBean("triggerService");
+    }
+    public EventLogService getEventLogService() {
+        return (EventLogService) appContext.getBean("eventLogService");
     }
 }

@@ -22,7 +22,7 @@ import java.util.Map;
 public class TriggerService implements MessageHandler {
 
     private static final Logger LOG = LogManager.getLogger( TriggerService.class );
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     private TriggerStructure triggerStructure;
 
@@ -49,6 +49,8 @@ public class TriggerService implements MessageHandler {
         if (((MotionSensorState) deviceState).isLock()) {
             return;
         }
+
+        context.getEventLogService().insertLog(deviceState, (String) message.getPayload());
 
         updateSensorState(deviceState, triggerMsg);
 

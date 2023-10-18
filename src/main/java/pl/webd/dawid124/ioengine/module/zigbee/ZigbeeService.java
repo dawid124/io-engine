@@ -53,6 +53,8 @@ public class ZigbeeService implements MessageHandler {
         ZigbeeDeviceState deviceState = (ZigbeeDeviceState)
                 context.getStateService().getSensors().get(id);
 
+        context.getEventLogService().insertLog(deviceState, (String) message.getPayload());
+
         JsonElement msgJson = JsonParser.parseString((String) message.getPayload());
 
         updateState(msgJson, deviceState);
