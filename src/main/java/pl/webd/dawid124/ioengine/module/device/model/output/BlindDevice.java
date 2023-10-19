@@ -47,7 +47,6 @@ public class BlindDevice extends Device {
             this.power = GPIO.provisionDigitalOutputPin(power, "blind-" + name + "-power", PinState.LOW);
             this.down = GPIO.provisionDigitalOutputPin(down, "blind-" + name + "-down", PinState.LOW);
             this.state = new BlindDeviceState(id, name);
-//            moveLocal(EBlindDirection.UP);
         } catch (Exception | Error ex) {
 
         }
