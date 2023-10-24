@@ -52,7 +52,7 @@ zones:
               name: Day
               hourFrom: 05:00
               hourTo: 22:00
-              temperature: 22.0
+              temperature: 22.5
         manual:
           id: manual
           name: Manual
@@ -2792,13 +2792,13 @@ zones:
           ranges:
             - id: auto-night
               name: Night
-              hourFrom: 22:00
+              hourFrom: 20:00
               hourTo: 05:00
               temperature: 19.0
             - id: auto-day
               name: Day
               hourFrom: 05:00
-              hourTo: 22:00
+              hourTo: 20:00
               temperature: 22.0
         manual:
           id: manual
@@ -3488,21 +3488,16 @@ zones:
           id: auto
           name: Auto
           ranges:
-            - id: auto-morning
-              name: Morning
-              hourFrom: 04:00
-              hourTo: 08:00
-              temperature: 23.0
             - id: auto-day
               name: Day
-              hourFrom: 08:00
-              hourTo: 21:00
-              temperature: 21.0
+              hourFrom: 05:00
+              hourTo: 23:00
+              temperature: 23.0
             - id: auto-night
               name: Noc
-              hourFrom: 21:00
-              hourTo: 04:00
-              temperature: 22.0
+              hourFrom: 23:00
+              hourTo: 05:00
+              temperature: 21.0
         manual:
           id: manual
           name: Manual
@@ -3636,6 +3631,136 @@ rightBlindMacros:
     label: Wypompowanie
     clickMacroId: rain-bird-1h
     holdClickMacroId: rain-bird-clear
+
+rightBlindGroups:
+  macrosGroup:
+    id: devicesGroup
+    label: Makra
+    buttons:
+      - id: cookerHood
+        label: Okap
+        clickMacroId: cookerHood-15m-macro
+        unClickMacroId: cookerHood-clear-macro
+        holdClickMacroId: cookerHood-60m-macro
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: cookerHood
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+  rainBirdGroup:
+    id: rainBirdGroup
+    label: Zraszacze
+    buttons:
+      - id: rain-bird-20m
+        label: 8m
+        clickMacroId: rain-bird-8m
+        unClickMacroId: rain-bird-clear
+        holdClickMacroId: rain-bird-clear
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: GLOBAL_VARIABLE
+            key: rain-bird-mode
+          testValue:
+            type: STRING
+            value: mode-20m
+      - id: rain-bird-1h
+        label: Wypompowanie
+        clickMacroId: rain-bird-1h
+        unClickMacroId: rain-bird-clear
+        holdClickMacroId: rain-bird-clear
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: GLOBAL_VARIABLE
+            key: rain-bird-mode
+          testValue:
+            type: STRING
+            value: rain-bird-pumping-out
+  homeHeating:
+    id: homeHeating
+    label: Ogrzewanie
+    buttons:
+      - id: home-pump-switch
+        label: Pompa CO
+        clickMacroId: home-heating-pump-on
+        unClickMacroId: home-heating-pump-off
+        holdClickMacroId: home-heating-pump-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: home-pump-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-valve-living-room
+        label: Salon
+        clickMacroId: heating-valve-living-room-on
+        unClickMacroId: heating-valve-living-room-off
+        holdClickMacroId: heating-valve-living-room-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-livingroom-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-valve-office
+        label: Biuro
+        clickMacroId: heating-valve-office-on
+        unClickMacroId: heating-valve-office-off
+        holdClickMacroId: heating-valve-office-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-office-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-bedroom
+        label: Sypialnia
+        clickMacroId: heating-bedroom-on
+        unClickMacroId: heating-bedroom-off
+        holdClickMacroId: heating-bedroom-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-bathroom-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+
+
+#  rainBirdPump:
+#    id: rain-bird-8m
+#    label: Trawin
+#    clickMacroId: rain-bird-8m
+#    holdClickMacroId: rain-bird-clear
+#  rainBirdPumpFull:
+#    id: rain-bird-1h
+#    label: Wypompowanie
+#    clickMacroId: rain-bird-1h
+#    holdClickMacroId: rain-bird-clear
+
 variables:
   bedroom-brightness-o:
     type: NUMBER
@@ -3646,3 +3771,6 @@ variables:
   bedroom-brightness-cct:
     type: NUMBER
     value: 255
+  rain-bird-mode:
+    type: STRING
+    value: 'OFF'

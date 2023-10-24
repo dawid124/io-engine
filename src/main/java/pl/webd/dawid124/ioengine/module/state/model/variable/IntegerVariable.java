@@ -6,6 +6,10 @@ public class IntegerVariable implements IVariable {
 
     private Integer value;
 
+    public IntegerVariable(Integer value) {
+        this.value = value;
+    }
+
     @Override public EVariableType getType() {
         return EVariableType.NUMBER;
     }

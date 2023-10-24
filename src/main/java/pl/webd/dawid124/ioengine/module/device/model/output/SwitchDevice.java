@@ -4,6 +4,7 @@ import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDrive
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.EDeviceStateType;
 import pl.webd.dawid124.ioengine.module.state.model.device.SwitchDeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeSwitchDeviceState;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfigSwitch;
 

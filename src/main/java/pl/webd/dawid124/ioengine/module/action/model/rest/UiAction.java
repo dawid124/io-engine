@@ -150,7 +150,7 @@ public class UiAction implements IUiAction {
     public IoAction toIoAction(IDevice device) {
         String deviceId = device.getDriverConfiguration().getDriver().getId();
         EIoDriverType deviceType = device.getDriverConfiguration().getDriver().getType();
-        return new IoAction(
+        IoAction ioAction = new IoAction(
                 this.getIoId(),
                 device.getIoType(),
                 this.getAction(),
@@ -162,6 +162,7 @@ public class UiAction implements IUiAction {
                 deviceId,
                 deviceType,
                 this.getZigbeeAction());
+        return ioAction;
     }
 
     public Color getColor2() {
@@ -171,4 +172,5 @@ public class UiAction implements IUiAction {
     public void setColor2(Color color2) {
         this.color2 = color2;
     }
+
 }

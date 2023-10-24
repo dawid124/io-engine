@@ -2,19 +2,13 @@ package pl.webd.dawid124.ioengine.module.device.model.adapter;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
-import pl.webd.dawid124.ioengine.module.state.model.device.EDeviceStateType;
-import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
-import pl.webd.dawid124.ioengine.mqtt.action.adapter.IoActionJsonPartyAdapter;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 public class DeviceStateJsonDeserializer extends StdDeserializer<DeviceState> {
 

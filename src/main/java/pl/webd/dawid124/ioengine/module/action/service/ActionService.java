@@ -39,6 +39,8 @@ public class ActionService {
     public void processSimpleActions(List<IUiAction> actions) {
         List<IoAction> mqttActions = actionDataService.fromUiAction(actions);
 
+        stateService.updateDeviceStates(mqttActions);
+
         mqttService.sendActionsToDevices(mqttActions);
     }
 

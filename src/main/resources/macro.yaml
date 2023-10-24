@@ -1245,6 +1245,15 @@ macros:
           - ioId: cookerHood
             action: TEMP_ON
             time: 900000
+  cookerHood-clear-macro:
+    zoneId: ''
+    name: Okap
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: cookerHood
+            action: 'OFF'
   hotWaterPump-5m-macro:
     zoneId: ''
     name: Cyrkulacja
@@ -1265,6 +1274,82 @@ macros:
           - ioId: cookerHood
             action: TEMP_ON
             time: 3600000
+
+  home-heating-pump-on:
+    zoneId: ''
+    name: home-heating-pump-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: home-pump-switch
+            action: 'ON'
+  home-heating-pump-off:
+    zoneId: ''
+    name: home-heating-pump-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: home-pump-switch
+            action: 'OFF'
+
+  heating-valve-living-room-on:
+    zoneId: ''
+    name: heating-valve-living-room-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-livingroom-switch
+            action: 'ON'
+  heating-valve-living-room-off:
+    zoneId: ''
+    name: heating-valve-living-room-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-livingroom-switch
+            action: 'OFF'
+
+  heating-valve-office-on:
+    zoneId: ''
+    name: heating-valve-office-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-office-switch
+            action: 'ON'
+  heating-valve-office-off:
+    zoneId: ''
+    name: heating-valve-office-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-office-switch
+            action: 'OFF'
+
+  heating-bedroom-on:
+    zoneId: ''
+    name: heating-bedroom-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-bedroom-switch
+            action: 'ON'
+  heating-bedroom-off:
+    zoneId: ''
+    name: heating-bedroom-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-bedroom-switch
+            action: 'OFF'
 
   restart-livingroom-panel-app:
     zoneId: ''
@@ -1376,6 +1461,13 @@ macros:
             action: 'ON'
 
       - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: rain-bird-mode
+        value:
+          type: STRING
+          value: 'mode-20m'
+
+      - blockType: RUNNER
         runnerType: ACTION
         actions:
           - ioId: rainBirdZone3
@@ -1464,6 +1556,13 @@ macros:
             action: 'ON'
 
       - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: rain-bird-mode
+        value:
+          type: STRING
+          value: 'rain-bird-pumping-out'
+
+      - blockType: RUNNER
         runnerType: ACTION
         actions:
           - ioId: rainBirdZone1
@@ -1540,3 +1639,9 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-pump-off-48
         action: CLEAR
+      - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: rain-bird-mode
+        value:
+          type: STRING
+          value: 'OFF'

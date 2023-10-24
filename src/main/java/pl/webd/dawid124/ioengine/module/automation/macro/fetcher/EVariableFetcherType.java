@@ -3,7 +3,8 @@ package pl.webd.dawid124.ioengine.module.automation.macro.fetcher;
 public enum EVariableFetcherType {
 
     MACRO_VARIABLE(MacroVariableFetcher.class),
-    GLOBAL_VARIABLE(null),
+    DEVICE_STATE(DeviceStateFetcher.class),
+    GLOBAL_VARIABLE(GlobalVariableFetcher.class),
     ZONE_VARIABLE(null),
     CURRENT_STATE_VARIABLE(CurrentStateVariableFetcher.class),
     SENSOR_INACTIVE_FOR_TIME(SensorInactiveForTimeVariableFetcher.class),

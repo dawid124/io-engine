@@ -1,13 +1,16 @@
 package pl.webd.dawid124.ioengine.module.state.service;
 
+import com.pi4j.io.gpio.PinState;
 import io.jsondb.JsonDBTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import pl.webd.dawid124.ioengine.database.Jsondb;
 import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
+import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
+import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
@@ -20,16 +23,22 @@ import pl.webd.dawid124.ioengine.module.structure.model.Scene;
 import pl.webd.dawid124.ioengine.module.structure.model.TemperatureScenes;
 import pl.webd.dawid124.ioengine.module.structure.model.Zone;
 import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import javax.annotation.PostConstruct;
 import javax.swing.plaf.nimbus.State;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class StateService {
 
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final StructureService structureService;
     private final DeviceService deviceService;
     private final JsonDBTemplate db;
@@ -311,5 +320,29 @@ public class StateService {
     public void updateDeviceState(String id, DeviceState state) {
         sensors.put(id, state);
         updateDbDeviceState(state);
+    }
+
+    public void updateDeviceStates(List<IoAction> mqttActions) {
+        // temp implementation
+        mqttActions.forEach(a -> {
+            DeviceState state = sensors.get(a.getIoId());
+            if (EDeviceStateType.SWITCH.equals(state.getIoType())) {
+                SwitchDeviceState switchState = (SwitchDeviceState) state;
+                if (EActionType.ON.equals(a.getAction())) {
+                    switchState.setOn(true);
+                } else if (EActionType.OFF.equals(a.getAction())) {
+                    switchState.setOn(false);
+                } else if (EActionType.TEMP_ON.equals(a.getAction())) {
+                    switchState.setOn(true);
+                    scheduler.schedule(() -> {
+                        switchState.setOn(false);
+                        updateDbDeviceState(state);
+                    }, a.getTime(), TimeUnit.MILLISECONDS);
+                }
+//                state.update(a);
+                updateDbDeviceState(state);
+            }
+        });
+
     }
 }

@@ -1,15 +1,27 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
-public class SwitchDeviceState extends ZigbeeDeviceState {
+import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
+
+public class SwitchDeviceState extends DeviceState {
 
     private boolean on;
-    private double power;
 
     public SwitchDeviceState() {}
 
     public SwitchDeviceState(String ioId, String name, EDeviceStateType ioType, boolean on) {
-        super(ioId, name, ioType, 0 ,0);
+        super(ioId, name, ioType);
         this.on = on;
+    }
+
+    public void update(IoAction a) {
+        if (EActionType.ON.equals(a.getAction())) {
+            on = true;
+        } else if (EActionType.OFF.equals(a.getAction())) {
+            on = false;
+        } else if (EActionType.TEMP_ON.equals(a.getAction())) {
+            on = true;
+        }
     }
 
     public boolean isOn() {
@@ -18,13 +30,5 @@ public class SwitchDeviceState extends ZigbeeDeviceState {
 
     public void setOn(boolean on) {
         this.on = on;
-    }
-
-    public double getPower() {
-        return power;
-    }
-
-    public void setPower(double power) {
-        this.power = power;
     }
 }

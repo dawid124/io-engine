@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class HomeStructureController {
 
-    private StructureService structureService;
+    private final StructureService structureService;
 
     public HomeStructureController(StructureService structureService) {
         this.structureService = structureService;
@@ -30,5 +30,13 @@ public class HomeStructureController {
         return ResponseEntity.ok()
                 .cacheControl(cacheControl)
                 .body(structureService.fetchStructure());
+    }
+
+    @GetMapping(value = "/api/right-slider-structure", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseBody
+    public ResponseEntity<RightSliderData> fetchRightSliderStructure() {
+        return ResponseEntity.ok()
+                .body(structureService.fetchRightSliderStructure());
     }
 }

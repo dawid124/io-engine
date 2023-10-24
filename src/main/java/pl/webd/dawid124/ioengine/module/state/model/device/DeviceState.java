@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonDeserializer;
+import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.io.Serializable;
 
@@ -23,6 +24,8 @@ public abstract class DeviceState implements Cloneable, Serializable {
         this.name = name;
         this.ioType = ioType;
     }
+
+    public void update(IoAction a) {};
 
     public String getIoId() {
         return ioId;

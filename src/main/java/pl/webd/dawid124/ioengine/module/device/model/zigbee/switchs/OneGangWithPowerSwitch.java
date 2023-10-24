@@ -8,7 +8,7 @@ import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeAction;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.EDeviceStateType;
-import pl.webd.dawid124.ioengine.module.state.model.device.SwitchDeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeSwitchDeviceState;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 
 public class OneGangWithPowerSwitch extends ZigbeeDevice {
@@ -27,7 +27,7 @@ public class OneGangWithPowerSwitch extends ZigbeeDevice {
 
     @Override
     public DeviceState getInitialState() {
-        return new SwitchDeviceState(id, name, EDeviceStateType.POWER_METER_SWITCH, false);
+        return new ZigbeeSwitchDeviceState(id, name, EDeviceStateType.POWER_METER_SWITCH, false);
     }
 
     @Override
