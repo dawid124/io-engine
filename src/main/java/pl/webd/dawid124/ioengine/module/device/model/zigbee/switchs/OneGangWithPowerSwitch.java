@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs;
 
-import org.springframework.messaging.Message;
+import com.google.gson.JsonElement;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.device.model.driver.configuration.IDriverConfiguration;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
@@ -8,6 +8,7 @@ import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeAction;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.EDeviceStateType;
+import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeSwitchDeviceState;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 
@@ -36,7 +37,7 @@ public class OneGangWithPowerSwitch extends ZigbeeDevice {
     }
 
     @Override
-    public void processIncomingMsg(AutomationContext context, Message<?> message) {}
+    public void processIncomingMsg(AutomationContext context, ZigbeeDeviceState deviceState, JsonElement message) {}
 
     @Override
     public ZigbeeAction processAction(String action, Object params) {

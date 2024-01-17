@@ -2171,6 +2171,28 @@ macros:
         value:
           type: BOOLEAN
           value: false
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: home-heating-pump-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-bedroom-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-p1-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-p2-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-bath-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-valve-living-room-off
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: heating-valve-office-off
+
   home-temperature-gwc-on-macro:
     name: włączenie gwc
     blocks:

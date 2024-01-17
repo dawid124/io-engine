@@ -20,6 +20,10 @@ public abstract class ZigbeeDevice implements IDevice, ZigbeeApi {
         return id;
     }
 
+    public String getMqttAddress() {
+        return id;
+    }
+
     @Override public String getName() {
         return name;
     }

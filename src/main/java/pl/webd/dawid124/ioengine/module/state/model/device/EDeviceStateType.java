@@ -2,7 +2,7 @@ package pl.webd.dawid124.ioengine.module.state.model.device;
 
 public enum EDeviceStateType {
     SWITCH(SwitchDeviceState.class),
-    ZIGBEE_SWITCH(SwitchDeviceState.class),
+    ZIGBEE_SWITCH(ZigbeeSwitchDeviceState.class),
     POWER_METER_SWITCH(ZigbeeSwitchDeviceState.class),
     BLIND(BlindDeviceState.class),
     NEO(NeoDeviceState.class),

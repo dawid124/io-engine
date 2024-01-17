@@ -17,6 +17,7 @@ import pl.webd.dawid124.ioengine.module.device.model.input.MotionSensor;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.button.SonoffSinlgeButton;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.ESonoff3GangSwitchLocation;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.OneGangWithPowerSwitch;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.Sonoff1GangSwitch;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.switchs.Sonoff3GangSwitch;
 import pl.webd.dawid124.ioengine.module.device.model.zigbee.temperature.SonoffTemperatureSensor;
 import pl.webd.dawid124.ioengine.module.device.model.output.*;
@@ -235,8 +236,8 @@ public class DeviceService {
         addDevice(new Sonoff3GangSwitch("temperature-p1-switch", "f2-temperature-switch-1", "temperature-p1-switch",
                 ESonoff3GangSwitchLocation.L3, zigbeeDriverConfigurationDown));
 
-        addDevice(new Sonoff3GangSwitch("temperature-p2-switch", "f2-temperature-switch-2","temperature-p2-switch",
-                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationDown));
+        addDevice(new Sonoff1GangSwitch("temperature-p2-switch","temperature-p2-switch",
+                zigbeeDriverConfigurationDown));
 
         addDevice(new SwitchDevice("temperature-livingroom-switch", "temperature-livingroom-switch", floor1Driver0Local, 12, ESwitchType.HIGH_ON));
         addDevice(new SwitchDevice("temperature-office-switch", "temperature-office-switch", floor1Driver0Local, 13, ESwitchType.HIGH_ON));

@@ -1,6 +1,5 @@
 package pl.webd.dawid124.ioengine.module.state.service;
 
-import com.pi4j.io.gpio.PinState;
 import io.jsondb.JsonDBTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -10,8 +9,6 @@ import pl.webd.dawid124.ioengine.module.action.model.VarChangeRequest;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
-import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
-import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
 import pl.webd.dawid124.ioengine.module.state.model.device.*;
@@ -26,7 +23,6 @@ import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import javax.annotation.PostConstruct;
-import javax.swing.plaf.nimbus.State;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;

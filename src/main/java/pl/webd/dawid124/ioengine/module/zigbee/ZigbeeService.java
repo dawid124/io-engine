@@ -21,9 +21,8 @@ import pl.webd.dawid124.ioengine.module.state.model.variable.VariableFactory;
 import pl.webd.dawid124.ioengine.utils.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ZigbeeService implements MessageHandler {
@@ -49,24 +48,26 @@ public class ZigbeeService implements MessageHandler {
 
         String topic = (String) headers.get(MQTT_RECEIVED_TOPIC);
         String id = topic.substring(topic.lastIndexOf("/") + 1);
-        IDevice iDevice = deviceService.fetchDevice(id);
 
-        if (!(iDevice instanceof ZigbeeDevice)) {
-            return;
+        List<IDevice> devices = deviceService.fetchAll().values().stream()
+                .filter(d -> d instanceof ZigbeeDevice)
+                .filter(z -> ((ZigbeeDevice) z).getMqttAddress().equals(id))
+                .collect(Collectors.toList());
+
+        for (IDevice iDevice : devices) {
+            ZigbeeDeviceState deviceState = (ZigbeeDeviceState)
+                    context.getStateService().getSensors().get(iDevice.getId());
+
+            context.getEventLogService().insertLog(deviceState, (String) message.getPayload());
+
+            JsonElement msgJson = JsonParser.parseString((String) message.getPayload());
+
+            updateState(msgJson, deviceState);
+
+            runTrigger(msgJson, deviceState);
+
+            ((ZigbeeDevice) iDevice).processIncomingMsg(context, deviceState, msgJson);
         }
-
-        ZigbeeDeviceState deviceState = (ZigbeeDeviceState)
-                context.getStateService().getSensors().get(id);
-
-        context.getEventLogService().insertLog(deviceState, (String) message.getPayload());
-
-        JsonElement msgJson = JsonParser.parseString((String) message.getPayload());
-
-        updateState(msgJson, deviceState);
-
-        runTrigger(msgJson, deviceState);
-
-        ((ZigbeeDevice) iDevice).processIncomingMsg(context, message);
     }
 
     private void runTrigger(JsonElement msgJson, ZigbeeDeviceState deviceState) {

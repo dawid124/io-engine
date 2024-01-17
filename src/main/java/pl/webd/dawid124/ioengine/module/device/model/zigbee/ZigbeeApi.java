@@ -1,11 +1,12 @@
 package pl.webd.dawid124.ioengine.module.device.model.zigbee;
 
-import org.springframework.messaging.Message;
+import com.google.gson.JsonElement;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
+import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeDeviceState;
 
 public interface ZigbeeApi {
 
-    default void processIncomingMsg(AutomationContext context, Message<?> message) {};
+    default void processIncomingMsg(AutomationContext context, ZigbeeDeviceState deviceState, JsonElement message) {};
     default ZigbeeAction processAction(String action, Object params) {
         return null;
     }

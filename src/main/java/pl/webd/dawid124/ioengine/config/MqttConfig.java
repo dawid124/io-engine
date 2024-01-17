@@ -18,6 +18,7 @@ import org.springframework.messaging.MessageHandler;
 import pl.webd.dawid124.ioengine.config.settings.MqttSettings;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.MqttDriver;
+import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.driversync.DriverSyncService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
@@ -25,6 +26,7 @@ import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 import pl.webd.dawid124.ioengine.module.zigbee.ZigbeeService;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -69,16 +71,19 @@ public class MqttConfig {
 
     @Bean
     public MessageProducer zigbee() {
-        List<String> zigbeeTopics = deviceService.fetchAll().values().stream()
+        Set<String> zigbeeTopics = deviceService.fetchAll().values().stream()
                 .filter(d -> EIoDriverType.ZIGBEE_MQTT.equals(d.getDriverConfiguration().getDriver().getType()))
                 .filter(d -> d.getDriverConfiguration().getDriver() instanceof MqttDriver)
-                .map(device -> ((MqttDriver) device.getDriverConfiguration().getDriver()).getTopic() + "/" + device.getId())
-                .collect(Collectors.toList());
+                .map(device -> ((MqttDriver) device.getDriverConfiguration().getDriver()).getTopic() + "/" + ((ZigbeeDevice) device).getMqttAddress())
+                .collect(Collectors.toSet());
 
         if (zigbeeTopics.isEmpty()) return null;
 
+        String first = zigbeeTopics.iterator().next();
+        zigbeeTopics.remove(first);
+
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                settings.getClientId() + "Zigbee", mqttClientFactory(), zigbeeTopics.remove(0));
+                settings.getClientId() + "Zigbee", mqttClientFactory(), first);
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setOutputChannel(mqttZigbeeChannel());
 

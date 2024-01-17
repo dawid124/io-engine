@@ -13,24 +13,13 @@ import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.ZigbeeSwitchDeviceState;
 import pl.webd.dawid124.ioengine.mqtt.config.IoConfig;
 
-public class Sonoff3GangSwitch extends ZigbeeDevice {
+public class Sonoff1GangSwitch extends ZigbeeDevice {
 
     private static final String SET_SUFFIX = "/set";
-    private static final String JSON_OBJECT = "{\"%s\": \"%s\"}";
+    private static final String JSON_OBJECT = "{\"state\": \"%s\"}";
 
-    private final ESonoff3GangSwitchLocation location;
-    private final String deviceId;
-
-    public Sonoff3GangSwitch(String id, String deviceId, String name, ESonoff3GangSwitchLocation location,
-                             IDriverConfiguration driverConfiguration) {
+    public Sonoff1GangSwitch(String id, String name, IDriverConfiguration driverConfiguration) {
         super(id, name, driverConfiguration);
-        this.location = location;
-        this.deviceId = deviceId;
-    }
-
-    @Override
-    public String getMqttAddress() {
-        return deviceId;
     }
 
     @Override
@@ -51,7 +40,7 @@ public class Sonoff3GangSwitch extends ZigbeeDevice {
     @Override
     public void processIncomingMsg(AutomationContext context, ZigbeeDeviceState deviceState, JsonElement message) {
         JsonObject obj = message.getAsJsonObject();
-        if ("ON".equals(obj.get(location.getStateKey()).getAsString())) {
+        if ("ON".equals(obj.get("state").getAsString())) {
             ((ZigbeeSwitchDeviceState) deviceState).setOn(true);
         } else {
             ((ZigbeeSwitchDeviceState) deviceState).setOn(false);
@@ -62,19 +51,19 @@ public class Sonoff3GangSwitch extends ZigbeeDevice {
     public ZigbeeAction processAction(String action, Object params) {
         switch (action) {
             case "ON":
-                return new ZigbeeAction(deviceId + SET_SUFFIX, buildOnAction());
+                return new ZigbeeAction(id + SET_SUFFIX, buildOnAction());
             case "OFF":
-                return new ZigbeeAction(deviceId + SET_SUFFIX, buildOffAction());
+                return new ZigbeeAction(id + SET_SUFFIX, buildOffAction());
             default:
                 return null;
         }
     }
 
     public String buildOnAction() {
-        return String.format(JSON_OBJECT, location.getStateKey(), "ON");
+        return String.format(JSON_OBJECT, "ON");
     }
 
     public String buildOffAction() {
-        return String.format(JSON_OBJECT, location.getStateKey(), "OFF");
+        return String.format(JSON_OBJECT, "OFF");
     }
 }
