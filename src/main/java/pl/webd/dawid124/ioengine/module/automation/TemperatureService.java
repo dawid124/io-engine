@@ -7,6 +7,7 @@ import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
+import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.device.MqttTemperatureSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.BooleanVariable;
@@ -41,7 +42,6 @@ public class TemperatureService {
         this.deviceService = deviceService;
         this.actionService = actionService;
         this.pumpActiveIds = new HashMap<>();
-        this.structureService.fetchStructure().getVariables().put(ACTIVE_FLAG_KEY, new BooleanVariable(true));
     }
 
     @Scheduled(fixedDelay = 1000 * 60 * 5)
@@ -125,6 +125,9 @@ public class TemperatureService {
     }
 
     private boolean isActive() {
-        return (Boolean) this.structureService.fetchStructure().getVariables().get(ACTIVE_FLAG_KEY).getValue();
+        StateVariable variable = this.stateService.getVariables().get(ACTIVE_FLAG_KEY);
+        if (variable == null) return false;
+
+        return BooleanVariable.getBooleanValue(variable.getVar());
     }
 }

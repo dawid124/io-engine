@@ -101,7 +101,10 @@ public class StateService {
                 variable = new StateVariable(k, v);
                 db.insert(variable);
             }
-            variables.put(k, variable);
+        });
+
+        db.findAll(StateVariable.class).forEach(v -> {
+            variables.put(v.getId(), v);
         });
     }
 

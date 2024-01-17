@@ -7,6 +7,8 @@ mqtt:
   action-topic: home/actions
   trigger-topic: home/triggers
   driver-sync-topic: home/driver-sync
+modbus:
+  host: 192.168.0.10
 sound:
   preset-location: /home/pi/sound-preset
 db:

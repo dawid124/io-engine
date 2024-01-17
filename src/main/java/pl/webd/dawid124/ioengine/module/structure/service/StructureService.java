@@ -74,9 +74,11 @@ import java.util.stream.Collectors;
         return buttons.stream()
                 .map(macroButton -> {
                     ICondition activeCondition = macroButton.getActiveCondition();
-                    boolean active = false;
+                    boolean active;
                     if (activeCondition != null) {
                         active = activeCondition.test(context, new HashMap<>(), "GLOBAL");
+                    } else {
+                        active = macroButton.isActive();
                     }
                     return new UiMacroButton(macroButton, active);
                 })

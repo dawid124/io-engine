@@ -10,6 +10,7 @@ public enum EVariableFetcherType {
     SENSOR_INACTIVE_FOR_TIME(SensorInactiveForTimeVariableFetcher.class),
     SENSOR_ACTIVE_IN_TIME(SensorActiveInTimeVariableFetcher.class),
     TIMER(null),
+    MODBUS_TCP(ModbusTcpVariableFetcher.class),
     CURRENT_TIME(CurrentTimeFetcher.class);
 
     Class clazz;

@@ -105,9 +105,21 @@ triggers:
       - blockType: RUNNER
         runnerType: MACRO_RUNNER
         macroId: bedroom-btn-macro
+  living-room-btn-1:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: living-room-btn-macro
   t-kitchen-power:
     zoneId: floor1
     blocs:
       - blockType: RUNNER
         runnerType: MACRO_RUNNER
         macroId: t-kitchen-power-meter-macro
+  t-bathroom:
+    zoneId: floor1
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: ventilation-wind-mode-on-t-bathroom

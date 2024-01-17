@@ -45,14 +45,14 @@ zones:
           ranges:
             - id: auto-night
               name: Night
-              hourFrom: 22:00
-              hourTo: 05:00
-              temperature: 19.0
+              hourFrom: 20:00
+              hourTo: 03:00
+              temperature: 20.5
             - id: auto-day
               name: Day
-              hourFrom: 05:00
-              hourTo: 22:00
-              temperature: 22.5
+              hourFrom: 03:00
+              hourTo: 20:00
+              temperature: 22
         manual:
           id: manual
           name: Manual
@@ -60,7 +60,7 @@ zones:
             - id: manual
               name: Manual
               allTime: true
-              temperature: 23.0
+              temperature: 22.0
         eco:
           id: eco
           name: Eco
@@ -68,7 +68,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
     scenes:
       auto:
         id: auto
@@ -2793,11 +2793,11 @@ zones:
             - id: auto-night
               name: Night
               hourFrom: 20:00
-              hourTo: 05:00
-              temperature: 19.0
+              hourTo: 04:00
+              temperature: 20.0
             - id: auto-day
               name: Day
-              hourFrom: 05:00
+              hourFrom: 04:00
               hourTo: 20:00
               temperature: 22.0
         manual:
@@ -2807,7 +2807,7 @@ zones:
             - id: manual
               name: Manual
               allTime: true
-              temperature: 23.0
+              temperature: 22.0
         eco:
           id: eco
           name: Eco
@@ -2815,7 +2815,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
     scenes:
       auto:
         id: auto
@@ -2965,6 +2965,83 @@ zones:
                     g: 0
                     b: 0
                     w: 255
+      night:
+        id: night
+        name: Night
+        order: 1
+        groups:
+          - state:
+              ioId: rgbw-office
+              name: Biuro
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+          - state:
+              ioId: other-manual-group
+              name: Parter
+              ioType: RGBW
+              brightness: 255
+              animationId: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+            children:
+              - state:
+                  ioId: rgbw-lobby
+                  name: Korytarz
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+              - state:
+                  ioId: l-mirror
+                  name: Lustro
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+              - state:
+                  ioId: plants
+                  name: Doniczka
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+              - state:
+                  ioId: rgbw-wc1
+                  name: Wc 1
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+              - state:
+                  ioId: rgbw-wc2
+                  name: Wc 2
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
   bedroom:
     id: bedroom
     name: Syp
@@ -3002,19 +3079,14 @@ zones:
           ranges:
             - id: auto-morning
               name: Morning
-              hourFrom: 04:00
-              hourTo: 08:00
+              hourFrom: 02:00
+              hourTo: 07:00
               temperature: 25.0
             - id: auto-day
               name: Day
-              hourFrom: 08:00
-              hourTo: 20:00
-              temperature: 19.0
-            - id: auto-night
-              name: Noc
-              hourFrom: 20:00
-              hourTo: 04:00
-              temperature: 20.0
+              hourFrom: 07:00
+              hourTo: 02:00
+              temperature: 21.0
         manual:
           id: manual
           name: Manual
@@ -3030,7 +3102,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
     scenes:
       auto:
         id: auto
@@ -3297,7 +3369,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
         manual:
           id: manual
           name: Manual
@@ -3400,7 +3472,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
         manual:
           id: manual
           name: Manual
@@ -3513,7 +3585,7 @@ zones:
             - id: eco
               name: Eco
               allTime: true
-              temperature: 16.0
+              temperature: 18.0
     scenes:
       auto:
         id: auto
@@ -3622,9 +3694,9 @@ downBlindMacros:
     holdClickMacroId: hotWaterPump-5m-macro
 rightBlindMacros:
   rainBirdPump:
-    id: rain-bird-8m
+    id: rain-bird-20m
     label: Trawin
-    clickMacroId: rain-bird-8m
+    clickMacroId: rain-bird-20m
     holdClickMacroId: rain-bird-clear
   rainBirdPumpFull:
     id: rain-bird-1h
@@ -3634,7 +3706,7 @@ rightBlindMacros:
 
 rightBlindGroups:
   macrosGroup:
-    id: devicesGroup
+    id: macrosGroup
     label: Makra
     buttons:
       - id: cookerHood
@@ -3652,13 +3724,173 @@ rightBlindGroups:
           testValue:
             type: BOOLEAN
             value: true
+      - id: allScenesAuto
+        label: Auto all
+        clickMacroId:
+        active: false
+
+  automationGroup:
+    id: automationGroup
+    label: Automatyzacja
+    buttons:
+      - id: floor-heating
+        label: Ogrzewanie
+        clickMacroId: home-temperature-service-on-macro
+        unClickMacroId: home-temperature-service-off-macro
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: GLOBAL_VARIABLE
+            key: home-temperature-service-active
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: ventilation-gwc
+        label: GWC
+        clickMacroId: home-temperature-gwc-on-macro
+        unClickMacroId: home-temperature-gwc-off-macro
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 69
+          testValue:
+            type: NUMBER
+            value: 1
+
+  ventilationScheduleGroup:
+    id: ventilationScheduleGroup
+    label: Wentylacja
+    buttons:
+      - id: ventilationScheduleP
+        label: 0
+        clickMacroId: ventilation-schedule-pause
+        unClickMacroId: ventilation-schedule-pause-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 4
+          testValue:
+            type: NUMBER
+            value: 1
+      - id: ventilationScheduleH1
+        label: 1
+        clickMacroId: ventilation-schedule-h1
+        unClickMacroId: ventilation-schedule-pause
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 4
+          testValue:
+            type: NUMBER
+            value: 3
+      - id: ventilationScheduleH2
+        label: 2
+        clickMacroId: ventilation-schedule-h2
+        unClickMacroId: ventilation-schedule-pause
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 4
+          testValue:
+            type: NUMBER
+            value: 4
+      - id: ventilationScheduleH3
+        label: 3
+        clickMacroId: ventilation-schedule-h3
+        unClickMacroId: ventilation-schedule-pause
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 4
+          testValue:
+            type: NUMBER
+            value: 5
+      - id: ventilationScheduleH4
+        label: 4
+        clickMacroId: ventilation-schedule-h4
+        unClickMacroId: ventilation-schedule-pause
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 4
+          testValue:
+            type: NUMBER
+            value: 6
+
+
+  ventilationGroup:
+    id: ventilationGroup
+    label:
+    buttons:
+      - id: ventilationSchedule
+        label: H
+        clickMacroId: ventilation-schedule-on
+        unClickMacroId: ventilation-schedule-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 37
+          testValue:
+            type: NUMBER
+            value: 1
+      - id: ventilationWind
+        label: Wietrzenie
+        clickMacroId: ventilation-wind-on
+        unClickMacroId: ventilation-wind-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 32
+          testValue:
+            type: NUMBER
+            value: 1
+      - id: ventilationParty
+        label: Party
+        clickMacroId: ventilation-party-on
+        unClickMacroId: ventilation-party-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MODBUS_TCP
+            slaveId: 1
+            offset: 34
+          testValue:
+            type: NUMBER
+            value: 1
+
   rainBirdGroup:
     id: rainBirdGroup
     label: Zraszacze
     buttons:
       - id: rain-bird-20m
-        label: 8m
-        clickMacroId: rain-bird-8m
+        label: 20m
+        clickMacroId: rain-bird-20m
         unClickMacroId: rain-bird-clear
         holdClickMacroId: rain-bird-clear
         activeCondition:
@@ -3689,7 +3921,7 @@ rightBlindGroups:
     label: Ogrzewanie
     buttons:
       - id: home-pump-switch
-        label: Pompa CO
+        label: Pompa
         clickMacroId: home-heating-pump-on
         unClickMacroId: home-heating-pump-off
         holdClickMacroId: home-heating-pump-off
@@ -3733,11 +3965,61 @@ rightBlindGroups:
           testValue:
             type: BOOLEAN
             value: true
+
+  homeHeatingUp:
+    id: homeHeatingUp
+    label:
+    buttons:
       - id: heating-bedroom
-        label: Sypialnia
+        label: Syp
         clickMacroId: heating-bedroom-on
         unClickMacroId: heating-bedroom-off
         holdClickMacroId: heating-bedroom-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-bedroom-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-p1
+        label: P1
+        clickMacroId: heating-p1-on
+        unClickMacroId: heating-p1-off
+        holdClickMacroId: heating-p1-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-p1-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-p2
+        label: P2
+        clickMacroId: heating-p2-on
+        unClickMacroId: heating-p2-off
+        holdClickMacroId: heating-p2-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: temperature-p2-switch
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: heating-bath
+        label: Ł
+        clickMacroId: heating-bath-on
+        unClickMacroId: heating-bath-off
+        holdClickMacroId: heating-bath-off
         activeCondition:
           type: COMPARE
           compareType: EQUAL
@@ -3748,7 +4030,6 @@ rightBlindGroups:
           testValue:
             type: BOOLEAN
             value: true
-
 
 #  rainBirdPump:
 #    id: rain-bird-8m
@@ -3774,3 +4055,6 @@ variables:
   rain-bird-mode:
     type: STRING
     value: 'OFF'
+  bedroom-blind-button-state:
+    type: STRING
+    value: 'CLOSE'

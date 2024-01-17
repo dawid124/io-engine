@@ -6,6 +6,7 @@ public class MacroButton extends Macro {
     private String unClickMacroId;
 
     private ICondition activeCondition;
+    private boolean active;
 
     public String getUnClickMacroId() {
         return unClickMacroId;
@@ -21,5 +22,13 @@ public class MacroButton extends Macro {
 
     public void setActiveCondition(ICondition activeCondition) {
         this.activeCondition = activeCondition;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

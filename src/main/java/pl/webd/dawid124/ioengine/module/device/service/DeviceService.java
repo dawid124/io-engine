@@ -49,8 +49,7 @@ public class DeviceService {
         PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
         LocalDriver piLocal = new LocalDriver("pi-master");
-        MqttDriver zigbee2mqttUp = new MqttDriver("zigbee2mqttUp", "zigbee2mqttUp");
-        MqttDriver zigbee2mqttDown = new MqttDriver("zigbee2mqttDown", "zigbee2mqttDown");
+        MqttDriver zigbee2mqttDown = new MqttDriver("zigbee2mqtt", "zigbee2mqtt");
 
         drivers.add(floor1Driver0);
         drivers.add(floor1Driver1);
@@ -60,10 +59,7 @@ public class DeviceService {
         drivers.add(floor0Driver0);
         drivers.add(test);
         drivers.add(piLocal);
-        drivers.add(zigbee2mqttUp);
         drivers.add(zigbee2mqttDown);
-
-        ZigbeeDriverConfiguration zigbeeDriverConfigurationUp = new ZigbeeDriverConfiguration(zigbee2mqttUp);
         ZigbeeDriverConfiguration zigbeeDriverConfigurationDown = new ZigbeeDriverConfiguration(zigbee2mqttDown);
 
         PicoDriverConfiguration floor1Driver0ExpanderA = new PicoDriverConfiguration(floor1Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
@@ -223,23 +219,24 @@ public class DeviceService {
         addDevice(new SonoffTemperatureSensor("t-livingroom", "Temperatura Salon", zigbeeDriverConfigurationDown));
         addDevice(new OneGangWithPowerSwitch("t-kitchen-power", "t-kitchen-power", zigbeeDriverConfigurationDown));
 
-        addDevice(new SonoffTemperatureSensor("t-bethroom", "Sypialnia", zigbeeDriverConfigurationUp));
-        addDevice(new SonoffTemperatureSensor("t-bathroom", "Łazienka", zigbeeDriverConfigurationUp));
-        addDevice(new SonoffTemperatureSensor("t-p1", "Pokój 1", zigbeeDriverConfigurationUp));
-        addDevice(new SonoffTemperatureSensor("t-p2", "Pokój 2", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffTemperatureSensor("t-bethroom", "Sypialnia", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffTemperatureSensor("t-bathroom", "Łazienka", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffTemperatureSensor("t-p1", "Pokój 1", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffTemperatureSensor("t-p2", "Pokój 2", zigbeeDriverConfigurationDown));
 
-        addDevice(new SonoffSinlgeButton("bedroom-btn-1", "bedroom-btn-1", zigbeeDriverConfigurationUp));
-        addDevice(new SonoffSinlgeButton("bedroom-btn-2", "bedroom-btn-2", zigbeeDriverConfigurationUp));
+        addDevice(new SonoffSinlgeButton("bedroom-btn-1", "bedroom-btn-1", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffSinlgeButton("bedroom-btn-2", "bedroom-btn-2", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffSinlgeButton("living-room-btn-1", "living-room-btn-1", zigbeeDriverConfigurationDown));
 
         addDevice(new Sonoff3GangSwitch("temperature-bathroom-switch", "f2-temperature-switch-1","temperature-bathroom-switch",
-                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationUp));
+                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationDown));
         addDevice(new Sonoff3GangSwitch("temperature-bedroom-switch", "f2-temperature-switch-1","temperature-bedroom-switch",
-                ESonoff3GangSwitchLocation.L2, zigbeeDriverConfigurationUp));
+                ESonoff3GangSwitchLocation.L2, zigbeeDriverConfigurationDown));
         addDevice(new Sonoff3GangSwitch("temperature-p1-switch", "f2-temperature-switch-1", "temperature-p1-switch",
-                ESonoff3GangSwitchLocation.L3, zigbeeDriverConfigurationUp));
+                ESonoff3GangSwitchLocation.L3, zigbeeDriverConfigurationDown));
 
         addDevice(new Sonoff3GangSwitch("temperature-p2-switch", "f2-temperature-switch-2","temperature-p2-switch",
-                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationUp));
+                ESonoff3GangSwitchLocation.L1, zigbeeDriverConfigurationDown));
 
         addDevice(new SwitchDevice("temperature-livingroom-switch", "temperature-livingroom-switch", floor1Driver0Local, 12, ESwitchType.HIGH_ON));
         addDevice(new SwitchDevice("temperature-office-switch", "temperature-office-switch", floor1Driver0Local, 13, ESwitchType.HIGH_ON));

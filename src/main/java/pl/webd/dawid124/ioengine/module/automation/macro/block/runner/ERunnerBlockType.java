@@ -7,9 +7,11 @@ public enum ERunnerBlockType {
     ACTION(ActionRunnerBlock.class),
     CMD(CMDRunnerBlock.class),
     SCENE_CHANGE(SceneChangeRunnerBlock.class),
+    SCENE_BRIGHTNESS_CHANGE(SceneBrightnessChangeRunnerBlock.class),
     BLIND_ACTION(BlindActionRunnerBlock.class),
     GLOBAL_VARIABLE_CHANGE(GlobalVariableChangeRunnerBlock.class),
     ZONE_VARIABLE_CHANGE(null),
+    MODBUS_TCP_ACTION(ModbusTcpActionRunnerBlock.class),
     TIMER(TimerRunnerBlock.class);
 
     Class clazz;

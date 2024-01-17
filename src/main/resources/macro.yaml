@@ -1341,6 +1341,7 @@ macros:
         actions:
           - ioId: temperature-bedroom-switch
             action: 'ON'
+            zigbeeAction: 'ON'
   heating-bedroom-off:
     zoneId: ''
     name: heating-bedroom-off
@@ -1350,6 +1351,70 @@ macros:
         actions:
           - ioId: temperature-bedroom-switch
             action: 'OFF'
+            zigbeeAction: 'OFF'
+
+  heating-p1-on:
+    zoneId: ''
+    name: heating-p1-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-p1-switch
+            action: 'ON'
+            zigbeeAction: 'ON'
+  heating-p1-off:
+    zoneId: ''
+    name: heating-p1-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-p1-switch
+            action: 'OFF'
+            zigbeeAction: 'OFF'
+
+  heating-p2-on:
+    zoneId: ''
+    name: heating-p2-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-p2-switch
+            action: 'ON'
+            zigbeeAction: 'ON'
+  heating-p2-off:
+    zoneId: ''
+    name: heating-p2-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-p2-switch
+            action: 'OFF'
+            zigbeeAction: 'OFF'
+
+  heating-bath-on:
+    zoneId: ''
+    name: heating-bath-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-bathroom-switch
+            action: 'ON'
+            zigbeeAction: 'ON'
+  heating-bath-off:
+    zoneId: ''
+    name: heating-bath-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: temperature-bathroom-switch
+            action: 'OFF'
+            zigbeeAction: 'OFF'
 
   restart-livingroom-panel-app:
     zoneId: ''
@@ -1394,6 +1459,157 @@ macros:
               action: RUN
               time: 180000
 
+  living-room-btn-macro:
+    zoneId: floor1
+    name: living button
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: toggle
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: CURRENT_STATE_VARIABLE
+                testValue:
+                  type: STRING
+                  value: auto
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: SCENE_CHANGE
+                    newSceneId: manual
+              falseBlock:
+                  blockType: CONDITION
+                  condition:
+                    type: COMPARE
+                    compareType: EQUAL
+                    fetcher:
+                      fetcherType: CURRENT_STATE_VARIABLE
+                    testValue:
+                      type: STRING
+                      value: manual
+                  trueBlock:
+                    blockType: BLOCK
+                    blocs:
+                      - blockType: RUNNER
+                        runnerType: SCENE_CHANGE
+                        newSceneId: night
+                  falseBlock:
+                    blockType: CONDITION
+                    condition:
+                      type: COMPARE
+                      compareType: EQUAL
+                      fetcher:
+                        fetcherType: CURRENT_STATE_VARIABLE
+                      testValue:
+                        type: STRING
+                        value: night
+                    trueBlock:
+                      blockType: BLOCK
+                      blocs:
+                        - blockType: RUNNER
+                          runnerType: SCENE_CHANGE
+                          newSceneId: tv
+                    falseBlock:
+                      blockType: CONDITION
+                      condition:
+                        type: COMPARE
+                        compareType: EQUAL
+                        fetcher:
+                          fetcherType: CURRENT_STATE_VARIABLE
+                        testValue:
+                          type: STRING
+                          value: tv
+                      trueBlock:
+                        blockType: BLOCK
+                        blocs:
+                          - blockType: RUNNER
+                            runnerType: SCENE_CHANGE
+                            newSceneId: auto
+
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: double
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: manual
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: hue_move
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: auto
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: brightness_step_up
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_BRIGHTNESS_CHANGE
+              newSceneId: night
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: brightness_step_down
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_BRIGHTNESS_CHANGE
+              newSceneId: night
+
   bedroom-btn-macro:
     zoneId: bedroom
     name: bedroom button
@@ -1411,9 +1627,71 @@ macros:
         trueBlock:
           blockType: BLOCK
           blocs:
-            - blockType: RUNNER
-              runnerType: SCENE_CHANGE
-              newSceneId: auto
+
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: CURRENT_STATE_VARIABLE
+                testValue:
+                  type: STRING
+                  value: auto
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: SCENE_CHANGE
+                    newSceneId: chill
+              falseBlock:
+                blockType: CONDITION
+                condition:
+                  type: COMPARE
+                  compareType: EQUAL
+                  fetcher:
+                    fetcherType: CURRENT_STATE_VARIABLE
+                  testValue:
+                    type: STRING
+                    value: chill
+                trueBlock:
+                  blockType: BLOCK
+                  blocs:
+                    - blockType: RUNNER
+                      runnerType: SCENE_CHANGE
+                      newSceneId: manual
+                falseBlock:
+                  blockType: CONDITION
+                  condition:
+                    type: COMPARE
+                    compareType: EQUAL
+                    fetcher:
+                      fetcherType: CURRENT_STATE_VARIABLE
+                    testValue:
+                      type: STRING
+                      value: manual
+                  trueBlock:
+                    blockType: BLOCK
+                    blocs:
+                      - blockType: RUNNER
+                        runnerType: SCENE_CHANGE
+                        newSceneId: night
+                  falseBlock:
+                    blockType: CONDITION
+                    condition:
+                      type: COMPARE
+                      compareType: EQUAL
+                      fetcher:
+                        fetcherType: CURRENT_STATE_VARIABLE
+                      testValue:
+                        type: STRING
+                        value: night
+                    trueBlock:
+                      blockType: BLOCK
+                      blocs:
+                        - blockType: RUNNER
+                          runnerType: SCENE_CHANGE
+                          newSceneId: auto
+
       - blockType: CONDITION
         condition:
           type: COMPARE
@@ -1425,11 +1703,84 @@ macros:
             type: STRING
             value: double
         trueBlock:
-          blockType: BLOCK
-          blocs:
-            - blockType: RUNNER
-              runnerType: SCENE_CHANGE
-              newSceneId: manual
+          blockType: CONDITION
+          condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: GLOBAL_VARIABLE
+              key: bedroom-blind-button-state
+            testValue:
+              type: STRING
+              value: 'OPEN-1'
+          trueBlock:
+            blockType: BLOCK
+            blocs:
+              - blockType: RUNNER
+                runnerType: GLOBAL_VARIABLE_CHANGE
+                key: bedroom-blind-button-state
+                value:
+                  type: STRING
+                  value: 'OPEN-2'
+              - blockType: RUNNER
+                runnerType: BLIND_ACTION
+                actions:
+                  - ioId: syp
+                    action: DIM_UP
+                    percent: 40
+          falseBlock:
+            blockType: CONDITION
+            condition:
+              type: COMPARE
+              compareType: EQUAL
+              fetcher:
+                fetcherType: GLOBAL_VARIABLE
+                key: bedroom-blind-button-state
+              testValue:
+                type: STRING
+                value: 'OPEN-2'
+            trueBlock:
+              blockType: BLOCK
+              blocs:
+                - blockType: RUNNER
+                  runnerType: GLOBAL_VARIABLE_CHANGE
+                  key: bedroom-blind-button-state
+                  value:
+                    type: STRING
+                    value: 'CLOSE'
+                - blockType: RUNNER
+                  runnerType: BLIND_ACTION
+                  actions:
+                    - ioId: syp
+                      action: DIM_DOWN
+                      percent: 100
+            falseBlock:
+              blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: GLOBAL_VARIABLE
+                  key: bedroom-blind-button-state
+                testValue:
+                  type: STRING
+                  value: 'CLOSE'
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: GLOBAL_VARIABLE_CHANGE
+                    key: bedroom-blind-button-state
+                    value:
+                      type: STRING
+                      value: 'OPEN-1'
+                  - blockType: RUNNER
+                    runnerType: BLIND_ACTION
+                    actions:
+                      - ioId: syp
+                        action: DIM_UP
+                        percent: 40
+
       - blockType: CONDITION
         condition:
           type: COMPARE
@@ -1448,8 +1799,7 @@ macros:
               newSceneId: night
 
 
-
-  rain-bird-8m:
+  rain-bird-20m:
     zoneId: ''
     name: Pompa zraszacze 20m
     blocks:
@@ -1645,3 +1995,195 @@ macros:
         value:
           type: STRING
           value: 'OFF'
+
+
+
+
+  ventilation-schedule-off:
+    zoneId: ''
+    name: ventilation-schedule-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 37
+        value: 0
+  ventilation-schedule-on:
+    zoneId: ''
+    name: ventilation-schedule-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 37
+        value: 1
+
+  ventilation-wind-off:
+    zoneId: ''
+    name: ventilation-wind-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 32
+        value: 0
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 1
+  ventilation-wind-on:
+    zoneId: ''
+    name: ventilation-wind-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 3
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 32
+        value: 1
+
+  ventilation-party-off:
+    zoneId: ''
+    name: ventilation-party-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 34
+        value: 0
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 1
+  ventilation-party-on:
+    zoneId: ''
+    name: ventilation-party-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 3
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 34
+        value: 1
+
+
+  ventilation-schedule-pause:
+    zoneId: ''
+    name: ventilation-schedule-pause
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 1
+
+  ventilation-schedule-h1:
+    zoneId: ''
+    name: ventilation-schedule-h1
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 3
+
+  ventilation-schedule-h2:
+    zoneId: ''
+    name: ventilation-schedule-h2
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 4
+
+  ventilation-schedule-h3:
+    zoneId: ''
+    name: ventilation-schedule-h3
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 5
+
+  ventilation-schedule-h4:
+    zoneId: ''
+    name: ventilation-schedule-pause
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 4
+        value: 6
+
+  ventilation-wind-mode-on-t-bathroom:
+    name: Wietrzenie jak zbyt duża wilgotność
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: GREATER_THEN
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: humidity
+          testValue:
+            type: DOUBLE
+            value: 90
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: MACRO_RUNNER
+              macroId: ventilation-wind-on
+        falseBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: MACRO_RUNNER
+              macroId: ventilation-wind-off
+
+  home-temperature-service-on-macro:
+    name: włączenie ogrzewania
+    blocks:
+      - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: home-temperature-service-active
+        value:
+          type: BOOLEAN
+          value: true
+  home-temperature-service-off-macro:
+    name: włączenie ogrzewania
+    blocks:
+      - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: home-temperature-service-active
+        value:
+          type: BOOLEAN
+          value: false
+  home-temperature-gwc-on-macro:
+    name: włączenie gwc
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 69
+        value: 1
+  home-temperature-gwc-off-macro:
+    name: włączenie gwc
+    blocks:
+      - blockType: RUNNER
+        runnerType: MODBUS_TCP_ACTION
+        slaveId: 1
+        offset: 69
+        value: 0

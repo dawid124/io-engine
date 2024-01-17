@@ -15,6 +15,12 @@ public class BooleanVariable implements IVariable {
         this.value = value;
     }
 
+    public static boolean getBooleanValue(IVariable variable) {
+        if (variable == null) return false;
+
+        return (Boolean) variable.getValue();
+    }
+
     @Override public EVariableType getType() {
         return EVariableType.BOOLEAN;
     }

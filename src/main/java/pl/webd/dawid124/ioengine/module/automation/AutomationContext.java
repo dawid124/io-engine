@@ -2,6 +2,7 @@ package pl.webd.dawid124.ioengine.module.automation;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import pl.webd.dawid124.ioengine.modbus.ModbusTcpService;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
 import pl.webd.dawid124.ioengine.module.automation.macro.MacroService;
 import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
@@ -39,5 +40,8 @@ public class AutomationContext {
     }
     public EventLogService getEventLogService() {
         return (EventLogService) appContext.getBean("eventLogService");
+    }
+    public ModbusTcpService getModbusTcpService() {
+        return (ModbusTcpService) appContext.getBean("modbusTcpService");
     }
 }
