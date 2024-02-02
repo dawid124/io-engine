@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.core.MessageProducer;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
@@ -22,10 +23,9 @@ import pl.webd.dawid124.ioengine.module.device.model.zigbee.ZigbeeDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.driversync.DriverSyncService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
-import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
+import pl.webd.dawid124.ioengine.module.voice.VoiceController;
 import pl.webd.dawid124.ioengine.module.zigbee.ZigbeeService;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,15 +36,17 @@ public class MqttConfig {
     private final TriggerService triggerService;
     private final ZigbeeService zigbeeService;
     private final DeviceService deviceService;
+    private final VoiceController voiceController;
     private final DriverSyncService driverSyncService;
 
     public MqttConfig(MqttSettings settings, TriggerService triggerService, ZigbeeService zigbeeService,
-                      DeviceService deviceService, DriverSyncService driverSyncService, StructureService structureService) {
+                      DeviceService deviceService, DriverSyncService driverSyncService, VoiceController voiceController) {
         this.settings = settings;
         this.triggerService = triggerService;
         this.zigbeeService = zigbeeService;
         this.deviceService = deviceService;
         this.driverSyncService = driverSyncService;
+        this.voiceController = voiceController;
     }
 
     @Bean
@@ -57,6 +59,10 @@ public class MqttConfig {
         return new DirectChannel();
     }
 
+    @Bean
+    public MessageChannel mqttHermesChannel() {
+        return new DirectChannel();
+    }
 
     @Bean
     public MessageProducer triggers() {
@@ -65,6 +71,17 @@ public class MqttConfig {
 
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setOutputChannel(mqttTriggerChannel());
+
+        return adapter;
+    }
+
+    @Bean
+    public MessageProducer hermes() {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+                settings.getClientId() + "Hermes", mqttClientFactory(), settings.getHermesIntentTopic());
+
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setOutputChannel(mqttHermesChannel());
 
         return adapter;
     }
@@ -107,6 +124,12 @@ public class MqttConfig {
     }
 
     @Bean
+    @ServiceActivator(inputChannel = "mqttHermesChannel")
+    public MessageHandler hermesHandler() {
+        return voiceController;
+    }
+
+    @Bean
     public MessageChannel mqttDriverSyncChannel() {
         return new DirectChannel();
     }
@@ -132,8 +155,6 @@ public class MqttConfig {
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();
     }
-
-
 
     @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")

@@ -14,6 +14,7 @@ public class MqttSettings {
     private String password;
     private String topic;
     private String triggerTopic;
+    private String hermesIntentTopic;
     private String driverSyncTopic;
     private String actionTopic;
     private String clientId;
@@ -80,5 +81,13 @@ public class MqttSettings {
 
     public void setDriverSyncTopic(String driverSyncTopic) {
         this.driverSyncTopic = driverSyncTopic;
+    }
+
+    public String getHermesIntentTopic() {
+        return hermesIntentTopic;
+    }
+
+    public void setHermesIntentTopic(String hermesIntentTopic) {
+        this.hermesIntentTopic = hermesIntentTopic;
     }
 }

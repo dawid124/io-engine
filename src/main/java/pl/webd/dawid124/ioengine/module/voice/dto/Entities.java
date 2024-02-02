@@ -5,6 +5,13 @@ public class Entities {
     private String entity;
     private String value;
 
+    public Entities() {}
+
+    public Entities(String entity, String value) {
+        this.entity = entity;
+        this.value = value;
+    }
+
     public String getEntity() {
         return entity;
     }

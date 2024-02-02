@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.action.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.EChangeLightMode;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
@@ -57,7 +58,7 @@ public class ActionService {
         return sceneState;
     }
 
-    public SceneState chngeLightPercent(String zoneId, int percent) {
+    public SceneState changeLightPercent(String zoneId, int percent, EChangeLightMode mode) {
         int val = (int) ((percent / (float) 100) * 255);
         ZoneState zone = stateService.getZoneState().get(zoneId);
         SceneState scece = zone.getSceneStates().get(zone.getActiveScene());
@@ -68,7 +69,18 @@ public class ActionService {
                 action.setAnimationId(state.getAnimationId());
                 action.setSpeed(state.getSpeed());
             }
-            action.setBrightness(val);
+            switch (mode) {
+                case SET:
+                    action.setBrightness(val);
+                    break;
+                case INCREASE:
+                    action.setBrightness(action.getBrightness() + val);
+                    break;
+                case DECREASE:
+                    action.setBrightness(action.getBrightness() - val);
+                    break;
+            }
+
             stateService.updateSateByUiAction(zoneId, gs, action);
         });
         SceneState sceneState = stateService.fetchScene(zoneId, zone.getActiveScene());
