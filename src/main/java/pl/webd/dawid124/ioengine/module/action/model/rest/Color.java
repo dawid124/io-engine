@@ -1,8 +1,6 @@
 package pl.webd.dawid124.ioengine.module.action.model.rest;
 
-import java.io.Serializable;
-
-public class Color implements Serializable {
+public class Color implements IColor {
 
     private int r = 0;
     private int g = 0;
@@ -74,15 +72,14 @@ public class Color implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
         Color color = (Color) o;
 
-        if (r != color.r) return false;
-        if (g != color.g) return false;
-        if (b != color.b) return false;
-        if (w != color.w) return false;
-        return ww == color.ww;
+        if (r != color.getR()) return false;
+        if (g != color.getG()) return false;
+        if (b != color.getB()) return false;
+        if (w != color.getW()) return false;
+        return ww == color.getWw();
     }
 
     @Override
@@ -95,11 +92,11 @@ public class Color implements Serializable {
         return result;
     }
 
-    public void update(Color color) {
-        this.r = color.r;
-        this.g = color.g;
-        this.b = color.b;
-        this.w = color.w;
-        this.ww = color.ww;
+    public void update(IColor color) {
+        this.r = color.getR();
+        this.g = color.getG();
+        this.b = color.getB();
+        this.w = color.getW();
+        this.ww = color.getWw();
     }
 }

@@ -3,13 +3,16 @@ package pl.webd.dawid124.ioengine.module.structure.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.condition.ICondition;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.ConditionVariableRunner;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IConditionJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableFetcherJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonAdapter;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.IColorJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.LocalTimeAdapter;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
@@ -20,10 +23,8 @@ import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service public class StructureService {
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
         this.home = new Home();
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(DeviceState.class, new DeviceStateJsonAdapter())
+                .registerTypeAdapter(IColor.class, new IColorJsonAdapter())
                 .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
                 .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
                 .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter())
@@ -56,6 +58,10 @@ import java.util.stream.Collectors;
 
     public Home fetchStructure() {
         return home;
+    }
+
+    public ConditionVariableRunner fetchConditionVariable(String name) {
+        return home.getConditionVariables().get(name);
     }
 
     public Scene fetchScene(String zoneId, String sceneId) {

@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.structure.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.ConditionVariableRunner;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.util.HashMap;
@@ -14,12 +15,15 @@ public class Home {
     @JsonIgnore
     private final LinkedHashMap<String, ButtonGroup> rightBlindGroups;
     private final Map<String, IVariable> variables;
+    @JsonIgnore
+    private final Map<String, ConditionVariableRunner> conditionVariables;
 
     public Home() {
         this.zones = new LinkedHashMap<>();
         this.downBlindMacros = new LinkedHashMap<>();
         this.rightBlindGroups = new LinkedHashMap<>();
         this.variables = new LinkedHashMap<>();
+        this.conditionVariables = new LinkedHashMap<>();
     }
 
     public Map<String, Zone> getZones() {
@@ -36,5 +40,9 @@ public class Home {
 
     public Map<String, IVariable> getVariables() {
         return variables;
+    }
+
+    public Map<String, ConditionVariableRunner> getConditionVariables() {
+        return conditionVariables;
     }
 }

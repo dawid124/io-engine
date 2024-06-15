@@ -9,6 +9,7 @@ import pl.webd.dawid124.ioengine.module.automation.timer.TimerService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
 import pl.webd.dawid124.ioengine.module.logs.EventLogService;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
+import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 
 @Component
 public class AutomationContext {
@@ -29,6 +30,10 @@ public class AutomationContext {
 
     public StateService getStateService() {
         return (StateService) appContext.getBean("stateService");
+    }
+
+    public StructureService getStructureService() {
+        return (StructureService) appContext.getBean("structureService");
     }
 
     public ActionService getActionService() {

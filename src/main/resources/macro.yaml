@@ -25,6 +25,7 @@ macros:
               sceneIds:
                 - auto
                 - manual
+                - night
               ledChangeData:
                 time: 1000
                 stepTime: 30
@@ -70,6 +71,7 @@ macros:
               sceneIds:
                 - auto
                 - manual
+                - night
               ledChangeData:
                 time: 1000
                 stepTime: 30
@@ -121,6 +123,7 @@ macros:
               sceneIds:
                 - auto
                 - manual
+                - night
               runnerType: STATE_ACTION
               ledChangeData:
                 time: 1000
@@ -409,12 +412,12 @@ macros:
                   stepTime: 30
                 actions:
                   - ioId: cct-f2-lobby
-                    brightness: 255
+                    brightness: ${cv-lobby-up-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: 255
+                      w: ${cv-home-cold-white-value}
                       ww: 255
           falseBlock:
             blockType: BLOCK
@@ -424,6 +427,87 @@ macros:
                 timerId: lobby-up-light-off-timer
                 action: UPDATE_TIME
                 time: 10000
+  pir-bath-up-macro:
+    zoneId: other
+    name: Łazienka góra
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: IN
+          fetcher:
+            fetcherType: CURRENT_STATE_VARIABLE
+          testValue:
+            type: LIST
+            value:
+              - type: STRING
+                value: auto
+        trueBlock:
+          blockType: CONDITION
+          condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: MACRO_VARIABLE
+              key: pir-value
+            testValue:
+              type: BOOLEAN
+              value: true
+          trueBlock:
+            blockType: BLOCK
+            blocs:
+#              - blockType: RUNNER
+#                runnerType: MACRO_RUNNER
+#                macroId: hotWaterPump-5m-macro
+              - blockType: RUNNER
+                runnerType: TIMER
+                timerId: pir-bath-up-macro-off-timer
+                action: CLEAR
+              - blockType: RUNNER
+                runnerType: STATE_ACTION
+                ledChangeData:
+                  time: 1000
+                  stepTime: 30
+                actions:
+                  - ioId: bath-rgbw-shower
+                    brightness: 150
+                    color:
+                      r: 255
+                      g: 0
+                      b: 255
+                      w: 0
+                      ww: 0
+                  - ioId: bath-rgbw-lamel
+                    brightness: 100
+                    color:
+                      r: 150
+                      g: 0
+                      b: 0
+                      w: 255
+                      ww: 0
+                  - ioId: bath-mirror
+                    brightness: 255
+                    color:
+                      w: 255
+                      ww: 0
+                  - ioId: bath-shower
+                    brightness: 255
+                    color:
+                      w: 255
+                      ww: 0
+                  - ioId: bath-bathtub
+                    brightness: 200
+                    color:
+                      w: 0
+                      ww: 255
+          falseBlock:
+            blockType: BLOCK
+            blocs:
+              - blockType: RUNNER
+                runnerType: TIMER
+                timerId: pir-bath-up-macro-off-timer
+                action: UPDATE_TIME
+                time: 180000
   lobby-stairs-down-up-on-macro:
     zoneId: other
     name: Schody od góry do dołu
@@ -466,42 +550,42 @@ macros:
                   stepTime: 30
                 actions:
                   - ioId: led-stairs-1
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 0
                     color:
                       w: 255
                   - ioId: led-stairs-2
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 100
                     color:
                       w: 255
                   - ioId: led-stairs-3
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 200
                     color:
                       w: 255
                   - ioId: led-stairs-4
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 300
                     color:
                       w: 255
                   - ioId: led-stairs-5
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 400
                     color:
                       w: 255
                   - ioId: led-stairs-6
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 500
                     color:
                       w: 255
                   - ioId: led-stairs-7
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 600
                     color:
                       w: 255
                   - ioId: led-stairs-8
-                    brightness: 100
+                    brightness: ${cv-home-up-stairs-brightness}
                     delay: 700
                     color:
                       w: 255
@@ -548,17 +632,17 @@ macros:
                 runnerType: ACTION
                 actions:
                   - ioId: cct-wardrobe-m
-                    brightness: 200
+                    brightness: ${cv-home-up-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: 255
+                      w: ${cv-home-cold-white-value}
                       ww: 255
                     time: 1000
                     stepTime: 30
                   - ioId: cct-wardrobe-m2
-                    brightness: 255
+                    brightness: ${cv-home-up-brightness}
                     color:
                       r: 0
                       g: 0
@@ -618,12 +702,12 @@ macros:
                 runnerType: ACTION
                 actions:
                   - ioId: cct-wardrobe-d
-                    brightness: 255
+                    brightness: ${cv-home-up-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: 255
+                      w: ${cv-home-cold-white-value}
                       ww: 255
                     time: 1000
                     stepTime: 30
@@ -641,292 +725,90 @@ macros:
     blocks:
       - blockType: CONDITION
         condition:
-          type: LOGIC
-          logicalType: AND
-          conditions:
-            - type: COMPARE
-              compareType: GREATER_EQUALS
-              fetcher:
-                fetcherType: CURRENT_TIME
-              testValue:
-                type: TIME
-                value: '06:30:00'
-            - type: COMPARE
-              compareType: LESS_THEN
-              fetcher:
-                fetcherType: CURRENT_TIME
-              testValue:
-                type: TIME
-                value: '21:00:00'
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: pir-value
+          testValue:
+            type: BOOLEAN
+            value: true
         trueBlock:
-          blockType: CONDITION
-          condition:
-            type: COMPARE
-            compareType: EQUAL
-            fetcher:
-              fetcherType: MACRO_VARIABLE
-              key: pir-value
-            testValue:
-              type: BOOLEAN
-              value: true
-          trueBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p1-light-off-timer
-                action: CLEAR
-              - blockType: RUNNER
-                runnerType: STATE_ACTION
-                sceneIds:
-                  - auto
-                ledChangeData:
-                  time: 1000
-                  stepTime: 30
-                actions:
-                  - ioId: cct-p1
-                    brightness: 255
-                    color:
-                      r: 0
-                      g: 0
-                      b: 0
-                      w: 255
-                      ww: 255
-          falseBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p1-light-off-timer
-                action: UPDATE_TIME
-                time: 60000
-      - blockType: CONDITION
-        condition:
-          type: LOGIC
-          logicalType: OR
-          conditions:
-            - type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '21:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '23:59:59'
-            - type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '00:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '06:30:00'
-        trueBlock:
-          blockType: CONDITION
-          condition:
-            type: COMPARE
-            compareType: EQUAL
-            fetcher:
-              fetcherType: MACRO_VARIABLE
-              key: pir-value
-            testValue:
-              type: BOOLEAN
-              value: true
-          trueBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p1-light-off-timer
-                action: CLEAR
-              - blockType: RUNNER
-                runnerType: STATE_ACTION
-                sceneIds:
-                  - auto
-                ledChangeData:
-                  time: 30
-                  stepTime: 30
-                actions:
-                  - ioId: cct-p1
-                    brightness: 10
-                    color:
-                      r: 0
-                      g: 0
-                      b: 0
-                      w: 255
-                      ww: 255
-          falseBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p1-light-off-timer
-                action: UPDATE_TIME
-                time: 60000
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: p1-light-off-timer
+              action: CLEAR
+            - blockType: RUNNER
+              runnerType: STATE_ACTION
+              sceneIds:
+                - auto
+              ledChangeData:
+                time: 1000
+                stepTime: 30
+              actions:
+                - ioId: cct-p1
+                  brightness: ${cv-home-up-brightness}
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: ${cv-home-cold-white-value}
+                    ww: 255
+        falseBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: p1-light-off-timer
+              action: UPDATE_TIME
+              time: 60000
   p2-pir-macro:
     zoneId: p2
     name: Pokoj 2
     blocks:
       - blockType: CONDITION
         condition:
-          type: LOGIC
-          logicalType: AND
-          conditions:
-            - type: COMPARE
-              compareType: GREATER_EQUALS
-              fetcher:
-                fetcherType: CURRENT_TIME
-              testValue:
-                type: TIME
-                value: '06:30:00'
-            - type: COMPARE
-              compareType: LESS_THEN
-              fetcher:
-                fetcherType: CURRENT_TIME
-              testValue:
-                type: TIME
-                value: '21:00:00'
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: pir-value
+          testValue:
+            type: BOOLEAN
+            value: true
         trueBlock:
-          blockType: CONDITION
-          condition:
-            type: COMPARE
-            compareType: EQUAL
-            fetcher:
-              fetcherType: MACRO_VARIABLE
-              key: pir-value
-            testValue:
-              type: BOOLEAN
-              value: true
-          trueBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p2-light-off-timer
-                action: CLEAR
-              - blockType: RUNNER
-                runnerType: STATE_ACTION
-                sceneIds:
-                  - auto
-                ledChangeData:
-                  time: 1000
-                  stepTime: 30
-                actions:
-                  - ioId: cct-p2
-                    brightness: 255
-                    color:
-                      r: 0
-                      g: 0
-                      b: 0
-                      w: 255
-                      ww: 255
-          falseBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p2-light-off-timer
-                action: UPDATE_TIME
-                time: 60000
-      - blockType: CONDITION
-        condition:
-          type: LOGIC
-          logicalType: OR
-          conditions:
-            - type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '21:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '23:59:59'
-            - type: LOGIC
-              logicalType: AND
-              conditions:
-                - type: COMPARE
-                  compareType: GREATER_EQUALS
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '00:00:00'
-                - type: COMPARE
-                  compareType: LESS_THEN
-                  fetcher:
-                    fetcherType: CURRENT_TIME
-                  testValue:
-                    type: TIME
-                    value: '06:30:00'
-        trueBlock:
-          blockType: CONDITION
-          condition:
-            type: COMPARE
-            compareType: EQUAL
-            fetcher:
-              fetcherType: MACRO_VARIABLE
-              key: pir-value
-            testValue:
-              type: BOOLEAN
-              value: true
-          trueBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p2-light-off-timer
-                action: CLEAR
-              - blockType: RUNNER
-                runnerType: STATE_ACTION
-                sceneIds:
-                  - auto
-                ledChangeData:
-                  time: 30
-                  stepTime: 30
-                actions:
-                  - ioId: cct-p2
-                    brightness: 10
-                    color:
-                      r: 0
-                      g: 0
-                      b: 0
-                      w: 255
-                      ww: 255
-          falseBlock:
-            blockType: BLOCK
-            blocs:
-              - blockType: RUNNER
-                runnerType: TIMER
-                timerId: p2-light-off-timer
-                action: UPDATE_TIME
-                time: 60000
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: p2-light-off-timer
+              action: CLEAR
+            - blockType: RUNNER
+              runnerType: STATE_ACTION
+              sceneIds:
+                - auto
+              ledChangeData:
+                time: 1000
+                stepTime: 30
+              actions:
+                - ioId: cct-p2
+                  brightness: ${cv-home-up-brightness}
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: ${cv-home-cold-white-value}
+                    ww: 255
+        falseBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: TIMER
+              timerId: p2-light-off-timer
+              action: UPDATE_TIME
+              time: 60000
   bedroom-pir-macro:
     zoneId: bedroom
     name: Sypialnia makro
@@ -935,266 +817,62 @@ macros:
         blocs:
           - blockType: CONDITION
             condition:
-              type: TIME_BETWEEN
+              type: COMPARE
+              compareType: EQUAL
               fetcher:
-                fetcherType: CURRENT_TIME
-              fromTime:
-                type: TIME
-                value: '06:30:00'
-              toTime:
-                type: TIME
-                value: '09:00:00'
+                fetcherType: MACRO_VARIABLE
+                key: pir-value
+              testValue:
+                type: BOOLEAN
+                value: true
             trueBlock:
-              blockType: CONDITION
-              condition:
-                type: COMPARE
-                compareType: EQUAL
-                fetcher:
-                  fetcherType: MACRO_VARIABLE
-                  key: pir-value
-                testValue:
-                  type: BOOLEAN
-                  value: true
-              trueBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: CLEAR
-                  - blockType: RUNNER
-                    runnerType: STATE_ACTION
-                    sceneIds:
-                      - auto
-                    ledChangeData:
-                      time: 1000
-                      stepTime: 30
-                    actions:
-                      - ioId: cct-bedroom-o
-                        brightness: 90
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-                      - ioId: cct-bedroom-w
-                        brightness: 0
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-                      - ioId: cct-bedroom
-                        brightness: 0
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-              falseBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: UPDATE_TIME
-                    time: 10000
-          - blockType: CONDITION
-            condition:
-              type: TIME_BETWEEN
-              fetcher:
-                fetcherType: CURRENT_TIME
-              fromTime:
-                type: TIME
-                value: '09:00:00'
-              toTime:
-                type: TIME
-                value: '21:00:00'
-            trueBlock:
-              blockType: CONDITION
-              condition:
-                type: COMPARE
-                compareType: EQUAL
-                fetcher:
-                  fetcherType: MACRO_VARIABLE
-                  key: pir-value
-                testValue:
-                  type: BOOLEAN
-                  value: true
-              trueBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: CLEAR
-                  - blockType: RUNNER
-                    runnerType: STATE_ACTION
-                    sceneIds:
-                      - auto
-                    ledChangeData:
-                      time: 1000
-                      stepTime: 30
-                    actions:
-                      - ioId: cct-bedroom-w
-                        brightness: 255
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 255
-                          ww: 255
-                      - ioId: cct-bedroom-o
-                        brightness: 255
-                        delay: 300
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 255
-                          ww: 255
-                      - ioId: cct-bedroom
-                        brightness: 100
-                        delay: 300
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 255
-                          ww: 255
-              falseBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: UPDATE_TIME
-                    time: 30000
-          - blockType: CONDITION
-            condition:
-              type: TIME_BETWEEN
-              fetcher:
-                fetcherType: CURRENT_TIME
-              fromTime:
-                type: TIME
-                value: '21:00:00'
-              toTime:
-                type: TIME
-                value: '23:00:00'
-            trueBlock:
-              blockType: CONDITION
-              condition:
-                type: COMPARE
-                compareType: EQUAL
-                fetcher:
-                  fetcherType: MACRO_VARIABLE
-                  key: pir-value
-                testValue:
-                  type: BOOLEAN
-                  value: true
-              trueBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: CLEAR
-                  - blockType: RUNNER
-                    runnerType: STATE_ACTION
-                    sceneIds:
-                      - auto
-                    ledChangeData:
-                      time: 1000
-                      stepTime: 30
-                    actions:
-                      - ioId: cct-bedroom
-                        brightness: 0
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-                      - ioId: cct-bedroom-o
-                        brightness: 80
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-                      - ioId: cct-bedroom-w
-                        brightness: 80
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-              falseBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: UPDATE_TIME
-                    time: 30000
-          - blockType: CONDITION
-            condition:
-              type: TIME_BETWEEN
-              fetcher:
-                fetcherType: CURRENT_TIME
-              fromTime:
-                type: TIME
-                value: '23:00:00'
-              toTime:
-                type: TIME
-                value: '06:30:00'
-            trueBlock:
-              blockType: CONDITION
-              condition:
-                type: COMPARE
-                compareType: EQUAL
-                fetcher:
-                  fetcherType: MACRO_VARIABLE
-                  key: pir-value
-                testValue:
-                  type: BOOLEAN
-                  value: true
-              trueBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: CLEAR
-                  - blockType: RUNNER
-                    runnerType: STATE_ACTION
-                    sceneIds:
-                      - auto
-                    ledChangeData:
-                      time: 30
-                      stepTime: 30
-                    actions:
-                      - ioId: cct-bedroom-o
-                        brightness: 4
-                        color:
-                          r: 0
-                          g: 0
-                          b: 0
-                          w: 0
-                          ww: 255
-              falseBlock:
-                blockType: BLOCK
-                blocs:
-                  - blockType: RUNNER
-                    runnerType: TIMER
-                    timerId: bedroom-light-off-timer
-                    action: UPDATE_TIME
-                    time: 5000
+              blockType: BLOCK
+              blocs:
+                - blockType: RUNNER
+                  runnerType: TIMER
+                  timerId: bedroom-light-off-timer
+                  action: CLEAR
+                - blockType: RUNNER
+                  runnerType: STATE_ACTION
+                  sceneIds:
+                    - auto
+                  ledChangeData:
+                    time: 1000
+                    stepTime: 30
+                  actions:
+                    - ioId: cct-bedroom-o
+                      brightness: ${cv-bedroom-o.brightness}
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: ${cv-bedroom-o.coldWhite}
+                        ww: 255
+                    - ioId: cct-bedroom-w
+                      brightness: ${cv-bedroom-w.brightness}
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: ${cv-bedroom-w.coldWhite}
+                        ww: 255
+                    - ioId: cct-bedroom
+                      brightness: ${cv-bedroom-brightness}
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        w: 255
+                        ww: 255
+            falseBlock:
+              blockType: BLOCK
+              blocs:
+                - blockType: RUNNER
+                  runnerType: TIMER
+                  timerId: bedroom-light-off-timer
+                  action: UPDATE_TIME
+                  time: 10000
+
   door-entry-gate-macro:
     zoneId: ''
     name: Brama Wjazdowa
@@ -1799,104 +1477,370 @@ macros:
               newSceneId: night
 
 
-  rain-bird-20m:
-    zoneId: ''
-    name: Pompa zraszacze 20m
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: hold
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: night
+  magda-btn-macro:
+    zoneId: war-m
+    name: war-m button
     blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: single
+        trueBlock:
+          blockType: BLOCK
+          blocs:
 
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: CURRENT_STATE_VARIABLE
+                testValue:
+                  type: STRING
+                  value: auto
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: SCENE_CHANGE
+                    newSceneId: manual
+              falseBlock:
+                blockType: CONDITION
+                condition:
+                  type: COMPARE
+                  compareType: EQUAL
+                  fetcher:
+                    fetcherType: CURRENT_STATE_VARIABLE
+                  testValue:
+                    type: STRING
+                    value: manual
+                trueBlock:
+                  blockType: BLOCK
+                  blocs:
+                    - blockType: RUNNER
+                      runnerType: SCENE_CHANGE
+                      newSceneId: auto
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: hold
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: auto
+
+  office-btn-macro:
+    zoneId: office
+    name: bedroom button
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: single
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: CURRENT_STATE_VARIABLE
+                testValue:
+                  type: STRING
+                  value: auto
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: SCENE_CHANGE
+                    newSceneId: manual
+              falseBlock:
+                blockType: CONDITION
+                condition:
+                  type: COMPARE
+                  compareType: EQUAL
+                  fetcher:
+                    fetcherType: CURRENT_STATE_VARIABLE
+                  testValue:
+                    type: STRING
+                    value: manual
+                trueBlock:
+                  blockType: BLOCK
+                  blocs:
+                    - blockType: RUNNER
+                      runnerType: SCENE_CHANGE
+                      newSceneId: night
+                falseBlock:
+                  blockType: CONDITION
+                  condition:
+                    type: COMPARE
+                    compareType: EQUAL
+                    fetcher:
+                      fetcherType: CURRENT_STATE_VARIABLE
+                    testValue:
+                      type: STRING
+                      value: night
+                  trueBlock:
+                    blockType: BLOCK
+                    blocs:
+                      - blockType: RUNNER
+                        runnerType: SCENE_CHANGE
+                        newSceneId: auto
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: double
+        trueBlock:
+          blockType: CONDITION
+          condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: GLOBAL_VARIABLE
+              key: office-blind-button-state
+            testValue:
+              type: STRING
+              value: 'OPEN-1'
+          trueBlock:
+            blockType: BLOCK
+            blocs:
+              - blockType: RUNNER
+                runnerType: GLOBAL_VARIABLE_CHANGE
+                key: office-blind-button-state
+                value:
+                  type: STRING
+                  value: 'OPEN-2'
+              - blockType: RUNNER
+                runnerType: BLIND_ACTION
+                actions:
+                  - ioId: office-left
+                    action: DIM_UP
+                    percent: 40
+                  - ioId: office-right
+                    action: DIM_UP
+                    percent: 40
+          falseBlock:
+            blockType: CONDITION
+            condition:
+              type: COMPARE
+              compareType: EQUAL
+              fetcher:
+                fetcherType: GLOBAL_VARIABLE
+                key: office-blind-button-state
+              testValue:
+                type: STRING
+                value: 'OPEN-2'
+            trueBlock:
+              blockType: BLOCK
+              blocs:
+                - blockType: RUNNER
+                  runnerType: GLOBAL_VARIABLE_CHANGE
+                  key: office-blind-button-state
+                  value:
+                    type: STRING
+                    value: 'CLOSE'
+                - blockType: RUNNER
+                  runnerType: BLIND_ACTION
+                  actions:
+                    - ioId: office-left
+                      action: DIM_DOWN
+                      percent: 100
+                    - ioId: office-right
+                      action: DIM_DOWN
+                      percent: 100
+            falseBlock:
+              blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: GLOBAL_VARIABLE
+                  key: office-blind-button-state
+                testValue:
+                  type: STRING
+                  value: 'CLOSE'
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: GLOBAL_VARIABLE_CHANGE
+                    key: office-blind-button-state
+                    value:
+                      type: STRING
+                      value: 'OPEN-1'
+                  - blockType: RUNNER
+                    runnerType: BLIND_ACTION
+                    actions:
+                      - ioId: office-left
+                        action: DIM_UP
+                        percent: 40
+                      - ioId: office-right
+                        action: DIM_UP
+                        percent: 40
+
+      - blockType: CONDITION
+        condition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: MACRO_VARIABLE
+            key: action
+          testValue:
+            type: STRING
+            value: hold
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: night
+
+  rain-bird-pump-on:
+    zoneId: ''
+    name: rain-bird-pump-on
+    blocks:
       - blockType: RUNNER
         runnerType: ACTION
         actions:
           - ioId: rainBirdPump
             action: 'ON'
-
+  rain-bird-pump-off:
+    zoneId: ''
+    name: rain-bird-pump-off
+    blocks:
       - blockType: RUNNER
-        runnerType: GLOBAL_VARIABLE_CHANGE
-        key: rain-bird-mode
-        value:
-          type: STRING
-          value: 'mode-20m'
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'OFF'
 
+  rain-bird-z1-on:
+    zoneId: ''
+    name: rain-bird-z1-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'ON'
+  rain-bird-z1-off:
+    zoneId: ''
+    name: rain-bird-z1-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'OFF'
+
+  rain-bird-z2-on:
+    zoneId: ''
+    name: rain-bird-z2-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone2
+            action: 'ON'
+  rain-bird-z2-off:
+    zoneId: ''
+    name: rain-bird-z2-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone2
+            action: 'OFF'
+
+
+  rain-bird-z3-on:
+    zoneId: ''
+    name: rain-bird-z3-on
+    blocks:
       - blockType: RUNNER
         runnerType: ACTION
         actions:
           - ioId: rainBirdZone3
             action: 'ON'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-zone-3-off-12
-        action: RUN
-        time: 300000
-        blocs:
-          - blockType: RUNNER
-            runnerType: ACTION
-            actions:
-              - ioId: rainBirdZone3
-                action: 'OFF'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-zone-1-on-12
-        action: RUN
-        time: 300000
-        blocs:
-          - blockType: RUNNER
-            runnerType: ACTION
-            actions:
-              - ioId: rainBirdZone1
-                action: 'ON'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-zone-1-off-30
-        action: RUN
-        time: 780000
-        blocs:
-          - blockType: RUNNER
-            runnerType: ACTION
-            actions:
-              - ioId: rainBirdZone1
-                action: 'OFF'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-zone-2-on-30
-        action: RUN
-        time: 780000
-        blocs:
-          - blockType: RUNNER
-            runnerType: ACTION
-            actions:
-              - ioId: rainBirdZone2
-                action: 'ON'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-zone-2-off-48
-        action: RUN
-        time: 1200000
-        blocs:
-          - blockType: RUNNER
-            runnerType: ACTION
-            actions:
-              - ioId: rainBirdZone2
-                action: 'OFF'
-
-      - blockType: RUNNER
-        runnerType: TIMER
-        timerId: rain-bird-pump-off-48
-        action: RUN
-        time: 1200000
-        blocs:
-        - blockType: RUNNER
-          runnerType: ACTION
-          actions:
-            - ioId: rainBirdPump
-              action: 'OFF'
-  rain-bird-1h:
+  rain-bird-z3-off:
     zoneId: ''
-    name: Pompa wypompowanie 1h
+    name: rain-bird-z3-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone3
+            action: 'OFF'
+
+
+  rain-bird-z4-on:
+    zoneId: ''
+    name: rain-bird-z4-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone4
+            action: 'ON'
+  rain-bird-z4-off:
+    zoneId: ''
+    name: rain-bird-z4-off
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone4
+            action: 'OFF'
+
+  rain-bird-m1:
+    zoneId: ''
+    name: Zraszacze mode 1 - 20m
     blocks:
 
       - blockType: RUNNER
@@ -1910,7 +1854,7 @@ macros:
         key: rain-bird-mode
         value:
           type: STRING
-          value: 'rain-bird-pumping-out'
+          value: 'mode-1'
 
       - blockType: RUNNER
         runnerType: ACTION
@@ -1920,9 +1864,9 @@ macros:
 
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-2-off-48
+        timerId: rain-bird-m-1-zone-1-off
         action: RUN
-        time: 3600000
+        time: 1810
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1932,15 +1876,220 @@ macros:
 
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-pump-off-48
+        timerId: rain-bird-m-1-zone-2-on
         action: RUN
-        time: 3600000
+        time: 1800
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-2-off
+        action: RUN
+        time: 4210
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-3-on
+        action: RUN
+        time: 4200
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone3
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-3-off
+        action: RUN
+        time: 6010
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone3
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-on
+        action: RUN
+        time: 6000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone4
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-off
+        action: RUN
+        time: 12000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone4
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-pump-off
+        action: RUN
+        time: 12000
+        blocs:
+        - blockType: RUNNER
+          runnerType: ACTION
+          actions:
+            - ioId: rainBirdPump
+              action: 'OFF'
+        - blockType: RUNNER
+          runnerType: GLOBAL_VARIABLE_CHANGE
+          key: rain-bird-mode
+          value:
+            type: STRING
+            value: 'OFF'
+
+  rain-bird-m2:
+    zoneId: ''
+    name: Zraszacze mode 1 - 30m
+    blocks:
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: rain-bird-mode
+        value:
+          type: STRING
+          value: 'mode-2'
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-1-off
+        action: RUN
+        time: 241000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone1
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-2-on
+        action: RUN
+        time: 240000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-2-off
+        action: RUN
+        time: 541000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone2
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-3-on
+        action: RUN
+        time: 540000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone3
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-3-off
+        action: RUN
+        time: 781000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone3
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-on
+        action: RUN
+        time: 780000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone4
+                action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-off
+        action: RUN
+        time: 1740000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone4
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-pump-off
+        action: RUN
+        time: 1740000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
             actions:
               - ioId: rainBirdPump
                 action: 'OFF'
+          - blockType: RUNNER
+            runnerType: GLOBAL_VARIABLE_CHANGE
+            key: rain-bird-mode
+            value:
+              type: STRING
+              value: 'OFF'
+
   rain-bird-clear:
     zoneId: ''
     name: Pompa zraszacze stop
@@ -1958,6 +2107,11 @@ macros:
       - blockType: RUNNER
         runnerType: ACTION
         actions:
+          - ioId: rainBirdZone4
+            action: 'OFF'
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
           - ioId: rainBirdZone2
             action: 'OFF'
       - blockType: RUNNER
@@ -1967,27 +2121,39 @@ macros:
             action: 'OFF'
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-3-off-12
+        timerId: rain-bird-m-1-zone-1-off
         action: CLEAR
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-1-on-12
+        timerId: rain-bird-m-1-zone-1-on
         action: CLEAR
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-1-off-30
+        timerId: rain-bird-m-1-zone-2-off
         action: CLEAR
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-3-on-30
+        timerId: rain-bird-m-1-zone-2-on
         action: CLEAR
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-zone-3-off-48
+        timerId: rain-bird-m-1-zone-3-off
         action: CLEAR
       - blockType: RUNNER
         runnerType: TIMER
-        timerId: rain-bird-pump-off-48
+        timerId: rain-bird-m-1-zone-3-on
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-off
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-zone-4-on
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m-1-pump-off
         action: CLEAR
       - blockType: RUNNER
         runnerType: GLOBAL_VARIABLE_CHANGE
@@ -2209,3 +2375,38 @@ macros:
         slaveId: 1
         offset: 69
         value: 0
+  all-auto-macro:
+    name: Auto all
+    blocks:
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: floor1
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: office
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: other
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: p1
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: p2
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: bedroom
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: outdoor
+      - blockType: RUNNER
+        runnerType: SCENE_CHANGE
+        newSceneId: auto
+        zoneId: war-m

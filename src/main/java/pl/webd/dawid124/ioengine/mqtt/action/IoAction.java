@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.mqtt.action;
 
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
@@ -13,8 +14,8 @@ public class IoAction {
 
     private EActionType action;
 
-    private Color color;
-    private Color color2;
+    private IColor color;
+    private IColor color2;
 
     private String zigbeeAction;
     private int brightness;
@@ -34,7 +35,7 @@ public class IoAction {
 
     public IoAction() {}
 
-    public IoAction(String ioId, EDeviceType ioType, EActionType action, Color color,
+    public IoAction(String ioId, EDeviceType ioType, EActionType action, IColor color,
                     int brightness, int delay, int time, int stepTime,
                     String deviceId, EIoDriverType deviceType, String zigbeeAction) {
         this.ioId = ioId;
@@ -74,11 +75,11 @@ public class IoAction {
         this.action = action;
     }
 
-    public Color getColor() {
+    public IColor getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(IColor color) {
         this.color = color;
     }
 
@@ -162,11 +163,11 @@ public class IoAction {
         this.intParam = intParam;
     }
 
-    public Color getColor2() {
+    public IColor getColor2() {
         return color2;
     }
 
-    public void setColor2(Color color2) {
+    public void setColor2(IColor color2) {
         this.color2 = color2;
     }
 

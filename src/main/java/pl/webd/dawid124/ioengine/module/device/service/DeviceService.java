@@ -48,6 +48,7 @@ public class DeviceService {
         PicoDriver floor1Driver5 = new PicoDriver("IO-DRIVER-F1-5");
         PicoDriver floor2Driver0 = new PicoDriver("IO-DRIVER-F2-0");
         PicoDriver floor0Driver0 = new PicoDriver("IO-DRIVER-F0-0");
+        PicoDriver floor0Driver1 = new PicoDriver("IO-DRIVER-F0-1");
         PicoDriver test = new PicoDriver("IO-DRIVER-TEST");
         LocalDriver piLocal = new LocalDriver("pi-master");
         MqttDriver zigbee2mqttDown = new MqttDriver("zigbee2mqtt", "zigbee2mqtt");
@@ -58,6 +59,7 @@ public class DeviceService {
         drivers.add(floor1Driver5);
         drivers.add(floor2Driver0);
         drivers.add(floor0Driver0);
+        drivers.add(floor0Driver1);
         drivers.add(test);
         drivers.add(piLocal);
         drivers.add(zigbee2mqttDown);
@@ -82,10 +84,13 @@ public class DeviceService {
         PicoDriverConfiguration testLocal = new PicoDriverConfiguration(test, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
         PicoDriverConfiguration floor0Driver0Local = new PicoDriverConfiguration(floor0Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
+        PicoDriverConfiguration floor0Driver1Local = new PicoDriverConfiguration(floor0Driver1, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
 
         PicoDriverConfiguration floor2Driver0Local = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.LOCAL));
         PicoDriverConfiguration floor2Driver0ExpanderA = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_A));
         PicoDriverConfiguration floor2Driver0ExpanderB = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_B));
+        PicoDriverConfiguration floor2Driver0ExpanderC = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_C));
+        PicoDriverConfiguration floor2Driver0ExpanderD = new PicoDriverConfiguration(floor2Driver0, new PicoDriverConfig(EPicoDriverLocation.EXPANDER_D));
 
         LocalDriverConfiguration localPi = new LocalDriverConfiguration(piLocal, new LocalDriverConfig(ELocalDriverLocation.IO));
 
@@ -124,6 +129,16 @@ public class DeviceService {
         addDevice(new SingleColorLedDevice("led-stairs-7", "Stairs 7", floor0Driver0Local, 9));
         addDevice(new SingleColorLedDevice("led-stairs-8", "Stairs 8", floor0Driver0Local, 10));
 
+//        FLOOR 0 - DRIVER 1
+
+
+        addDevice(new CctDevice("cct-outdoor-stairs-1", "Schody outdoor 1", floor0Driver1Local, 21, 1));
+        addDevice(new CctDevice("cct-outdoor-stairs-2", "Schody outdoor 2", floor0Driver1Local, 2, 3));
+        addDevice(new CctDevice("cct-outdoor-stairs-3", "Schody outdoor 3", floor0Driver1Local, 6, 7));
+        addDevice(new CctDevice("cct-outdoor-stairs-4", "Schody outdoor 4", floor0Driver1Local, 8, 9));
+        addDevice(new CctDevice("cct-outdoor-stairs-5", "Schody outdoor 5", floor0Driver1Local, 10, 11));
+        addDevice(new CctDevice("cct-outdoor-gateway", "Daszki", floor0Driver1Local, 12, 13));
+        addDevice(new CctDevice("cct-outdoor-fence", "Płot", floor0Driver1Local, 14, 15));
 //        FLOOR 1 - DRIVER 0
 
         addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver0ExpanderA, 0, 1, 2, 3));
@@ -172,6 +187,7 @@ public class DeviceService {
         addDevice(new RgbwDevice("p4", "Panel4", floor1Driver2ExpanderA, 12, 13, 14, 15));
 
         addDevice(new RgbwDevice("plants", "Doniczka", floor1Driver2ExpanderB, 0, 1, 2, 3));
+        addDevice(new CctDevice("outdoor-door", "Dwór  drzwi", floor1Driver2ExpanderB, 4, 5));
         addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
 
         addDevice(new MotionSensor("pir-tv", "Pir Tv", floor1Driver2Local, 20));
@@ -183,27 +199,32 @@ public class DeviceService {
 
 //        FLOOR 1 - DRIVER 5
 
-        addDevice(new SwitchDevice("rainBirdPump", "Zraszacz pompa", floor1Driver5Local, 1, ESwitchType.HIGH_ON));
-        addDevice(new SwitchDevice("rainBirdZone1", "Zraszacz strefa 1 - Tuje", floor1Driver5Local, 2, ESwitchType.HIGH_ON));
-        addDevice(new SwitchDevice("rainBirdZone2", "Zraszacz strefa 2", floor1Driver5Local, 3, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdPump", "Zraszacz pompa", floor1Driver5Local, 8, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone1", "Zraszacz strefa 1 - Tuje", floor1Driver5Local, 10, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone2", "Zraszacz strefa 2", floor1Driver5Local, 9, ESwitchType.HIGH_ON));
         addDevice(new SwitchDevice("rainBirdZone3", "Zraszacz strefa 3", floor1Driver5Local, 6, ESwitchType.HIGH_ON));
+        addDevice(new SwitchDevice("rainBirdZone4", "Zraszacz strefa 4", floor1Driver5Local, 7, ESwitchType.HIGH_ON));
+
+        addDevice(new CctDevice("cct-a-roof-1", "Altanka Rant 1", floor1Driver5Local, 12, 13));
+        addDevice(new CctDevice("cct-a-roof-2", "Altanka Rant 2", floor1Driver5Local, 14, 15));
 
 //        FLOOR 2 - DRIVER 0
-        addDevice(new CctDevice("cct-bedroom-w", "Szafa Dawid", floor2Driver0ExpanderA, 0, 1));
+        addDevice(new MotionSensor("pir-war-m", "Pir Szafa Magda", floor2Driver0Local, 0));
+        addDevice(new MotionSensor("pir-war-d", "Pir Szafa Dawid", floor2Driver0Local, 10));
+        addDevice(new MotionSensor("pir-bedroom", "Pir Sypialnia", floor2Driver0Local, 2));
+        addDevice(new MotionSensor("pir-f2-lobby", "Pir Korytarz", floor2Driver0Local, 3));
+        addDevice(new MotionSensor("pir-p1", "Pir P1", floor2Driver0Local, 6));
+        addDevice(new MotionSensor("pir-p2", "Pir P2", floor2Driver0Local, 7));
+        addDevice(new MotionSensor("pir-bath-up", "pir-bath-up", floor2Driver0Local, 9));
+
+        addDevice(new CctDevice("cct-bedroom-w", "Sypialnia", floor2Driver0ExpanderA, 0, 1));
         addDevice(new CctDevice("cct-wardrobe-d", "Szafa Dawid", floor2Driver0ExpanderA, 2, 3));
-        addDevice(new CctDevice("cct-bedroom", "Sypialnia", floor2Driver0ExpanderA, 4, 5));
         addDevice(new CctDevice("cct-f2-lobby", "Korytarz", floor2Driver0ExpanderA, 6, 7));
         addDevice(new CctDevice("cct-p1", "Pokój 1", floor2Driver0ExpanderA, 8, 9));
         addDevice(new CctDevice("cct-p2", "Pokój 2", floor2Driver0ExpanderA, 10, 11));
         addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
         addDevice(new CctDevice("cct-wardrobe-m2", "Szafa Magda 2", floor2Driver0ExpanderA, 14, 15));
 
-        addDevice(new MotionSensor("pir-war-m", "Pir Szafa Magda", floor2Driver0Local, 0));
-        addDevice(new MotionSensor("pir-war-d", "Pir Szafa Dawid", floor2Driver0Local, 1));
-        addDevice(new MotionSensor("pir-bedroom", "Pir Sypialnia", floor2Driver0Local, 2));
-        addDevice(new MotionSensor("pir-f2-lobby", "Pir Korytarz", floor2Driver0Local, 3));
-        addDevice(new MotionSensor("pir-p1", "Pir P1", floor2Driver0Local, 6));
-        addDevice(new MotionSensor("pir-p2", "Pir P2", floor2Driver0Local, 7));
 
         addDevice(new BlindDevice("syp", "Sypialnia", floor2Driver0ExpanderB, 0, 1));
         addDevice(new BlindDevice("p1-l", "Pokój 1 L", floor2Driver0ExpanderB, 2, 3));
@@ -212,6 +233,15 @@ public class DeviceService {
         addDevice(new BlindDevice("bath", "Lazienka", floor2Driver0ExpanderB, 8, 9));
 
         addDevice(new RgbwwDevice("cct-bedroom-o", "okno", floor2Driver0ExpanderB, 15, 14, 13, 12, 11));
+        addDevice(new RgbwwDevice("cct-bedroom", "Sypialnia", floor2Driver0ExpanderC, 15, 14, 13, 12, 11));
+
+        addDevice(new RgbwDevice("bath-rgbw-shower", "Łazienka prysznic", floor2Driver0ExpanderC, 0, 1, 2, 3));
+        addDevice(new SingleColorLedDevice("bath-mirror", "Łazienka lustro", floor2Driver0ExpanderC, 4));
+        addDevice(new RgbwDevice("bath-rgbw-lamel", "Łazienka Lamele", floor2Driver0ExpanderC, 5, 6, 7, 8));
+        addDevice(new SingleColorLedDevice("bath-shower", "Łazienka prysznic", floor2Driver0ExpanderC, 9));
+        addDevice(new CctDevice("bath-bathtub", "Łazienka wanna", floor2Driver0ExpanderA, 4, 5));
+        addDevice(new CctDevice("ctt-out-roof-1", "Dach 1", floor2Driver0ExpanderD, 0, 1));
+        addDevice(new CctDevice("ctt-out-roof-2", "Dach 2", floor2Driver0ExpanderD, 2, 3));
 
 
         addDevice(new NeoDevice("neo-test", "neo test", testLocal, 10, 60, false, ENeoType.NEO_GRBW));
@@ -225,6 +255,8 @@ public class DeviceService {
         addDevice(new SonoffTemperatureSensor("t-p1", "Pokój 1", zigbeeDriverConfigurationDown));
         addDevice(new SonoffTemperatureSensor("t-p2", "Pokój 2", zigbeeDriverConfigurationDown));
 
+        addDevice(new SonoffSinlgeButton("office-btn", "office-btn", zigbeeDriverConfigurationDown));
+        addDevice(new SonoffSinlgeButton("magda-btn", "magda-btn", zigbeeDriverConfigurationDown));
         addDevice(new SonoffSinlgeButton("bedroom-btn-1", "bedroom-btn-1", zigbeeDriverConfigurationDown));
         addDevice(new SonoffSinlgeButton("bedroom-btn-2", "bedroom-btn-2", zigbeeDriverConfigurationDown));
         addDevice(new SonoffSinlgeButton("living-room-btn-1", "living-room-btn-1", zigbeeDriverConfigurationDown));

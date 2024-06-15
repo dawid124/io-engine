@@ -14,8 +14,8 @@ public class UiAction implements IUiAction {
     private EDeviceType ioType;
     private EActionType action;
 
-    private Color color;
-    private Color color2;
+    private IColor color;
+    private IColor color2;
     private int brightness;
 
     private int speed;
@@ -63,11 +63,11 @@ public class UiAction implements IUiAction {
         this.action = action;
     }
 
-    public Color getColor() {
+    public IColor getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(IColor color) {
         this.color = color;
     }
 
@@ -147,29 +147,29 @@ public class UiAction implements IUiAction {
         this.zigbeeAction = zigbeeAction;
     }
 
-    public IoAction toIoAction(IDevice device) {
+    public static IoAction toIoAction(IUiAction action, IDevice device) {
         String deviceId = device.getDriverConfiguration().getDriver().getId();
         EIoDriverType deviceType = device.getDriverConfiguration().getDriver().getType();
         IoAction ioAction = new IoAction(
-                this.getIoId(),
+                action.getIoId(),
                 device.getIoType(),
-                this.getAction(),
-                this.getColor(),
-                this.getBrightness(),
-                this.getDelay(),
-                this.getTime(),
-                this.getStepTime(),
+                action.getAction(),
+                action.getColor(),
+                action.getBrightness(),
+                action.getDelay(),
+                action.getTime(),
+                action.getStepTime(),
                 deviceId,
                 deviceType,
-                this.getZigbeeAction());
+                action.getZigbeeAction());
         return ioAction;
     }
 
-    public Color getColor2() {
+    public IColor getColor2() {
         return color2;
     }
 
-    public void setColor2(Color color2) {
+    public void setColor2(IColor color2) {
         this.color2 = color2;
     }
 

@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.club.model;
 
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 
 public class SoundLightDefinition {
 
@@ -14,7 +15,7 @@ public class SoundLightDefinition {
     private int toneIndex;
     private double scale;
 
-    private Color color;
+    private IColor color;
 
     private int threshold;
     private int minBrightness;
@@ -64,11 +65,11 @@ public class SoundLightDefinition {
         this.scale = scale;
     }
 
-    public Color getColor() {
+    public IColor getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(IColor color) {
         this.color = color;
     }
 

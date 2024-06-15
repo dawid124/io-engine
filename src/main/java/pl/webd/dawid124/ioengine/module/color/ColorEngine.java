@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.club.SoundDefinitionService;
 import pl.webd.dawid124.ioengine.module.club.fft.Recorder;
 import pl.webd.dawid124.ioengine.module.club.fft.Visualizer;
@@ -95,7 +96,7 @@ public class ColorEngine {
                 continue;
             }
 
-            Color currentColor = null;
+            IColor currentColor = null;
             if (state instanceof ColorLedDeviceState) {
                 currentColor = ((ColorLedDeviceState) state).getColor();
             } else if (state instanceof NeoDeviceState) {
@@ -124,7 +125,7 @@ public class ColorEngine {
         mqttService.sendActionsToDevicesParty(list);
     }
 
-    public Color getNextColor(Color c, double scale) {
+    public Color getNextColor(IColor c, double scale) {
         if (c == null) return new Color(0, 0,0,0);
         float[] hsb = java.awt.Color.RGBtoHSB(c.getR(), c.getG(), c.getB(), null);
 

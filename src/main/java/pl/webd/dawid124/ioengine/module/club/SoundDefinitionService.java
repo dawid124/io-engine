@@ -7,8 +7,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.settings.SoundProperties;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.club.model.SoundDefinition;
 import pl.webd.dawid124.ioengine.module.club.model.SoundLightDefinition;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.IColorJsonAdapter;
 import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
 import javax.annotation.PostConstruct;
@@ -43,7 +45,9 @@ public class SoundDefinitionService {
 
     public SoundDefinitionService(SoundProperties soundProperties) {
         this.soundProperties = soundProperties;
-        this.gson = new GsonBuilder().create();
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(IColor.class, new IColorJsonAdapter())
+                .create();
     }
 
     @PostConstruct

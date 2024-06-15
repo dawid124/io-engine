@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.device.model.output.EDeviceType;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
@@ -18,12 +19,12 @@ public class IoActionJsonPartyAdapter implements JsonSerializer<IoAction> {
         JsonObject object = new JsonObject();
         object.addProperty("id", ioAction.getIoId());
 
-        Color color = ioAction.getColor();
+        IColor color = ioAction.getColor();
         String colorStr = String.format("%02x%02x%02x%02x%02x", color.getR(), color.getG(), color.getB(), color.getW(), color.getWw());
         object.addProperty("c", colorStr);
 
         if (ioAction.getColor2() != null) {
-            Color color2 = ioAction.getColor2();
+            IColor color2 = ioAction.getColor2();
             String color2Str = String.format("%02x%02x%02x%02x%02x",
                     color2.getR(), color2.getG(), color2.getB(), color2.getW(), color2.getWw());
             object.addProperty("c2", color2Str);

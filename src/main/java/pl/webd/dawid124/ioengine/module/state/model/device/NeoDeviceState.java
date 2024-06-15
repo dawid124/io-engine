@@ -1,11 +1,12 @@
 package pl.webd.dawid124.ioengine.module.state.model.device;
 
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 
 public class NeoDeviceState extends LedDeviceState {
 
-    private Color color;
-    private Color color2;
+    private IColor color;
+    private IColor color2;
     private int animationId;
     private int speed;
 
@@ -17,11 +18,11 @@ public class NeoDeviceState extends LedDeviceState {
         this.brightness = 0;
     }
 
-    public Color getColor() {
+    public IColor getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(IColor color) {
         this.color = color;
     }
 
@@ -41,11 +42,11 @@ public class NeoDeviceState extends LedDeviceState {
         this.speed = speed;
     }
 
-    public Color getColor2() {
+    public IColor getColor2() {
         return color2;
     }
 
-    public void setColor2(Color color2) {
+    public void setColor2(IColor color2) {
         this.color2 = color2;
     }
 }

@@ -27,9 +27,9 @@ public interface IUiAction extends Serializable {
 
     void setAction(EActionType action);
 
-    Color getColor();
+    IColor getColor();
 
-    void setColor(Color color);
+    void setColor(IColor color);
 
     int getBrightness();
 
@@ -65,11 +65,9 @@ public interface IUiAction extends Serializable {
 
     void setDelay(int delay);
 
-    IoAction toIoAction(IDevice device);
+    IColor getColor2();
 
-    Color getColor2();
-
-    void setColor2(Color color2);
+    void setColor2(IColor color2);
 
     String getZigbeeAction();
 

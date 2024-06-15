@@ -62,6 +62,12 @@ triggers:
       - blockType: RUNNER
         runnerType: MACRO_RUNNER
         macroId: lobby-up-pir-macro
+  pir-bath-up:
+    zoneId: other
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: pir-bath-up-macro
   pir-bedroom:
     zoneId: bedroom
     blocs:
@@ -93,6 +99,18 @@ triggers:
         runnerType: MACRO_RUNNER
         macroId: p2-pir-macro
 
+  office-btn:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: office-btn-macro
+  magda-btn:
+    zoneId: office
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: magda-btn-macro
   bedroom-btn-1:
     zoneId: bedroom
     blocs:

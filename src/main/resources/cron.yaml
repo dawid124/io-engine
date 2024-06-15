@@ -31,6 +31,38 @@ crons:
             - blockType: RUNNER
               runnerType: SCENE_CHANGE
               newSceneId: auto
+  bathroom-clear-to-auto-if-no-motion:
+    id: bedroom-clear-to-auto-if-no-motion
+    zoneId: other
+    cron: 0 0/5 * * * ?
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: LOGIC
+          logicalType: AND
+          conditions:
+            - type: COMPARE
+              compareType: NOT_EQUAL
+              fetcher:
+                fetcherType: CURRENT_STATE_VARIABLE
+              testValue:
+                type: STRING
+                value: auto
+            - type: COMPARE
+              compareType: EQUAL
+              fetcher:
+                fetcherType: SENSOR_INACTIVE_FOR_TIME
+                second: 420
+                sensorId: pir-bath-up
+              testValue:
+                type: BOOLEAN
+                value: true
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: RUNNER
+              runnerType: SCENE_CHANGE
+              newSceneId: auto
   war-m-clear-to-auto-if-no-motion:
     id: war-m-clear-to-auto-if-no-motion
     zoneId: war-m

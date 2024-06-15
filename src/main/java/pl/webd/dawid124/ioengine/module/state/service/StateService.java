@@ -275,6 +275,7 @@ public class StateService {
         if (ioAction.getColor() == null || state.getColor().equals(ioAction.getColor())) {
             state.setBrightness(ioAction.getBrightness());
         } else if (ioAction.getColor() != null) {
+            state.setBrightness(ioAction.getBrightness());
             state.getColor().update(ioAction.getColor());
         }
     }

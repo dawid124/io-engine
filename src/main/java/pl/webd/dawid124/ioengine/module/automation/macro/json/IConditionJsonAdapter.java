@@ -21,6 +21,7 @@ public class IConditionJsonAdapter implements JsonDeserializer<ICondition> {
 
         try {
             EConditionType conditionType = EConditionType.valueOf(messageType.getAsString());
+
             return context.deserialize(jsonElement, conditionType.getClazz());
         } catch (Exception e) {
             throw new JsonParseException(String.format(ERROR_MSG, jsonElement), e);

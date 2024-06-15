@@ -3546,6 +3546,10 @@ zones:
         ioId: pir-f2-lobby
         name: Kor
         ioType: MOTION_SENSOR
+      pir-bath-up:
+        ioId: pir-bath-up
+        name: Laz
+        ioType: MOTION_SENSOR
       t-bathroom:
         ioId: t-bathroom
         name: Łazienka
@@ -3592,6 +3596,65 @@ zones:
         name: Auto
         order: 0
         groups:
+          - state:
+              ioId: f2-bath
+              name: Łazienka góra
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: bath-rgbw-shower
+                  name: Prysznic led
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-mirror
+                  name: Lustro
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-rgbw-lamel
+                  name: Lamele
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-shower
+                  name: Prysznic
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-bathtub
+                  name: Wanna
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 0
+                    ww: 255
+
           - state:
               ioId: f1-other-stairs
               name: Schody
@@ -3667,6 +3730,414 @@ zones:
                 b: 0
                 w: 255
                 ww: 255
+      manual:
+        id: manual
+        name: Manual
+        order: 0
+        groups:
+          - state:
+              ioId: f2-bath
+              name: Łazienka góra
+              ioType: RGBW
+              brightness: 200
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: bath-rgbw-shower
+                  name: Prysznic led
+                  ioType: RGBW
+                  brightness: 100
+                  color:
+                    r: 255
+                    g: 0
+                    b: 255
+                    w: 0
+                    ww: 0
+              - state:
+                  ioId: bath-mirror
+                  name: Lustro
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-rgbw-lamel
+                  name: Lamele
+                  ioType: RGBW
+                  brightness: 100
+                  color:
+                    r: 255
+                    g: 0
+                    b: 0
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-shower
+                  name: Prysznic
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 0
+              - state:
+                  ioId: bath-bathtub
+                  name: Wanna
+                  ioType: CCT
+                  brightness: 200
+                  color:
+                    w: 0
+                    ww: 255
+
+          - state:
+              ioId: f1-other-stairs
+              name: Schody
+              ioType: RGBW
+              brightness: 0
+              color:
+                w: 255
+            children:
+              - state:
+                  ioId: led-stairs-1
+                  name: Schody 1
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-2
+                  name: Schody 2
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-3
+                  name: Schody 3
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-4
+                  name: Schody 4
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-5
+                  name: Schody 5
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-6
+                  name: Schody 6
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-7
+                  name: Schody 7
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+              - state:
+                  ioId: led-stairs-8
+                  name: Schody 8
+                  ioType: RGBW
+                  brightness: 0
+                  color:
+                    w: 255
+          - state:
+              ioId: cct-f2-lobby
+              name: Korytarz
+              ioType: CCT
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+                ww: 255
+  outdoor:
+    id: outdoor
+    name: OUT
+    blinds:
+    sensors:
+      pir-p2:
+        ioId: pir-satel-entry
+        name: Entry
+        ioType: MOTION_SENSOR
+    scenes:
+      auto:
+        id: auto
+        name: Auto
+        order: 0
+        groups:
+          - state:
+              ioId: ctt-a-roof
+              name: Altanka Dach
+              ioType: CCT
+              brightness: 0
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: cct-a-roof-1
+                  name: Altanka Dach 1
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-a-roof-2
+                  name: Altanka Dach 2
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 255
+          - state:
+              ioId: outdoor-door
+              name: Wejście
+              ioType: CCT
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+                ww: 255
+          - state:
+              ioId: cct-outdoor-gateway
+              name: Daszki wejście
+              ioType: CCT
+              brightness: 0
+              color:
+                w: 255
+                ww: 255
+          - state:
+              ioId: cct-outdoor-fence
+              name: Płot
+              ioType: CCT
+              brightness: 0
+              color:
+                w: 255
+                ww: 255
+          - state:
+              ioId: ctt-out-roof
+              name: Schody
+              ioType: CCT
+              brightness: 0
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: ctt-out-roof-1
+                  name: Dach 1
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: ctt-out-roof-2
+                  name: Dach 2
+                  ioType: CCT
+                  brightness: 0
+                  color:
+                    w: 255
+                    ww: 255
+          - state:
+              ioId: out-stairs
+              name: Schody
+              ioType: CCT
+              brightness: 0
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: cct-outdoor-stairs-1
+                  name: Schody 1
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-2
+                  name: Schody 2
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-3
+                  name: Schody 3
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-4
+                  name: Schody 4
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-5
+                  name: Schody 5
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+      manual:
+        id: manual
+        name: Manual
+        order: 1
+        groups:
+          - state:
+              ioId: ctt-a-roof
+              name: Altanka Dach
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: cct-a-roof-1
+                  name: Altanka Dach 1
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-a-roof-2
+                  name: Altanka Dach 2
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+          - state:
+              ioId: outdoor-door
+              name: Wejście
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+          - state:
+              ioId: cct-outdoor-gateway
+              name: Daszki wejście
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+          - state:
+              ioId: cct-outdoor-fence
+              name: Płot
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+          - state:
+              ioId: ctt-out-roof
+              name: Dach
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: ctt-out-roof-1
+                  name: Dach 1
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: ctt-out-roof-2
+                  name: Dach 2
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+          - state:
+              ioId: out-stairs
+              name: Schody
+              ioType: CCT
+              brightness: 255
+              color:
+                w: 255
+                ww: 255
+            children:
+              - state:
+                  ioId: cct-outdoor-stairs-1
+                  name: Schody 1
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-2
+                  name: Schody 2
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-3
+                  name: Schody 3
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-4
+                  name: Schody 4
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
+              - state:
+                  ioId: cct-outdoor-stairs-5
+                  name: Schody 5
+                  ioType: CCT
+                  brightness: 255
+                  color:
+                    w: 255
+                    ww: 255
 downBlindMacros:
   doorEntryGate:
     id: doorEntryGate
@@ -3692,17 +4163,6 @@ downBlindMacros:
     label: Woda
     clickMacroId: hotWaterPump-5m-macro
     holdClickMacroId: hotWaterPump-5m-macro
-rightBlindMacros:
-  rainBirdPump:
-    id: rain-bird-20m
-    label: Trawin
-    clickMacroId: rain-bird-20m
-    holdClickMacroId: rain-bird-clear
-  rainBirdPumpFull:
-    id: rain-bird-1h
-    label: Wypompowanie
-    clickMacroId: rain-bird-1h
-    holdClickMacroId: rain-bird-clear
 
 rightBlindGroups:
   macrosGroup:
@@ -3888,9 +4348,9 @@ rightBlindGroups:
     id: rainBirdGroup
     label: Zraszacze
     buttons:
-      - id: rain-bird-20m
+      - id: rain-bird-m1
         label: 20m
-        clickMacroId: rain-bird-20m
+        clickMacroId: rain-bird-m1
         unClickMacroId: rain-bird-clear
         holdClickMacroId: rain-bird-clear
         activeCondition:
@@ -3901,10 +4361,11 @@ rightBlindGroups:
             key: rain-bird-mode
           testValue:
             type: STRING
-            value: mode-20m
-      - id: rain-bird-1h
-        label: Wypompowanie
-        clickMacroId: rain-bird-1h
+            value: 'mode-1'
+
+      - id: rain-bird-m1
+        label: 30m
+        clickMacroId: rain-bird-m2
         unClickMacroId: rain-bird-clear
         holdClickMacroId: rain-bird-clear
         activeCondition:
@@ -3915,7 +4376,88 @@ rightBlindGroups:
             key: rain-bird-mode
           testValue:
             type: STRING
-            value: rain-bird-pumping-out
+            value: 'mode-2'
+
+  rainBirdGroup2:
+    id: rainBirdGroup2
+    label:
+    buttons:
+      - id: rain-bird-pomp-btn
+        label: Pompa
+        clickMacroId: rain-bird-pump-on
+        unClickMacroId: rain-bird-pump-off
+        holdClickMacroId: rain-bird-pump-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: rainBirdPump
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: rain-bird-z1-btn
+        label: Z1
+        clickMacroId: rain-bird-z1-on
+        unClickMacroId: rain-bird-z1-off
+        holdClickMacroId: rain-bird-z1-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: rainBirdZone1
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: rain-bird-z2-btn
+        label: Z2
+        clickMacroId: rain-bird-z2-on
+        unClickMacroId: rain-bird-z2-off
+        holdClickMacroId: rain-bird-z2-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: rainBirdZone2
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: rain-bird-z3-btn
+        label: Z3
+        clickMacroId: rain-bird-z3-on
+        unClickMacroId: rain-bird-z3-off
+        holdClickMacroId: rain-bird-z3-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: rainBirdZone3
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+      - id: rain-bird-z4-btn
+        label: Z4
+        clickMacroId: rain-bird-z4-on
+        unClickMacroId: rain-bird-z4-off
+        holdClickMacroId: rain-bird-z4-off
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: DEVICE_STATE
+            ioId: rainBirdZone4
+            key: 'on'
+          testValue:
+            type: BOOLEAN
+            value: true
+
   homeHeating:
     id: homeHeating
     label: Ogrzewanie
@@ -4031,17 +4573,6 @@ rightBlindGroups:
             type: BOOLEAN
             value: true
 
-#  rainBirdPump:
-#    id: rain-bird-8m
-#    label: Trawin
-#    clickMacroId: rain-bird-8m
-#    holdClickMacroId: rain-bird-clear
-#  rainBirdPumpFull:
-#    id: rain-bird-1h
-#    label: Wypompowanie
-#    clickMacroId: rain-bird-1h
-#    holdClickMacroId: rain-bird-clear
-
 variables:
   bedroom-brightness-o:
     type: NUMBER
@@ -4058,3 +4589,347 @@ variables:
   bedroom-blind-button-state:
     type: STRING
     value: 'CLOSE'
+  office-blind-button-state:
+    type: STRING
+    value: 'CLOSE'
+
+conditionVariables:
+  cv-lobby-up-brightness:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '07:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variable:
+          type: NUMBER
+          value: 255
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variable:
+          type: NUMBER
+          value: 50
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '00:00:00'
+        variable:
+          type: NUMBER
+          value: 30
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '00:00:00'
+          toTime:
+            type: TIME
+            value: '07:00:00'
+        variable:
+          type: NUMBER
+          value: 20
+
+  cv-home-up-brightness:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '07:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variable:
+          type: NUMBER
+          value: 255
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variable:
+          type: NUMBER
+          value: 100
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '00:00:00'
+        variable:
+          type: NUMBER
+          value: 50
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '00:00:00'
+          toTime:
+            type: TIME
+            value: '07:00:00'
+        variable:
+          type: NUMBER
+          value: 20
+  cv-home-cold-white-value:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '07:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variable:
+          type: NUMBER
+          value: 255
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '07:00:00'
+        variable:
+          type: NUMBER
+          value: 0
+
+  cv-home-up-stairs-brightness:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '07:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variable:
+          type: NUMBER
+          value: 100
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '07:00:00'
+        variable:
+          type: NUMBER
+          value: 20
+
+  cv-bedroom-brightness:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '21:00:00'
+          toTime:
+            type: TIME
+            value: '09:00:00'
+        variable:
+          type: NUMBER
+          value: 0
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '09:00:00'
+          toTime:
+            type: TIME
+            value: '21:00:00'
+        variable:
+          type: NUMBER
+          value: 100
+
+
+  cv-bedroom-w:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '06:30:00'
+          toTime:
+            type: TIME
+            value: '09:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 20
+          coldWhite:
+            type: NUMBER
+            value: 100
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '09:00:00'
+          toTime:
+            type: TIME
+            value: '21:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 150
+          coldWhite:
+            type: NUMBER
+            value: 255
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '21:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 50
+          coldWhite:
+            type: NUMBER
+            value: 0
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '06:30:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 2
+          coldWhite:
+            type: NUMBER
+            value: 0
+
+
+  cv-bedroom-o:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '06:30:00'
+          toTime:
+            type: TIME
+            value: '09:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 40
+          coldWhite:
+            type: NUMBER
+            value: 100
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '09:00:00'
+          toTime:
+            type: TIME
+            value: '21:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 100
+          coldWhite:
+            type: NUMBER
+            value: 255
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '21:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 50
+          coldWhite:
+            type: NUMBER
+            value: 0
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '06:30:00'
+        variables:
+          brightness:
+            type: NUMBER
+            value: 5
+          coldWhite:
+            type: NUMBER
+            value: 0

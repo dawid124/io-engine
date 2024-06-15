@@ -19,10 +19,11 @@ public class BlindDevice extends Device {
 
     private static final Logger LOG = LogManager.getLogger( BlindDevice.class );
 
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 
     public static final int FULL_CHANGE_TIME = 1300;
     public static final int FULL_DIMMER_TIME = 60 * 1000;
+    public static final int TIME_BEETWEEN_CHAGNE = 50;
 
     private transient GpioPinDigitalOutput power;
     private transient GpioPinDigitalOutput down;
@@ -59,17 +60,17 @@ public class BlindDevice extends Device {
     public void moveLocal(EBlindDirection direction, int time) {
 
         if (EBlindDirection.UP.equals(direction)) {
-            power.setState(PinState.HIGH);
             down.setState(PinState.LOW);
+            scheduler.schedule(() -> power.setState(PinState.HIGH), TIME_BEETWEEN_CHAGNE, TimeUnit.MILLISECONDS);
         } else {
-            power.setState(PinState.HIGH);
             down.setState(PinState.HIGH);
+            scheduler.schedule(() -> power.setState(PinState.HIGH), TIME_BEETWEEN_CHAGNE, TimeUnit.MILLISECONDS);
         }
 
         scheduler.schedule(() -> {
-            down.setState(PinState.LOW);
             power.setState(PinState.LOW);
-        }, time, TimeUnit.MILLISECONDS);
+            scheduler.schedule(() -> down.setState(PinState.LOW), TIME_BEETWEEN_CHAGNE, TimeUnit.MILLISECONDS);
+        }, time + TIME_BEETWEEN_CHAGNE, TimeUnit.MILLISECONDS);
     }
 
     @Override public EDeviceType getIoType() {

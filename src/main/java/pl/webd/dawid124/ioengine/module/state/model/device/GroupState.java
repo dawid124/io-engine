@@ -2,8 +2,6 @@ package pl.webd.dawid124.ioengine.module.state.model.device;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 public class GroupState implements Serializable {
 

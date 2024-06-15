@@ -3,6 +3,7 @@ package pl.webd.dawid124.ioengine.module.automation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
+import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.automation.cron.CronService;
 import pl.webd.dawid124.ioengine.module.automation.cron.CronStructure;
@@ -17,6 +18,7 @@ import pl.webd.dawid124.ioengine.module.automation.timer.structure.TimerStructur
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerService;
 import pl.webd.dawid124.ioengine.module.automation.trigger.TriggerStructure;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
+import pl.webd.dawid124.ioengine.utils.AppGsonBuilder;
 import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +36,6 @@ public class AutomationService {
     private final TriggerService triggerService;
 
     private final CronService cronService;
-    private final AutomationContext automationContext;
 
 
     public AutomationService(TimerService timerService, MacroService macroService, TriggerService triggerService,
@@ -43,15 +44,8 @@ public class AutomationService {
         this.macroService = macroService;
         this.triggerService = triggerService;
         this.cronService = cronService;
-        this.automationContext = automationContext;
 
-        this.gson =  new GsonBuilder()
-                .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
-                .registerTypeAdapter(IBlock.class, new IBlockJsonAdapter())
-                .registerTypeAdapter(IUiAction.class, new VariableUIActionJsonAdapter(automationContext))
-                .registerTypeAdapter(IVariableFetcher.class, new IVariableFetcherJsonAdapter())
-                .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter())
-                .create();
+        this.gson = AppGsonBuilder.instance(automationContext);
     }
 
     @PostConstruct
