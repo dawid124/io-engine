@@ -31,7 +31,7 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: rgbw-lobby
-                  brightness: 255
+                  brightness: ${cv-home-down.brightness-lobby}
                   color:
                     r: 0
                     g: 0
@@ -77,14 +77,14 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: l-mirror
-                  brightness: 255
+                  brightness: ${cv-home-down.brightness-lobby-mirror}
                   color:
                     r: 0
                     g: 0
                     b: 0
                     w: 255
                 - ioId: plants
-                  brightness: 255
+                  brightness: ${cv-home-down.brightness-lobby}
                   color:
                     r: 0
                     g: 0
@@ -130,7 +130,7 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: rgbw-wc2
-                  brightness: ${bedroom-brightness-cct}
+                  brightness: 255
                   color:
                     r: 0
                     g: 0
@@ -174,7 +174,7 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: rgbw-office
-                  brightness: 255
+                  brightness: ${cv-home-down.brightness-lobby}
                   color:
                     r: 0
                     g: 0
@@ -218,21 +218,21 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: n-tv
-                  brightness: 100
+                  brightness: ${cv-home-down.brightness-tv-neo}
                   color:
                     r: 0
                     g: 0
                     b: 0
                     w: 255
                 - ioId: rgbw-tv1
-                  brightness: 100
+                  brightness: ${cv-home-down.brightness-tv-wall}
                   color:
                     r: 0
                     g: 0
                     b: 0
                     w: 255
                 - ioId: rgbw-tv2
-                  brightness: 100
+                  brightness: ${cv-home-down.brightness-tv-wall}
                   color:
                     r: 0
                     g: 0
@@ -345,11 +345,11 @@ macros:
           stepTime: 30
         actions:
           - ioId: n-kit
-            brightness: 150
+            brightness: ${cv-home-down.brightness-neo}
           - ioId: kit-blat
-            brightness: 255
+            brightness: ${cv-home-down.brightness-blat}
           - ioId: cooker
-            brightness: 255
+            brightness: ${cv-home-down.brightness-cooker}
   kitchen-light-off-medium-macro:
     zoneId: floor1
     blocks:
@@ -412,12 +412,12 @@ macros:
                   stepTime: 30
                 actions:
                   - ioId: cct-f2-lobby
-                    brightness: ${cv-lobby-up-brightness}
+                    brightness: ${cv-home-up.default-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: ${cv-home-cold-white-value}
+                      w: ${cv-home-up.default-cold-white}
                       ww: 255
           falseBlock:
             blockType: BLOCK
@@ -550,42 +550,42 @@ macros:
                   stepTime: 30
                 actions:
                   - ioId: led-stairs-1
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 0
                     color:
                       w: 255
                   - ioId: led-stairs-2
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 100
                     color:
                       w: 255
                   - ioId: led-stairs-3
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 200
                     color:
                       w: 255
                   - ioId: led-stairs-4
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 300
                     color:
                       w: 255
                   - ioId: led-stairs-5
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 400
                     color:
                       w: 255
                   - ioId: led-stairs-6
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 500
                     color:
                       w: 255
                   - ioId: led-stairs-7
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 600
                     color:
                       w: 255
                   - ioId: led-stairs-8
-                    brightness: ${cv-home-up-stairs-brightness}
+                    brightness: ${cv-home-down.brightness-stairs}
                     delay: 700
                     color:
                       w: 255
@@ -632,17 +632,17 @@ macros:
                 runnerType: ACTION
                 actions:
                   - ioId: cct-wardrobe-m
-                    brightness: ${cv-home-up-brightness}
+                    brightness: ${cv-home-up.default-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: ${cv-home-cold-white-value}
+                      w: ${cv-home-up.default-cold-white}
                       ww: 255
                     time: 1000
                     stepTime: 30
                   - ioId: cct-wardrobe-m2
-                    brightness: ${cv-home-up-brightness}
+                    brightness: ${cv-home-up.default-brightness}
                     color:
                       r: 0
                       g: 0
@@ -702,12 +702,12 @@ macros:
                 runnerType: ACTION
                 actions:
                   - ioId: cct-wardrobe-d
-                    brightness: ${cv-home-up-brightness}
+                    brightness: ${cv-home-up.default-brightness}
                     color:
                       r: 0
                       g: 0
                       b: 0
-                      w: ${cv-home-cold-white-value}
+                      w: ${cv-home-up.default-cold-white}
                       ww: 255
                     time: 1000
                     stepTime: 30
@@ -749,12 +749,12 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: cct-p1
-                  brightness: ${cv-home-up-brightness}
+                  brightness: ${cv-home-up.brightness-p1}
                   color:
                     r: 0
                     g: 0
                     b: 0
-                    w: ${cv-home-cold-white-value}
+                    w: ${cv-home-up.default-cold-white}
                     ww: 255
         falseBlock:
           blockType: BLOCK
@@ -794,12 +794,12 @@ macros:
                 stepTime: 30
               actions:
                 - ioId: cct-p2
-                  brightness: ${cv-home-up-brightness}
+                  brightness: ${cv-home-up.default-brightness}
                   color:
                     r: 0
                     g: 0
                     b: 0
-                    w: ${cv-home-cold-white-value}
+                    w: ${cv-home-up.default-cold-white}
                     ww: 255
         falseBlock:
           blockType: BLOCK
@@ -841,28 +841,28 @@ macros:
                     stepTime: 30
                   actions:
                     - ioId: cct-bedroom-o
-                      brightness: ${cv-bedroom-o.brightness}
+                      brightness: ${cv-home-up.brightness-bedroom-o}
                       color:
                         r: 0
                         g: 0
                         b: 0
-                        w: ${cv-bedroom-o.coldWhite}
+                        w: ${cv-home-up.cold-white-bedroom}
                         ww: 255
                     - ioId: cct-bedroom-w
-                      brightness: ${cv-bedroom-w.brightness}
+                      brightness: ${cv-home-up.brightness-bedroom-w}
                       color:
                         r: 0
                         g: 0
                         b: 0
-                        w: ${cv-bedroom-w.coldWhite}
+                        w: ${cv-home-up.cold-white-bedroom}
                         ww: 255
                     - ioId: cct-bedroom
-                      brightness: ${cv-bedroom-brightness}
+                      brightness: ${cv-home-up.brightness-bedroom}
                       color:
                         r: 0
                         g: 0
                         b: 0
-                        w: 255
+                        w: ${cv-home-up.cold-white-bedroom}
                         ww: 255
             falseBlock:
               blockType: BLOCK
@@ -1336,7 +1336,7 @@ macros:
                   blocs:
                     - blockType: RUNNER
                       runnerType: SCENE_CHANGE
-                      newSceneId: manual
+                      newSceneId: night
                 falseBlock:
                   blockType: CONDITION
                   condition:
@@ -1346,13 +1346,13 @@ macros:
                       fetcherType: CURRENT_STATE_VARIABLE
                     testValue:
                       type: STRING
-                      value: manual
+                      value: night
                   trueBlock:
                     blockType: BLOCK
                     blocs:
                       - blockType: RUNNER
                         runnerType: SCENE_CHANGE
-                        newSceneId: night
+                        newSceneId: auto
                   falseBlock:
                     blockType: CONDITION
                     condition:
@@ -1362,7 +1362,7 @@ macros:
                         fetcherType: CURRENT_STATE_VARIABLE
                       testValue:
                         type: STRING
-                        value: night
+                        value: manual
                     trueBlock:
                       blockType: BLOCK
                       blocs:
@@ -1866,7 +1866,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-1-off
         action: RUN
-        time: 1810
+        time: 181000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1878,7 +1878,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-2-on
         action: RUN
-        time: 1800
+        time: 180000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1890,7 +1890,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-2-off
         action: RUN
-        time: 4210
+        time: 421000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1902,7 +1902,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-3-on
         action: RUN
-        time: 4200
+        time: 420000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1914,7 +1914,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-3-off
         action: RUN
-        time: 6010
+        time: 601000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1926,7 +1926,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-4-on
         action: RUN
-        time: 6000
+        time: 600000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1938,7 +1938,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-zone-4-off
         action: RUN
-        time: 12000
+        time: 1200000
         blocs:
           - blockType: RUNNER
             runnerType: ACTION
@@ -1950,7 +1950,7 @@ macros:
         runnerType: TIMER
         timerId: rain-bird-m-1-pump-off
         action: RUN
-        time: 12000
+        time: 1200000
         blocs:
         - blockType: RUNNER
           runnerType: ACTION

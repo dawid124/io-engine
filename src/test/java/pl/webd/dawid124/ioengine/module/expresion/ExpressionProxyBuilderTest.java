@@ -16,7 +16,7 @@ public class ExpressionProxyBuilderTest {
 
     public static final String YAML1 =
             "ioId: cct-wardrobe-d\n" +
-            "brightness: ${cv-home-up-brightness}\n" +
+            "brightness: ${cv-home-up.default-brightness}\n" +
             "color:\n" +
             " r: 0\n" +
             " g: 0\n" +

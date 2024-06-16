@@ -4594,204 +4594,7 @@ variables:
     value: 'CLOSE'
 
 conditionVariables:
-  cv-lobby-up-brightness:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '07:00:00'
-          toTime:
-            type: TIME
-            value: '22:00:00'
-        variable:
-          type: NUMBER
-          value: 255
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '22:00:00'
-          toTime:
-            type: TIME
-            value: '23:00:00'
-        variable:
-          type: NUMBER
-          value: 50
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '23:00:00'
-          toTime:
-            type: TIME
-            value: '00:00:00'
-        variable:
-          type: NUMBER
-          value: 30
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '00:00:00'
-          toTime:
-            type: TIME
-            value: '07:00:00'
-        variable:
-          type: NUMBER
-          value: 20
-
-  cv-home-up-brightness:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '07:00:00'
-          toTime:
-            type: TIME
-            value: '22:00:00'
-        variable:
-          type: NUMBER
-          value: 255
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '22:00:00'
-          toTime:
-            type: TIME
-            value: '23:00:00'
-        variable:
-          type: NUMBER
-          value: 100
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '23:00:00'
-          toTime:
-            type: TIME
-            value: '00:00:00'
-        variable:
-          type: NUMBER
-          value: 50
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '00:00:00'
-          toTime:
-            type: TIME
-            value: '07:00:00'
-        variable:
-          type: NUMBER
-          value: 20
-  cv-home-cold-white-value:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '07:00:00'
-          toTime:
-            type: TIME
-            value: '22:00:00'
-        variable:
-          type: NUMBER
-          value: 255
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '22:00:00'
-          toTime:
-            type: TIME
-            value: '07:00:00'
-        variable:
-          type: NUMBER
-          value: 0
-
-  cv-home-up-stairs-brightness:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '07:00:00'
-          toTime:
-            type: TIME
-            value: '23:00:00'
-        variable:
-          type: NUMBER
-          value: 100
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '23:00:00'
-          toTime:
-            type: TIME
-            value: '07:00:00'
-        variable:
-          type: NUMBER
-          value: 20
-
-  cv-bedroom-brightness:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '21:00:00'
-          toTime:
-            type: TIME
-            value: '09:00:00'
-        variable:
-          type: NUMBER
-          value: 0
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '09:00:00'
-          toTime:
-            type: TIME
-            value: '21:00:00'
-        variable:
-          type: NUMBER
-          value: 100
-
-
-  cv-bedroom-w:
+  cv-home-up:
     conditions:
       - condition:
           type: TIME_BETWEEN
@@ -4804,118 +4607,94 @@ conditionVariables:
             type: TIME
             value: '09:00:00'
         variables:
-          brightness:
+          default-brightness:
             type: NUMBER
-            value: 20
-          coldWhite:
+            value: 90
+          default-cold-white:
             type: NUMBER
-            value: 100
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '09:00:00'
-          toTime:
-            type: TIME
-            value: '21:00:00'
-        variables:
-          brightness:
+            value: 0
+          brightness-p1:
             type: NUMBER
-            value: 150
-          coldWhite:
+            value: 15
+          cold-white-bedroom:
             type: NUMBER
-            value: 255
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '21:00:00'
-          toTime:
-            type: TIME
-            value: '23:00:00'
-        variables:
-          brightness:
+            value: 0
+          brightness-bedroom:
+            type: NUMBER
+            value: 0
+          brightness-bedroom-w:
             type: NUMBER
             value: 50
-          coldWhite:
-            type: NUMBER
-            value: 0
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '23:00:00'
-          toTime:
-            type: TIME
-            value: '06:30:00'
-        variables:
-          brightness:
-            type: NUMBER
-            value: 2
-          coldWhite:
-            type: NUMBER
-            value: 0
-
-
-  cv-bedroom-o:
-    conditions:
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '06:30:00'
-          toTime:
-            type: TIME
-            value: '09:00:00'
-        variables:
-          brightness:
-            type: NUMBER
-            value: 40
-          coldWhite:
-            type: NUMBER
-            value: 100
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '09:00:00'
-          toTime:
-            type: TIME
-            value: '21:00:00'
-        variables:
-          brightness:
-            type: NUMBER
-            value: 100
-          coldWhite:
-            type: NUMBER
-            value: 255
-      - condition:
-          type: TIME_BETWEEN
-          fetcher:
-            fetcherType: CURRENT_TIME
-          fromTime:
-            type: TIME
-            value: '21:00:00'
-          toTime:
-            type: TIME
-            value: '23:00:00'
-        variables:
-          brightness:
+          brightness-bedroom-o:
             type: NUMBER
             value: 50
-          coldWhite:
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '09:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variables:
+          default-brightness:
+            type: NUMBER
+            value: 255
+          default-cold-white:
+            type: NUMBER
+            value: 255
+          brightness-p1:
+            type: NUMBER
+            value: 80
+          cold-white-bedroom:
+            type: NUMBER
+            value: 255
+          brightness-bedroom:
+            type: NUMBER
+            value: 100
+          brightness-bedroom-w:
+            type: NUMBER
+            value: 255
+          brightness-bedroom-o:
+            type: NUMBER
+            value: 255
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variables:
+          default-brightness:
+            type: NUMBER
+            value: 80
+          default-cold-white:
+            type: NUMBER
+            value: 50
+          brightness-p1:
+            type: NUMBER
+            value: 10
+          cold-white-bedroom:
+            type: NUMBER
+            value: 50
+          brightness-bedroom:
             type: NUMBER
             value: 0
+          brightness-bedroom-w:
+            type: NUMBER
+            value: 70
+          brightness-bedroom-o:
+            type: NUMBER
+            value: 70
+
       - condition:
           type: TIME_BETWEEN
           fetcher:
@@ -4925,11 +4704,205 @@ conditionVariables:
             value: '23:00:00'
           toTime:
             type: TIME
-            value: '06:30:00'
+            value: '00:00:00'
         variables:
-          brightness:
+          default-brightness:
+            type: NUMBER
+            value: 15
+          default-cold-white:
+            type: NUMBER
+            value: 0
+          brightness-p1:
             type: NUMBER
             value: 5
-          coldWhite:
+          cold-white-bedroom:
             type: NUMBER
             value: 0
+          brightness-bedroom:
+            type: NUMBER
+            value: 0
+          brightness-bedroom-w:
+            type: NUMBER
+            value: 8
+          brightness-bedroom-o:
+            type: NUMBER
+            value: 5
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '00:00:00'
+          toTime:
+            type: TIME
+            value: '06:30:00'
+        variables:
+          default-brightness:
+            type: NUMBER
+            value: 5
+          default-cold-white:
+            type: NUMBER
+            value: 0
+          brightness-p1:
+            type: NUMBER
+            value: 2
+          cold-white-bedroom:
+            type: NUMBER
+            value: 0
+          brightness-bedroom:
+            type: NUMBER
+            value: 0
+          brightness-bedroom-w:
+            type: NUMBER
+            value: 2
+          brightness-bedroom-o:
+            type: NUMBER
+            value: 5
+
+  cv-home-down:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '07:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variables:
+          brightness-lobby:
+            type: NUMBER
+            value: 255
+          brightness-lobby-mirror:
+            type: NUMBER
+            value: 180
+          brightness-cooker:
+            type: NUMBER
+            value: 200
+          brightness-neo:
+            type: NUMBER
+            value: 150
+          brightness-blat:
+            type: NUMBER
+            value: 200
+          brightness-stairs:
+            type: NUMBER
+            value: 70
+          brightness-tv-neo:
+            type: NUMBER
+            value: 80
+          brightness-tv-wall:
+            type: NUMBER
+            value: 80
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variables:
+          brightness-lobby:
+            type: NUMBER
+            value: 50
+          brightness-lobby-mirror:
+            type: NUMBER
+            value: 100
+          brightness-cooker:
+            type: NUMBER
+            value: 100
+          brightness-neo:
+            type: NUMBER
+            value: 40
+          brightness-blat:
+            type: NUMBER
+            value: 120
+          brightness-stairs:
+            type: NUMBER
+            value: 30
+          brightness-tv-neo:
+            type: NUMBER
+            value: 0
+          brightness-tv-wall:
+            type: NUMBER
+            value: 40
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '00:00:00'
+        variables:
+          brightness-lobby:
+            type: NUMBER
+            value: 15
+          brightness-lobby-mirror:
+            type: NUMBER
+            value: 50
+          brightness-cooker:
+            type: NUMBER
+            value: 60
+          brightness-neo:
+            type: NUMBER
+            value: 5
+          brightness-blat:
+            type: NUMBER
+            value: 30
+          brightness-stairs:
+            type: NUMBER
+            value: 10
+          brightness-tv-neo:
+            type: NUMBER
+            value: 0
+          brightness-tv-wall:
+            type: NUMBER
+            value: 20
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '00:00:00'
+          toTime:
+            type: TIME
+            value: '07:00:00'
+        variables:
+          brightness-lobby:
+            type: NUMBER
+            value: 10
+          brightness-lobby-mirror:
+            type: NUMBER
+            value: 30
+          brightness-cooker:
+            type: NUMBER
+            value: 30
+          brightness-neo:
+            type: NUMBER
+            value: 0
+          brightness-blat:
+            type: NUMBER
+            value: 30
+          brightness-stairs:
+            type: NUMBER
+            value: 5
+          brightness-tv-neo:
+            type: NUMBER
+            value: 0
+          brightness-tv-wall:
+            type: NUMBER
+            value: 10

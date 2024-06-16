@@ -155,7 +155,7 @@ public class DeviceService {
 
 
         addDevice(new MotionSensor("pir-office", "Pir Biuro", floor1Driver0Local, 7));
-        addDevice(new MotionSensor("pir-lobby", "Pir Korytarz", floor1Driver0Local, 8));
+        addDevice(new MotionSensor("pir-lobby", "Pir Korytarz", floor1Driver0Local, 10));
         addDevice(new MotionSensor("pir-kitchen", "Pir Kuchnia", floor1Driver0Local, 9));
 
 
@@ -190,7 +190,7 @@ public class DeviceService {
         addDevice(new CctDevice("outdoor-door", "Dwór  drzwi", floor1Driver2ExpanderB, 4, 5));
         addDevice(new RgbwDevice("led-hs", "Jadalnia Okno", floor1Driver2ExpanderB, 12, 13, 14, 15));
 
-        addDevice(new MotionSensor("pir-tv", "Pir Tv", floor1Driver2Local, 20));
+        addDevice(new MotionSensor("pir-tv", "Pir Tv", floor1Driver2Local, 22));
 
 
         addDevice(new NeoDevice("w5", "Wall 5", floor1Driver2Local, 12, 155, false, ENeoType.NEO_GRB));
