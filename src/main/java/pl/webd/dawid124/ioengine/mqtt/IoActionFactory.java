@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.mqtt;
 
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
 import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.ColorLedDeviceState;
@@ -13,7 +14,7 @@ public final class IoActionFactory {
 
     private IoActionFactory() {}
 
-    public static IoAction fromDeviceState(IDevice device, DeviceState state, LedChangeData ledChange, int delay, double brightnessPercent) {
+    public static IoAction fromDeviceState(IDevice device, DeviceState state, ILedChangeData ledChange, int delay, double brightnessPercent) {
         IoAction a = new IoAction();
         a.setIoId(device.getId());
         a.setIoType(device.getIoType());

@@ -139,6 +139,7 @@ public class DeviceService {
         addDevice(new CctDevice("cct-outdoor-stairs-5", "Schody outdoor 5", floor0Driver1Local, 10, 11));
         addDevice(new CctDevice("cct-outdoor-gateway", "Daszki", floor0Driver1Local, 12, 13));
         addDevice(new CctDevice("cct-outdoor-fence", "Płot", floor0Driver1Local, 14, 15));
+        addDevice(new MotionSensor("pir-fence", "Pir Płot", floor0Driver1Local, 20));
 //        FLOOR 1 - DRIVER 0
 
         addDevice(new RgbwDevice("rgbw-wc1", "WC 1", floor1Driver0ExpanderA, 0, 1, 2, 3));
@@ -219,7 +220,7 @@ public class DeviceService {
 
         addDevice(new CctDevice("cct-bedroom-w", "Sypialnia", floor2Driver0ExpanderA, 0, 1));
         addDevice(new CctDevice("cct-wardrobe-d", "Szafa Dawid", floor2Driver0ExpanderA, 2, 3));
-        addDevice(new CctDevice("cct-f2-lobby", "Korytarz", floor2Driver0ExpanderA, 6, 7));
+        addDevice(new CctDevice("cct-f2-lobby", "Korytarz", floor2Driver0ExpanderA, 7, 6));
         addDevice(new CctDevice("cct-p1", "Pokój 1", floor2Driver0ExpanderA, 8, 9));
         addDevice(new CctDevice("cct-p2", "Pokój 2", floor2Driver0ExpanderA, 10, 11));
         addDevice(new CctDevice("cct-wardrobe-m", "Szafa Magda", floor2Driver0ExpanderA, 12, 13));
@@ -240,7 +241,7 @@ public class DeviceService {
         addDevice(new RgbwDevice("bath-rgbw-lamel", "Łazienka Lamele", floor2Driver0ExpanderC, 5, 6, 7, 8));
         addDevice(new SingleColorLedDevice("bath-shower", "Łazienka prysznic", floor2Driver0ExpanderC, 9));
         addDevice(new CctDevice("bath-bathtub", "Łazienka wanna", floor2Driver0ExpanderA, 4, 5));
-        addDevice(new CctDevice("ctt-out-roof-1", "Dach 1", floor2Driver0ExpanderD, 0, 1));
+        addDevice(new CctDevice("ctt-out-roof-1", "Dach 1", floor2Driver0ExpanderD, 1, 0));
         addDevice(new CctDevice("ctt-out-roof-2", "Dach 2", floor2Driver0ExpanderD, 2, 3));
 
 

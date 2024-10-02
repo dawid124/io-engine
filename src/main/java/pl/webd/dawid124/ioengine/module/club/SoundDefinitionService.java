@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.config.settings.SoundProperties;
 import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
 import pl.webd.dawid124.ioengine.module.club.model.SoundDefinition;
 import pl.webd.dawid124.ioengine.module.club.model.SoundLightDefinition;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.IColorJsonAdapter;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.ILedChangeDataJsonAdapter;
 import pl.webd.dawid124.ioengine.utils.ResourceUtils;
 
 import javax.annotation.PostConstruct;
@@ -47,6 +49,7 @@ public class SoundDefinitionService {
         this.soundProperties = soundProperties;
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(IColor.class, new IColorJsonAdapter())
+                .registerTypeAdapter(ILedChangeData.class, new ILedChangeDataJsonAdapter())
                 .create();
     }
 

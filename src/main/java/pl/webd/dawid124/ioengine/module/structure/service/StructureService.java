@@ -4,15 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.condition.ICondition;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.runner.ConditionVariableRunner;
 import pl.webd.dawid124.ioengine.module.automation.macro.fetcher.IVariableFetcher;
+import pl.webd.dawid124.ioengine.module.automation.macro.json.ExpressionIVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IConditionJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableFetcherJsonAdapter;
 import pl.webd.dawid124.ioengine.module.automation.macro.json.IVariableJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.IColorJsonAdapter;
+import pl.webd.dawid124.ioengine.module.device.model.adapter.ILedChangeDataJsonAdapter;
 import pl.webd.dawid124.ioengine.module.device.model.adapter.LocalTimeAdapter;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
@@ -39,9 +42,10 @@ import java.util.stream.Collectors;
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(DeviceState.class, new DeviceStateJsonAdapter())
                 .registerTypeAdapter(IColor.class, new IColorJsonAdapter())
+                .registerTypeAdapter(ILedChangeData.class, new ILedChangeDataJsonAdapter())
                 .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
-                .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
-                .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter())
+                .registerTypeAdapter(IVariable.class, new ExpressionIVariableJsonAdapter(context))
+                .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter(context))
                 .registerTypeAdapter(IVariableFetcher.class, new IVariableFetcherJsonAdapter())
                 .create();
     }

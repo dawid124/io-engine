@@ -9,7 +9,7 @@ timers:
           - auto
           - manual
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: rgbw-lobby
@@ -29,7 +29,7 @@ timers:
           - auto
           - manual
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: l-mirror
@@ -56,7 +56,7 @@ timers:
           - auto
           - manual
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.long-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: rgbw-wc1
@@ -82,7 +82,7 @@ timers:
         sceneIds:
           - auto
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: n-tv
@@ -117,7 +117,7 @@ timers:
           - tv
           - night
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: dinner-m
@@ -131,7 +131,7 @@ timers:
         sceneIds:
           - auto
         ledChangeData:
-          time: 8000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: rgbw-office
@@ -155,7 +155,7 @@ timers:
       - blockType: RUNNER
         runnerType: STATE_ACTION
         ledChangeData:
-          time: 4000
+          time: ${cv-home-up.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: cct-f2-lobby
@@ -173,7 +173,7 @@ timers:
       - blockType: RUNNER
         runnerType: STATE_ACTION
         ledChangeData:
-          time: 4000
+          time: ${cv-home-up.bath-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: bath-rgbw-shower
@@ -216,7 +216,7 @@ timers:
         sceneIds:
           - auto
         ledChangeData:
-          time: 4000
+          time: ${cv-home-up.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: cct-bedroom
@@ -225,6 +225,14 @@ timers:
             brightness: 0
           - ioId: cct-bedroom-w
             brightness: 0
+  outdoor-entry-light-off-timer:
+    zoneId: bedroom
+    defaultTime: 10000
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: outdoor-light-off-door-macro
+
   kitchen-oven-off-timer:
     zoneId: floor1
     defaultTime: 300000
@@ -249,7 +257,7 @@ timers:
               b: 0
               w: 255
               ww: 255
-            time: 4000
+            time: ${cv-home-up.default-led-change-off-time}
             stepTime: 30
           - ioId: cct-wardrobe-m2
             brightness: 0
@@ -259,7 +267,7 @@ timers:
               b: 0
               w: 255
               ww: 255
-            time: 4000
+            time: ${cv-home-up.default-led-change-off-time}
             stepTime: 30
   wardrobe-d-light-off-timer:
     zoneId: bedroom
@@ -276,7 +284,7 @@ timers:
               b: 0
               w: 255
               ww: 255
-            time: 4000
+            time: ${cv-home-up.default-led-change-off-time}
             stepTime: 30
   p1-light-off-timer:
     zoneId: p1
@@ -287,7 +295,7 @@ timers:
         sceneIds:
           - auto
         ledChangeData:
-          time: 4000
+          time: ${cv-home-up.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: cct-p1
@@ -307,7 +315,7 @@ timers:
         sceneIds:
           - auto
         ledChangeData:
-          time: 4000
+          time: ${cv-home-up.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: cct-p2
@@ -325,7 +333,7 @@ timers:
       - blockType: RUNNER
         runnerType: STATE_ACTION
         ledChangeData:
-          time: 2000
+          time: ${cv-home-down.default-led-change-stairs-time}
           stepTime: 30
         actions:
           - ioId: led-stairs-1

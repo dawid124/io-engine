@@ -1,6 +1,7 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
 import org.springframework.util.CollectionUtils;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
 import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
@@ -42,11 +43,11 @@ final class ActionDataFactory {
         return actions;
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, int delay) {
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, ILedChangeData ledChange, int delay) {
         return buildActions(devices, item, ledChange, delay, FULL_PERCENT);
     }
 
-    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, LedChangeData ledChange, int delay, double brightnessPercent) {
+    public static List<IoAction> buildActions(Map<String, IDevice> devices, GroupState item, ILedChangeData ledChange, int delay, double brightnessPercent) {
         List<GroupState> children = item.getChildren();
         List<IoAction> actions = new ArrayList<>();
 

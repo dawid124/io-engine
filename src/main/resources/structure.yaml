@@ -800,7 +800,7 @@ zones:
               ioId: f1-tv-tv
               name: TV
               ioType: RGBW
-              brightness: 150
+              brightness: 50
               color:
                 r: 0
                 g: 0
@@ -833,7 +833,7 @@ zones:
                   ioType: NEO
                   brightness: 0
                   animationId: 0
-                  speed: 100
+                  speed: 70
                   color:
                     r: 0
                     g: 0
@@ -898,7 +898,7 @@ zones:
               ioId: f1-tv-dinner
               name: Jadalnia
               ioType: RGBW
-              brightness: 20
+              brightness: 10
               color:
                 r: 255
                 g: 105
@@ -909,7 +909,7 @@ zones:
                   ioId: dinner-m
                   name: Stół
                   ioType: RGBW
-                  brightness: 200
+                  brightness: 50
                   color:
                     r: 255
                     g: 105
@@ -939,7 +939,7 @@ zones:
               ioId: f1-tv-other
               name: Dodatki
               ioType: NEO
-              brightness: 90
+              brightness: 15
               animationId: 0
               speed: 100
               color:
@@ -1172,7 +1172,7 @@ zones:
               ioId: f1-night-all
               name: Oświetlenie
               ioType: NEO
-              brightness: 150
+              brightness: 100
               animationId: 0
               speed: 100
               color:
@@ -1288,7 +1288,7 @@ zones:
                   ioId: f1-night-dinner
                   name: Jadalnia
                   ioType: RGBW
-                  brightness: 50
+                  brightness: 40
                   color:
                     r: 0
                     g: 0
@@ -1329,7 +1329,7 @@ zones:
                   ioId: f1-night-other
                   name: Dodatki
                   ioType: NEO
-                  brightness: 80
+                  brightness: 20
                   animationId: 0
                   speed: 100
                   color:
@@ -3215,7 +3215,7 @@ zones:
               ioId: cct-bedroom-w
               name: Sciana
               ioType: CCT
-              brightness: 20
+              brightness: 15
               color:
                 r: 0
                 g: 0
@@ -3226,7 +3226,7 @@ zones:
               ioId: cct-bedroom-o
               name: Okno
               ioType: CCT
-              brightness: 40
+              brightness: 15
               color:
                 r: 100
                 g: 0
@@ -3878,6 +3878,10 @@ zones:
         ioId: pir-satel-entry
         name: Entry
         ioType: MOTION_SENSOR
+      pir-fence:
+        ioId: pir-fence
+        name: Fence
+        ioType: MOTION_SENSOR
     scenes:
       auto:
         id: auto
@@ -3938,7 +3942,7 @@ zones:
                 ww: 255
           - state:
               ioId: ctt-out-roof
-              name: Schody
+              name: Dach
               ioType: CCT
               brightness: 0
               color:
@@ -3949,7 +3953,7 @@ zones:
                   ioId: ctt-out-roof-1
                   name: Dach 1
                   ioType: CCT
-                  brightness: 0
+                  brightness: 255
                   color:
                     w: 255
                     ww: 255
@@ -3957,7 +3961,7 @@ zones:
                   ioId: ctt-out-roof-2
                   name: Dach 2
                   ioType: CCT
-                  brightness: 0
+                  brightness: 255
                   color:
                     w: 255
                     ww: 255
@@ -4602,11 +4606,20 @@ conditionVariables:
             fetcherType: CURRENT_TIME
           fromTime:
             type: TIME
-            value: '06:30:00'
+            value: '07:00:00'
           toTime:
             type: TIME
             value: '09:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 300
+          default-led-change-off-time:
+            type: NUMBER
+            value: 800
+          bath-led-change-off-time:
+            type: NUMBER
+            value: 6000
           default-brightness:
             type: NUMBER
             value: 90
@@ -4614,6 +4627,9 @@ conditionVariables:
             type: NUMBER
             value: 0
           brightness-p1:
+            type: NUMBER
+            value: 15
+          brightness-p2:
             type: NUMBER
             value: 15
           cold-white-bedroom:
@@ -4624,8 +4640,17 @@ conditionVariables:
             value: 0
           brightness-bedroom-w:
             type: NUMBER
-            value: 50
+            value: 20
           brightness-bedroom-o:
+            type: NUMBER
+            value: 20
+          brightness-bath-standard:
+            type: NUMBER
+            value: 200
+          brightness-bath-bathtub:
+            type: NUMBER
+            value: 100
+          brightness-bath-other:
             type: NUMBER
             value: 50
 
@@ -4640,6 +4665,15 @@ conditionVariables:
             type: TIME
             value: '22:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1000
+          default-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          bath-led-change-off-time:
+            type: NUMBER
+            value: 8000
           default-brightness:
             type: NUMBER
             value: 255
@@ -4647,6 +4681,9 @@ conditionVariables:
             type: NUMBER
             value: 255
           brightness-p1:
+            type: NUMBER
+            value: 80
+          brightness-p2:
             type: NUMBER
             value: 80
           cold-white-bedroom:
@@ -4661,6 +4698,15 @@ conditionVariables:
           brightness-bedroom-o:
             type: NUMBER
             value: 255
+          brightness-bath-standard:
+            type: NUMBER
+            value: 255
+          brightness-bath-bathtub:
+            type: NUMBER
+            value: 150
+          brightness-bath-other:
+            type: NUMBER
+            value: 80
 
       - condition:
           type: TIME_BETWEEN
@@ -4673,6 +4719,15 @@ conditionVariables:
             type: TIME
             value: '23:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 700
+          default-led-change-off-time:
+            type: NUMBER
+            value: 2000
+          bath-led-change-off-time:
+            type: NUMBER
+            value: 7000
           default-brightness:
             type: NUMBER
             value: 80
@@ -4680,6 +4735,9 @@ conditionVariables:
             type: NUMBER
             value: 50
           brightness-p1:
+            type: NUMBER
+            value: 10
+          brightness-p2:
             type: NUMBER
             value: 10
           cold-white-bedroom:
@@ -4690,10 +4748,19 @@ conditionVariables:
             value: 0
           brightness-bedroom-w:
             type: NUMBER
-            value: 70
+            value: 5
           brightness-bedroom-o:
             type: NUMBER
-            value: 70
+            value: 5
+          brightness-bath-standard:
+            type: NUMBER
+            value: 210
+          brightness-bath-bathtub:
+            type: NUMBER
+            value: 110
+          brightness-bath-other:
+            type: NUMBER
+            value: 80
 
       - condition:
           type: TIME_BETWEEN
@@ -4706,6 +4773,15 @@ conditionVariables:
             type: TIME
             value: '00:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 300
+          default-led-change-off-time:
+            type: NUMBER
+            value: 1000
+          bath-led-change-off-time:
+            type: NUMBER
+            value: 6000
           default-brightness:
             type: NUMBER
             value: 15
@@ -4713,6 +4789,9 @@ conditionVariables:
             type: NUMBER
             value: 0
           brightness-p1:
+            type: NUMBER
+            value: 5
+          brightness-p2:
             type: NUMBER
             value: 5
           cold-white-bedroom:
@@ -4723,10 +4802,19 @@ conditionVariables:
             value: 0
           brightness-bedroom-w:
             type: NUMBER
-            value: 8
+            value: 0
           brightness-bedroom-o:
             type: NUMBER
-            value: 5
+            value: 8
+          brightness-bath-standard:
+            type: NUMBER
+            value: 0
+          brightness-bath-bathtub:
+            type: NUMBER
+            value: 80
+          brightness-bath-other:
+            type: NUMBER
+            value: 50
 
       - condition:
           type: TIME_BETWEEN
@@ -4737,8 +4825,17 @@ conditionVariables:
             value: '00:00:00'
           toTime:
             type: TIME
-            value: '06:30:00'
+            value: '07:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 100
+          default-led-change-off-time:
+            type: NUMBER
+            value: 500
+          bath-led-change-off-time:
+            type: NUMBER
+            value: 3000
           default-brightness:
             type: NUMBER
             value: 5
@@ -4748,6 +4845,9 @@ conditionVariables:
           brightness-p1:
             type: NUMBER
             value: 2
+          brightness-p2:
+            type: NUMBER
+            value: 4
           cold-white-bedroom:
             type: NUMBER
             value: 0
@@ -4756,10 +4856,19 @@ conditionVariables:
             value: 0
           brightness-bedroom-w:
             type: NUMBER
-            value: 2
+            value: 0
           brightness-bedroom-o:
             type: NUMBER
-            value: 5
+            value: 4
+          brightness-bath-standard:
+            type: NUMBER
+            value: 0
+          brightness-bath-bathtub:
+            type: NUMBER
+            value: 40
+          brightness-bath-other:
+            type: NUMBER
+            value: 10
 
   cv-home-down:
     conditions:
@@ -4772,14 +4881,80 @@ conditionVariables:
             value: '07:00:00'
           toTime:
             type: TIME
-            value: '22:00:00'
+            value: '20:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1000
+          default-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          long-led-change-off-time:
+            type: NUMBER
+            value: 8000
+          default-led-change-stairs-time:
+            type: NUMBER
+            value: 2000
           brightness-lobby:
             type: NUMBER
-            value: 255
+            value: 100
           brightness-lobby-mirror:
             type: NUMBER
-            value: 180
+            value: 0
+          brightness-cooker:
+            type: NUMBER
+            value: 100
+          brightness-neo:
+            type: NUMBER
+            value: 70
+          brightness-blat:
+            type: NUMBER
+            value: 80
+          brightness-stairs:
+            type: NUMBER
+            value: 70
+          brightness-tv-neo:
+            type: NUMBER
+            value: 30
+          brightness-tv-wall:
+            type: NUMBER
+            value: 50
+          brightness-wc-2:
+            type: NUMBER
+            value: 255
+          brightness-dinner:
+            type: NUMBER
+            value: 25
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '20:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1000
+          default-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          long-led-change-off-time:
+            type: NUMBER
+            value: 8000
+          default-led-change-stairs-time:
+            type: NUMBER
+            value: 2000
+          brightness-lobby:
+            type: NUMBER
+            value: 110
+          brightness-lobby-mirror:
+            type: NUMBER
+            value: 80
           brightness-cooker:
             type: NUMBER
             value: 200
@@ -4788,7 +4963,7 @@ conditionVariables:
             value: 150
           brightness-blat:
             type: NUMBER
-            value: 200
+            value: 60
           brightness-stairs:
             type: NUMBER
             value: 70
@@ -4798,6 +4973,12 @@ conditionVariables:
           brightness-tv-wall:
             type: NUMBER
             value: 80
+          brightness-wc-2:
+            type: NUMBER
+            value: 255
+          brightness-dinner:
+            type: NUMBER
+            value: 50
 
       - condition:
           type: TIME_BETWEEN
@@ -4810,12 +4991,24 @@ conditionVariables:
             type: TIME
             value: '23:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 700
+          default-led-change-off-time:
+            type: NUMBER
+            value: 2000
+          long-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          default-led-change-stairs-time:
+            type: NUMBER
+            value: 1000
           brightness-lobby:
             type: NUMBER
-            value: 50
+            value: 70
           brightness-lobby-mirror:
             type: NUMBER
-            value: 100
+            value: 50
           brightness-cooker:
             type: NUMBER
             value: 100
@@ -4824,7 +5017,7 @@ conditionVariables:
             value: 40
           brightness-blat:
             type: NUMBER
-            value: 120
+            value: 50
           brightness-stairs:
             type: NUMBER
             value: 30
@@ -4834,6 +5027,12 @@ conditionVariables:
           brightness-tv-wall:
             type: NUMBER
             value: 40
+          brightness-wc-2:
+            type: NUMBER
+            value: 200
+          brightness-dinner:
+            type: NUMBER
+            value: 15
 
       - condition:
           type: TIME_BETWEEN
@@ -4846,12 +5045,24 @@ conditionVariables:
             type: TIME
             value: '00:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 500
+          default-led-change-off-time:
+            type: NUMBER
+            value: 1000
+          long-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          default-led-change-stairs-time:
+            type: NUMBER
+            value: 700
           brightness-lobby:
             type: NUMBER
             value: 15
           brightness-lobby-mirror:
             type: NUMBER
-            value: 50
+            value: 30
           brightness-cooker:
             type: NUMBER
             value: 60
@@ -4860,7 +5071,7 @@ conditionVariables:
             value: 5
           brightness-blat:
             type: NUMBER
-            value: 30
+            value: 15
           brightness-stairs:
             type: NUMBER
             value: 10
@@ -4870,6 +5081,12 @@ conditionVariables:
           brightness-tv-wall:
             type: NUMBER
             value: 20
+          brightness-wc-2:
+            type: NUMBER
+            value: 100
+          brightness-dinner:
+            type: NUMBER
+            value: 8
 
       - condition:
           type: TIME_BETWEEN
@@ -4882,12 +5099,24 @@ conditionVariables:
             type: TIME
             value: '07:00:00'
         variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 100
+          default-led-change-off-time:
+            type: NUMBER
+            value: 500
+          long-led-change-off-time:
+            type: NUMBER
+            value: 3000
+          default-led-change-stairs-time:
+            type: NUMBER
+            value: 500
           brightness-lobby:
             type: NUMBER
             value: 10
           brightness-lobby-mirror:
             type: NUMBER
-            value: 30
+            value: 20
           brightness-cooker:
             type: NUMBER
             value: 30
@@ -4899,10 +5128,359 @@ conditionVariables:
             value: 30
           brightness-stairs:
             type: NUMBER
-            value: 5
+            value: 10
           brightness-tv-neo:
             type: NUMBER
             value: 0
           brightness-tv-wall:
             type: NUMBER
             value: 10
+          brightness-wc-2:
+            type: NUMBER
+            value: 70
+          brightness-dinner:
+            type: NUMBER
+            value: 3
+
+  cv-home-out:
+    conditions:
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '14:00:00'
+          toTime:
+            type: TIME
+            value: '22:00:00'
+        variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1500
+          default-led-change-off-time:
+            type: NUMBER
+            value: 4000
+          default-cold-white:
+            type: NUMBER
+            value: 255
+          default-warm-white:
+            type: NUMBER
+            value: 255
+          brightness-stairs:
+            type: NUMBER
+            value: 70
+          brightness-roof:
+            type: NUMBER
+            value: 100
+          brightness-entry:
+            type: NUMBER
+            value: 200
+          brightness-a:
+            type: NUMBER
+            value: 100
+
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '22:00:00'
+          toTime:
+            type: TIME
+            value: '23:00:00'
+        variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1200
+          default-led-change-off-time:
+            type: NUMBER
+            value: 3000
+          default-cold-white:
+            type: NUMBER
+            value: 0
+          default-warm-white:
+            type: NUMBER
+            value: 255
+          brightness-stairs:
+            type: NUMBER
+            value: 50
+          brightness-roof:
+            type: NUMBER
+            value: 50
+          brightness-entry:
+            type: NUMBER
+            value: 100
+          brightness-a:
+            type: NUMBER
+            value: 50
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '23:00:00'
+          toTime:
+            type: TIME
+            value: '00:00:00'
+        variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 1000
+          default-led-change-off-time:
+            type: NUMBER
+            value: 2200
+          default-cold-white:
+            type: NUMBER
+            value: 0
+          default-warm-white:
+            type: NUMBER
+            value: 255
+          brightness-stairs:
+            type: NUMBER
+            value: 20
+          brightness-roof:
+            type: NUMBER
+            value: 10
+          brightness-entry:
+            type: NUMBER
+            value: 30
+          brightness-a:
+            type: NUMBER
+            value: 10
+
+      - condition:
+          type: TIME_BETWEEN
+          fetcher:
+            fetcherType: CURRENT_TIME
+          fromTime:
+            type: TIME
+            value: '00:00:00'
+          toTime:
+            type: TIME
+            value: '14:00:00'
+        variables:
+          default-led-change-on-time:
+            type: NUMBER
+            value: 600
+          default-led-change-off-time:
+            type: NUMBER
+            value: 600
+          default-cold-white:
+            type: NUMBER
+            value: 255
+          default-warm-white:
+            type: NUMBER
+            value: 255
+          brightness-stairs:
+            type: NUMBER
+            value: 5
+          brightness-roof:
+            type: NUMBER
+            value: 3
+          brightness-entry:
+            type: NUMBER
+            value: 15
+          brightness-a:
+            type: NUMBER
+            value: 3
+
+  outdoor-time:
+    conditions:
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 1
+        variables:
+          start:
+            type: TIME
+            value: '16:00:00'
+          end:
+            type: TIME
+            value: '07:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 2
+        variables:
+          start:
+            type: TIME
+            value: '16:30:00'
+          end:
+            type: TIME
+            value: '07:00:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 3
+        variables:
+          start:
+            type: TIME
+            value: '17:45:00'
+          end:
+            type: TIME
+            value: '05:45:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 4
+        variables:
+          start:
+            type: TIME
+            value: '19:00:00'
+          end:
+            type: TIME
+            value: '05:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 5
+        variables:
+          start:
+            type: TIME
+            value: '20:00:00'
+          end:
+            type: TIME
+            value: '04:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 6
+        variables:
+          start:
+            type: TIME
+            value: '21:00:00'
+          end:
+            type: TIME
+            value: '04:10:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 7
+        variables:
+          start:
+            type: TIME
+            value: '20:00:00'
+          end:
+            type: TIME
+            value: '04:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 8
+        variables:
+          start:
+            type: TIME
+            value: '19:45:00'
+          end:
+            type: TIME
+            value: '05:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 9
+        variables:
+          start:
+            type: TIME
+            value: '18:45:00'
+          end:
+            type: TIME
+            value: '06:00:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 10
+        variables:
+          start:
+            type: TIME
+            value: '17:40:00'
+          end:
+            type: TIME
+            value: '06:30:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 11
+        variables:
+          start:
+            type: TIME
+            value: '16:00:00'
+          end:
+            type: TIME
+            value: '07:00:00'
+
+      - condition:
+            type: COMPARE
+            compareType: EQUAL
+            fetcher:
+              fetcherType: CURRENT_MONTH
+            testValue:
+              type: NUMBER
+              value: 12
+        variables:
+          start:
+            type: TIME
+            value: '15:30:00'
+          end:
+            type: TIME
+            value: '07:00:00'
+
+

@@ -27,7 +27,7 @@ macros:
                 - manual
                 - night
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: rgbw-lobby
@@ -73,7 +73,7 @@ macros:
                 - manual
                 - night
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: l-mirror
@@ -84,7 +84,7 @@ macros:
                     b: 0
                     w: 255
                 - ioId: plants
-                  brightness: ${cv-home-down.brightness-lobby}
+                  brightness: ${cv-home-down.brightness-lobby-mirror}
                   color:
                     r: 0
                     g: 0
@@ -126,11 +126,11 @@ macros:
                 - night
               runnerType: STATE_ACTION
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: rgbw-wc2
-                  brightness: 255
+                  brightness: ${cv-home-down.brightness-wc-2}
                   color:
                     r: 0
                     g: 0
@@ -143,7 +143,7 @@ macros:
               runnerType: TIMER
               timerId: wc-down-light-off-timer
               action: UPDATE_TIME
-              time: 30000
+              time: 60000
   office-pir-macro:
     zoneId: office
     name: Biuro oświetlenie makro
@@ -170,7 +170,7 @@ macros:
                 - auto
               runnerType: STATE_ACTION
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: rgbw-office
@@ -214,7 +214,7 @@ macros:
                 - auto
               runnerType: STATE_ACTION
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: n-tv
@@ -285,11 +285,11 @@ macros:
                 - night
               runnerType: STATE_ACTION
               ledChangeData:
-                time: 1000
+                time: ${cv-home-down.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: dinner-m
-                  brightness: 150
+                  brightness: ${cv-home-down.brightness-dinner}
         falseBlock:
           blockType: BLOCK
           blocs:
@@ -341,7 +341,7 @@ macros:
           - night
           - warm
         ledChangeData:
-          time: 1000
+          time: ${cv-home-down.default-led-change-on-time}
           stepTime: 30
         actions:
           - ioId: n-kit
@@ -361,7 +361,7 @@ macros:
           - night
           - warm
         ledChangeData:
-          time: 4000
+          time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
         actions:
           - ioId: n-kit
@@ -408,7 +408,7 @@ macros:
               - blockType: RUNNER
                 runnerType: STATE_ACTION
                 ledChangeData:
-                  time: 1000
+                  time: ${cv-home-up.default-led-change-on-time}
                   stepTime: 30
                 actions:
                   - ioId: cct-f2-lobby
@@ -466,11 +466,11 @@ macros:
               - blockType: RUNNER
                 runnerType: STATE_ACTION
                 ledChangeData:
-                  time: 1000
+                  time: ${cv-home-up.default-led-change-on-time}
                   stepTime: 30
                 actions:
                   - ioId: bath-rgbw-shower
-                    brightness: 150
+                    brightness: ${cv-home-up.brightness-bath-other}
                     color:
                       r: 255
                       g: 0
@@ -478,7 +478,7 @@ macros:
                       w: 0
                       ww: 0
                   - ioId: bath-rgbw-lamel
-                    brightness: 100
+                    brightness: ${cv-home-up.brightness-bath-other}
                     color:
                       r: 150
                       g: 0
@@ -486,17 +486,17 @@ macros:
                       w: 255
                       ww: 0
                   - ioId: bath-mirror
-                    brightness: 255
+                    brightness: ${cv-home-up.brightness-bath-standard}
                     color:
                       w: 255
                       ww: 0
                   - ioId: bath-shower
-                    brightness: 255
+                    brightness: ${cv-home-up.brightness-bath-standard}
                     color:
                       w: 255
                       ww: 0
                   - ioId: bath-bathtub
-                    brightness: 200
+                    brightness: ${cv-home-up.brightness-bath-bathtub}
                     color:
                       w: 0
                       ww: 255
@@ -546,7 +546,7 @@ macros:
               - blockType: RUNNER
                 runnerType: STATE_ACTION
                 ledChangeData:
-                  time: 2000
+                  time: ${cv-home-down.default-led-change-stairs-time}
                   stepTime: 30
                 actions:
                   - ioId: led-stairs-1
@@ -639,7 +639,7 @@ macros:
                       b: 0
                       w: ${cv-home-up.default-cold-white}
                       ww: 255
-                    time: 1000
+                    time: ${cv-home-up.default-led-change-on-time}
                     stepTime: 30
                   - ioId: cct-wardrobe-m2
                     brightness: ${cv-home-up.default-brightness}
@@ -649,7 +649,7 @@ macros:
                       b: 0
                       w: 0
                       ww: 255
-                    time: 1000
+                    time: ${cv-home-up.default-led-change-on-time}
                     stepTime: 30
           falseBlock:
             blockType: BLOCK
@@ -709,7 +709,7 @@ macros:
                       b: 0
                       w: ${cv-home-up.default-cold-white}
                       ww: 255
-                    time: 1000
+                    time: ${cv-home-up.default-led-change-on-time}
                     stepTime: 30
           falseBlock:
             blockType: BLOCK
@@ -745,7 +745,7 @@ macros:
               sceneIds:
                 - auto
               ledChangeData:
-                time: 1000
+                time: ${cv-home-up.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: cct-p1
@@ -790,11 +790,11 @@ macros:
               sceneIds:
                 - auto
               ledChangeData:
-                time: 1000
+                time: ${cv-home-up.default-led-change-on-time}
                 stepTime: 30
               actions:
                 - ioId: cct-p2
-                  brightness: ${cv-home-up.default-brightness}
+                  brightness: ${cv-home-up.brightness-p2}
                   color:
                     r: 0
                     g: 0
@@ -837,7 +837,7 @@ macros:
                   sceneIds:
                     - auto
                   ledChangeData:
-                    time: 1000
+                    time: ${cv-home-up.default-led-change-on-time}
                     stepTime: 30
                   actions:
                     - ioId: cct-bedroom-o
@@ -872,6 +872,326 @@ macros:
                   timerId: bedroom-light-off-timer
                   action: UPDATE_TIME
                   time: 10000
+
+
+  outdoor-light-on-door-macro:
+    zoneId: outdoor
+    name: Dwór on animacja od drzwi
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: LOGIC
+          logicalType: AND
+          conditions:
+            - type: COMPARE
+              compareType: EQUAL
+              fetcher:
+                fetcherType: CURRENT_STATE_VARIABLE
+              testValue:
+                type: STRING
+                value: auto
+            - type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '${outdoor-time.start}'
+              toTime:
+                type: TIME
+                value: '${outdoor-time.end}'
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: MACRO_VARIABLE
+                  key: pir-value
+                testValue:
+                  type: BOOLEAN
+                  value: true
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: TIMER
+                    timerId: outdoor-entry-light-off-timer
+                    action: CLEAR
+                  - blockType: RUNNER
+                    runnerType: STATE_ACTION
+                    sceneIds:
+                      - auto
+                    ledChangeData:
+                      time: ${cv-home-out.default-led-change-on-time}
+                      stepTime: 30
+                    actions:
+                      - ioId: outdoor-door
+                        brightness: ${cv-home-out.brightness-entry}
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-a-roof-1
+                        brightness: ${cv-home-out.brightness-a}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-a-roof-2
+                        brightness: ${cv-home-out.brightness-a}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: ctt-out-roof-1
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: ctt-out-roof-2
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-5
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 150
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-4
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 300
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-3
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 450
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-2
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 600
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-1
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 750
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+
+              falseBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: TIMER
+                    timerId: outdoor-entry-light-off-timer
+                    action: UPDATE_TIME
+                    time: 10000
+
+  outdoor-light-on-fence-macro:
+    zoneId: outdoor
+    name: Dwór on animacja od płotu
+    blocks:
+      - blockType: CONDITION
+        condition:
+          type: LOGIC
+          logicalType: AND
+          conditions:
+            - type: COMPARE
+              compareType: EQUAL
+              fetcher:
+                fetcherType: CURRENT_STATE_VARIABLE
+              testValue:
+                type: STRING
+                value: auto
+            - type: TIME_BETWEEN
+              fetcher:
+                fetcherType: CURRENT_TIME
+              fromTime:
+                type: TIME
+                value: '21:30:00'
+              toTime:
+                type: TIME
+                value: '06:30:00'
+        trueBlock:
+          blockType: BLOCK
+          blocs:
+            - blockType: CONDITION
+              condition:
+                type: COMPARE
+                compareType: EQUAL
+                fetcher:
+                  fetcherType: MACRO_VARIABLE
+                  key: pir-value
+                testValue:
+                  type: BOOLEAN
+                  value: true
+              trueBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: TIMER
+                    timerId: outdoor-entry-light-off-timer
+                    action: CLEAR
+                  - blockType: RUNNER
+                    runnerType: STATE_ACTION
+                    sceneIds:
+                      - auto
+                    ledChangeData:
+                      time: ${cv-home-out.default-led-change-on-time}
+                      stepTime: 30
+                    actions:
+                      - ioId: cct-a-roof-1
+                        brightness: ${cv-home-out.brightness-a}
+                        delay: 750
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-a-roof-2
+                        brightness: ${cv-home-out.brightness-a}
+                        delay: 750
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: outdoor-door
+                        delay: 750
+                        brightness: ${cv-home-out.brightness-entry}
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: ctt-out-roof-1
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 750
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: ctt-out-roof-2
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 750
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-5
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 600
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-4
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 450
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-3
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 300
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-2
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 150
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-stairs-1
+                        brightness: ${cv-home-out.brightness-stairs}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+
+              falseBlock:
+                blockType: BLOCK
+                blocs:
+                  - blockType: RUNNER
+                    runnerType: TIMER
+                    timerId: outdoor-entry-light-off-timer
+                    action: UPDATE_TIME
+                    time: 10000
+
+  outdoor-light-off-door-macro:
+    zoneId: outdoor
+    name: Dwór off animacja od drzwi
+    blocks:
+      - blockType: RUNNER
+        runnerType: STATE_ACTION
+        sceneIds:
+          - auto
+        ledChangeData:
+          time: ${cv-home-out.default-led-change-off-time}
+          stepTime: 30
+        actions:
+          - ioId: outdoor-door
+            brightness: 0
+            delay: 750
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-a-roof-1
+            brightness: 0
+            delay: 750
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-a-roof-2
+            brightness: 0
+            delay: 750
+            color:
+              w: 255
+              ww: 255
+          - ioId: ctt-out-roof-1
+            brightness: 0
+            delay: 750
+            color:
+              w: 255
+              ww: 255
+          - ioId: ctt-out-roof-2
+            brightness: 0
+            delay: 750
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-stairs-5
+            brightness: 0
+            delay: 600
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-stairs-4
+            brightness: 0
+            delay: 450
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-stairs-3
+            brightness: 0
+            delay: 300
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-stairs-2
+            brightness: 0
+            delay: 150
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-stairs-1
+            brightness: 0
+            delay: 0
+            color:
+              w: 255
+              ww: 255
+
 
   door-entry-gate-macro:
     zoneId: ''

@@ -1,10 +1,9 @@
 package pl.webd.dawid124.ioengine.utils;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
 import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.IBlock;
 import pl.webd.dawid124.ioengine.module.automation.macro.block.condition.ICondition;
@@ -17,12 +16,13 @@ public class AppGsonBuilder {
 
     private AppGsonBuilder(AutomationContext automationContext) {
         this.gson =  new com.google.gson.GsonBuilder()
-                .registerTypeAdapter(IVariable.class, new IVariableJsonAdapter())
+                .registerTypeAdapter(IVariable.class, new ExpressionIVariableJsonAdapter(automationContext))
                 .registerTypeAdapter(IBlock.class, new IBlockJsonAdapter())
                 .registerTypeAdapter(IUiAction.class, new ExpressionUIActionJsonAdapter(automationContext))
+                .registerTypeAdapter(ILedChangeData.class, new ExpressionLedChangeDataJsonAdapter(automationContext))
                 .registerTypeAdapter(IColor.class, new ExpressionColorJsonAdapter(automationContext))
                 .registerTypeAdapter(IVariableFetcher.class, new IVariableFetcherJsonAdapter())
-                .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter())
+                .registerTypeAdapter(ICondition.class, new IConditionJsonAdapter(automationContext))
                 .create();
     }
 

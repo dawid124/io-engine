@@ -1,0 +1,28 @@
+package pl.webd.dawid124.ioengine.module.automation.macro.json;
+
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import pl.webd.dawid124.ioengine.module.action.model.rest.Color;
+import pl.webd.dawid124.ioengine.module.action.model.rest.IColor;
+import pl.webd.dawid124.ioengine.module.action.model.server.ILedChangeData;
+import pl.webd.dawid124.ioengine.module.action.model.server.LedChangeData;
+import pl.webd.dawid124.ioengine.module.automation.AutomationContext;
+import pl.webd.dawid124.ioengine.module.expresion.ExpressionProxyBuilder;
+
+import java.lang.reflect.Type;
+
+public class ExpressionLedChangeDataJsonAdapter implements JsonDeserializer<ILedChangeData> {
+    private final AutomationContext context;
+
+    public ExpressionLedChangeDataJsonAdapter(AutomationContext automationContext) {
+        this.context = automationContext;
+    }
+
+    @Override
+    public ILedChangeData deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+       return ExpressionProxyBuilder.instance(LedChangeData.class, context).deserialize(jsonElement, jsonDeserializationContext);
+    }
+}

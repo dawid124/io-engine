@@ -98,6 +98,18 @@ triggers:
       - blockType: RUNNER
         runnerType: MACRO_RUNNER
         macroId: p2-pir-macro
+  pir-satel-entry:
+    zoneId: outdoor
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: outdoor-light-on-door-macro
+  pir-fence:
+    zoneId: outdoor
+    blocs:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: outdoor-light-on-fence-macro
 
   office-btn:
     zoneId: office

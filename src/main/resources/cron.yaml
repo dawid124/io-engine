@@ -98,7 +98,7 @@ crons:
   bedroom-dim-up-blinds:
     id: bedroom-up-down-blinds
     zoneId: bedroom
-    cron: 0 30 6 * * ?
+    cron: 0 30 7 * * ?
     blocks:
       - blockType: RUNNER
         runnerType: BLIND_ACTION
@@ -138,7 +138,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 7200
+                second: 1800
                 sensorId: pir-satel-dinner
               testValue:
                 type: BOOLEAN
@@ -147,7 +147,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 7200
+                second: 1800
                 sensorId: pir-kitchen
               testValue:
                 type: BOOLEAN
@@ -156,7 +156,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 7200
+                second: 1800
                 sensorId: pir-tv
               testValue:
                 type: BOOLEAN
@@ -189,7 +189,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 2700
+                second: 1800
                 sensorId: pir-office
               testValue:
                 type: BOOLEAN

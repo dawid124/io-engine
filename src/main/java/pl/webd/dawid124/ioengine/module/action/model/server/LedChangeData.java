@@ -1,6 +1,6 @@
 package pl.webd.dawid124.ioengine.module.action.model.server;
 
-public class LedChangeData {
+public class LedChangeData implements ILedChangeData {
 
     public static final int DEFAULT_STEP_TIME = 30;
     public static final int DEFAULT_TIME = 1000;

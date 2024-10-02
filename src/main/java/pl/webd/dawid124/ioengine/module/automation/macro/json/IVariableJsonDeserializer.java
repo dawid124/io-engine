@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import pl.webd.dawid124.ioengine.module.device.model.adapter.DeviceStateJsonAdapter;
-import pl.webd.dawid124.ioengine.module.state.model.device.DeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.variable.IVariable;
 
 import java.io.IOException;

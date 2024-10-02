@@ -34,7 +34,7 @@ public class ExpressionProxyBuilder<T> {
         return new ExpressionProxy<T>(type, obj, expressions).build(automationContext);
     }
 
-    private Map<String, String> getExpressionsAndRemoveItFromPrimitiveTypes(JsonObject json) {
+    public static Map<String, String> getExpressionsAndRemoveItFromPrimitiveTypes(JsonObject json) {
 
         Map<String, String> expressions = new HashMap<>();
 

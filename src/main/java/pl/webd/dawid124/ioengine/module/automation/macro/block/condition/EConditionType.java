@@ -6,13 +6,13 @@ public enum EConditionType {
     COMPARE(CompareCondition.class),
     TIME_BETWEEN(TimeBetweenCondition.class);
 
-    Class clazz;
+    final Class<? extends ICondition> clazz;
 
-    EConditionType(Class clazz) {
+    EConditionType(Class<? extends ICondition> clazz) {
         this.clazz = clazz;
     }
 
-    public Class getClazz() {
+    public Class<? extends ICondition> getClazz() {
         return clazz;
     }
 }

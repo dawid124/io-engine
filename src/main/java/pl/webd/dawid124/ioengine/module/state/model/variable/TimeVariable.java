@@ -8,6 +8,8 @@ public class TimeVariable implements IVariable {
 
     private LocalTime value;
 
+    public TimeVariable() {}
+
     public TimeVariable(LocalTime value) {
         this.value = value;
     }
