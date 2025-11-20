@@ -339,7 +339,7 @@ macros:
           - auto
           - tv
           - night
-          - warm
+          - chill
         ledChangeData:
           time: ${cv-home-down.default-led-change-on-time}
           stepTime: 30
@@ -359,7 +359,7 @@ macros:
           - auto
           - tv
           - night
-          - warm
+          - chill
         ledChangeData:
           time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
@@ -456,9 +456,9 @@ macros:
           trueBlock:
             blockType: BLOCK
             blocs:
-#              - blockType: RUNNER
-#                runnerType: MACRO_RUNNER
-#                macroId: hotWaterPump-5m-macro
+              - blockType: RUNNER
+                runnerType: MACRO_RUNNER
+                macroId: hotWaterPump-5m-macro
               - blockType: RUNNER
                 runnerType: TIMER
                 timerId: pir-bath-up-macro-off-timer
@@ -478,7 +478,7 @@ macros:
                       w: 0
                       ww: 0
                   - ioId: bath-rgbw-lamel
-                    brightness: ${cv-home-up.brightness-bath-other}
+                    brightness: ${cv-home-up.brightness-bath-lamel}
                     color:
                       r: 150
                       g: 0
@@ -596,7 +596,7 @@ macros:
                 runnerType: TIMER
                 timerId: lobby-stairs-down-up-off-timer
                 action: UPDATE_TIME
-                time: 4000
+                time: 15000
   wardrobe-m-pir-macro:
     zoneId: war-m
     name: Szafa Magda makro
@@ -986,6 +986,18 @@ macros:
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-gateway
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 600
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-fence
+                        brightness: ${cv-home-out.brightness-fence}
+                        delay: 600
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
 
               falseBlock:
                 blockType: BLOCK
@@ -1017,10 +1029,10 @@ macros:
                 fetcherType: CURRENT_TIME
               fromTime:
                 type: TIME
-                value: '21:30:00'
+                value: '${outdoor-time.start}'
               toTime:
                 type: TIME
-                value: '06:30:00'
+                value: '${outdoor-time.end}'
         trueBlock:
           blockType: BLOCK
           blocs:
@@ -1051,31 +1063,31 @@ macros:
                     actions:
                       - ioId: cct-a-roof-1
                         brightness: ${cv-home-out.brightness-a}
-                        delay: 750
+                        delay: 450
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
                       - ioId: cct-a-roof-2
                         brightness: ${cv-home-out.brightness-a}
-                        delay: 750
+                        delay: 450
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
                       - ioId: outdoor-door
-                        delay: 750
+                        delay: 450
                         brightness: ${cv-home-out.brightness-entry}
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
                       - ioId: ctt-out-roof-1
                         brightness: ${cv-home-out.brightness-roof}
-                        delay: 750
+                        delay: 450
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
                       - ioId: ctt-out-roof-2
                         brightness: ${cv-home-out.brightness-roof}
-                        delay: 750
+                        delay: 450
                         color:
                           w: ${cv-home-out.default-cold-white}
                           ww: ${cv-home-out.default-warm-white}
@@ -1105,6 +1117,18 @@ macros:
                           ww: ${cv-home-out.default-warm-white}
                       - ioId: cct-outdoor-stairs-1
                         brightness: ${cv-home-out.brightness-stairs}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-gateway
+                        brightness: ${cv-home-out.brightness-roof}
+                        delay: 0
+                        color:
+                          w: ${cv-home-out.default-cold-white}
+                          ww: ${cv-home-out.default-warm-white}
+                      - ioId: cct-outdoor-fence
+                        brightness: ${cv-home-out.brightness-fence}
                         delay: 0
                         color:
                           w: ${cv-home-out.default-cold-white}
@@ -1191,7 +1215,379 @@ macros:
             color:
               w: 255
               ww: 255
+          - ioId: cct-outdoor-gateway
+            brightness: 0
+            delay: 0
+            color:
+              w: 255
+              ww: 255
+          - ioId: cct-outdoor-fence
+            brightness: 0
+            delay: 0
+            color:
+              w: 255
+              ww: 255
 
+  outdoor-gateway-open-close-macro-light-on:
+    zoneId: outdoor
+    name: otwarcie zamknięcie bramy led on
+    blocks:
+      - blockType: RUNNER
+        runnerType: STATE_ACTION
+        sceneIds:
+          - auto
+        ledChangeData:
+          time: 2000
+          stepTime: 30
+        actions:
+          - ioId: cct-outdoor-gateway
+            brightness: 255
+            delay: 0
+            color:
+              w: 0
+              ww: 255
+          - ioId: cct-outdoor-fence
+            brightness: 255
+            delay: 0
+            color:
+              w: 0
+              ww: 255
+
+  outdoor-gateway-open-close-macro-light-off:
+    zoneId: outdoor
+    name: otwarcie zamknięcie bramy led off
+    blocks:
+      - blockType: RUNNER
+        runnerType: STATE_ACTION
+        sceneIds:
+          - auto
+        ledChangeData:
+          time: 500
+          stepTime: 30
+        actions:
+          - ioId: cct-outdoor-gateway
+            brightness: 30
+            delay: 0
+            color:
+              w: 0
+              ww: 255
+          - ioId: cct-outdoor-fence
+            brightness: 30
+            delay: 0
+            color:
+              w: 0
+              ww: 255
+
+  outdoor-gateway-open-close-macro:
+    zoneId: outdoor
+    name: otwarcie zamknięcie bramy
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-1
+        action: RUN
+        time: 1500
+        blocs:
+        - blockType: RUNNER
+          runnerType: MACRO_RUNNER
+          macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-2
+        action: RUN
+        time: 2000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-3
+        action: RUN
+        time: 3500
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-4
+        action: RUN
+        time: 4000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-5
+        action: RUN
+        time: 5500
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-6
+        action: RUN
+        time: 6000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-7
+        action: RUN
+        time: 7500
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-8
+        action: RUN
+        time: 8000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-9
+        action: RUN
+        time: 9500
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-10
+        action: RUN
+        time: 10000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-11
+        action: RUN
+        time: 11500
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-off
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-12
+        action: RUN
+        time: 12000
+        blocs:
+          - blockType: RUNNER
+            runnerType: MACRO_RUNNER
+            macroId: outdoor-gateway-open-close-macro-light-on
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: outdoor-gateway-open-close-macro-timer-13
+        action: RUN
+        time: 13500
+        blocs:
+          - blockType: RUNNER
+            runnerType: STATE_ACTION
+            sceneIds:
+              - auto
+            ledChangeData:
+              time: 500
+              stepTime: 30
+            actions:
+              - ioId: cct-outdoor-gateway
+                brightness: 0
+                delay: 0
+                color:
+                  w: 0
+                  ww: 255
+              - ioId: cct-outdoor-fence
+                brightness: 0
+                delay: 0
+                color:
+                  w: 0
+                  ww: 255
+
+
+#  outdoor-gateway-open-close-macro:
+#    zoneId: outdoor
+#    name: otwarcie zamknięcie bramy
+#    blocks:
+#      - blockType: RUNNER
+#        runnerType: MACRO_RUNNER
+#        macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-1
+#        action: RUN
+#        time: 2000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-2
+#        action: RUN
+#        time: 3000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-3
+#        action: RUN
+#        time: 5000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-4
+#        action: RUN
+#        time: 6000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-5
+#        action: RUN
+#        time: 8000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-6
+#        action: RUN
+#        time: 9000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-7
+#        action: RUN
+#        time: 11000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-8
+#        action: RUN
+#        time: 12000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-9
+#        action: RUN
+#        time: 13000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-10
+#        action: RUN
+#        time: 14000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-11
+#        action: RUN
+#        time: 16000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-off
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-12
+#        action: RUN
+#        time: 17000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: MACRO_RUNNER
+#            macroId: outdoor-gateway-open-close-macro-light-on
+#
+#      - blockType: RUNNER
+#        runnerType: TIMER
+#        timerId: outdoor-gateway-open-close-macro-timer-13
+#        action: RUN
+#        time: 19000
+#        blocs:
+#          - blockType: RUNNER
+#            runnerType: STATE_ACTION
+#            sceneIds:
+#              - auto
+#            ledChangeData:
+#              time: 500
+#              stepTime: 30
+#            actions:
+#              - ioId: cct-outdoor-gateway
+#                brightness: 0
+#                delay: 0
+#                color:
+#                  w: 0
+#                  ww: 255
+#              - ioId: cct-outdoor-fence
+#                brightness: 0
+#                delay: 0
+#                color:
+#                  w: 0
+#                  ww: 255
 
   door-entry-gate-macro:
     zoneId: ''
@@ -1203,6 +1599,10 @@ macros:
           - ioId: entryGate1
             action: TEMP_ON
             time: 500
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: outdoor-gateway-open-close-macro
+
   door-gateway-macro:
     zoneId: ''
     name: Garaż
@@ -2070,6 +2470,18 @@ macros:
         actions:
           - ioId: rainBirdPump
             action: 'ON'
+
+  rain-bird-temp-pump-on:
+    zoneId: ''
+    name: rain-bird-temp-pump-on
+    blocks:
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: TEMP_ON
+            time: 360000
+
   rain-bird-pump-off:
     zoneId: ''
     name: rain-bird-pump-off
@@ -2410,6 +2822,62 @@ macros:
               type: STRING
               value: 'OFF'
 
+  rain-bird-t30:
+    zoneId: ''
+    name: Zraszacze mode tuya 1 - 30m
+    blocks:
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdZone1
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: ACTION
+        actions:
+          - ioId: rainBirdPump
+            action: 'ON'
+
+      - blockType: RUNNER
+        runnerType: GLOBAL_VARIABLE_CHANGE
+        key: rain-bird-mode
+        value:
+          type: STRING
+          value: 'mode-t30'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m30-zone-1-off
+        action: RUN
+        time: 1800000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdZone1
+                action: 'OFF'
+
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m30-pump-off
+        action: RUN
+        time: 1800000
+        blocs:
+          - blockType: RUNNER
+            runnerType: ACTION
+            actions:
+              - ioId: rainBirdPump
+                action: 'OFF'
+          - blockType: RUNNER
+            runnerType: GLOBAL_VARIABLE_CHANGE
+            key: rain-bird-mode
+            value:
+              type: STRING
+              value: 'OFF'
+
+
+
   rain-bird-clear:
     zoneId: ''
     name: Pompa zraszacze stop
@@ -2474,6 +2942,14 @@ macros:
       - blockType: RUNNER
         runnerType: TIMER
         timerId: rain-bird-m-1-pump-off
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m30-pump-off
+        action: CLEAR
+      - blockType: RUNNER
+        runnerType: TIMER
+        timerId: rain-bird-m30-zone-1-off
         action: CLEAR
       - blockType: RUNNER
         runnerType: GLOBAL_VARIABLE_CHANGE
@@ -2730,3 +3206,156 @@ macros:
         runnerType: SCENE_CHANGE
         newSceneId: auto
         zoneId: war-m
+
+
+  tv-wake-up:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell input keyevent KEYCODE_WAKEUP
+
+  tv-sleep:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell input keyevent KEYCODE_POWER
+
+  tv-spotify-random:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell input keyevent KEYCODE_ENTER; adb shell input keyevent KEYCODE_DPAD_LEFT; adb shell input keyevent KEYCODE_DPAD_LEFT; adb shell input keyevent KEYCODE_ENTER; adb shell input keyevent KEYCODE_DPAD_RIGHT; adb shell input keyevent KEYCODE_DPAD_RIGHT; adb shell input keyevent KEYCODE_DPAD_RIGHT; adb shell input keyevent KEYCODE_ENTER
+
+  tv-kodi:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -n org.xbmc.kodi/.MainActivity
+
+  tv-netflix:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -n com.netflix.ninja/.MainActivity
+
+
+  tv-spotify-play-lajtowe:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:5GBbCwHPepBnAyVTaWakSz:play"
+
+  tv-spotify-play-polskie:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:0BRk3ntoXCEJcpwM9QeXJk:play"
+
+  tv-spotify-play-rap:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:18kJUR1iQubOv8HMr3M8Tp:play"
+
+
+  tv-spotify-play-techno:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:0aZyEstDJxP3q0QIFiVo86:play"
+
+  tv-spotify-play-trance:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:2aY9dQatxdglCRGbjv4d91:play"
+
+
+  tv-spotify-play-classic-trance:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:0NgE1pcshm5dkoxrBUDn1a:play"
+
+  tv-spotify-play-party:
+    zoneId: ''
+    name: tv-wake-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: MACRO_RUNNER
+        macroId: tv-wake-up
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect  192.168.88.99:5555; adb shell am start -a android.intent.action.VIEW -d "spotify:playlist:418rPxMJ2bPMCKp9lSThAt:play"
+
+  tv-volume-up:
+    zoneId: ''
+    name: tv-volume-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect 192.168.88.99:5555; adb shell input keyevent 24; adb shell input keyevent 24; adb shell input keyevent 24; adb shell input keyevent 24; adb shell input keyevent 24
+
+  tv-volume-down:
+    zoneId: ''
+    name: tv-volume-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect 192.168.88.99:5555; adb shell input keyevent 25; adb shell input keyevent 25; adb shell input keyevent 25; adb shell input keyevent 25; adb shell input keyevent 25
+
+  tv-volume-mute:
+    zoneId: ''
+    name: tv-volume-up
+    blocks:
+      - blockType: RUNNER
+        runnerType: CMD
+        cmd: adb connect 192.168.88.99:5555; adb shell input keyevent 164
+
+

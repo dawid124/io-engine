@@ -1,23 +1,30 @@
 package pl.webd.dawid124.ioengine.module.action.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.EChangeLightMode;
 import pl.webd.dawid124.ioengine.module.action.model.rest.IUiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiActionRequest;
 import pl.webd.dawid124.ioengine.module.device.model.driver.instance.EIoDriverType;
+import pl.webd.dawid124.ioengine.module.state.model.device.GroupState;
+import pl.webd.dawid124.ioengine.module.state.model.device.LedDeviceState;
+import pl.webd.dawid124.ioengine.module.state.model.device.MqttTemperatureSensorState;
 import pl.webd.dawid124.ioengine.module.state.model.device.NeoDeviceState;
 import pl.webd.dawid124.ioengine.module.state.model.scene.SceneState;
 import pl.webd.dawid124.ioengine.module.state.model.zone.ZoneState;
 import pl.webd.dawid124.ioengine.module.state.service.StateService;
+import pl.webd.dawid124.ioengine.module.structure.service.StructureService;
 import pl.webd.dawid124.ioengine.mqtt.MqttService;
 import pl.webd.dawid124.ioengine.mqtt.action.IoAction;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ActionService {
@@ -28,13 +35,15 @@ public class ActionService {
     private final BlindService blindService;
     private final MqttService mqttService;
     private final ActionDataService actionDataService;
+    private final StructureService structureService;
 
     public ActionService(StateService stateService, BlindService blindService, MqttService mqttService,
-                         ActionDataService actionDataService) {
+                         ActionDataService actionDataService, StructureService structureService) {
         this.mqttService = mqttService;
         this.stateService = stateService;
         this.blindService = blindService;
         this.actionDataService = actionDataService;
+        this.structureService = structureService;
     }
 
     public void processSimpleActions(List<IUiAction> actions) {
@@ -49,6 +58,47 @@ public class ActionService {
         stateService.updateScene(zoneId, sceneId);
 
         SceneState sceneState = stateService.fetchScene(zoneId, sceneId);
+
+
+        List<IoAction> actions= actionDataService.fromSceneState(sceneState);
+
+        sendMqttActions(actions);
+
+        return sceneState;
+    }
+
+    public Optional<GroupState> findByIoId(Collection<GroupState> group, String ioId) {
+        for (GroupState item : group) {
+            if (item.getState().getIoId().equals(ioId)) {
+                return Optional.of(item);
+            } else if (item.getChildren() != null && !item.getChildren().isEmpty()) {
+                Optional<GroupState> find = findByIoId(item.getChildren(), ioId);
+                if (find.isPresent()) {
+                    return find;
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    public SceneState changeIdLightOnOff(String zoneId, String mode, String ioId) {
+        int val = mode.equals("off") ? 0 : 40;
+        ZoneState zone = stateService.getZoneState().get(zoneId);
+        SceneState scece = zone.getSceneStates().get(zone.getActiveScene());
+        Optional<GroupState> first = findByIoId(scece.getGroupState().values(), ioId);
+
+        first.ifPresent(gs -> {
+            UiAction action = new UiAction();
+            if (gs.getState() instanceof NeoDeviceState) {
+                NeoDeviceState state = (NeoDeviceState) gs.getState();
+                action.setAnimationId(state.getAnimationId());
+                action.setSpeed(state.getSpeed());
+            }
+                action.setBrightness(val);
+
+            stateService.updateSateByUiAction(zoneId, gs, action);
+        });
+        SceneState sceneState = stateService.fetchScene(zoneId, zone.getActiveScene());
 
 
         List<IoAction> actions= actionDataService.fromSceneState(sceneState);
@@ -74,10 +124,10 @@ public class ActionService {
                     action.setBrightness(val);
                     break;
                 case INCREASE:
-                    action.setBrightness(action.getBrightness() + val);
+                    action.setBrightness(Math.min(((LedDeviceState) gs.getState()).getBrightness() + val, 255));
                     break;
                 case DECREASE:
-                    action.setBrightness(action.getBrightness() - val);
+                    action.setBrightness(Math.max(((LedDeviceState) gs.getState()).getBrightness() - val, 0));
                     break;
             }
 
@@ -141,5 +191,19 @@ public class ActionService {
         List<IoAction> mqttActions = blindService.processBlinds(actions);
 
         mqttService.sendActionsToDevices(mqttActions);
+    }
+
+    public String getTemperature(String zoneId) {
+        String ioId = structureService.fetchStructure()
+            .getZones()
+            .get(zoneId)
+            .getTemperature()
+            .getSensors()
+            .get(0);
+
+        MqttTemperatureSensorState deviceState = (MqttTemperatureSensorState) stateService.getSensors()
+            .get(ioId);
+
+        return "Aktualna temperatura pomieszczenia to: " + Math.round(deviceState.getTemperature() * 2) / 2.0 + " ℃";
     }
 }

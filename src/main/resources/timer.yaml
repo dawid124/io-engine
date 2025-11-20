@@ -8,6 +8,7 @@ timers:
         sceneIds:
           - auto
           - manual
+          - night
         ledChangeData:
           time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
@@ -28,6 +29,7 @@ timers:
         sceneIds:
           - auto
           - manual
+          - night
         ledChangeData:
           time: ${cv-home-down.default-led-change-off-time}
           stepTime: 30
@@ -55,6 +57,7 @@ timers:
         sceneIds:
           - auto
           - manual
+          - night
         ledChangeData:
           time: ${cv-home-down.long-led-change-off-time}
           stepTime: 30

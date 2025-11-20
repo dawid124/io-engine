@@ -1,19 +1,13 @@
 package pl.webd.dawid124.ioengine.module.voice;
 
-import pl.webd.dawid124.ioengine.module.voice.dto.Speech;
-
 public class VoiceResponse {
-    private final Speech speech;
+    private final String text;
 
-    public VoiceResponse(Speech speech) {
-        this.speech = speech;
+    public VoiceResponse(String text) {
+        this.text = text;
     }
 
-    public static VoiceResponse text(String text) {
-        return new VoiceResponse(new Speech(text));
-    }
-
-    public Speech getSpeech() {
-        return speech;
+    public String getText() {
+        return text;
     }
 }

@@ -1,14 +1,14 @@
 package pl.webd.dawid124.ioengine.module.voice;
 
+import pl.webd.dawid124.ioengine.module.voice.dto.Session;
 import pl.webd.dawid124.ioengine.module.voice.mqttdto.Intent;
 import pl.webd.dawid124.ioengine.module.voice.mqttdto.Slot;
 
 import java.util.List;
 
-public class VoiceRequestMsg {
+public class VoiceRequestMsg extends Session {
 
     private Intent intent;
-    private String siteId;
     private List<Slot> slots;
 
     public Intent getIntent() {
@@ -17,14 +17,6 @@ public class VoiceRequestMsg {
 
     public void setIntent(Intent intent) {
         this.intent = intent;
-    }
-
-    public String getSiteId() {
-        return siteId;
-    }
-
-    public void setSiteId(String siteId) {
-        this.siteId = siteId;
     }
 
     public List<Slot> getSlots() {

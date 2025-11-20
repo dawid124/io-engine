@@ -123,11 +123,6 @@ public class MqttConfig {
         return zigbeeService;
     }
 
-    @Bean
-    @ServiceActivator(inputChannel = "mqttHermesChannel")
-    public MessageHandler hermesHandler() {
-        return voiceController;
-    }
 
     @Bean
     public MessageChannel mqttDriverSyncChannel() {

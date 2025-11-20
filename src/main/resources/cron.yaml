@@ -20,7 +20,7 @@ crons:
               compareType: EQUAL
               fetcher:
                 fetcherType: SENSOR_INACTIVE_FOR_TIME
-                second: 1500
+                second: 5400
                 sensorId: pir-bedroom
               testValue:
                 type: BOOLEAN
@@ -95,17 +95,17 @@ crons:
             - blockType: RUNNER
               runnerType: SCENE_CHANGE
               newSceneId: auto
-  bedroom-dim-up-blinds:
-    id: bedroom-up-down-blinds
-    zoneId: bedroom
-    cron: 0 30 7 * * ?
-    blocks:
-      - blockType: RUNNER
-        runnerType: BLIND_ACTION
-        actions:
-          - ioId: syp
-            action: DIM_UP
-            percent: 60
+#  bedroom-dim-up-blinds:
+#    id: bedroom-up-down-blinds
+#    zoneId: bedroom
+#    cron: 0 30 7 * * ?
+#    blocks:
+#      - blockType: RUNNER
+#        runnerType: BLIND_ACTION
+#        actions:
+#          - ioId: syp
+#            action: DIM_UP
+#            percent: 60
   bedroom-dim-down-blinds:
     id: bedroom-dim-down-blinds
     zoneId: bedroom

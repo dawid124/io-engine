@@ -397,7 +397,7 @@ zones:
         order: 1
         groups:
           - state:
-              ioId: f1-std-all
+              ioId: group-all
               name: Oświetlenie
               ioType: NEO
               brightness: 150
@@ -415,7 +415,7 @@ zones:
                 w: 0
             children:
               - state:
-                  ioId: f1-std-tv
+                  ioId: group-tv
                   name: TV
                   ioType: NEO
                   brightness: 200
@@ -468,7 +468,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-std-kitchen
+                  ioId: group-kitchen
                   name: Kuchnia
                   ioType: NEO
                   brightness: 255
@@ -523,7 +523,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-std-dinner
+                  ioId: group-dinner
                   name: Jadalnia
                   ioType: RGBW
                   brightness: 200
@@ -564,7 +564,7 @@ zones:
                         b: 0
                         w: 255
               - state:
-                  ioId: f1-std-other
+                  ioId: group-other
                   name: Dodatki
                   ioType: NEO
                   brightness: 200
@@ -655,7 +655,7 @@ zones:
                             w: 255
                             ww: 0
                   - state:
-                      ioId: f1-std-wall
+                      ioId: group-wall
                       name: Wall
                       ioType: NEO
                       brightness: 0
@@ -797,7 +797,7 @@ zones:
         order: 2
         groups:
           - state:
-              ioId: f1-tv-tv
+              ioId: group-tv
               name: TV
               ioType: RGBW
               brightness: 50
@@ -845,7 +845,7 @@ zones:
                     b: 0
                     w: 0
           - state:
-              ioId: f1-tv-kitchen
+              ioId: group-kitchen
               name: Kuchnia
               ioType: RGBW
               brightness: 0
@@ -895,7 +895,7 @@ zones:
                     b: 0
                     w: 0
           - state:
-              ioId: f1-tv-dinner
+              ioId: group-dinner
               name: Jadalnia
               ioType: RGBW
               brightness: 10
@@ -936,7 +936,7 @@ zones:
                     b: 0
                     w: 80
           - state:
-              ioId: f1-tv-other
+              ioId: group-other
               name: Dodatki
               ioType: NEO
               brightness: 15
@@ -1027,7 +1027,7 @@ zones:
                         w: 0
                         ww: 0
               - state:
-                  ioId: f1-tv-wall
+                  ioId: group-wall
                   name: Wall
                   ioType: NEO
                   brightness: 0
@@ -1169,7 +1169,7 @@ zones:
         order: 3
         groups:
           - state:
-              ioId: f1-night-all
+              ioId: group-all
               name: Oświetlenie
               ioType: NEO
               brightness: 100
@@ -1187,7 +1187,7 @@ zones:
                 w: 0
             children:
               - state:
-                  ioId: f1-night-tv
+                  ioId: group-tv
                   name: TV
                   ioType: RGBW
                   brightness: 100
@@ -1235,7 +1235,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-night-kitchen
+                  ioId: group-kitchen
                   name: Kuchnia
                   ioType: RGBW
                   brightness: 30
@@ -1285,7 +1285,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-night-dinner
+                  ioId: group-dinner
                   name: Jadalnia
                   ioType: RGBW
                   brightness: 40
@@ -1326,7 +1326,7 @@ zones:
                         b: 0
                         w: 255
               - state:
-                  ioId: f1-night-other
+                  ioId: group-other
                   name: Dodatki
                   ioType: NEO
                   brightness: 20
@@ -1417,7 +1417,7 @@ zones:
                             w: 255
                             ww: 0
               - state:
-                  ioId: f1-night-wall
+                  ioId: group-wall
                   name: Wall
                   ioType: NEO
                   brightness: 0
@@ -1553,13 +1553,13 @@ zones:
                         g: 0
                         b: 0
                         w: 0
-      warm:
-        id: warm
-        name: Warm
+      chill:
+        id: chill
+        name: Chill
         order: 4
         groups:
           - state:
-              ioId: f1-warm-all
+              ioId: group-all
               name: Oświetlenie
               ioType: NEO
               brightness: 150
@@ -1577,7 +1577,7 @@ zones:
                 w: 0
             children:
               - state:
-                  ioId: f1-night-tv
+                  ioId: group-tv
                   name: TV
                   ioType: RGBW
                   brightness: 100
@@ -1625,7 +1625,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-night-kitchen
+                  ioId: group-kitchen
                   name: Kuchnia
                   ioType: RGBW
                   brightness: 30
@@ -1675,7 +1675,7 @@ zones:
                         b: 0
                         w: 0
               - state:
-                  ioId: f1-night-dinner
+                  ioId: group-dinner
                   name: Jadalnia
                   ioType: RGBW
                   brightness: 50
@@ -1716,7 +1716,7 @@ zones:
                         b: 0
                         w: 150
               - state:
-                  ioId: f1-night-other
+                  ioId: group-other
                   name: Dodatki
                   ioType: NEO
                   brightness: 80
@@ -1807,7 +1807,7 @@ zones:
                             w: 255
                             ww: 0
               - state:
-                  ioId: f1-night-wall
+                  ioId: group-wall
                   name: Wall
                   ioType: NEO
                   brightness: 0
@@ -2349,7 +2349,7 @@ zones:
         order: 1
         groups:
           - state:
-              ioId: f1-std-all
+              ioId: group-all
               name: Oświetlenie
               ioType: NEO
               brightness: 150
@@ -2980,68 +2980,61 @@ zones:
                 g: 0
                 b: 0
                 w: 255
-          - state:
-              ioId: other-manual-group
-              name: Parter
+          - hidden: true
+            state:
+              ioId: rgbw-lobby
+              name: Korytarz
               ioType: RGBW
-              brightness: 255
-              animationId: 0
+              brightness: 0
               color:
                 r: 0
                 g: 0
                 b: 0
                 w: 255
-            children:
-              - state:
-                  ioId: rgbw-lobby
-                  name: Korytarz
-                  ioType: RGBW
-                  brightness: 0
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    w: 255
-              - state:
-                  ioId: l-mirror
-                  name: Lustro
-                  ioType: RGBW
-                  brightness: 0
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    w: 255
-              - state:
-                  ioId: plants
-                  name: Doniczka
-                  ioType: RGBW
-                  brightness: 0
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    w: 255
-              - state:
-                  ioId: rgbw-wc1
-                  name: Wc 1
-                  ioType: RGBW
-                  brightness: 0
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    w: 255
-              - state:
-                  ioId: rgbw-wc2
-                  name: Wc 2
-                  ioType: RGBW
-                  brightness: 0
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    w: 255
+          - hidden: true
+            state:
+              ioId: l-mirror
+              name: Lustro
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+          - hidden: true
+            state:
+              ioId: plants
+              name: Doniczka
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+          - hidden: true
+            state:
+              ioId: rgbw-wc1
+              name: Wc 1
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
+          - hidden: true
+            state:
+              ioId: rgbw-wc2
+              name: Wc 2
+              ioType: RGBW
+              brightness: 0
+              color:
+                r: 0
+                g: 0
+                b: 0
+                w: 255
   bedroom:
     id: bedroom
     name: Syp
@@ -4020,128 +4013,137 @@ zones:
         order: 1
         groups:
           - state:
-              ioId: ctt-a-roof
-              name: Altanka Dach
+              ioId: ctt-out-manual-all
+              name: All
               ioType: CCT
               brightness: 255
               color:
-                w: 255
+                w: 0
                 ww: 255
             children:
-              - state:
-                  ioId: cct-a-roof-1
-                  name: Altanka Dach 1
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: cct-a-roof-2
-                  name: Altanka Dach 2
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-          - state:
-              ioId: outdoor-door
-              name: Wejście
-              ioType: CCT
-              brightness: 255
-              color:
-                w: 255
-                ww: 255
-          - state:
-              ioId: cct-outdoor-gateway
-              name: Daszki wejście
-              ioType: CCT
-              brightness: 255
-              color:
-                w: 255
-                ww: 255
-          - state:
-              ioId: cct-outdoor-fence
-              name: Płot
-              ioType: CCT
-              brightness: 255
-              color:
-                w: 255
-                ww: 255
-          - state:
-              ioId: ctt-out-roof
-              name: Dach
-              ioType: CCT
-              brightness: 255
-              color:
-                w: 255
-                ww: 255
-            children:
-              - state:
-                  ioId: ctt-out-roof-1
-                  name: Dach 1
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: ctt-out-roof-2
-                  name: Dach 2
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-          - state:
-              ioId: out-stairs
-              name: Schody
-              ioType: CCT
-              brightness: 255
-              color:
-                w: 255
-                ww: 255
-            children:
-              - state:
-                  ioId: cct-outdoor-stairs-1
-                  name: Schody 1
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: cct-outdoor-stairs-2
-                  name: Schody 2
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: cct-outdoor-stairs-3
-                  name: Schody 3
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: cct-outdoor-stairs-4
-                  name: Schody 4
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
-              - state:
-                  ioId: cct-outdoor-stairs-5
-                  name: Schody 5
-                  ioType: CCT
-                  brightness: 255
-                  color:
-                    w: 255
-                    ww: 255
+            - state:
+                ioId: ctt-a-roof
+                name: Altanka Dach
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+              children:
+                - state:
+                    ioId: cct-a-roof-1
+                    name: Altanka Dach 1
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: cct-a-roof-2
+                    name: Altanka Dach 2
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+            - state:
+                ioId: outdoor-door
+                name: Wejście
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+            - state:
+                ioId: cct-outdoor-gateway
+                name: Daszki wejście
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+            - state:
+                ioId: cct-outdoor-fence
+                name: Płot
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+            - state:
+                ioId: ctt-out-roof
+                name: Dach
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+              children:
+                - state:
+                    ioId: ctt-out-roof-1
+                    name: Dach 1
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: ctt-out-roof-2
+                    name: Dach 2
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+            - state:
+                ioId: out-stairs
+                name: Schody
+                ioType: CCT
+                brightness: 255
+                color:
+                  w: 0
+                  ww: 255
+              children:
+                - state:
+                    ioId: cct-outdoor-stairs-1
+                    name: Schody 1
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: cct-outdoor-stairs-2
+                    name: Schody 2
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: cct-outdoor-stairs-3
+                    name: Schody 3
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: cct-outdoor-stairs-4
+                    name: Schody 4
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
+                - state:
+                    ioId: cct-outdoor-stairs-5
+                    name: Schody 5
+                    ioType: CCT
+                    brightness: 255
+                    color:
+                      w: 0
+                      ww: 255
 downBlindMacros:
   doorEntryGate:
     id: doorEntryGate
@@ -4382,13 +4384,28 @@ rightBlindGroups:
             type: STRING
             value: 'mode-2'
 
+      - id: rain-bird-t30
+        label: T-30m
+        clickMacroId: rain-bird-t30
+        unClickMacroId: rain-bird-clear
+        holdClickMacroId: rain-bird-clear
+        activeCondition:
+          type: COMPARE
+          compareType: EQUAL
+          fetcher:
+            fetcherType: GLOBAL_VARIABLE
+            key: rain-bird-mode
+          testValue:
+            type: STRING
+            value: 'mode-t30'
+
   rainBirdGroup2:
     id: rainBirdGroup2
     label:
     buttons:
       - id: rain-bird-pomp-btn
         label: Pompa
-        clickMacroId: rain-bird-pump-on
+        clickMacroId: rain-bird-temp-pump-on
         unClickMacroId: rain-bird-pump-off
         holdClickMacroId: rain-bird-pump-off
         activeCondition:
@@ -4646,7 +4663,10 @@ conditionVariables:
             value: 20
           brightness-bath-standard:
             type: NUMBER
-            value: 200
+            value: 255
+          brightness-bath-lamel:
+            type: NUMBER
+            value: 255
           brightness-bath-bathtub:
             type: NUMBER
             value: 100
@@ -4699,6 +4719,9 @@ conditionVariables:
             type: NUMBER
             value: 255
           brightness-bath-standard:
+            type: NUMBER
+            value: 255
+          brightness-bath-lamel:
             type: NUMBER
             value: 255
           brightness-bath-bathtub:
@@ -4754,7 +4777,10 @@ conditionVariables:
             value: 5
           brightness-bath-standard:
             type: NUMBER
-            value: 210
+            value: 255
+          brightness-bath-lamel:
+            type: NUMBER
+            value: 255
           brightness-bath-bathtub:
             type: NUMBER
             value: 110
@@ -4809,6 +4835,9 @@ conditionVariables:
           brightness-bath-standard:
             type: NUMBER
             value: 0
+          brightness-bath-lamel:
+            type: NUMBER
+            value: 255
           brightness-bath-bathtub:
             type: NUMBER
             value: 80
@@ -4863,6 +4892,9 @@ conditionVariables:
           brightness-bath-standard:
             type: NUMBER
             value: 0
+          brightness-bath-lamel:
+            type: NUMBER
+            value: 255
           brightness-bath-bathtub:
             type: NUMBER
             value: 40
@@ -5163,7 +5195,7 @@ conditionVariables:
             value: 4000
           default-cold-white:
             type: NUMBER
-            value: 255
+            value: 0
           default-warm-white:
             type: NUMBER
             value: 255
@@ -5177,6 +5209,12 @@ conditionVariables:
             type: NUMBER
             value: 200
           brightness-a:
+            type: NUMBER
+            value: 100
+          brightness-gateway:
+            type: NUMBER
+            value: 100
+          brightness-fence:
             type: NUMBER
             value: 100
 
@@ -5216,6 +5254,12 @@ conditionVariables:
           brightness-a:
             type: NUMBER
             value: 50
+          brightness-gateway:
+            type: NUMBER
+            value: 50
+          brightness-fence:
+            type: NUMBER
+            value: 50
 
       - condition:
           type: TIME_BETWEEN
@@ -5252,6 +5296,12 @@ conditionVariables:
           brightness-a:
             type: NUMBER
             value: 10
+          brightness-gateway:
+            type: NUMBER
+            value: 20
+          brightness-fence:
+            type: NUMBER
+            value: 20
 
       - condition:
           type: TIME_BETWEEN
@@ -5272,7 +5322,7 @@ conditionVariables:
             value: 600
           default-cold-white:
             type: NUMBER
-            value: 255
+            value: 0
           default-warm-white:
             type: NUMBER
             value: 255
@@ -5288,6 +5338,12 @@ conditionVariables:
           brightness-a:
             type: NUMBER
             value: 3
+          brightness-gateway:
+            type: NUMBER
+            value: 10
+          brightness-fence:
+            type: NUMBER
+            value: 10
 
   outdoor-time:
     conditions:

@@ -34,7 +34,6 @@ public class LightStateActionRunnerBlock extends RunnerBlock {
 
     @Override
     public void run(AutomationContext context, Map<String, IVariable> variables, String zoneId) {
-
         ZoneState zoneState = context.getStateService().getZoneState().get(zoneId);
 
         List<String> scenes = new ArrayList<>();
