@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.webd.dawid124.ioengine.module.action.model.rest.EActionType;
 import pl.webd.dawid124.ioengine.module.action.model.rest.UiAction;
 import pl.webd.dawid124.ioengine.module.action.service.ActionService;
+import pl.webd.dawid124.ioengine.module.automation.model.HeatingState;
+import pl.webd.dawid124.ioengine.module.automation.model.ZoneHeatingMemory;
 import pl.webd.dawid124.ioengine.module.device.model.output.IDevice;
 import pl.webd.dawid124.ioengine.module.device.service.DeviceService;
 import pl.webd.dawid124.ioengine.module.state.model.StateVariable;
@@ -28,12 +30,18 @@ import java.util.Map;
 public class TemperatureService {
 
     public static final String ACTIVE_FLAG_KEY = "home-temperature-service-active";
+
+    // Temperature thresholds for cyclic algorithm
+    private static final double TEMP_THRESHOLD_IDLE = 0.1;  // Threshold for IDLE state
+    private static final double TEMP_THRESHOLD_CLOSE = 0.3; // Close to target, transition to IDLE
+
     private final StructureService structureService;
     private final StateService stateService;
     private final DeviceService deviceService;
     private final ActionService actionService;
 
     private Map<String, Boolean> pumpActiveIds;
+    private Map<String, ZoneHeatingMemory> zoneMemories;
 
     public TemperatureService(StructureService structureService, StateService stateService, DeviceService deviceService,
                               ActionService actionService) {
@@ -42,6 +50,7 @@ public class TemperatureService {
         this.deviceService = deviceService;
         this.actionService = actionService;
         this.pumpActiveIds = new HashMap<>();
+        this.zoneMemories = new HashMap<>();
     }
 
     @Scheduled(fixedDelay = 1000 * 60 * 5)
@@ -72,22 +81,100 @@ public class TemperatureService {
         temperatureScenes.getRanges().stream()
                 .filter(range -> range.isAllTime() || TimeUtils.isInRange(range.getHourFrom(), range.getHourTo()))
                 .findFirst()
-                .ifPresent(range -> processSwitchAction(zoneStructure, currentTemperature, range));
+                .ifPresent(range -> processSwitchActionCyclic(zoneStructure, currentTemperature, range));
     }
 
-    private void processSwitchAction(Zone zoneStructure, double currentTemperature, TemperatureRange range) {
-        UiAction action = new UiAction();
-        action.setIoId(zoneStructure.getTemperature().getSwitchId());
-
+    /**
+     * Cyclic temperature management algorithm with state memory
+     * Prevents overheating due to thermal inertia of the system
+     */
+    private void processSwitchActionCyclic(Zone zoneStructure, double currentTemperature, TemperatureRange range) {
+        String zoneId = zoneStructure.getId();
+        String switchId = zoneStructure.getTemperature().getSwitchId();
         String pumpSwitchId = zoneStructure.getTemperature().getPumpSwitchId();
+        double targetTemperature = range.getTemperature();
 
-        if (currentTemperature > range.getTemperature()) {
-            action.setAction(EActionType.OFF);
-            action.setZigbeeAction("OFF");
-        } else {
+        // Initialize zone memory if it doesn't exist
+        ZoneHeatingMemory memory = zoneMemories.computeIfAbsent(zoneId, k -> new ZoneHeatingMemory(zoneId));
+
+        boolean shouldHeat = false;
+        HeatingState currentState = memory.getState();
+
+        // State machine for cyclic algorithm
+        switch (currentState) {
+            case IDLE:
+                // Temperature dropped below target -> start heating+
+                if (currentTemperature < targetTemperature) {
+                    memory.startHeating(currentTemperature);
+                    shouldHeat = true;
+                }
+                break;
+
+            case HEATING:
+                // Heat for 15 minutes
+                shouldHeat = true;
+                if (memory.isHeatingDurationElapsed()) {
+                    // If temperature is still very low (more than 1.0 below target), restart heating immediately
+                    if (currentTemperature < targetTemperature - 1.0) {
+                        memory.startHeating(currentTemperature);
+                    } else {
+                        // Normal cyclic behavior: transition to WAITING
+                        memory.startWaiting(currentTemperature);
+                        shouldHeat = false;
+                    }
+                }
+                break;
+
+            case WAITING:
+                // Wait and observe temperature rise
+                shouldHeat = false;
+
+                // If temperature is very low (more than 1.0 below target), start heating immediately
+                if (currentTemperature < targetTemperature - 1.0) {
+                    memory.startHeating(currentTemperature);
+                    shouldHeat = true;
+                    break;
+                }
+
+                // If temperature dropped during waiting -> heat immediately
+                if (currentTemperature < memory.getTemperatureAtWaitingStart() - 0.1) {
+                    memory.startHeating(currentTemperature);
+                    shouldHeat = true;
+                    break;
+                }
+
+                // If waiting time elapsed
+                if (memory.isWaitingDurationElapsed()) {
+                    double tempRise = currentTemperature - memory.getTemperatureAtWaitingStart();
+
+                    // Calculate next waiting time based on rise
+                    int nextWaitingDuration = memory.calculateNextWaitingDuration(tempRise);
+                    memory.updateWaitingDuration(nextWaitingDuration);
+
+                    // Decision: IDLE or next HEATING cycle
+                    if (currentTemperature >= targetTemperature - TEMP_THRESHOLD_CLOSE) {
+                        // Temperature close to target -> IDLE
+                        memory.setIdle();
+                    } else {
+                        // Temperature still too low -> next heating cycle
+                        memory.startHeating(currentTemperature);
+                        shouldHeat = true;
+                    }
+                }
+                break;
+        }
+
+        // Execute heating switch action
+        UiAction action = new UiAction();
+        action.setIoId(switchId);
+
+        if (shouldHeat) {
             action.setAction(EActionType.ON);
             action.setZigbeeAction("ON");
             pumpActiveIds.put(pumpSwitchId, true);
+        } else {
+            action.setAction(EActionType.OFF);
+            action.setZigbeeAction("OFF");
         }
 
         actionService.processSimpleActions(Collections.singletonList(action));
